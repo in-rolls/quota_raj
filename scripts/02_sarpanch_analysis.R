@@ -62,29 +62,39 @@ cat(chisq_table, file = here("tables", "chisq_table.tex"))
 
 #check chisquared results when you are actually awake! 
 
+# Create reservation dummies, caste group dummies -------------------------
+
+
+# inefficient but does the job
+raj_panch <- raj_panch %>%
+     mutate(
+          treat_2005 = ifelse(raj_panch$reservation_2005 %in% c("GEN W", "OBC W", "SC W", "ST W"), 1, 0),
+          treat_2010 = ifelse(raj_panch$reservation_2010 %in% c("GENW", "OBCW", "SCW", "STW"), 1, 0),
+          treat_2015 = ifelse(raj_panch$reservation_2015 %in% c("General (Woman)", "OBC (Woman)", "SC (Woman)", "ST (Woman)"), 1, 0),
+          treat_2020 = ifelse(raj_panch$reservation_2020 %in% c("General (Woman)", "OBC (Woman)", "SC (Woman)", "ST (Woman)"), 1, 0),
+          obc_2005 = ifelse(raj_panch$reservation_2005 %in% c("OBC W"), 1, 0),
+          obc_2010 = ifelse(raj_panch$reservation_2010 %in% c("OBCW"), 1, 0),
+          obc_2015 = ifelse(raj_panch$reservation_2015 %in% c("OBC (Woman)"), 1, 0),
+          obc_2020 = ifelse(raj_panch$reservation_2020 %in% c("OBC (Woman)"), 1, 0),
+          dalit_2005 = ifelse(raj_panch$reservation_2005 %in% c("SC W", "ST W"), 1, 0),
+          dalit_2010 = ifelse(raj_panch$reservation_2010 %in% c("SCW", "STW"), 1, 0),
+          dalit_2015 = ifelse(raj_panch$reservation_2015 %in% c("SC (Woman)", "ST (Woman)"), 1, 0),
+          dalit_2020 = ifelse(raj_panch$reservation_2020 %in% c("SC (Woman)", "ST (Woman)"), 1, 0),
+          always_treated = ifelse(treat_2005 + treat_2010 + treat_2015 == 3, 1, 0),
+          never_treated = ifelse(treat_2005 + treat_2010 + treat_2015 == 0, 1, 0),
+          sometimes_treated = ifelse(treat_2005 + treat_2010 + treat_2015 > 0, 1, 0),
+          treatment_intensity = treat_2005 + treat_2010 + treat_2015
+     )
+table(raj_panch$sometimes_treated)
+table(raj_panch$never_treated)
+table(raj_panch$always_treated)
+table(raj_panch$treatment_intensity)
+
+
 # Regressions -------------------------------------------------------------
 
-# create reservation dummies
 
-raj_panch <- raj_panch %>%
-     dplyr::mutate(treat_2005 = ifelse(
-          raj_panch$reservation_2005 %in% c("GEN W", "OBC W", "SC W", "ST W"), 1, 0
-     ))
+# immediate effect
 
-raj_panch <- raj_panch %>%
-     dplyr::mutate(treat_2010 = ifelse(
-          raj_panch$reservation_2010 %in% c("GENW", "OBCW", "SCW", "STW"), 1, 0
-     ))
-
-raj_panch <- raj_panch %>%
-     dplyr::mutate(treat_2015 = ifelse(
-          raj_panch$reservation_2015 %in% c("General (Woman)", "OBC (Woman)", "SC (Woman)", "ST (Woman)"), 1, 0
-     ))
-
-raj_panch <- raj_panch %>%
-     dplyr::mutate(treat_2020 = ifelse(
-          raj_panch$reservation_2020 %in% c("General (Woman)", "OBC (Woman)", "SC (Woman)", "ST (Woman)"), 1, 0
-     ))
-
-
-# test <- raj_panch %>% select(reservation_2005, treat_2005, reservation_2010,treat_2010, reservation_2015,treat_2015, reservation_2020,treat_2020)
+m_05_10 <- lm((raj_panch$sex_2010 =="F") ~ treat_2005, data = raj_panch)
+m_05_10_fe <- (lm((sex_2010 =="F") ~ treat_2005 + factor(gp_2010), data = raj_panch))
