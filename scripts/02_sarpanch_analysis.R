@@ -58,3 +58,33 @@ chisq_table <- results_store %>%
      kable("latex", escape = FALSE, booktabs = TRUE, caption = "Chi-Squared Test Results") %>%
      kable_styling(full_width = FALSE, position = "center")
 cat(chisq_table, file = here("tables", "chisq_table.tex"))
+
+
+#check chisquared results when you are actually awake! 
+
+# Regressions -------------------------------------------------------------
+
+# create reservation dummies
+
+raj_panch <- raj_panch %>%
+     dplyr::mutate(treat_2005 = ifelse(
+          raj_panch$reservation_2005 %in% c("GEN W", "OBC W", "SC W", "ST W"), 1, 0
+     ))
+
+raj_panch <- raj_panch %>%
+     dplyr::mutate(treat_2010 = ifelse(
+          raj_panch$reservation_2010 %in% c("GENW", "OBCW", "SCW", "STW"), 1, 0
+     ))
+
+raj_panch <- raj_panch %>%
+     dplyr::mutate(treat_2015 = ifelse(
+          raj_panch$reservation_2015 %in% c("General (Woman)", "OBC (Woman)", "SC (Woman)", "ST (Woman)"), 1, 0
+     ))
+
+raj_panch <- raj_panch %>%
+     dplyr::mutate(treat_2020 = ifelse(
+          raj_panch$reservation_2020 %in% c("General (Woman)", "OBC (Woman)", "SC (Woman)", "ST (Woman)"), 1, 0
+     ))
+
+
+# test <- raj_panch %>% select(reservation_2005, treat_2005, reservation_2010,treat_2010, reservation_2015,treat_2015, reservation_2020,treat_2020)
