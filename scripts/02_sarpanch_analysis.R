@@ -46,74 +46,140 @@ table(raj_panch$treatment_intensity)
 
 # Transition Matrces ------------------------------------------------------
 
+# comparing wiht previous reservation status
+
 trans_05_10 <- table(raj_panch$reservation_2005, raj_panch$reservation_2010)
 trans_10_15 <- table(raj_panch$reservation_2010, raj_panch$reservation_2015)
 trans_15_20 <- table(raj_panch$reservation_2015, raj_panch$reservation_2020)
 
-trans_05_15 <- table(raj_panch$reservation_2005, raj_panch$reservation_2015)
+#comparison with 2005 that had 33% 
+
+trans_05_15 <- table(raj_panch$reservation_2005, raj_panch$reservation_2015) #comparison with 2005 that had 33%. (not necessary, but for completeness sake!) 
 trans_05_20 <- table(raj_panch$reservation_2005, raj_panch$reservation_2020)
 
-# trans_05_10 <- table(raj_panch$treat_2005, raj_panch$treat_2010)
-# trans_10_15 <- table(raj_panch$treat_2010, raj_panch$treat_2015)
-# trans_15_20 <- table(raj_panch$treat_2015, raj_panch$treat_2020)
+
+#comparison with 2010, first election with 50%
+
+trans_10_15 <- table(raj_panch$reservation_2010, raj_panch$reservation_2015)
+trans_10_20 <- table(raj_panch$reservation_2010, raj_panch$reservation_2020)
 
 
-# blank dataframe to store results
-trans_matrices_store <- data.frame(
-     "Year Comparison" = c("2005-2010", "2010-2015", "2015-2020"),
-     "Transition Matrix" = c(
-          kable(trans_05_10, format = "latex", escape = FALSE, booktabs = TRUE),
-          kable(trans_10_15, format = "latex", escape = FALSE, booktabs = TRUE),
-          kable(trans_15_20, format = "latex", escape = FALSE, booktabs = TRUE)
-     )
+print(trans_matrices <- list(
+     `2005-2010` = trans_05_10,
+     `2010-2015` = trans_10_15,
+     `2015-2020` = trans_15_20,
+     `2005-2015` = trans_05_15,
+     `2005-2020` = trans_05_20,
+     `2010-2015` = trans_10_15,
+     `2010-2020` = trans_10_20
+))
+
+
+
+
+#write_to_latex(trans_matrices_store, here("tables", "tran_matrices.tex"))
+
+#only look at 0-1 transitions
+bin_trans_05_10 <- table(raj_panch$treat_2005, raj_panch$treat_2010)
+bin_trans_10_15 <- table(raj_panch$treat_2010, raj_panch$treat_2015)
+bin_trans_15_20 <- table(raj_panch$treat_2015, raj_panch$treat_2020)
+bin_trans_05_15 <- table(raj_panch$treat_2005, raj_panch$treat_2015)
+bin_trans_05_20 <- table(raj_panch$treat_2005, raj_panch$treat_2020)
+bin_trans_10_15 <- table(raj_panch$treat_2010, raj_panch$treat_2015)
+bin_trans_10_20 <- table(raj_panch$treat_2010, raj_panch$treat_2020)
+
+bin_trans_matrices <- list(
+     `2005-2010` = bin_trans_05_10,
+     `2010-2015` = bin_trans_10_15,
+     `2015-2020` = bin_trans_15_20,
+     `2005-2015` = bin_trans_05_15,
+     `2005-2020` = bin_trans_05_20,
+     `2010-2015` = bin_trans_10_15,
+     `2010-2020` = bin_trans_10_20
 )
 
-# TeX export Beautify this later
-trans_matrices_table <- trans_matrices_store %>%
-     kable("latex", escape = FALSE, booktabs = TRUE, caption = "Transition Matrices")
-cat(trans_matrices_table, file = here("tables", "tran_matrices.tex"))
 
 
 # Chi-Squared Test --------------------------------------------------------
 
-chi_sq_test_05_10 <- chisq.test(trans_05_10)
+chi_sq_test_05_10 <- chisq.test(trans_05_10) # continuity' correction not changing anything
 chi_sq_test_05_10
+
 chi_sq_test_10_15 <- chisq.test(trans_10_15)
 chi_sq_test_10_15
+
 chi_sq_test_15_20 <- chisq.test(trans_15_20)
 chi_sq_test_15_20
 
-#p-values are nearly identical, check again!  
+chi_sq_test_05_15 <- chisq.test(trans_05_15)
+chi_sq_test_05_15
+
+chi_sq_test_05_20 <- chisq.test(trans_05_20)
+chi_sq_test_05_20
+
+chi_sq_test_10_15 <- chisq.test(trans_10_15)
+chi_sq_test_10_15
+
+chi_sq_test_10_20 <- chisq.test(trans_10_20)
+chi_sq_test_10_20
 
 
-
-# blank dataframe to store results
-
-results_store <- data.frame(
-     "Year Comparison" = c("2005-2010", "2010-2015", "2015-2020"),
-     "Chi-Squared Test Result" = c(
-          format(chi_sq_test_05_10$p.value, scientific = TRUE, digits = 2),
-          format(chi_sq_test_10_15$p.value, scientific = TRUE, digits = 2),
-          format(chi_sq_test_15_20$p.value, scientific = TRUE, digits = 2)
-     )
+chi_squared_results <- data.frame(
+     "Comparison" = c("2005-2010", "2005-2015", "2005-2020", "2010-2015", "2010-2020", "2015-2020"),
+     "Chi-Squared Test Statistic" = c(chi_sq_test_05_10$statistic, chi_sq_test_05_15$statistic, chi_sq_test_05_20$statistic, 
+                                      chi_sq_test_10_15$statistic, chi_sq_test_10_20$statistic, chi_sq_test_15_20$statistic),
+     "Degrees of Freedom" = c(chi_sq_test_05_10$parameter, chi_sq_test_05_15$parameter, chi_sq_test_05_20$parameter, 
+                              chi_sq_test_10_15$parameter, chi_sq_test_10_20$parameter, chi_sq_test_15_20$parameter),
+     "P-Value" = format(c(chi_sq_test_05_10$p.value, chi_sq_test_05_15$p.value, chi_sq_test_05_20$p.value, 
+                          chi_sq_test_10_15$p.value, chi_sq_test_10_20$p.value, chi_sq_test_15_20$p.value), scientific = TRUE)
 )
 
-#teX export Beautify this later
-chisq_table <- results_store %>%
-     kable("latex", escape = FALSE, booktabs = TRUE, caption = "Chi-Squared Test Results") %>%
-     kable_styling(full_width = FALSE, position = "center")
-cat(chisq_table, file = here("tables", "chisq_table.tex"))
+chi_squared_results_table <- kable(chi_squared_results, format = "latex", caption = "Chi-Squared Test Results", booktabs = TRUE)
 
-
-#check chisquared results when you are actually awake! 
-
+#cat(chi_squared_results_table, file = here("tables", "chi_squared_results.tex"))
 
 
 
 # Regressions -------------------------------------------------------------
 
+library(estimatr)
 
-# immediate effect
+# Short Run Effects of Quotas (05-->10) -----------------------------------
 
-m_05_10 <- lm((raj_panch$sex_2010 =="F") ~ treat_2005, data = raj_panch)
-m_05_10_fe <- lm((sex_2010 =="F") ~ treat_2005 + factor(gp_2010), data = raj_panch)
+# clustering = gp (identifying source of variation) to account within-gp correlations
+# alternative clustering  D_ps_gp (key_2010)  (if we are to think that the identifying source of variation is a function of the D-Ps-GP structure, unlikely)
+# fixed effects= 3 way. D-->PS-->GP #GP_FE  should absord most of the shocks that could be correlated with the proportion of women sarpanchs in the panchayats 
+
+
+m_05_10 <- lm_robust((sex_2010 =="F") ~ treat_2005, cluster = gp_2010,  data = raj_panch)
+m_05_10_dfe <- lm_robust((sex_2010 =="F") ~ treat_2005, fixed_effects = ~ dist_name_2010, cluster = gp_2010,  data = raj_panch)
+m_05_10_psfe <- lm_robust((sex_2010 =="F") ~ treat_2005, fixed_effects = ~ dist_name_2010 + samiti_name_2010, cluster = gp_2010,  data = raj_panch)
+# m_05_10_gpfe <- lm_robust((sex_2010 =="F") ~ treat_2005, fixed_effects = ~ dist_name_2010 + samiti_name_2010 + gp_2010 , cluster = gp_2010,  data = raj_panch) #takes too long!
+m_05_10_gpfe <- lm_robust((sex_2010 =="F") ~ treat_2005, fixed_effects = ~ gp_2010, cluster = gp_2010,  data = raj_panch)
+
+# TeX
+
+models_05_10_list <- list(m_05_10, m_05_10_dfe, m_05_10_psfe) #, m_05_10_gpfe)
+
+# To remove fixed effect factors
+tidy_results <- lapply(models_05_10_list, function(model) {
+     tidy(model) %>%
+          filter(!grepl("factor", term))  # Remove rows with fixed effect factors
+})
+
+combined_results <- do.call(rbind, tidy_results)
+models_05_10 <- xtable(combined_results)
+
+# Print the LaTeX table
+print(models_05_10)
+print(xtable(models_05_10), file = here(tables_folder, "models_05_10.tex"))
+
+
+# Intermediate Effects of Quotas 05_10_15 ---------------------------------
+
+# Long Run Effects of Quotas 05_10_15_20 ----------------------------------
+
+
+
+
+
