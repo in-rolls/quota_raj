@@ -154,32 +154,32 @@ library(estimatr)
 m_05_10 <- lm_robust((sex_2010 =="F") ~ treat_2005, cluster = gp_2010,  data = raj_panch)
 m_05_10_dfe <- lm_robust((sex_2010 =="F") ~ treat_2005, fixed_effects = ~ dist_name_2010, cluster = gp_2010,  data = raj_panch)
 m_05_10_psfe <- lm_robust((sex_2010 =="F") ~ treat_2005, fixed_effects = ~ dist_name_2010 + samiti_name_2010, cluster = gp_2010,  data = raj_panch)
-# m_05_10_gpfe <- lm_robust((sex_2010 =="F") ~ treat_2005, fixed_effects = ~ dist_name_2010 + samiti_name_2010 + gp_2010 , cluster = gp_2010,  data = raj_panch) #takes too long!
-m_05_10_gpfe <- lm_robust((sex_2010 =="F") ~ treat_2005, fixed_effects = ~ gp_2010, cluster = gp_2010,  data = raj_panch)
+m_05_10_gpfe <- lm_robust((sex_2010 =="F") ~ treat_2005, fixed_effects = ~ dist_name_2010 + samiti_name_2010 + gp_2010, cluster = gp_2010,  data = raj_panch) #takes too long!
+# m_05_10_gpfe <- lm_robust((sex_2010 =="F") ~ treat_2005, fixed_effects = ~ gp_2010, cluster = gp_2010,  data = raj_panch)
+
 
 # TeX
 
+library(texreg)
+library(modelsummary)
+library(ggplot2)
 models_05_10_list <- list(m_05_10, m_05_10_dfe, m_05_10_psfe) #, m_05_10_gpfe)
+modelsummary(models_05_10_list, stars = TRUE, output = here("tables", "models_05_10.tex"))
 
-# To remove fixed effect factors
-tidy_results <- lapply(models_05_10_list, function(model) {
-     tidy(model) %>%
-          filter(!grepl("factor", term))  # Remove rows with fixed effect factors
-})
+# model_names <- c("Baseline", "Dist FE", "Dist-PS FE")
 
-combined_results <- do.call(rbind, tidy_results)
-models_05_10 <- xtable(combined_results)
 
-# Print the LaTeX table
-print(models_05_10)
-print(xtable(models_05_10), file = here(tables_folder, "models_05_10.tex"))
+models_05_10_plot <- modelplot(models_05_10_list, coef_omit = 'Interc', facet = TRUE) + 
+     geom_vline(xintercept = 0, color = "red") +  # Red vertical line at x = 0
+     theme_minimal() +  
+     theme(panel.grid = element_blank())  
+
+ggsave(file = here("plots", "models_05_10_plot.png"), plot = models_05_10_plot, width = 6, height = 4, dpi = 300)
+
 
 
 # Intermediate Effects of Quotas 05_10_15 ---------------------------------
 
 # Long Run Effects of Quotas 05_10_15_20 ----------------------------------
-
-
-
 
 
