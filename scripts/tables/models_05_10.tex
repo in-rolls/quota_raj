@@ -1,15 +1,22 @@
-% latex table generated in R 4.2.3 by xtable 1.8-4 package
-% Thu Oct 26 21:25:27 2023
-\begin{table}[ht]
+\begin{table}
 \centering
-\begin{tabular}{rlrrrrrrrl}
-  \hline
- & term & estimate & std.error & statistic & p.value & conf.low & conf.high & df & outcome \\ 
-  \hline
-1 & (Intercept) & 0.52 & 0.01 & 63.00 & 0.00 & 0.50 & 0.53 & 3150.51 & (sex\_2010 == "F") \\ 
-  2 & treat\_2005 & 0.02 & 0.01 & 1.42 & 0.15 & -0.01 & 0.05 & 3154.79 & (sex\_2010 == "F") \\ 
-  3 & treat\_2005 & 0.02 & 0.01 & 1.45 & 0.15 & -0.01 & 0.05 & 3147.61 & (sex\_2010 == "F") \\ 
-  4 & treat\_2005 & 0.02 & 0.01 & 1.93 & 0.06 & -0.00 & 0.04 & 37.47 & (sex\_2010 == "F") \\ 
-   \hline
+\begin{tabular}[t]{lccc}
+\toprule
+  & (1) & (2) & (3)\\
+\midrule
+(Intercept) & \num{0.517}*** &  & \\
+ & (\num{0.008}) &  & \\
+treat\_2005 & \num{0.020} & \num{0.021} & \num{0.021}+\\
+ & (\num{0.014}) & (\num{0.014}) & (\num{0.011})\\
+\midrule
+Num.Obs. & \num{6308} & \num{6308} & \num{6308}\\
+R2 & \num{0.000} & \num{0.004} & \num{0.019}\\
+R2 Adj. & \num{0.000} & \num{-0.001} & \num{-0.022}\\
+AIC & \num{18819.8} & \num{18831.2} & \num{18892.5}\\
+BIC & \num{18840.0} & \num{18844.7} & \num{18906.0}\\
+RMSE & \num{1.08} & \num{1.08} & \num{1.08}\\
+Std.Errors & by: gp\_2010 & by: gp\_2010 & by: gp\_2010\\
+\bottomrule
+\multicolumn{4}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
 \end{tabular}
 \end{table}
