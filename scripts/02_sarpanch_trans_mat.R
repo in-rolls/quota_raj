@@ -13,7 +13,6 @@ library(kableExtra)
 data_dir <- here("..", "data/sarpanch_election_data")
 sp_fin_file <- here(data_dir, "sp_2005_2010_2015_2020_fin.csv")
 raj_panch <- readr::read_csv(sp_fin_file)
-tables_folder <- here("tables")
 
 # Create reservation dummies, caste group dummies -------------------------
 
@@ -77,7 +76,7 @@ print(trans_matrices <- list(
 
 
 
-#write_to_latex(trans_matrices_store, here("tables", "tran_matrices.tex"))
+#write_to_latex(trans_matrices_store, here("..", "tables", "tran_matrices.tex"))
 
 #only look at 0-1 transitions
 bin_trans_05_10 <- table(raj_panch$treat_2005, raj_panch$treat_2010)
@@ -136,50 +135,6 @@ chi_squared_results <- data.frame(
 
 chi_squared_results_table <- kable(chi_squared_results, format = "latex", caption = "Chi-Squared Test Results", booktabs = TRUE)
 
-#cat(chi_squared_results_table, file = here("tables", "chi_squared_results.tex"))
-
-
-
-# Regressions -------------------------------------------------------------
-
-library(estimatr)
-
-# Short Run Effects of Quotas (05-->10) -----------------------------------
-
-# clustering = gp (identifying source of variation) to account within-gp correlations
-# alternative clustering  D_ps_gp (key_2010)  (if we are to think that the identifying source of variation is a function of the D-Ps-GP structure, unlikely)
-# fixed effects= 3 way. D-->PS-->GP #GP_FE  should absord most of the shocks that could be correlated with the proportion of women sarpanchs in the panchayats 
-
-
-m_05_10 <- lm_robust((sex_2010 =="F") ~ treat_2005, cluster = gp_2010,  data = raj_panch)
-m_05_10_dfe <- lm_robust((sex_2010 =="F") ~ treat_2005, fixed_effects = ~ dist_name_2010, cluster = gp_2010,  data = raj_panch)
-m_05_10_psfe <- lm_robust((sex_2010 =="F") ~ treat_2005, fixed_effects = ~ dist_name_2010 + samiti_name_2010, cluster = gp_2010,  data = raj_panch)
-m_05_10_gpfe <- lm_robust((sex_2010 =="F") ~ treat_2005, fixed_effects = ~ dist_name_2010 + samiti_name_2010 + gp_2010, cluster = gp_2010,  data = raj_panch) #takes too long!
-# m_05_10_gpfe <- lm_robust((sex_2010 =="F") ~ treat_2005, fixed_effects = ~ gp_2010, cluster = gp_2010,  data = raj_panch)
-
-
-# TeX
-
-library(texreg)
-library(modelsummary)
-library(ggplot2)
-models_05_10_list <- list(m_05_10, m_05_10_dfe, m_05_10_psfe) #, m_05_10_gpfe)
-modelsummary(models_05_10_list, stars = TRUE, output = here("tables", "models_05_10.tex"))
-
-# model_names <- c("Baseline", "Dist FE", "Dist-PS FE")
-
-
-models_05_10_plot <- modelplot(models_05_10_list, coef_omit = 'Interc', facet = TRUE) + 
-     geom_vline(xintercept = 0, color = "red") +  # Red vertical line at x = 0
-     theme_minimal() +  
-     theme(panel.grid = element_blank())  
-
-ggsave(file = here("plots", "models_05_10_plot.png"), plot = models_05_10_plot, width = 6, height = 4, dpi = 300)
-
-
-
-# Intermediate Effects of Quotas 05_10_15 ---------------------------------
-
-# Long Run Effects of Quotas 05_10_15_20 ----------------------------------
+cat(chi_squared_results_table, file = here("..", "tables", "chi_squared_results.tex"))
 
 
