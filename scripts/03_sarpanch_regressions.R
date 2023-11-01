@@ -7,8 +7,7 @@ library(fuzzyjoin)
 library(stringr)
 library(here)
 library(kableExtra)
-
-
+library(fixest)
 
 # Load data
 data_dir <- here("..", "data/sarpanch_election_data")
@@ -47,7 +46,6 @@ raj_panch <- raj_panch %>%
 # alternative clustering  D_ps_gp (key_2010)  (if we are to think that the identifying source of variation is a function of the D-Ps-GP structure, unlikely)
 # fixed effects= 3 way. D-->PS-->GP #GP_FE  should absord most of the shocks that could be correlated with the proportion of women sarpanchs in the panchayats 
 
-library(fixest)
 
 m_05_10 <- feols((sex_2010 =="F") ~ treat_2005, vcov = ~gp_2010, data = raj_panch)
 summary(m_05_10)
@@ -61,28 +59,10 @@ summary(m_05_10_psfe)
 m_05_10_gpfe <- feols((sex_2010 =="F") ~ treat_2005 | dist_name_2010 + samiti_name_2010 + gp_2010, ssc = ssc(fixef.K = "full"), vcov = ~gp_2010, data = raj_panch)
 summary(m_05_10_gpfe)
 
-fixedEffects = feols(m_05_10_gpfe)
-summary(fixedEffects)
-
-plot(fixedEffects)
 
 # TeX
 models_05_10_list <- list(m_05_10, m_05_10_dfe, m_05_10_psfe, m_05_10_gpfe)
-
-
 etable(models_05_10_list, tex=T, file = here("..", "tables", "models_05_10.tex"))
-
-
-#fix model names and labels
-models_05_10_plot <- modelplot(models_05_10_list, coef_omit = 'Interc', facet = TRUE) + 
-     geom_vline(xintercept = 0, color = "red") +  # Red vertical line at x = 0
-     theme_minimal() +  
-     theme(panel.grid = element_blank())  
-
-ggsave(file = here("..", "plots", "models_05_10_plot.png"), plot = models_05_10_plot, width = 6, height = 4, dpi = 300)
-
-
- 
 
 # Intermediate Effects of Quotas 05_10_15 ---------------------------------
 
@@ -160,7 +140,7 @@ print(identical(naampy_merge_raj_panch$first_name_15_og[2:length(naampy_merge_ra
 
 
 
-# Intermediate Effect Regressions -----------------------------------------
+# 2010 --> 2015 Regressions -----------------------------------------
 
 unique(naampy_merge_raj_panch$pred_gender_15)
 
@@ -190,7 +170,7 @@ summary(m_50_10_15_psfe)
 m_50_10_15_gpfe <- feols((sex_2015 == "F") ~ treat_2010 | dist_name_2015 + samiti_name_2015 + gp_2015, ssc = ssc(fixef.K = "full"), vcov = ~gp_2015, data = data_threshold_50)
 summary(m_50_10_15_gpfe) 
 
-
+# TeX
 models_50_list <- list(m_50_10_15, m_50_10_15_dfe, m_50_10_15_psfe, m_50_10_15_gpfe)
 etable(models_50_list, tex = TRUE, file = here("..", "tables", "models_50_10_15.tex"),   placement = "htbp", title = "Results for Threshold 0.52")
 
@@ -214,6 +194,7 @@ m_60_10_15_gpfe <- feols((sex_2015 == "F") ~ treat_2010 | dist_name_2015 + samit
 summary(m_60_10_15_gpfe) 
 
 
+# TeX
 models_60_list <- list(m_60_10_15, m_60_10_15_dfe, m_60_10_15_psfe, m_60_10_15_gpfe)
 etable(models_60_list, tex = TRUE, file = here("..", "tables", "models_60_10_15.tex"),   placement = "htbp", title = "Results for Threshold 0.6")
 
@@ -235,6 +216,7 @@ m_70_10_15_gpfe <- feols((sex_2015 == "F") ~ treat_2010 | dist_name_2015 + samit
 summary(m_70_10_15_gpfe)
 
 
+# TeX
 models_70_list <- list(m_70_10_15, m_70_10_15_dfe, m_70_10_15_psfe, m_70_10_15_gpfe)
 etable(models_70_list, tex = TRUE, file = here("..", "tables", "models_70_10_15.tex"), placement = "htbp", title = "Results for Threshold 0.7")
 
@@ -254,6 +236,7 @@ summary(m_80_10_15_psfe)
 m_80_10_15_gpfe <- feols((sex_2015 == "F") ~ treat_2010 | dist_name_2015 + samiti_name_2015 + gp_2015, ssc = ssc(fixef.K = "full"), vcov = ~gp_2015, data = data_threshold_80)
 summary(m_80_10_15_gpfe)
 
+# TeX
 models_80_list <- list(m_80_10_15, m_80_10_15_dfe, m_80_10_15_psfe, m_80_10_15_gpfe)
 etable(models_80_list, tex = TRUE, file = here("..", "tables", "models_80_10_15.tex"), placement = "htbp", title = "Results for Threshold 0.8")
 
@@ -271,22 +254,81 @@ m_90_10_15_psfe <- feols((sex_2015 == "F") ~ treat_2010 | dist_name_2015 + samit
 summary(m_90_10_15_psfe)
 
 m_90_10_15_gpfe <- feols((sex_2015 == "F") ~ treat_2010 | dist_name_2015 + samiti_name_2015 + gp_2015, ssc = ssc(fixef.K = "full"), vcov = ~gp_2015, data = data_threshold_90)
-summary(m_90_10_15_gpfe)
+summary(m_90_10_15_gpfe) #weird. co-eff >1! 
 
-#weird. co-eff >1! 
-
+# TeX
 models_90_list <- list(m_90_10_15, m_90_10_15_dfe, m_90_10_15_psfe, m_90_10_15_gpfe)
 etable(models_90_list, tex = TRUE, file = here("..", "tables", "models_90_10_15.tex"), placement = "htbp", title = "Results for Threshold 0.9")
 
 
 
-# Intermediate Effect treat_2005*treat_2010 -------------------------------
 
-# feols((sex_2015 == "F") ~ treat_2010 * treat_2005 | dist_name_2015 + samiti_name_2015 + gp_2015, ssc = ssc(fixef.K = "full"), vcov = ~gp_2015, data = naampy_merge_raj_panch)
+# Intermediate Effect treat_2005 * treat_2010 -----------------------------
+
+# Run all these models on the subsample of data where you got 50% predicted probability of sex==F when using naampy to predict sex of the sarpanches
+# This is the subsample that gives you the largest number of female sarpanches. 
+
+data_threshold_50 <- data_threshold_50 %>%
+     mutate(inter_always_treated = ifelse(treat_2010 == 1 & treat_2005 == 1, 1, 0),
+            inter_sometimes_treated = ifelse(treat_2010 == 1 | treat_2005 == 1, 1, 0))
+
+# interaction of treat_2005 and treat_2010
+# MM, WW, MW, WM
+#  0, 1,  0,  0
+
+m_05_10_15 <- feols((sex_2015 == "F") ~ treat_2010 * treat_2005 , vcov = ~gp_2015, data = data_threshold_50)
+summary(m_05_10_15)
+
+m_05_10_15_dfe <- feols((sex_2015 == "F") ~ treat_2010 * treat_2005  | dist_name_2015, vcov = ~gp_2015, data = data_threshold_50)
+summary(m_05_10_15_dfe)
+
+m_05_10_15_psfe <- feols((sex_2015 == "F") ~ treat_2010 * treat_2005  | dist_name_2015 + samiti_name_2015, vcov = ~gp_2015, data = data_threshold_50)
+summary(m_05_10_15_psfe)
+
+m_05_10_15_gpfe <- feols((sex_2015 == "F") ~ treat_2010 * treat_2005  | dist_name_2015 + samiti_name_2015 + gp_2015, vcov = ~gp_2015, data = data_threshold_50)
+summary(m_05_10_15_gpfe)
+
+# TeX
+models_05_10_15_list <- list(m_05_10_15, m_05_10_15_dfe, m_05_10_15_psfe, m_05_10_15_gpfe)
+etable(models_05_10_15_list, tex = TRUE, file = here("..", "tables", "intermediate_05_10_15.tex"), placement = "htbp")
+
+# Intermediate Always Treated 
+m_inter_always <- feols((sex_2015 == "F") ~ inter_always_treated, vcov = ~gp_2015, data = data_threshold_50)
+summary(m_inter_always)
 
 
+m_inter_always_dfe <- feols((sex_2015 == "F") ~ inter_always_treated  | dist_name_2015, vcov = ~gp_2015, data = data_threshold_50)
+summary(m_inter_always_dfe)
+
+m_inter_always_psfe <- feols((sex_2015 == "F") ~ inter_always_treated  | dist_name_2015 + samiti_name_2015, vcov = ~gp_2015, data = data_threshold_50)
+summary(m_inter_always_psfe)
+
+m_inter_always_gpfe <- feols((sex_2015 == "F") ~ inter_always_treated  | dist_name_2015 + samiti_name_2015 + gp_2015, vcov = ~gp_2015, data = data_threshold_50)
+summary(m_inter_always_gpfe)
+
+# TeX
+m_inter_always_list <- list(m_inter_always, m_inter_always_dfe, m_inter_always_psfe, m_inter_always_gpfe)
+etable(m_inter_always_list, tex = TRUE, file = here("..", "tables", "inter_always_treated.tex"), placement = "htbp")
 
 
+# Intermediate Sometimes Treated
+m_inter_sometimes <- feols((sex_2015 == "F") ~ inter_sometimes_treated, vcov = ~gp_2015, data = data_threshold_50)
+summary(m_inter_sometimes) #similar coef as always treated! 
+
+
+m_inter_sometimes_dfe <- feols((sex_2015 == "F") ~ inter_sometimes_treated  | dist_name_2015, vcov = ~gp_2015, data = data_threshold_50)
+summary(m_inter_sometimes_dfe)
+
+m_inter_sometimes_psfe <- feols((sex_2015 == "F") ~ inter_sometimes_treated  | dist_name_2015 + samiti_name_2015, vcov = ~gp_2015, data = data_threshold_50)
+summary(m_inter_sometimes_psfe)
+
+m_inter_sometimes_gpfe <- feols((sex_2015 == "F") ~ inter_sometimes_treated  | dist_name_2015 + samiti_name_2015 + gp_2015, vcov = ~gp_2015, data = data_threshold_50)
+summary(m_inter_sometimes_gpfe)
+
+
+# TeX
+m_inter_sometimes_list <- list(m_inter_sometimes, m_inter_sometimes_dfe, m_inter_sometimes_psfe, m_inter_sometimes_gpfe)
+etable(m_inter_sometimes_list, tex = TRUE, file = here("..", "tables", "inter_sometimes_treated.tex"), placement = "htbp")
 
 
 
@@ -297,7 +339,5 @@ etable(models_90_list, tex = TRUE, file = here("..", "tables", "models_90_10_15.
 # intensity of treatment. iterated by 2, 1, 0
 # 
 # MMM
-# WWW
-# max contrast estimator
-# 
+# WWW  
 
