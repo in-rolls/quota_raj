@@ -91,3 +91,34 @@
 \end{table}
 
 
+
+\begin{table}[htbp]
+   \caption{Results for Threshold 0.52}
+   \centering
+   \begin{tabular}{lcccc}
+      \tabularnewline \midrule \midrule
+      Dependent Variable: & \multicolumn{4}{c}{sex\_2015=="F"}\\
+      Model:               & (1)             & (2)             & (3)             & (4)\\  
+      \midrule
+      \emph{Variables}\\
+      Constant             & 0.4815$^{***}$  &                 &                 &   \\   
+                           & (0.0072)        &                 &                 &   \\   
+      treat\_2010          & -0.1778$^{***}$ & -0.1817$^{***}$ & -0.2060$^{***}$ & -0.1440\\   
+                           & (0.0117)        & (0.0120)        & (0.0129)        & (0.1395)\\   
+      \midrule
+      \emph{Fixed-effects}\\
+      dist\_name\_2015     &                 & Yes             & Yes             & Yes\\  
+      samiti\_name\_2015   &                 &                 & Yes             & Yes\\  
+      gp\_2015             &                 &                 &                 & Yes\\  
+      \midrule
+      \emph{Fit statistics}\\
+      Observations         & 8,383           & 8,383           & 8,383           & 8,383\\  
+      R$^2$                & 0.02961         & 0.03585         & 0.06698         & 0.94478\\  
+      Within R$^2$         &                 & 0.03000         & 0.03501         & 0.01699\\  
+      \midrule \midrule
+      \multicolumn{5}{l}{\emph{Clustered (gp\_2015) standard-errors in parentheses}}\\
+      \multicolumn{5}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+   \end{tabular}
+\end{table}
+
+
