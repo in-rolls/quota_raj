@@ -28,3 +28,33 @@
 \par\endgroup
 
 
+
+\begingroup
+\centering
+\begin{tabular}{lcccc}
+   \tabularnewline \midrule \midrule
+   Dependent Variable: & \multicolumn{4}{c}{sex\_2015=="F"}\\
+   Model:                      & (1)             & (2)             & (3)             & (4)\\  
+   \midrule
+   \emph{Variables}\\
+   Constant                    & 0.4757$^{***}$  &                 &                 &   \\   
+                               & (0.0080)        &                 &                 &   \\   
+   inter\_sometimes\_treated   & -0.1175$^{***}$ & -0.1213$^{***}$ & -0.1502$^{***}$ & -0.0954$^{*}$\\   
+                               & (0.0114)        & (0.0118)        & (0.0133)        & (0.0493)\\   
+   \midrule
+   \emph{Fixed-effects}\\
+   dist\_name\_2015            &                 & Yes             & Yes             & Yes\\  
+   samiti\_name\_2015          &                 &                 & Yes             & Yes\\  
+   gp\_2015                    &                 &                 &                 & Yes\\  
+   \midrule
+   \emph{Fit statistics}\\
+   Observations                & 8,383           & 8,383           & 8,383           & 8,383\\  
+   R$^2$                       & 0.01417         & 0.02018         & 0.05064         & 0.94423\\  
+   Within R$^2$                &                 & 0.01423         & 0.01811         & 0.00716\\  
+   \midrule \midrule
+   \multicolumn{5}{l}{\emph{Clustered (gp\_2015) standard-errors in parentheses}}\\
+   \multicolumn{5}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+\end{tabular}
+\par\endgroup
+
+

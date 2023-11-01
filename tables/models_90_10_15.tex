@@ -153,3 +153,34 @@
 \end{table}
 
 
+
+\begin{table}[htbp]
+   \caption{Results for Threshold 0.9}
+   \centering
+   \begin{tabular}{lcccc}
+      \tabularnewline \midrule \midrule
+      Dependent Variable: & \multicolumn{4}{c}{sex\_2015=="F"}\\
+      Model:               & (1)             & (2)             & (3)             & (4)\\  
+      \midrule
+      \emph{Variables}\\
+      Constant             & 0.4240$^{***}$  &                 &                 &   \\   
+                           & (0.0141)        &                 &                 &   \\   
+      treat\_2010          & -0.2413$^{***}$ & -0.2454$^{***}$ & -0.2902$^{***}$ & -1.094$^{***}$\\   
+                           & (0.0198)        & (0.0206)        & (0.0244)        & ($1\times 10^{-5}$)\\    
+      \midrule
+      \emph{Fixed-effects}\\
+      dist\_name\_2015     &                 & Yes             & Yes             & Yes\\  
+      samiti\_name\_2015   &                 &                 & Yes             & Yes\\  
+      gp\_2015             &                 &                 &                 & Yes\\  
+      \midrule
+      \emph{Fit statistics}\\
+      Observations         & 2,215           & 2,215           & 2,215           & 2,215\\  
+      R$^2$                & 0.06229         & 0.08158         & 0.19916         & 1.0000\\  
+      Within R$^2$         &                 & 0.06234         & 0.07746         & 0.99978\\  
+      \midrule \midrule
+      \multicolumn{5}{l}{\emph{Clustered (gp\_2015) standard-errors in parentheses}}\\
+      \multicolumn{5}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+   \end{tabular}
+\end{table}
+
+

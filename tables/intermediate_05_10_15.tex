@@ -202,3 +202,37 @@
 \par\endgroup
 
 
+
+\begingroup
+\centering
+\begin{tabular}{lcccc}
+   \tabularnewline \midrule \midrule
+   Dependent Variable: & \multicolumn{4}{c}{sex\_2015=="F"}\\
+   Model:                              & (1)             & (2)             & (3)                   & (4)\\  
+   \midrule
+   \emph{Variables}\\
+   Constant                            & 0.4757$^{***}$  &                 &                       &   \\   
+                                       & (0.0080)        &                 &                       &   \\   
+   treat\_2010                         & -0.1785$^{***}$ & -0.1831$^{***}$ & -0.2126$^{***}$       & -0.1314$^{**}$\\   
+                                       & (0.0138)        & (0.0141)        & (0.0154)              & (0.0561)\\   
+   treat\_2005                         & 0.0289          & 0.0263          & $9.56\times 10^{-5}$  & 0.0197\\   
+                                       & (0.0181)        & (0.0184)        & (0.0194)              & (0.0677)\\   
+   treat\_2010 $\times$ treat\_2005    & -0.0095         & -0.0050         & 0.0195                & -0.0390\\   
+                                       & (0.0264)        & (0.0267)        & (0.0275)              & (0.0940)\\   
+   \midrule
+   \emph{Fixed-effects}\\
+   dist\_name\_2015                    &                 & Yes             & Yes                   & Yes\\  
+   samiti\_name\_2015                  &                 &                 & Yes                   & Yes\\  
+   gp\_2015                            &                 &                 &                       & Yes\\  
+   \midrule
+   \emph{Fit statistics}\\
+   Observations                        & 8,383           & 8,383           & 8,383                 & 8,383\\  
+   R$^2$                               & 0.03009         & 0.03629         & 0.06710               & 0.94480\\  
+   Within R$^2$                        &                 & 0.03044         & 0.03513               & 0.01727\\  
+   \midrule \midrule
+   \multicolumn{5}{l}{\emph{Clustered (gp\_2015) standard-errors in parentheses}}\\
+   \multicolumn{5}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+\end{tabular}
+\par\endgroup
+
+

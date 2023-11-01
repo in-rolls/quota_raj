@@ -35,7 +35,9 @@ raj_panch <- raj_panch %>%
           always_treated = ifelse(treat_2005 + treat_2010 + treat_2015 == 3, 1, 0),
           never_treated = ifelse(treat_2005 + treat_2010 + treat_2015 == 0, 1, 0),
           sometimes_treated = ifelse(treat_2005 + treat_2010 + treat_2015 > 0, 1, 0),
-          treatment_intensity = treat_2005 + treat_2010 + treat_2015
+          treatment_intensity = treat_2005 + treat_2010 + treat_2015,
+          inter_always_treated = ifelse(treat_2010 == 1 & treat_2005 == 1, 1, 0),
+          inter_sometimes_treated = ifelse(treat_2010 == 1 | treat_2005 == 1, 1, 0)
      )
 
 # Regressions -------------------------------------------------------------
@@ -267,10 +269,10 @@ etable(models_90_list, tex = TRUE, file = here("..", "tables", "models_90_10_15.
 
 # Run all these models on the subsample of data where you got 50% predicted probability of sex==F when using naampy to predict sex of the sarpanches
 # This is the subsample that gives you the largest number of female sarpanches. 
-
-data_threshold_50 <- data_threshold_50 %>%
-     mutate(inter_always_treated = ifelse(treat_2010 == 1 & treat_2005 == 1, 1, 0),
-            inter_sometimes_treated = ifelse(treat_2010 == 1 | treat_2005 == 1, 1, 0))
+# 
+# data_threshold_50 <- data_threshold_50 %>%
+#      mutate(inter_always_treated = ifelse(treat_2010 == 1 & treat_2005 == 1, 1, 0),
+#             inter_sometimes_treated = ifelse(treat_2010 == 1 | treat_2005 == 1, 1, 0))
 
 # interaction of treat_2005 and treat_2010
 # MM, WW, MW, WM
