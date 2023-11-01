@@ -64,7 +64,7 @@ summary(m_05_10_gpfe)
 
 # TeX
 models_05_10_list <- list(m_05_10, m_05_10_dfe, m_05_10_psfe, m_05_10_gpfe)
-etable(models_05_10_list, tex=T, file = here("..", "tables", "models_05_10.tex"))
+etable(models_05_10_list, tex=T, file = here("..", "tables", "models_05_10.tex"), title = "Short-run Effects 2005 -- 2010",    replace = TRUE)
 
 # Intermediate Effects of Quotas 05_10_15 ---------------------------------
 
@@ -174,7 +174,7 @@ summary(m_50_10_15_gpfe)
 
 # TeX
 models_50_list <- list(m_50_10_15, m_50_10_15_dfe, m_50_10_15_psfe, m_50_10_15_gpfe)
-etable(models_50_list, tex = TRUE, file = here("..", "tables", "models_50_10_15.tex"),   placement = "htbp", title = "Results for Threshold 0.52")
+etable(models_50_list, tex = TRUE, file = here("..", "tables", "models_50_10_15.tex"),   placement = "htbp", title = "Results for Threshold 0.52", replace = TRUE)
 
 
 
@@ -198,7 +198,7 @@ summary(m_60_10_15_gpfe)
 
 # TeX
 models_60_list <- list(m_60_10_15, m_60_10_15_dfe, m_60_10_15_psfe, m_60_10_15_gpfe)
-etable(models_60_list, tex = TRUE, file = here("..", "tables", "models_60_10_15.tex"),   placement = "htbp", title = "Results for Threshold 0.6")
+etable(models_60_list, tex = TRUE, file = here("..", "tables", "models_60_10_15.tex"),   placement = "htbp", title = "Results for Threshold 0.6",  replace = TRUE)
 
 
 # Naampy Pred_Prob > 0.7
@@ -220,7 +220,7 @@ summary(m_70_10_15_gpfe)
 
 # TeX
 models_70_list <- list(m_70_10_15, m_70_10_15_dfe, m_70_10_15_psfe, m_70_10_15_gpfe)
-etable(models_70_list, tex = TRUE, file = here("..", "tables", "models_70_10_15.tex"), placement = "htbp", title = "Results for Threshold 0.7")
+etable(models_70_list, tex = TRUE, file = here("..", "tables", "models_70_10_15.tex"), placement = "htbp", title = "Results for Threshold 0.7",  replace = TRUE)
 
 
 # Naampy Pred_Prob > 0.8
@@ -240,7 +240,7 @@ summary(m_80_10_15_gpfe)
 
 # TeX
 models_80_list <- list(m_80_10_15, m_80_10_15_dfe, m_80_10_15_psfe, m_80_10_15_gpfe)
-etable(models_80_list, tex = TRUE, file = here("..", "tables", "models_80_10_15.tex"), placement = "htbp", title = "Results for Threshold 0.8")
+etable(models_80_list, tex = TRUE, file = here("..", "tables", "models_80_10_15.tex"), placement = "htbp", title = "Results for Threshold 0.8",  replace = TRUE)
 
 
 # Naampy Pred_prob > 0.90
@@ -260,7 +260,7 @@ summary(m_90_10_15_gpfe) #weird. co-eff >1!
 
 # TeX
 models_90_list <- list(m_90_10_15, m_90_10_15_dfe, m_90_10_15_psfe, m_90_10_15_gpfe)
-etable(models_90_list, tex = TRUE, file = here("..", "tables", "models_90_10_15.tex"), placement = "htbp", title = "Results for Threshold 0.9")
+etable(models_90_list, tex = TRUE, file = here("..", "tables", "models_90_10_15.tex"), placement = "htbp", title = "Results for Threshold 0.9",  replace = TRUE)
 
 
 
@@ -292,7 +292,7 @@ summary(m_05_10_15_gpfe)
 
 # TeX
 models_05_10_15_list <- list(m_05_10_15, m_05_10_15_dfe, m_05_10_15_psfe, m_05_10_15_gpfe)
-etable(models_05_10_15_list, tex = TRUE, file = here("..", "tables", "intermediate_05_10_15.tex"), placement = "htbp")
+etable(models_05_10_15_list, tex = TRUE, file = here("..", "tables", "intermediate_05_10_15.tex"), title = "Interaction Effects Treat 2005 * 2010", placement = "htbp", replace = TRUE)
 
 # Intermediate Always Treated 
 m_inter_always <- feols((sex_2015 == "F") ~ inter_always_treated, vcov = ~gp_2015, data = data_threshold_50)
@@ -310,7 +310,7 @@ summary(m_inter_always_gpfe)
 
 # TeX
 m_inter_always_list <- list(m_inter_always, m_inter_always_dfe, m_inter_always_psfe, m_inter_always_gpfe)
-etable(m_inter_always_list, tex = TRUE, file = here("..", "tables", "inter_always_treated.tex"), placement = "htbp")
+etable(m_inter_always_list, tex = TRUE, file = here("..", "tables", "inter_always_treated.tex"), title = "Intermediate Effects: Treated in 2005 and 2010", placement = "htbp",  replace = TRUE)
 
 
 # Intermediate Sometimes Treated
@@ -330,7 +330,7 @@ summary(m_inter_sometimes_gpfe)
 
 # TeX
 m_inter_sometimes_list <- list(m_inter_sometimes, m_inter_sometimes_dfe, m_inter_sometimes_psfe, m_inter_sometimes_gpfe)
-etable(m_inter_sometimes_list, tex = TRUE, file = here("..", "tables", "inter_sometimes_treated.tex"), placement = "htbp")
+etable(m_inter_sometimes_list, tex = TRUE, file = here("..", "tables", "inter_sometimes_treated.tex"), title = "Intermediate Effects: Treated in 2005 Or in 2010", placement = "htbp",  replace = TRUE)
 
 
 
