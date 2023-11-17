@@ -1,0 +1,32 @@
+
+\begin{table}[htbp]
+   \caption{Interaction Effects Treat 2005 * 2010}
+   \centering
+   \begin{tabular}{lccc}
+      \tabularnewline \midrule \midrule
+      Dependent Variable: & \multicolumn{3}{c}{sex\_manual\_2015=="F"}\\
+      Model:                              & (1)            & (2)            & (3)\\  
+      \midrule
+      \emph{Variables}\\
+      Constant                            & 0.0796$^{***}$ &                &   \\   
+                                          & (0.0061)       &                &   \\   
+      treat\_2010                         & -0.0101        & -0.0292$^{**}$ & -0.0292$^{**}$\\   
+                                          & (0.0091)       & (0.0140)       & (0.0128)\\   
+      treat\_2005                         & -0.0147        & -0.0318$^{**}$ & -0.0318$^{**}$\\   
+                                          & (0.0153)       & (0.0155)       & (0.0162)\\   
+      treat\_2010 $\times$ treat\_2005    & 0.0083         & 0.0169         & 0.0169\\   
+                                          & (0.0193)       & (0.0181)       & (0.0196)\\   
+      \midrule
+      \emph{Fixed-effects}\\
+      fe\_key\_2015                       &                & Yes            & Yes\\  
+      \midrule
+      \emph{Fit statistics}\\
+      Observations                        & 4,308          & 4,308          & 4,308\\  
+      R$^2$                               & 0.00064        & 0.14999        & 0.14999\\  
+      Within R$^2$                        &                & 0.00315        & 0.00315\\  
+      \midrule \midrule
+      \multicolumn{4}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
+   \end{tabular}
+\end{table}
+
+
