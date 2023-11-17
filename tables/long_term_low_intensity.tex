@@ -1,28 +1,26 @@
 
-\begin{table}[htbp]
-   \caption{Once treated in 2005, 2010, 2015}
-   \centering
-   \begin{tabular}{lccc}
-      \tabularnewline \midrule \midrule
-      Dependent Variable: & \multicolumn{3}{c}{sex\_2020=="F"}\\
-      Model:          & (1)                   & (2)                    & (3)\\  
-      \midrule
-      \emph{Variables}\\
-      Constant        & 0.1081$^{***}$        &                        &   \\   
-                      & (0.0069)              &                        &   \\   
-      once            & -0.0039               & $-2.58\times 10^{-6}$  & $-2.58\times 10^{-6}$\\    
-                      & (0.0094)              & (0.0102)               & (0.0098)\\   
-      \midrule
-      \emph{Fixed-effects}\\
-      fe\_key\_2020   &                       & Yes                    & Yes\\  
-      \midrule
-      \emph{Fit statistics}\\
-      Observations    & 4,351                 & 4,351                  & 4,351\\  
-      R$^2$           & $4.08\times 10^{-5}$  & 0.08693                & 0.08693\\  
-      Within R$^2$    &                       & $1.71\times 10^{-11}$  & $1.71\times 10^{-11}$\\   
-      \midrule \midrule
-      \multicolumn{4}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
-   \end{tabular}
-\end{table}
+\begingroup
+\centering
+\begin{tabular}{lcccc}
+   \toprule
+    & \multicolumn{4}{c}{\textit{2020 rep is a woman in an open seat}}\\
+                                             & [i]                   & [ii]                  & [iii]                  & [iv]\\  
+   \midrule 
+   Constant                                  & 0.1081                &                       &                        &   \\   
+                                             & (0.0069)              &                       &                        &   \\   
+   Treated once in either 2005, 2010 or 2010 & -0.0039               & -0.0021               & $-2.58\times 10^{-6}$  & -0.0791\\   
+                                             & (0.0094)              & (0.0096)              & (0.0099)               & (0.0520)\\   
+    \\
+   Standard-Errors & IID & \multicolumn{3}{c}{Gram Panchayat (2020)} \\ 
+   Observations                              & 4,351                 & 4,351                 & 4,351                  & 4,351\\  
+   R$^2$                                     & $4.08\times 10^{-5}$  & 0.02364               & 0.08693                & 0.98953\\  
+   Within R$^2$                              &                       & $1.11\times 10^{-5}$  & $1.71\times 10^{-11}$  & 0.01601\\  
+    \\
+   District (2020) fixed effects             &                       & $\checkmark$          & $\checkmark$           & $\checkmark$\\   
+   Panchayat Samiti (2020) fixed effects     &                       &                       & $\checkmark$           & $\checkmark$\\   
+   Gram Panchayat (2020) fixed effects       &                       &                       &                        & $\checkmark$\\   
+   \bottomrule
+\end{tabular}
+\par\endgroup
 
 
