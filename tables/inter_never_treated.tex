@@ -1,28 +1,25 @@
 
-\begin{table}[htbp]
-   \caption{Intermediate Effects: Never treated in 2005 and 2010}
-   \centering
-   \begin{tabular}{lccc}
-      \tabularnewline \midrule \midrule
-      Dependent Variable: & \multicolumn{3}{c}{sex\_manual\_2015=="F"}\\
-      Model:                  & (1)            & (2)            & (3)\\  
-      \midrule
-      \emph{Variables}\\
-      Constant                & 0.0670$^{***}$ &                &   \\   
-                              & (0.0051)       &                &   \\   
-      inter\_never\_treated   & 0.0125         & 0.0337$^{***}$ & 0.0337$^{***}$\\   
-                              & (0.0080)       & (0.0123)       & (0.0116)\\   
-      \midrule
-      \emph{Fixed-effects}\\
-      fe\_key\_2015           &                & Yes            & Yes\\  
-      \midrule
-      \emph{Fit statistics}\\
-      Observations            & 4,308          & 4,308          & 4,308\\  
-      R$^2$                   & 0.00057        & 0.14964        & 0.14964\\  
-      Within R$^2$            &                & 0.00273        & 0.00273\\  
-      \midrule \midrule
-      \multicolumn{4}{l}{\emph{Signif. Codes: ***: 0.01, **: 0.05, *: 0.1}}\\
-   \end{tabular}
-\end{table}
+\begingroup
+\centering
+\begin{tabular}{lcccc}
+   \toprule
+    & \multicolumn{4}{c}{\textit{2015 rep is a woman in an open seat}}\\
+                                                & [i]      & [ii]          & [iii]         & [iv]\\  
+   \midrule 
+   Constant                                     & 0.0670   &               &               &   \\   
+                                                & (0.0051) &               &               &   \\   
+   Never treated (no quota in 2005, 2010, 2015) & 0.0125   & 0.0158        & 0.0337        & 0.0337\\   
+                                                & (0.0080) & (0.0087)      & (0.0116)      & (0.0116)\\   
+    \\
+   Standard-Errors & IID & \multicolumn{3}{c}{Gram Panchayat (2015)} \\ 
+   Observations                                 & 4,308    & 4,308         & 4,308         & 4,308\\  
+   R$^2$                                        & 0.00057  & 0.07687       & 0.14964       & 0.14964\\  
+   Within R$^2$                                 &          & 0.00086       & 0.00273       & 0.00273\\  
+    \\
+   District (2015) fixed effects                &          & $\checkmark$  & $\checkmark$  & $\checkmark$\\   
+   Panchayat Samiti (2015) fixed effects        &          &               & $\checkmark$  & $\checkmark$\\   
+   \bottomrule
+\end{tabular}
+\par\endgroup
 
 
