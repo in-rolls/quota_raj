@@ -73,7 +73,7 @@ m_long_term_gpfe <- feols((sex_2020 == "F") ~ treat_2015 * treat_2010 * treat_20
 summary(m_long_term_gpfe)
 
 # TeX
-models_long_term_list <- list(m_long_term, m_long_term_dfe, m_long_term_psfe)
+models_long_term_list <- list(m_long_term, m_long_term_dfe, m_long_term_psfe, m_long_term_gpfe)
 
 etable(models_long_term_list, 
        tex = TRUE, 
