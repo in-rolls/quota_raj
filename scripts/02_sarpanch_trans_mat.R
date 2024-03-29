@@ -34,13 +34,27 @@ raj_panch <- raj_panch %>%
           always_treated = ifelse(treat_2005 + treat_2010 + treat_2015 == 3, 1, 0),
           never_treated = ifelse(treat_2005 + treat_2010 + treat_2015 == 0, 1, 0),
           sometimes_treated = ifelse(treat_2005 + treat_2010 + treat_2015 > 0, 1, 0),
-          treatment_intensity = treat_2005 + treat_2010 + treat_2015
+          once = ifelse(treat_2005 + treat_2010 + treat_2015 == 1, 1, 0),
+          twice = ifelse(treat_2005 + treat_2010 + treat_2015 == 2, 1, 0),
+          inter_always_treated = ifelse(treat_2010 == 1 & treat_2005 == 1, 1, 0),
+          inter_sometimes_treated = ifelse(treat_2010 == 1 | treat_2005 == 1, 1, 0),
+          inter_never_treated = ifelse(treat_2005 + treat_2010 == 0, 1, 0),
+          sc_2005 = ifelse(raj_panch$reservation_2010 %in% c("SC",  "ST" , "SC W" , "ST W"), 1, 0),
+          sc_2010 = ifelse(raj_panch$reservation_2010 %in% c("SC",  "ST" , "SCW" , "STW"), 1, 0),
+          sc_2015 = ifelse(raj_panch$reservation_2015 %in% c("SC",  "SC (Woman)" , "SCW" , "ST (Woman)"), 1, 0),
+          sc_2020 = ifelse(raj_panch$reservation_2020 %in% c("SC",  "SC (Woman)" , "SCW" , "ST (Woman)"), 1, 0),
+          all_obc_2005 = ifelse(raj_panch$reservation_2005 %in% c("OBC",  "OBC W"), 1, 0),
+          
+          all_obc_2010 = ifelse(raj_panch$reservation_2010 %in% c("OBC",  "OBCW"), 1, 0),
+          all_obc_2015 = ifelse(raj_panch$reservation_2015 %in% c("OBC",  "OBC (Woman)"), 1, 0),
+          all_obc_2020 = ifelse(raj_panch$reservation_2020 %in% c("OBC",  "OBC (Woman)"), 1, 0),
+          fe_key_2010 = paste(dist_name_2010, samiti_name_2010),
+          cluster_key_2010 = paste(dist_name_2010, samiti_name_2010, gp_2010),
+          fe_key_2015 = paste(dist_name_2015,samiti_name_2015),
+          cluster_key_2015 = paste(dist_name_2015,samiti_name_2015, gp_2015),
+          fe_key_2020 = paste(district_2020, ps_2020),
+          cluster_key_2020 = paste(district_2020, ps_2020, gp_2020)
      )
-
-table(raj_panch$sometimes_treated)
-table(raj_panch$never_treated)
-table(raj_panch$always_treated)
-table(raj_panch$treatment_intensity)
 
 
 # Transition Matrces ------------------------------------------------------
@@ -101,26 +115,23 @@ bin_trans_matrices <- list(
 
 # Chi-Squared Test --------------------------------------------------------
 
-chi_sq_test_05_10 <- chisq.test(trans_05_10) # continuity' correction not changing anything
-chi_sq_test_05_10
+chi_sq_test_05_10 <- chisq.test(bin_trans_05_10) # continuity' correction not changing anything
+chi_sq_test_05_10 #done
 
-chi_sq_test_10_15 <- chisq.test(trans_10_15)
-chi_sq_test_10_15
+chi_sq_test_10_15 <- chisq.test(bin_trans_10_15)
+chi_sq_test_10_15 #done
 
-chi_sq_test_15_20 <- chisq.test(trans_15_20)
-chi_sq_test_15_20
+chi_sq_test_15_20 <- chisq.test(bin_trans_15_20)
+chi_sq_test_15_20#
 
-chi_sq_test_05_15 <- chisq.test(trans_05_15)
-chi_sq_test_05_15
+chi_sq_test_05_15 <- chisq.test(bin_trans_05_15)
+chi_sq_test_05_15#done
 
-chi_sq_test_05_20 <- chisq.test(trans_05_20)
-chi_sq_test_05_20
+chi_sq_test_05_20 <- chisq.test(bin_trans_05_20)
+chi_sq_test_05_20#done
 
-chi_sq_test_10_15 <- chisq.test(trans_10_15)
-chi_sq_test_10_15
-
-chi_sq_test_10_20 <- chisq.test(trans_10_20)
-chi_sq_test_10_20
+chi_sq_test_10_20 <- chisq.test(bin_trans_10_20)
+chi_sq_test_10_20#done
 
 
 chi_squared_results <- data.frame(
@@ -130,11 +141,9 @@ chi_squared_results <- data.frame(
      "Degrees of Freedom" = c(chi_sq_test_05_10$parameter, chi_sq_test_05_15$parameter, chi_sq_test_05_20$parameter, 
                               chi_sq_test_10_15$parameter, chi_sq_test_10_20$parameter, chi_sq_test_15_20$parameter),
      "P-Value" = format(c(chi_sq_test_05_10$p.value, chi_sq_test_05_15$p.value, chi_sq_test_05_20$p.value, 
-                          chi_sq_test_10_15$p.value, chi_sq_test_10_20$p.value, chi_sq_test_15_20$p.value), scientific = TRUE)
+                          chi_sq_test_10_15$p.value, chi_sq_test_10_20$p.value, chi_sq_test_15_20$p.value), digits = 4)
 )
 
 chi_squared_results_table <- kable(chi_squared_results, format = "latex", caption = "Chi-Squared Test Results", booktabs = TRUE)
 
 cat(chi_squared_results_table, file = here("..", "tables", "chi_squared_results.tex"))
-
-
