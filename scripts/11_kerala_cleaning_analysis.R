@@ -63,6 +63,22 @@ kerala_wide_year <-kerala_panch %>%
      values_fn = list )
 
 
+kerala_panch$key  <- paste0(kerala_panch$year, kerala_panch$district, kerala_panch$gram_panchayat, kerala_panch$ward_name, kerala_panch$ward_no)
+                           
+kerala_wide_year <- kerala_panch %>%
+     pivot_wider(
+          names_from = key,
+          values_from = c(
+               district, elected_members, gender, 
+               gram_panchayat, marital_status, mobile, 
+               name_of_member, occupation, party,
+               reservation, role, ward_name, 
+               ward_no
+          ),
+          values_fn = list
+     )
+
+
 kerala_wide_year <- kerala_wide_year %>% select(-image)
 
 
