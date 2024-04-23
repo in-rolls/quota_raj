@@ -92,22 +92,3 @@ mean(kerala_wide$always_treated) # 0.03568372
 mean((kerala_wide$never_treated)) # 0.004740273
 
 
-
-# subset data -------------------------------------------------------------
-# Strongest specification by removing all partial matches -----------------
-
-kerala_wide_sub <- kerala_wide %>% 
-    dplyr:: filter(`dist...79` != 2 ) %>% 
-     filter(`dist...80` != 2 ) %>% 
-     filter(`dist...79` != 1 ) %>% 
-     filter(`dist...80` != 1 ) 
-
-m_10_15 <- feols(I(gender_2015 == "Female") ~ treat_2010, data = filter(kerala_wide_sub, treat_2015 == 0))
-summary(m_10_15)
-
-m_15_20 <- feols(I(gender_2020 == "Female") ~ treat_2015, data = filter(kerala_wide_sub, treat_2020 == 0))
-summary(m_15_20)
-
-m_interact <- feols(I(gender_2020 == "Female") ~ treat_2010 * treat_2015, data = filter(kerala_wide_sub, treat_2020 == 0))
-summary(m_interact)
-
