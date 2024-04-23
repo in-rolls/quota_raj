@@ -7,6 +7,7 @@ library(stringr)
 library(here)
 library(tidyr)
 library(fixest)
+library(kableExtra)
 # Load data ---------------------------------------------------------------
 
 data_dir <- here("..", "data/kerala")
@@ -91,8 +92,75 @@ kerala_wide <- kerala_wide %>%
             dalit_2010 = ifelse(kerala_wide$reservation_2010 %in% c("SC", "ST", "SC Woman", "ST Woman"), 1, 0),
             dalit_2015 = ifelse(kerala_wide$reservation_2015 %in% c("SC", "ST", "SC Woman", "ST Woman"), 1, 0),
             dalit_2020 = ifelse(kerala_wide$reservation_2020 %in% c("SC", "ST", "SC Woman", "ST Woman"), 1, 0),
-            always_treated = ifelse(treat_2010 + treat_2015 == 2, 1, 0),   #no variation here
-            never_treated = ifelse(treat_2010 + treat_2015 == 0, 1, 0))   #there is variation here
+            always_treated = ifelse(treat_2010 + treat_2015 == 2, 1, 0),   
+            never_treated = ifelse(treat_2010 + treat_2015 == 0, 1, 0),    
+            sometimes_treated = ifelse((treat_2010 | treat_2015 == 0), 1, 0),
+            sometimes_treated1212 = ifelse(treat_2010 + treat_2015 == 1, 1, 0))
+
+
+# write_csv(kerala_wide, here(data_dir, "kerala_wide.csv") )
+
+
+
+# Transition Matrices -----------------------------------------------------
+
+trans_10_15 <- table(kerala_wide$treat_2010, kerala_wide$treat_2015)
+trans_15_20 <- table(kerala_wide$treat_2015, kerala_wide$treat_2020)
+
+#comparison with 2010 - 2015
+
+trans_10_15 <- table(kerala_wide$treat_2010, kerala_wide$treat_2015)
+trans_10_20 <- table(kerala_wide$treat_2010, kerala_wide$treat_2020)
+
+print(trans_matrices <- list(
+     `2010-2015` = trans_10_15,
+     `2015-2020` = trans_15_20,
+     `2010-2015` = trans_10_15,
+     `2010-2020` = trans_10_20
+))
+
+
+#write_to_latex(trans_matrices_store, here("..", "tables", "tran_matrices.tex"))
+
+bin_trans_10_15 <- table(kerala_wide$treat_2010, kerala_wide$treat_2015)
+bin_trans_15_20 <- table(kerala_wide$treat_2015, kerala_wide$treat_2020)
+bin_trans_10_20 <- table(kerala_wide$treat_2010, kerala_wide$treat_2020)
+
+bin_trans_matrices <- list(
+     
+     `2010-2015` = bin_trans_10_15,
+     `2015-2020` = bin_trans_15_20,
+     `2010-2020` = bin_trans_10_20
+)
+
+
+
+# Chi-Squared Test --------------------------------------------------------
+
+chi_sq_test_10_15 <- chisq.test(bin_trans_10_15)
+chi_sq_test_10_15 #done
+
+chi_sq_test_15_20 <- chisq.test(bin_trans_15_20)
+chi_sq_test_15_20#
+
+chi_sq_test_10_20 <- chisq.test(bin_trans_10_20)
+chi_sq_test_10_20#done
+
+
+chi_squared_results <- data.frame(
+     "Comparison" = c( "2010-2015", "2010-2020", "2015-2020"),
+     "Chi-Squared Test Statistic" = c(chi_sq_test_10_15$statistic, chi_sq_test_10_20$statistic, chi_sq_test_15_20$statistic),
+     "Degrees of Freedom" = c(chi_sq_test_10_15$parameter, chi_sq_test_10_20$parameter, chi_sq_test_15_20$parameter),
+     "P-Value" = format(c(chi_sq_test_10_15$p.value, chi_sq_test_10_20$p.value, chi_sq_test_15_20$p.value), digits = 4)
+)
+
+chi_squared_results_table <- kable(chi_squared_results, format = "latex", caption = "Chi-Squared Test Results", booktabs = TRUE)
+
+cat(chi_squared_results_table, file = here("..", "tables", "kerala_chi_squared_results.tex"))
+
+
+
+# Models ------------------------------------------------------------------
 
 m_10_15 <- lm(I(gender_2015 == "Female") ~ treat_2010, data = filter(kerala_wide, treat_2015 == 0))
 summary(m_10_15)
@@ -109,13 +177,28 @@ summary(m_interact)
 m_interact <- feols(I(gender_2020 == "Female") ~ treat_2010, data = filter(kerala_wide, treat_2020 == 0))
 summary(m_interact)
 
+levels(as.factor(kerala_wide$never_treated))
+levels(as.factor(kerala_wide$always_treated))
+levels(as.factor(kerala_wide$sometimes_treated))
+
+mean(kerala_wide$sometimes_treated)# 0.52
+mean(kerala_wide$always_treated) # 0.03568372
+mean((kerala_wide$never_treated)) # 0.004740273
 
 
+m_always <- feols(I(gender_2020 == "Female") ~ always_treated, data = filter(kerala_wide, treat_2020 == 0))
+summary(m_always)
+
+m_never <- feols(I(gender_2020 == "Female") ~ never_treated, data = filter(kerala_wide, treat_2020 == 0))
+summary(m_never)
 
 
+m_sometimes <- feols(I(gender_2020 == "Female") ~ sometimes_treated, data = filter(kerala_wide, treat_2020 == 0))
+summary(m_sometimes)
 
-# Blind Wide Pivot --------------------------------------------------------
+# Legacy ------------------------------------------------------------------
 
+# blind wide reshape
 rm(list=ls())
 
 # Load data ---------------------------------------------------------------
