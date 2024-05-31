@@ -10,8 +10,10 @@ library(here)
 
 # Load data ---------------------------------------------------------------
 
-data_dir <- here("..", "data/up")
-up_files <- here(data_dir, "up_gram_panchayat_pradhan_2021.csv")
+
+data_dir <- here("..", "data", "up")
+
+up_files <- here(data_dir, "up_gram_panchayat_pradhan_2021.csv.zip")
 up_data <- readr::read_csv(up_files)
 
 # Clean raw data ----------------------------------------------------------
