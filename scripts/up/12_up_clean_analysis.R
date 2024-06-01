@@ -1,61 +1,59 @@
-# Load libs
-
+# Load libs.
 library(readr)
-library(dplyr)
-library(xtable)
-library(fuzzyjoin)
-library(stringr)
-library(here)
+library(arrow)
+library(tidyverse)
+library(stringi)
 
+# Load dat
+up_2005 <- read_parquet("data/up/up_gp_sarpanch_2005_fixed_with_transliteration.parquet")
+up_2010 <- read_parquet("data/up/up_gp_sarpanch_2010_fixed_with_transliteration.parquet")
+up_2015 <- read_parquet("data/up/up_gp_sarpanch_2015_fixed_with_transliteration.parquet")
+up_2021 <- read_parquet("data/up/up_gp_sarpanch_2021_fixed_with_transliteration.parquet")
 
-# Load data ---------------------------------------------------------------
+# Let's filter to winners for 2021
+up_2021 <- up_2021 %>% filter(result == 'विजेता')
 
+# See https://en.wikipedia.org/wiki/Kanpur_Dehat_district
+up_2010$district_name     <- ifelse(up_2010$district_name == "रमाबाई नगर", "कानपुर देहात", up_2010$district_name)
+up_2010$district_name_eng <- ifelse(up_2010$district_name_eng == "Ramabai Nagar", "Kanpur Dehat", up_2010$district_name_eng)
 
-data_dir <- here("..", "data", "up")
+# Transform
+up_2005_dedupe <- up_2005 %>%
+     mutate(female_res = grepl("Female", gp_res_status_fin_eng, ignore.case = TRUE),
+            key = normalize_string(paste(district_name, block_name, gp_name_fin)),
+            eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng))) %>%
+     filter (!duplicated(key))
+up_2010_dedupe <- up_2010 %>%
+     mutate(female_res = grepl("Female", gp_res_status_fin_eng, ignore.case = TRUE),
+            key = normalize_string(paste(district_name, block_name, gp_name_fin)),
+            eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng))) %>%
+     filter (!duplicated(key))
+up_2015_dedupe <- up_2015 %>%
+     mutate(female_res = grepl("Female", gp_reservation_status_eng, ignore.case = TRUE),
+            key = normalize_string(paste(district_name, block_name, gp_name)),
+            eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng))) %>%
+     filter (!duplicated(key))
+up_2021_dedupe <- up_2021 %>%
+     mutate(female_res = grepl("Female", gp_reservation_status_eng, ignore.case = TRUE),
+            key = normalize_string(paste(district_name, block_name, gp_name)),
+            eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng))) %>%
+     filter (!duplicated(key))
 
-up_files <- here(data_dir, "up_gram_panchayat_pradhan_2021.csv.zip")
-up_data <- readr::read_csv(up_files)
+# Join
+up_05_10 <- inner_join(up_2005_dedupe, up_2010_dedupe, by = "key", suffix = c("_2005", "_2010"))
+up_10_15 <- inner_join(up_2010_dedupe, up_2015_dedupe, by = "key", suffix = c("_2010", "_2015"))
+up_15_21 <- inner_join(up_2015_dedupe, up_2021_dedupe, by = "key", suffix = c("_2015", "_2021"))
+up_all   <- inner_join(up_05_10, up_15_21, by = "key")
 
-# Clean raw data ----------------------------------------------------------
+# 
+with(up_05_10, summary(lm(female_res_2010 ~ female_res_2005)))
+with(up_10_15, summary(lm(female_res_2015 ~ female_res_2010)))
+with(up_15_21, summary(lm(female_res_2021 ~ female_res_2015)))
 
-colnames(up_data) <- tolower(colnames(up_data))
-names(up_data)
+with(up_all, summary(lm(female_res_2010 ~ female_res_2005)))
+with(up_all, summary(lm(female_res_2015 ~ female_res_2010)))
+with(up_all, summary(lm(female_res_2021 ~ female_res_2015)))
 
-up_data <- up_data %>% 
-     rename(lgi_type = 'lgi type',
-            gram_panchayat = 'grama panchayat',
-            ward_no = 'ward no.',
-            ward_name = 'ward name',
-            elected_members = 'elected members',
-            name_of_member = 'name of member',
-            gender = 'female/male',
-            marital_status = 'marital status')
-
-names(up_data)
-
-# only retain gram panchayat 
-up_panch <- up_data %>% 
-     dplyr::filter(lgi_type=="Grama Panchayat")
-levels(as.factor(up_panch$lgi_type))
-up_panch <- up_panch %>% 
-     select(-block, -municipality, -corporation)
-
-
-
-# treatment  --------------------------------------------------------------
-
-# Transition Matrces ------------------------------------------------------
-
-# comparing wiht previous reservation status
-
-trans_10_15 <- table(up_panch$prez_treat_2010, up_panch$prez_treat_2015)
-trans_15_20 <- table(up_panch$prez_treat_2015, up_panch$prez_treat_2020)
-
-
-print(trans_matrices <- list(
-     `2010-2015` = trans_10_15,
-     `2015-2020` = trans_15_20
-))
 
 
 #Ward Members
