@@ -28,13 +28,14 @@ treated_units_df <- raj_sarpanch %>%
 
 
 n_districts <- length(unique(raj_sarpanch$District))
-n_treatments <- length(unique(raj_sarpanch$treat_2020))
-samples_per_group <- ceiling(1000 / (n_districts * n_treatments))
+n_cat_gp <- 4 #only G(W), OBC(@), SC(W), ST
+samples_per_group <- ceiling(2000 / (n_districts * n_cat_gp)) ## Artificially inflate the number of samples per group to ensure a larger pool
+
 
 
 set.seed(12091986)  
 sampled_mobile_nos <- treated_units_df %>%
-     group_by(District, treat_2020) %>%
+     group_by(District) %>%
      sample_n(samples_per_group, replace = FALSE) %>%
      ungroup()
 
