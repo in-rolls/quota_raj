@@ -6,6 +6,13 @@ library(stringi)
 library(kableExtra)
 library(fixest)
 
+normalize_string <- function(input_string) {
+     # Remove diacritics and convert to lowercase
+     normalized_string <- stri_trans_general(input_string, "Latin-ASCII")
+     normalized_string <- stri_trans_tolower(normalized_string)
+     return(normalized_string)
+}
+
 # Load dat
 up_2005 <- read_parquet("data/up/up_gp_sarpanch_2005_fixed_with_transliteration.parquet")
 up_2010 <- read_parquet("data/up/up_gp_sarpanch_2010_fixed_with_transliteration.parquet")
