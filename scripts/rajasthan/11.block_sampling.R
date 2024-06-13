@@ -10,9 +10,9 @@ library(kableExtra)
 
 
 # Load data
-data_dir <- here("..", "data/rajasthan/sarpanch_election_data/background")
-sp_fin_file <- here(data_dir, "WinnerSarpanch_2020.csv")
-raj_sarpanch <- readr::read_csv(sp_fin_file)
+file_path <- "data/rajasthan/sarpanch_election_data/background/WinnerSarpanch_2020.csv"
+raj_sarpanch <- readr::read_csv(file_path)
+
 
 # only general election, removing by elections
 
@@ -24,19 +24,33 @@ raj_sarpanch <- raj_sarpanch %>%
 
 
 treated_units_df <- raj_sarpanch %>% 
-     filter(treat_2020 == 1)
+     filter(treat_2020 == 1 & MobileNo != 0)
 
 
 n_districts <- length(unique(raj_sarpanch$District))
 n_cat_gp <- 4 #only G(W), OBC(@), SC(W), ST
-samples_per_group <- ceiling(2000 / (n_districts * n_cat_gp)) ## Artificially inflate the number of samples per group to ensure a larger pool
+samples_per_group <- ceiling(750 / (n_districts * n_cat_gp)) 
 
 
 
 set.seed(12091986)  
 sampled_mobile_nos <- treated_units_df %>%
-     group_by(District) %>%
-     sample_n(samples_per_group, replace = FALSE) %>%
+     group_by(District, CategoryOfGramPanchyat) %>%
+     sample_n(min(samples_per_group, n()), replace = FALSE) %>%
      ungroup()
 
-# write.csv(sampled_mobile_nos, "sampled_mobile_nos.csv", row.names = FALSE)
+
+remaining_samples <- 750 - nrow(sampled_mobile_nos)
+
+#sample additional observations from the treated data to reach 750
+if (remaining_samples > 0) {
+     set.seed(12101986)
+     additional_samples <- treated_units_df %>%
+          filter(!MobileNo %in% sampled_mobile_nos$MobileNo) %>%
+          sample_n(remaining_samples, replace = FALSE) 
+
+     sampled_mobile_nos <- bind_rows(sampled_mobile_nos, additional_samples)
+}
+
+
+ # write.csv(sampled_mobile_nos, "sampled_mobile_nos.csv", row.names = FALSE)
