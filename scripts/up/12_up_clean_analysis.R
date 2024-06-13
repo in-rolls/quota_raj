@@ -29,25 +29,25 @@ up_2010$district_name_eng <- ifelse(up_2010$district_name_eng == "Ramabai Nagar"
 # Transform
 up_2005_dedupe <- up_2005 %>%
      mutate(female_res = grepl("Female", gp_res_status_fin_eng, ignore.case = TRUE),
-            key = normalize_string(paste(district_name, block_name, gp_name_fin)),
+            key = paste(district_name, block_name, gp_name_fin),
             eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng)),
             female_cand = I(sex == 'महिला')) %>%
      filter (!duplicated(key))
 up_2010_dedupe <- up_2010 %>%
      mutate(female_res = grepl("Female", gp_res_status_fin_eng, ignore.case = TRUE),
-            key = normalize_string(paste(district_name, block_name, gp_name_fin)),
+            key = paste(district_name, block_name, gp_name_fin),
             eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng)),
             female_cand = I(sex == 'महिला')) %>%
      filter (!duplicated(key))
 up_2015_dedupe <- up_2015 %>%
      mutate(female_res = grepl("Female", gp_reservation_status_eng, ignore.case = TRUE),
-            key = normalize_string(paste(district_name, block_name, gp_name)),
+            key = paste(district_name, block_name, gp_name),
             eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng)),
             female_cand = I(sex == 'महिला')) %>%
      filter (!duplicated(key))
 up_2021_dedupe <- up_2021 %>%
      mutate(female_res = grepl("Female", gp_reservation_status_eng, ignore.case = TRUE),
-            key = normalize_string(paste(district_name, block_name, gp_name)),
+            key = paste(district_name, block_name, gp_name),
             eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng)),
             female_cand = I(sex == 'महिला')) %>%
      filter (!duplicated(key))
