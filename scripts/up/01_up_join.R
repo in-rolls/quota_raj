@@ -102,6 +102,23 @@ apply_matching <- function(df1, df2, key1, key2, match_column1, match_column2, m
      return(processed_results)
 }
 
+process_matched_dataframe <- function(matched_df, 
+                                      distance_threshold = 0.1, 
+                                      distance_col = "distance", 
+                                      group_by_cols_x, 
+                                      group_by_cols_y) {
+     matched_df %>%
+          filter(!!sym(distance_col) < distance_threshold) %>%
+          group_by(across(all_of(group_by_cols_x))) %>%
+          mutate(dup_x = n() > 1) %>%
+          ungroup() %>%
+          group_by(across(all_of(group_by_cols_y))) %>%
+          mutate(dup_y = n() > 1) %>%
+          ungroup() %>%
+          filter(!dup_x & !dup_y) %>%
+          select(-dup_x, -dup_y)
+}
+
 up_05_10_f <- apply_matching(
      up_2005_dedupe,
      up_2010_dedupe,
@@ -111,6 +128,14 @@ up_05_10_f <- apply_matching(
      match_column2 = "district_name",
      method = "jw",
      distance_col = "up_05_10_dist"
+)
+
+up_05_10_ff <- process_matched_dataframe(
+     up_05_10_f,
+     distance_threshold = 0.1,
+     distance_col = "up_05_10_dist",
+     group_by_cols_x = c("key.x"),
+     group_by_cols_y = c("key.y")
 )
 
 up_10_15_f <- apply_matching(
@@ -124,6 +149,14 @@ up_10_15_f <- apply_matching(
      distance_col = "up_10_15_dist"
 )
 
-write_parquet(up_05_10_f, sink = "data/up/up_05_10_fuzzy.parquet")
-write_parquet(up_10_15_f, sink = "data/up/up_10_15_fuzzy.parquet")
+up_10_15_ff <- process_matched_dataframe(
+     up_10_15_f,
+     distance_threshold = 0.1,
+     distance_col = "up_10_15_dist",
+     group_by_cols_x = c("key.x"),
+     group_by_cols_y = c("key.y")
+)
+
+write_parquet(up_05_10_ff, sink = "data/up/up_05_10_fuzzy.parquet")
+write_parquet(up_10_15_ff, sink = "data/up/up_10_15_fuzzy.parquet")
 
