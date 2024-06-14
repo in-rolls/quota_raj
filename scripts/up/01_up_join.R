@@ -55,16 +55,47 @@ up_2021_dedupe <- up_2021 %>%
      filter (!duplicated(key))
 
 # Join
-up_05_10 <- inner_join(up_2005_dedupe, up_2010_dedupe, by = "key", suffix = c("_2005", "_2010"))
-up_10_15 <- inner_join(up_2010_dedupe, up_2015_dedupe, by = "key", suffix = c("_2010", "_2015")) 
-up_15_21 <- inner_join(up_2015_dedupe, up_2021_dedupe, by = "key", suffix = c("_2015", "_2021"))
-up_all   <- inner_join(up_05_10, up_15_21, by = "key")
+up_05_10 <- inner_join(up_2005_dedupe, 
+                       up_2010_dedupe, 
+                       by = "key", 
+                       suffix = c("_2005", "_2010"))
+up_10_15 <- inner_join(up_2010_dedupe, 
+                       up_2015_dedupe, 
+                       by = "key", 
+                       suffix = c("_2010", "_2015")) 
+up_15_21 <- inner_join(up_2015_dedupe, 
+                       up_2021_dedupe, 
+                       by = "key", 
+                       suffix = c("_2015", "_2021"))
+up_all   <- inner_join(up_05_10, 
+                       up_15_21, 
+                       by = "key")
 
 up_all$total_res <- with(up_all, rowSums(cbind(female_res_2005, female_res_2010, female_res_2015)))
 
 # Fuzzy join
 
-process_row <- function(row, df2, key1, key2, match_column1, match_column2, method = "jw", distance_col = "distance") {
+up_2005_dedupe_suff <- up_2005_dedupe %>%
+     rename_with(~ paste0(., "_2005"))
+
+up_2010_dedupe_suff <- up_2010_dedupe %>%
+     rename_with(~ paste0(., "_2010"))
+
+up_2015_dedupe_suff <- up_2015_dedupe %>%
+     rename_with(~ paste0(., "_2015"))
+
+up_2021_dedupe_suff <- up_2021_dedupe %>%
+     rename_with(~ paste0(., "_2021"))
+
+process_row <- function(row, 
+                        df2, 
+                        key1, 
+                        key2, 
+                        match_column1, 
+                        match_column2, 
+                        method = "jw", 
+                        distance_col = "distance") {
+     
      election_subset <- df2 %>%
           filter(tolower(!!sym(match_column2)) == tolower(row[[match_column1]]))
      
@@ -85,8 +116,16 @@ process_row <- function(row, df2, key1, key2, match_column1, match_column2, meth
 }
 
 # Function to apply process_row_generalized across all rows with progress bar
-apply_matching <- function(df1, df2, key1, key2, match_column1, match_column2, method = "jw", distance_col = "distance") {
-     pb <- progress::progress_bar$new(
+apply_matching <- function(df1, 
+                           df2, 
+                           key1, 
+                           key2, 
+                           match_column1, 
+                           match_column2, 
+                           method = "jw", 
+                           distance_col = "distance") {
+     
+     pb <- progress_bar$new(
           format = "[:bar] :current/:total (:percent) :elapsedfull",
           total = nrow(df1),
           clear = FALSE
@@ -120,12 +159,12 @@ process_matched_dataframe <- function(matched_df,
 }
 
 up_05_10_f <- apply_matching(
-     up_2005_dedupe,
-     up_2010_dedupe,
-     key1 = "key",
-     key2 = "key",
-     match_column1 = "district_name",
-     match_column2 = "district_name",
+     up_2005_dedupe_suff,
+     up_2010_dedupe_suff,
+     key1 = "key_2005",
+     key2 = "key_2010",
+     match_column1 = "district_name_2005",
+     match_column2 = "district_name_2010",
      method = "jw",
      distance_col = "up_05_10_dist"
 )
@@ -134,17 +173,17 @@ up_05_10_ff <- process_matched_dataframe(
      up_05_10_f,
      distance_threshold = 0.1,
      distance_col = "up_05_10_dist",
-     group_by_cols_x = c("key.x"),
-     group_by_cols_y = c("key.y")
+     group_by_cols_x = c("key_2005"),
+     group_by_cols_y = c("key_2010")
 )
 
 up_10_15_f <- apply_matching(
-     up_2010_dedupe,
-     up_2015_dedupe,
-     key1 = "key",
-     key2 = "key",
-     match_column1 = "district_name",
-     match_column2 = "district_name",
+     up_2010_dedupe_suff,
+     up_2015_dedupe_suff,
+     key1 = "key_2010",
+     key2 = "key_2015",
+     match_column1 = "district_name_2010",
+     match_column2 = "district_name_2015",
      method = "jw",
      distance_col = "up_10_15_dist"
 )
@@ -153,8 +192,8 @@ up_10_15_ff <- process_matched_dataframe(
      up_10_15_f,
      distance_threshold = 0.1,
      distance_col = "up_10_15_dist",
-     group_by_cols_x = c("key.x"),
-     group_by_cols_y = c("key.y")
+     group_by_cols_x = c("key_2010"),
+     group_by_cols_y = c("key_2015")
 )
 
 write_parquet(up_05_10_ff, sink = "data/up/up_05_10_fuzzy.parquet")

@@ -4,11 +4,20 @@ library(arrow)
 library(tidyverse)
 library(stringi)
 library(kableExtra)
+library(here)
+
+# Load fuzzy
+up_05_10_ff <- read_parquet("data/up/up_05_10_fuzzy.parquet")
+up_10_15_ff <- read_parquet("data/up/up_10_15_fuzzy.parquet")
 
 # Random or not
 #------------------
 with(up_05_10, summary(lm(female_res_2010 ~ female_res_2005)))
+with(up_05_10_ff, summary(lm(female_res_2010 ~ female_res_2005)))
+
 with(up_10_15, summary(lm(female_res_2015 ~ female_res_2010)))
+with(up_10_15_ff, summary(lm(female_res_2015 ~ female_res_2010)))
+
 with(up_15_21, summary(lm(female_res_2021 ~ female_res_2015)))
 
 with(up_all, summary(lm(female_res_2010 ~ female_res_2005)))
