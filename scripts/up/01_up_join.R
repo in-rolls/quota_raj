@@ -5,6 +5,7 @@ library(tidyverse)
 library(stringi)
 library(kableExtra)
 library(fixest)
+library(progress)
 library(fuzzyjoin)
 
 normalize_string <- function(input_string) {
