@@ -10,6 +10,9 @@ library(here)
 up_05_10_ff <- read_parquet("data/up/up_05_10_fuzzy.parquet")
 up_10_15_ff <- read_parquet("data/up/up_10_15_fuzzy.parquet")
 
+
+
+
 # Random or not
 #------------------
 with(up_05_10, summary(lm(female_res_2010 ~ female_res_2005)))
