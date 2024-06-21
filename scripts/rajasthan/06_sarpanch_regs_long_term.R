@@ -10,6 +10,7 @@ library(kableExtra)
 library(fixest)
 
 # Load data ---------------------------------------------------------------
+raj_panch <- read_csv("data/rajasthan/sarpanch_election_data/sp_2005_2010_2015_2020_fin.csv")
 
 # 2005 * 2010 * 2015 full interaction
 
@@ -32,15 +33,15 @@ etable(models_long_term_list,
        tex = TRUE, 
        style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
        interaction.combine = "$\times$",
-       file = here("..", "tables", "longterm_interaction.tex"), 
-       dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat", 
+       file = "tables/longterm_interaction.tex", 
+       dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat in Raj", 
                  "treat_2010" = "Quota in 2010", 
                  "treat_2005" = "Quota in 2005",
                  "treat_2015" = "Quota in 2015",
                  "district_2020" = "District (2020)",
                  "ps_2020" = "Panchayat Samiti (2020)",
                  "gp_2020" = "Gram Panchayat (2020)"), #  notes = "Robust standard errors clustered at gram panchayat level",
-       signif.code = NA,
+
        replace = TRUE)
 
 

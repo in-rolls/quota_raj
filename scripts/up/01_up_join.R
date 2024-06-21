@@ -74,6 +74,10 @@ up_all   <- inner_join(up_05_10,
 
 up_all$total_res <- with(up_all, rowSums(cbind(female_res_2005, female_res_2010, female_res_2015)))
 
+save(up_all, file = "data/up/up_all_joined.RData")
+
+
+
 # Fuzzy join
 
 up_2005_dedupe_suff <- up_2005_dedupe %>%
