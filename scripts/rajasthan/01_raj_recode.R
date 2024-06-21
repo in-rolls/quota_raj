@@ -10,9 +10,8 @@ library(kableExtra)
 
 
 # Load data
-data_dir <- here("..", "data/sarpanch_election_data")
-sp_fin_file <- here(data_dir, "sp_2005_2010_2015_2020_fin.csv")
-raj_panch <- readr::read_csv(sp_fin_file)
+
+raj_panch <- read_csv("data/rajasthan/sarpanch_election_data/sp_2005_2010_2015_2020_fin2.csv")
 
 # Create reservation dummies, caste group dummies -------------------------
 
@@ -56,5 +55,6 @@ raj_panch <- raj_panch %>%
           cluster_key_2020 = paste(district_2020, ps_2020, gp_2020)
      )
 
+save(raj_panch, file = "data/rajasthan/sarpanch_election_data/raj_panch.RData")
 
 

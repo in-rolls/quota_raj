@@ -1,5 +1,5 @@
 # Libraries ---------------------------------------------------------------
-
+load("data/rajasthan/sarpanch_election_data/raj_panch.RData")
 # Regressions -------------------------------------------------------------
 
 # Short Run Effects of Quotas (05-->10) -----------------------------------
