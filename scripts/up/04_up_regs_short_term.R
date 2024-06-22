@@ -13,7 +13,7 @@ library(fixest)
 load("data/up/up_all_recoded.RData")
 
 
-summary(lm((female_cand_2010 == "TRUE") ~ treat_2005, data = subset(up_all, treat_2010 == 0)))
+# summary(lm((female_cand_2010 == "TRUE") ~ treat_2005, data = subset(up_all, treat_2010 == 0)))
 
 m_05_10 <- feols((female_cand_2010 =="TRUE") ~ treat_2005, data = filter(up_all, treat_2010 == 0))
 summary(m_05_10)
@@ -72,9 +72,6 @@ etable(models_10_15_list,
        replace = TRUE)
 
 
-
-
-
 # 2015 ---> 2021 ----------------------------------------------------------
 
 m_15_21 <- feols((female_cand_2021 =="TRUE") ~ treat_2015, data = filter(up_all, treat_2021 == 0))
@@ -104,4 +101,5 @@ etable(models_15_21_list,
                  "gp_name_eng_2021" = "Gram Panchayat (2021)"),
        #"SE_Type" = "S.E. Type"), #  notes = "Robust standard errors clustered at gram panchayat level"
        replace = TRUE)
+
 

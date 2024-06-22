@@ -30,11 +30,17 @@ raj_panch <- raj_panch %>%
           dalit_2010 = ifelse(raj_panch$reservation_2010 %in% c("SCW", "STW"), 1, 0),
           dalit_2015 = ifelse(raj_panch$reservation_2015 %in% c("SC (Woman)", "ST (Woman)"), 1, 0),
           dalit_2020 = ifelse(raj_panch$reservation_2020 %in% c("SC (Woman)", "ST (Woman)"), 1, 0),
+          
+          
           always_treated = ifelse(treat_2005 + treat_2010 + treat_2015 == 3, 1, 0),
           never_treated = ifelse(treat_2005 + treat_2010 + treat_2015 == 0, 1, 0),
           sometimes_treated = ifelse(treat_2005 + treat_2010 + treat_2015 > 0, 1, 0),
+          
+          
           once = ifelse(treat_2005 + treat_2010 + treat_2015 == 1, 1, 0),
           twice = ifelse(treat_2005 + treat_2010 + treat_2015 == 2, 1, 0),
+          
+          
           inter_always_treated = ifelse(treat_2010 == 1 & treat_2005 == 1, 1, 0),
           inter_sometimes_treated = ifelse(treat_2010 == 1 | treat_2005 == 1, 1, 0),
           inter_never_treated = ifelse(treat_2005 + treat_2010 == 0, 1, 0),
