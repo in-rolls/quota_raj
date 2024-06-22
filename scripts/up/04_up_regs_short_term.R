@@ -18,13 +18,11 @@ load("data/up/up_all_recoded.RData")
 m_05_10 <- feols((female_cand_2010 =="TRUE") ~ treat_2005, data = filter(up_all, treat_2010 == 0))
 summary(m_05_10)
 
-m_05_10_dfe <- feols((female_cand_2010 =="TRUE") ~ treat_2005 | district_name_eng_2010, vcov = ~gp_name_eng_2010, data = filter(up_all, treat_2010 == 0) )
+m_05_10_dfe <- feols((female_cand_2010 =="TRUE") ~ treat_2005 | district_name_eng_2010,  data = filter(up_all, treat_2010 == 0) )
 summary(m_05_10_dfe)
 
-m_05_10_psfe <- feols((female_cand_2010 =="TRUE") ~ treat_2005 | district_name_eng_2010 + block_name_eng_2010, vcov = ~gp_name_eng_2010,  data = filter(up_all, treat_2010 == 0))
+m_05_10_psfe <- feols((female_cand_2010 =="TRUE") ~ treat_2005 | district_name_eng_2010 + block_name_eng_2010, data = filter(up_all, treat_2010 == 0))
 summary(m_05_10_psfe)
-
-
 
 # TeX
 models_05_10_list <- list(m_05_10, m_05_10_dfe, m_05_10_psfe)
