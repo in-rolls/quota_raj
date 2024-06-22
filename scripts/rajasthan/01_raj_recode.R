@@ -8,7 +8,6 @@ library(stringr)
 library(here)
 library(kableExtra)
 
-
 # Load data
 
 raj_panch <- read_csv("data/rajasthan/sarpanch_election_data/sp_2005_2010_2015_2020_fin2.csv")
