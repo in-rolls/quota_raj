@@ -64,8 +64,6 @@ etable(models_10_15_list,
 
 
 
-
-
 # 2015 ---> 2021 ----------------------------------------------------------
 
 m_15_21 <- feols((female_cand_2021 =="TRUE") ~ treat_2015, data = filter(up_all, treat_2021 == 0))
