@@ -34,13 +34,13 @@ up_2005_dedupe <- up_2005 %>%
      mutate(female_res = grepl("Female", gp_res_status_fin_eng, ignore.case = TRUE),
             key = paste(district_name, block_name, gp_name_fin),
             eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng)),
-            female_cand = I(sex == 'महिला')) %>%
+            female_cand = I(cand_sex_fin == 'महिला')) %>%
      filter (!duplicated(key))
 up_2010_dedupe <- up_2010 %>%
      mutate(female_res = grepl("Female", gp_res_status_fin_eng, ignore.case = TRUE),
             key = paste(district_name, block_name, gp_name_fin),
             eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng)),
-            female_cand = I(sex == 'महिला')) %>%
+            female_cand = I(cand_sex_fin == 'महिला')) %>%
      filter (!duplicated(key))
 up_2015_dedupe <- up_2015 %>%
      mutate(female_res = grepl("Female", gp_reservation_status_eng, ignore.case = TRUE),

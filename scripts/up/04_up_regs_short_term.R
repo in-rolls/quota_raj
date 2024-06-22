@@ -11,7 +11,7 @@ library(fixest)
 
 load("data/up/up_all_recoded.RData")
 
-summary(lm((female_cand_2010 == "TRUE") ~ treat_2005, data = subset(up_all, treat_2010 == 0)))
+summary(lm((cand_sex_fin_2010 == "TRUE") ~ treat_2005, data = subset(up_all, treat_2010 == 0)))
 
 m_05_10 <- feols((female_cand_2010 =="TRUE") ~ treat_2005, data = filter(up_all, treat_2010 == 0))
 summary(m_05_10)
