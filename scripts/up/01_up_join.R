@@ -15,7 +15,6 @@ normalize_string <- function(input_string) {
      return(normalized_string)
 }
 
-
 # Load dat
 up_2005 <- read_parquet("data/up/up_gp_sarpanch_2005_fixed_with_transliteration.parquet")
 up_2010 <- read_parquet("data/up/up_gp_sarpanch_2010_fixed_with_transliteration.parquet")
@@ -75,8 +74,6 @@ up_all   <- inner_join(up_05_10,
 up_all$total_res <- with(up_all, rowSums(cbind(female_res_2005, female_res_2010, female_res_2015)))
 
 save(up_all, file = "data/up/up_all_joined.RData")
-
-
 
 # Fuzzy join
 
