@@ -3,17 +3,9 @@ library(readr)
 library(arrow)
 library(tidyverse)
 library(stringi)
-library(kableExtra)
-library(fixest)
-library(progress)
 library(fuzzyjoin)
-
-normalize_string <- function(input_string) {
-     # Remove diacritics and convert to lowercase
-     normalized_string <- stri_trans_general(input_string, "Latin-ASCII")
-     normalized_string <- stri_trans_tolower(normalized_string)
-     return(normalized_string)
-}
+library(here)
+library(progress)
 
 # Load dat
 up_2005 <- read_parquet("data/up/up_gp_sarpanch_2005_fixed_with_transliteration.parquet")
@@ -31,28 +23,35 @@ up_2010$district_name_eng <- ifelse(up_2010$district_name_eng == "Ramabai Nagar"
 # Transform
 up_2005_dedupe <- up_2005 %>%
      mutate(female_res = grepl("Female", gp_res_status_fin_eng, ignore.case = TRUE),
-            key = paste(district_name, block_name, gp_name_fin),
-            eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng)),
-            female_cand = I(cand_sex_fin == 'महिला')) %>%
-     filter (!duplicated(key))
+            key = normalize_string(paste(district_name, block_name, gp_name_fin)),
+            eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng))) %>%
+     filter (!duplicated(key)) %>%
+     filter(!is.na(key)) %>%
+     filter(!is.na(gp_res_status_fin_eng) & (gp_res_status_fin_eng != "Unknown"))
+
 up_2010_dedupe <- up_2010 %>%
      mutate(female_res = grepl("Female", gp_res_status_fin_eng, ignore.case = TRUE),
-            key = paste(district_name, block_name, gp_name_fin),
-            eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng)),
-            female_cand = I(cand_sex_fin == 'महिला')) %>%
-     filter (!duplicated(key))
+            key = normalize_string(paste(district_name, block_name, gp_name_fin)),
+            eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng))) %>%
+     filter (!duplicated(key)) %>%
+     filter(!is.na(key)) %>%
+     filter(!is.na(gp_res_status_fin_eng) & (gp_res_status_fin_eng != "Unknown"))
+
 up_2015_dedupe <- up_2015 %>%
      mutate(female_res = grepl("Female", gp_reservation_status_eng, ignore.case = TRUE),
-            key = paste(district_name, block_name, gp_name),
-            eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng)),
-            female_cand = I(sex == 'महिला')) %>%
-     filter (!duplicated(key))
+            key = normalize_string(paste(district_name, block_name, gp_name)),
+            eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng))) %>%
+     filter (!duplicated(key)) %>%
+     filter(!is.na(key)) %>%
+     filter(!is.na(gp_reservation_status_eng) & (gp_reservation_status_eng != "Unknown"))
+
 up_2021_dedupe <- up_2021 %>%
      mutate(female_res = grepl("Female", gp_reservation_status_eng, ignore.case = TRUE),
-            key = paste(district_name, block_name, gp_name),
-            eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng)),
-            female_cand = I(sex == 'महिला')) %>%
-     filter (!duplicated(key))
+            key = normalize_string(paste(district_name, block_name, gp_name)),
+            eng_key = normalize_string(paste(district_name_eng, block_name_eng, gp_name_eng))) %>%
+     filter (!duplicated(key)) %>%
+     filter(!is.na(key)) %>%
+     filter(!is.na(gp_reservation_status_eng) & (gp_reservation_status_eng != "Unknown"))
 
 # Join
 up_05_10 <- inner_join(up_2005_dedupe, 
@@ -71,9 +70,14 @@ up_all   <- inner_join(up_05_10,
                        up_15_21, 
                        by = "key")
 
-up_all$total_res <- with(up_all, rowSums(cbind(female_res_2005, female_res_2010, female_res_2015)))
+up_all   <- inner_join(up_05_10, up_15_21, by = "key")
 
-save(up_all, file = "data/up/up_all_joined.RData")
+normalize_string <- function(input_string) {
+     # Remove diacritics and convert to lowercase
+     normalized_string <- stri_trans_general(input_string, "Latin-ASCII")
+     normalized_string <- stri_trans_tolower(normalized_string)
+     return(normalized_string)
+}
 
 # Fuzzy join
 
@@ -198,6 +202,25 @@ up_10_15_ff <- process_matched_dataframe(
      group_by_cols_y = c("key_2015")
 )
 
+up_10_15_21_f <- apply_matching(
+     up_10_15_ff,
+     up_15_21,
+     key1 = "eng_key_2015",
+     key2 = "eng_key_2021",
+     match_column1 = "district_name_2010",
+     match_column2 = "district_name_2015",
+     method = "jw",
+     distance_col = "up_05_10_15_21_dist"
+)
+
+up_10_15_21_ff <- process_matched_dataframe(
+     up_10_15_21_f,
+     distance_threshold = 0.1,
+     distance_col = "up_05_10_15_21_dist",
+     group_by_cols_x = c("eng_key_2015.y"),
+     group_by_cols_y = c("eng_key_2021")
+)
+
 write_parquet(up_05_10_ff, sink = "data/up/up_05_10_fuzzy.parquet")
 write_parquet(up_10_15_ff, sink = "data/up/up_10_15_fuzzy.parquet")
-
+write_parquet(up_10_15_21_ff,   sink = "data/up/up_all_fuzzy.parquet")
