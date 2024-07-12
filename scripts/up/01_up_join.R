@@ -20,6 +20,14 @@ up_2021 <- up_2021 %>% filter(result == 'विजेता')
 up_2010$district_name     <- ifelse(up_2010$district_name == "रमाबाई नगर", "कानपुर देहात", up_2010$district_name)
 up_2010$district_name_eng <- ifelse(up_2010$district_name_eng == "Ramabai Nagar", "Kanpur Dehat", up_2010$district_name_eng)
 
+# Normalize string
+normalize_string <- function(input_string) {
+     # Remove diacritics and convert to lowercase
+     normalized_string <- stri_trans_general(input_string, "Latin-ASCII")
+     normalized_string <- stri_trans_tolower(normalized_string)
+     return(normalized_string)
+}
+
 # Transform
 up_2005_dedupe <- up_2005 %>%
      mutate(female_res = grepl("Female", gp_res_status_fin_eng, ignore.case = TRUE),
@@ -71,13 +79,6 @@ up_all   <- inner_join(up_05_10,
                        by = "key")
 
 up_all   <- inner_join(up_05_10, up_15_21, by = "key")
-
-normalize_string <- function(input_string) {
-     # Remove diacritics and convert to lowercase
-     normalized_string <- stri_trans_general(input_string, "Latin-ASCII")
-     normalized_string <- stri_trans_tolower(normalized_string)
-     return(normalized_string)
-}
 
 # Fuzzy join
 
