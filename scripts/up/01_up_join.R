@@ -225,3 +225,4 @@ up_10_15_21_ff <- process_matched_dataframe(
 write_parquet(up_05_10_ff, sink = "data/up/up_05_10_fuzzy.parquet")
 write_parquet(up_10_15_ff, sink = "data/up/up_10_15_fuzzy.parquet")
 write_parquet(up_10_15_21_ff,   sink = "data/up/up_all_fuzzy.parquet")
+write_parquet(up_all, sink = "data/up/up_all.parquet")

@@ -10,7 +10,7 @@ library(fixest)
 
 # UP_All Anaysis ----------------------------------------------------------
 
-load("data/up/up_all_joined.RData")
+up_all <- read_parquet("data/up/up_all.parquet")
 
 
 # Reservation_Status -----------------------------------------------------
