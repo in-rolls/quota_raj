@@ -8,14 +8,16 @@ library(here)
 library(fixest)
 
 
+
 # Short Run Effects of Quotas (05-->10) -----------------------------------
 
 load("data/up/up_all_recoded.RData")
 
 # Long Term ---------------------------------------------------------------
 
-summary(lm((sex_2021 =="महिला") ~ always_treated, data = subset(up_all, treat_2021 == 0))
-        )
+summary(lm((sex_2021 =="महिला") ~ treat_2005*treat_2010*treat_2015, data = subset(up_all, treat_2021 == 0)))
+
+summary(lm((sex_2021 =="महिला") ~ always_treated, data = subset(up_all, treat_2021 == 0)))
 # always treated treat_2005 + treat_2010 + treat_2015 = 3
 
 m_always_lt <- feols((sex_2021 == "महिला") ~ always_treated,  data = filter(up_all, treat_2021 == 0))
@@ -24,10 +26,10 @@ summary(m_always_lt)
 m_always_lt_dfe <- feols((sex_2021 == "महिला") ~ always_treated  | district_name_eng_2021,  data = filter(up_all, treat_2021 == 0))
 summary(m_always_lt_dfe)
 
-m_always_lt_psfe <- feols((sex_2021 == "महिला") ~ always_treated  | district_name_eng_2021 + block_name_eng_2021, data = filter(up_all, treat_2021 == 0))
+m_always_lt_psfe <- feols((sex_2021 == "महिला") ~ always_treated  | I(paste0(district_name_eng_2021, block_name_eng_2021)), data = filter(up_all, treat_2021 == 0))
 summary(m_always_lt_psfe)
 
-m_always_lt_gpfe <- feols((sex_2021 == "महिला") ~ always_treated  | district_name_eng_2021 + block_name_eng_2021 + gp_name_eng_2021, data = filter(up_all, treat_2021 == 0))
+m_always_lt_gpfe <- feols((sex_2021 == "महिला") ~ always_treated + key, data = filter(up_all, treat_2021 == 0))
 summary(m_always_lt_gpfe)
 
 

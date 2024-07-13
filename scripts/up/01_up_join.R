@@ -203,10 +203,10 @@ up_10_15_ff <- process_matched_dataframe(
      group_by_cols_y = c("key_2015")
 )
 
-up_10_15_21_f <- apply_matching(
-     up_10_15_ff,
+up_05_10_15_21_f <- apply_matching(
+     up_05_10_ff,
      up_15_21,
-     key1 = "eng_key_2015",
+     key1 = "eng_key_2010",
      key2 = "eng_key_2021",
      match_column1 = "district_name_2010",
      match_column2 = "district_name_2015",
@@ -214,7 +214,7 @@ up_10_15_21_f <- apply_matching(
      distance_col = "up_05_10_15_21_dist"
 )
 
-up_10_15_21_ff <- process_matched_dataframe(
+up_05_10_15_21_ff <- process_matched_dataframe(
      up_10_15_21_f,
      distance_threshold = 0.1,
      distance_col = "up_05_10_15_21_dist",
