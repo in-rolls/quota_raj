@@ -10,7 +10,7 @@ library(fixest)
 
 # UP_All Anaysis ----------------------------------------------------------
 
-up_all <- read_parquet("data/up/up_all.parquet")
+up_all <- read_parquet("data/up/up_all_fuzzy.parquet")
 
 
 # Reservation_Status -----------------------------------------------------
@@ -33,14 +33,16 @@ up_all <- up_all %>%
           dalit_2015 = ifelse(up_all$gp_reservation_status_eng_2015 %in% c("Scheduled Caste - Female", "Scheduled Tribe - Female"), 1, 0),
           dalit_2020 = ifelse(up_all$gp_reservation_status_eng_2021 %in% c("Scheduled Caste Female", "Scheduled Tribe Female"), 1, 0),
           
-          always_treated = ifelse(treat_2005 + treat_2010 + treat_2015 == 3, 1, 0),
-          never_treated = ifelse(treat_2005 + treat_2010 + treat_2015 == 0, 1, 0),
-          sometimes_treated = ifelse(treat_2005 + treat_2010 + treat_2015 > 0, 1, 0),
+          always_treated = ifelse((treat_2005 + treat_2010 + treat_2015) == 3, 1, 0),
+          never_treated = ifelse((treat_2005 + treat_2010 + treat_2015) == 0, 1, 0),
+          sometimes_treated = ifelse((treat_2005 + treat_2010 + treat_2015) > 0, 1, 0),
           
-          once = ifelse(treat_2005 + treat_2010 + treat_2015 == 1, 1, 0),
-          twice = ifelse(treat_2005 + treat_2010 + treat_2015 == 2, 1, 0),
-          inter_always_treated = ifelse(treat_2010 == 1 & treat_2005 == 1, 1, 0),
-          inter_sometimes_treated = ifelse(treat_2010 == 1 | treat_2005 == 1, 1, 0),
+          count_treated = (treat_2005 + treat_2010 + treat_2015),
+
+          once = ifelse((treat_2005 + treat_2010 + treat_2015) == 1, 1, 0),
+          twice = ifelse((treat_2005 + treat_2010 + treat_2015) == 2, 1, 0),
+          inter_always_treated = ifelse((treat_2010 == 1) & (treat_2005 == 1), 1, 0),
+          inter_sometimes_treated = ifelse((treat_2010 == 1) | (treat_2005 == 1), 1, 0),
           inter_never_treated = ifelse(treat_2005 + treat_2010 == 0, 1, 0),
           
           all_sc_2005 = ifelse(grepl("Scheduled", gp_res_status_fin_eng_2005, ignore.case = TRUE), 1, 0),
