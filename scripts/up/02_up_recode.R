@@ -44,6 +44,7 @@ up_all <- up_all %>%
           inter_always_treated = ifelse((treat_2010 == 1) & (treat_2005 == 1), 1, 0),
           inter_sometimes_treated = ifelse((treat_2010 == 1) | (treat_2005 == 1), 1, 0),
           inter_never_treated = ifelse(treat_2005 + treat_2010 == 0, 1, 0),
+          treat_all = paste(treat_2005, treat_2010, treat_2015, sep = "_"),
           
           all_sc_2005 = ifelse(grepl("Scheduled", gp_res_status_fin_eng_2005, ignore.case = TRUE), 1, 0),
           all_sc_2010 = ifelse(grepl("Scheduled", gp_res_status_fin_eng_2010, ignore.case = TRUE), 1, 0),
@@ -65,6 +66,6 @@ up_all <- up_all %>%
           cluster_key_2021 = paste(district_name_eng_2021, block_name_eng_2021, gp_name_eng_2021))
 
 
-save(up_all, file = "data/up/up_all_recoded.RData")
+save(up_all, file = "data/up/up_all_fuzzy_recoded.RData")
 
 
