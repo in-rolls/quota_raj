@@ -215,14 +215,14 @@ up_05_10_15_21_f <- apply_matching(
 )
 
 up_05_10_15_21_ff <- process_matched_dataframe(
-     up_10_15_21_f,
+     up_05_10_15_21_f,
      distance_threshold = 0.1,
      distance_col = "up_05_10_15_21_dist",
-     group_by_cols_x = c("eng_key_2015.y"),
+     group_by_cols_x = c("eng_key_2015"),
      group_by_cols_y = c("eng_key_2021")
 )
 
 write_parquet(up_05_10_ff, sink = "data/up/up_05_10_fuzzy.parquet")
 write_parquet(up_10_15_ff, sink = "data/up/up_10_15_fuzzy.parquet")
-write_parquet(up_10_15_21_ff,   sink = "data/up/up_all_fuzzy.parquet")
+write_parquet(up_05_10_15_21_ff,   sink = "data/up/up_all_fuzzy.parquet")
 write_parquet(up_all, sink = "data/up/up_all.parquet")
