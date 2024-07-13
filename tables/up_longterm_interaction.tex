@@ -3,34 +3,34 @@
 \centering
 \begin{tabular}{lcccc}
    \toprule
-    & \multicolumn{4}{c}{\textit{female\_cand\_2021=="TRUE"}}\\
-                                                                 & [i]             & [ii]            & [iii]           & [iv]\\  
+    & \multicolumn{4}{c}{\textit{sex\_2021=="महिला"}}\\
+                                                                 & [i]            & [ii]           & [iii]          & [iv]\\  
    \midrule 
-   Constant                                                      & 0.3384$^{***}$  &                 &                 &   \\   
-                                                                 & (0.0131)        &                 &                 &   \\   
-   Quota in 2015                                                 & -0.0701$^{***}$ & -0.0719$^{***}$ & -0.0649$^{***}$ & -0.0427\\   
-                                                                 & (0.0232)        & (0.0225)        & (0.0235)        & (0.0748)\\   
-   Quota in 2010                                                 & 0.0193          & 0.0164          & 0.0268          & 0.0467\\   
-                                                                 & (0.0217)        & (0.0215)        & (0.0224)        & (0.0579)\\   
-   Quota in 2005                                                 & 0.0068          & 0.0053          & 0.0096          & 0.0594\\   
-                                                                 & (0.0180)        & (0.0183)        & (0.0190)        & (0.0539)\\   
-   Quota in 2015 $\times$ Quota in 2010                          & 0.0752$^{*}$    & 0.0760$^{*}$    & 0.0515          & 0.0744\\   
-                                                                 & (0.0440)        & (0.0443)        & (0.0467)        & (0.1821)\\   
-   Quota in 2015 $\times$ Quota in 2005                          & 0.0329          & 0.0358          & 0.0233          & 0.1198\\   
-                                                                 & (0.0388)        & (0.0377)        & (0.0397)        & (0.1095)\\   
-   Quota in 2010 $\times$ Quota in 2005                          & 0.0551$^{*}$    & 0.0613$^{*}$    & 0.0490          & -0.0210\\   
-                                                                 & (0.0307)        & (0.0313)        & (0.0326)        & (0.0836)\\   
-   Quota in 2015 $\times$ Quota in 2010 $\times$ Quota in 2005   & -0.0825         & -0.0922         & -0.0647         & -0.0500\\   
-                                                                 & (0.0746)        & (0.0750)        & (0.0791)        & (0.2524)\\   
+   Constant                                                      & 0.1779$^{***}$ &                &                &   \\   
+                                                                 & (0.0104)       &                &                &   \\   
+   Quota in 2015                                                 & 0.0349$^{**}$  & 0.0358$^{***}$ & 0.0381$^{***}$ & 0.0646\\   
+                                                                 & (0.0138)       & (0.0123)       & (0.0130)       & (0.0722)\\   
+   Quota in 2010                                                 & -0.0041        & -0.0061        & -0.0019        & 0.0053\\   
+                                                                 & (0.0163)       & (0.0142)       & (0.0152)       & (0.0866)\\   
+   Quota in 2005                                                 & 0.0054         & 0.0052         & 0.0082         & 0.0292\\   
+                                                                 & (0.0139)       & (0.0123)       & (0.0128)       & (0.0851)\\   
+   Quota in 2015 $\times$ Quota in 2010                          & 0.0102         & 0.0101         & -0.0066        & -0.0524\\   
+                                                                 & (0.0246)       & (0.0243)       & (0.0247)       & (0.1339)\\   
+   Quota in 2015 $\times$ Quota in 2005                          & -0.0054        & -0.0078        & -0.0141        & -0.0285\\   
+                                                                 & (0.0203)       & (0.0177)       & (0.0177)       & (0.0914)\\   
+   Quota in 2010 $\times$ Quota in 2005                          & 0.0001         & 0.0036         & -0.0052        & -0.0101\\   
+                                                                 & (0.0227)       & (0.0226)       & (0.0247)       & (0.1295)\\   
+   Quota in 2015 $\times$ Quota in 2010 $\times$ Quota in 2005   & 0.0671$^{*}$   & 0.0587         & 0.0790$^{**}$  & 0.1064\\   
+                                                                 & (0.0377)       & (0.0375)       & (0.0374)       & (0.2071)\\   
     \\
-   Standard-Errors & IID & \multicolumn{3}{c}{Gram Panchayat (2021)} \\ 
-   Observations                                                  & 5,438           & 5,437           & 5,437           & 5,437\\  
-   R$^2$                                                         & 0.00670         & 0.01548         & 0.06939         & 0.91897\\  
-   Within R$^2$                                                  &                 & 0.00691         & 0.00674         & 0.01042\\  
+   Standard-Errors & IID & \multicolumn{3}{c}{district\_name\_eng\_2021} \\ 
+   Observations                                                  & 9,357          & 9,357          & 9,357          & 9,355\\  
+   R$^2$                                                         & 0.00384        & 0.01905        & 0.06371        & 0.86208\\  
+   Within R$^2$                                                  &                & 0.00353        & 0.00327        & 0.00554\\  
     \\
-   district\_name\_eng\_2021 fixed effects                       &                 & $\checkmark$    & $\checkmark$    & $\checkmark$\\   
-   Panchayat Block (2021) fixed effects                          &                 &                 & $\checkmark$    & $\checkmark$\\   
-   Gram Panchayat (2021) fixed effects                           &                 &                 &                 & $\checkmark$\\   
+   district\_name\_eng\_2021 fixed effects                       &                & $\checkmark$   & $\checkmark$   & $\checkmark$\\   
+   Panchayat Block (2021) fixed effects                          &                &                & $\checkmark$   & $\checkmark$\\   
+   Gram Panchayat (2021) fixed effects                           &                &                &                & $\checkmark$\\   
    \bottomrule
 \end{tabular}
 \par\endgroup

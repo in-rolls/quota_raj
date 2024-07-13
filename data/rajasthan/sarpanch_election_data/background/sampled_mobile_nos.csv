@@ -1,0 +1,5 @@
+attempts_to_reach,phone_answered,phone_answered_by,relationship,relative_gender,willing-to_transfer_call,did_transfer,call_back?,q_answered_by,q1_meetings_regularly,q2_do_you_attend_regularly,q3_bureaucrats_helpful,q4_family_help
+,yes,member,self,male,yes,yes,yes,member,,,,
+,no,non-member,spouse,female,no,no,no,non-member,,,,
+,,,child,,not_applicable,not_applicable,not_applicable,,,,,
+,,,family_member,,,,,,,,,

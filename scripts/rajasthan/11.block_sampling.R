@@ -53,4 +53,15 @@ if (remaining_samples > 0) {
 }
 
 
- # write.csv(sampled_mobile_nos, "sampled_mobile_nos.csv", row.names = FALSE)
+# write.csv(sampled_mobile_nos, "data/rajasthan/sarpanch_election_data/background/sampled_mobile_nos.csv", row.names = FALSE)
+# 
+
+ronit_trial <- anti_join(raj_sarpanch, sampled_mobile_nos)
+ronit_trial <- ronit_trial %>% 
+     filter(treat_2020==1)
+
+ronit_trial_nos <-sample_n(ronit_trial, 25)
+
+
+#  write.csv(ronit_trial_nos, "data/rajasthan/sarpanch_election_data/background/trial_nos.csv", row.names = FALSE)
+

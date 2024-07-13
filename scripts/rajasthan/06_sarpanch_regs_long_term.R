@@ -10,20 +10,20 @@ library(kableExtra)
 library(fixest)
 
 # Load data ---------------------------------------------------------------
-raj_panch <- read_csv("data/rajasthan/sarpanch_election_data/sp_2005_2010_2015_2020_fin.csv")
 
+load("data/rajasthan/sarpanch_election_data/raj_panch.RData")
 # 2005 * 2010 * 2015 full interaction
 
 m_long_term <- feols((sex_2020 == "F") ~ treat_2015 * treat_2010 * treat_2005,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_long_term)
 
-m_long_term_dfe <- feols((sex_2020 == "F") ~ treat_2015 * treat_2010 * treat_2005  | district_2020, vcov = ~gp_2020, data = filter(raj_panch, treat_2020 == 0))
+m_long_term_dfe <- feols((sex_2020 == "F") ~ treat_2015 * treat_2010 * treat_2005  | district_2020,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_long_term_dfe)
 
-m_long_term_psfe <- feols((sex_2020 == "F") ~ treat_2015 * treat_2010 * treat_2005  | district_2020 + ps_2020 , vcov = ~gp_2020, data = filter(raj_panch, treat_2020 == 0))
+m_long_term_psfe <- feols((sex_2020 == "F") ~ treat_2015 * treat_2010 * treat_2005  | district_2020 + ps_2020 ,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_long_term_psfe)
 
-m_long_term_gpfe <- feols((sex_2020 == "F") ~ treat_2015 * treat_2010 * treat_2005  | district_2020 + ps_2020 + gp_2020 , vcov = ~gp_2020, data = filter(raj_panch, treat_2020 == 0))
+m_long_term_gpfe <- feols((sex_2020 == "F") ~ treat_2015 * treat_2010 * treat_2005  | district_2020 + ps_2020 + gp_2020 ,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_long_term_gpfe)
 
 # TeX
@@ -51,13 +51,13 @@ etable(models_long_term_list,
 m_always_lt <- feols((sex_2020 == "F") ~ always_treated,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_always_lt)
 
-m_always_lt_dfe <- feols((sex_2020 == "F") ~ always_treated  | district_2020 , vcov = ~gp_2020,  data = filter(raj_panch, treat_2020 == 0))
+m_always_lt_dfe <- feols((sex_2020 == "F") ~ always_treated  | district_2020 ,   data = filter(raj_panch, treat_2020 == 0))
 summary(m_always_lt_dfe)
 
-m_always_lt_psfe <- feols((sex_2020 == "F") ~ always_treated  | district_2020 + ps_2020 , vcov = ~gp_2020, data = filter(raj_panch, treat_2020 == 0))
+m_always_lt_psfe <- feols((sex_2020 == "F") ~ always_treated  | district_2020 + ps_2020 ,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_always_lt_psfe)
 
-m_always_lt_gpfe <- feols((sex_2020 == "F") ~ always_treated  | district_2020 + ps_2020 + gp_2020, vcov = ~gp_2020,, data = filter(raj_panch, treat_2020 == 0))
+m_always_lt_gpfe <- feols((sex_2020 == "F") ~ always_treated  | district_2020 + ps_2020 + gp_2020, , data = filter(raj_panch, treat_2020 == 0))
 summary(m_always_lt_gpfe)
 
 
@@ -68,8 +68,8 @@ etable(m_always_lt_list,
        tex = TRUE, 
        style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
        interaction.combine = "$\times$",
-       file = here("..", "tables", "long_term_always.tex"), 
-       dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat", 
+       file = "tables/long_term_always.tex", 
+       dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat in Raj", 
                  "treat_2010" = "Quota in 2010", 
                  "treat_2005" = "Quota in 2005",
                  "treat_2015" = "Quota in 2015",
@@ -77,7 +77,6 @@ etable(m_always_lt_list,
                  "district_2020" = "District (2020)",
                  "ps_2020" = "Panchayat Samiti (2020)",
                  "gp_2020" = "Gram Panchayat (2020)"), #  notes = "Robust standard errors clustered at gram panchayat level",
-       signif.code = NA,
        replace = TRUE)
 
 # Never treated treat_2005 + treat_2010 + treat_2015 = 0
@@ -85,13 +84,13 @@ etable(m_always_lt_list,
 m_always_never <- feols((sex_2020 == "F") ~ never_treated,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_always_never)
 
-m_always_never_dfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020, vcov = ~gp_2020,  data = filter(raj_panch, treat_2020 == 0))
+m_always_never_dfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020,   data = filter(raj_panch, treat_2020 == 0))
 summary(m_always_never_dfe)
 
-m_always_never_psfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 + ps_2020 , vcov = ~gp_2020, data = filter(raj_panch, treat_2020 == 0))
+m_always_never_psfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 + ps_2020 ,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_always_never_psfe)
 
-m_always_never_gpfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 + ps_2020 + gp_2020 , vcov = ~gp_2020, data = filter(raj_panch, treat_2020 == 0))
+m_always_never_gpfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 + ps_2020 + gp_2020 ,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_always_never_gpfe)
 
 
@@ -102,8 +101,8 @@ etable(m_always_never_list,
        tex = TRUE, 
        style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
        interaction.combine = " $\times $ ",
-       file = here("..", "tables", "long_term_always.tex"), 
-       dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat", 
+       file = "tables/long_term_never.tex", 
+       dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat in Raj", 
                  "treat_2010" = "Quota in 2010", 
                  "treat_2005" = "Quota in 2005",
                  "treat_2015" = "Quota in 2015",
@@ -111,7 +110,6 @@ etable(m_always_never_list,
                  "district_2020" = "District (2020)",
                  "ps_2020" = "Panchayat Samiti (2020)",
                  "gp_2020" = "Gram Panchayat (2020)"), #  notes = "Robust standard errors clustered at gram panchayat level",
-       signif.code = NA,
        replace = TRUE)
 
 
@@ -121,13 +119,13 @@ etable(m_always_never_list,
 m_sometimes <- feols((sex_2020 == "F") ~ sometimes_treated,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_sometimes)
 
-m_sometimes_dfe <- feols((sex_2020 == "F") ~ sometimes_treated  | district_2020 , vcov = ~gp_2020,  data = filter(raj_panch, treat_2020 == 0))
+m_sometimes_dfe <- feols((sex_2020 == "F") ~ sometimes_treated  | district_2020 ,   data = filter(raj_panch, treat_2020 == 0))
 summary(m_sometimes_dfe)
 
-m_sometimes_psfe <- feols((sex_2020 == "F") ~ sometimes_treated  | district_2020 + ps_2020 , vcov = ~gp_2020,  data = filter(raj_panch, treat_2020 == 0))
+m_sometimes_psfe <- feols((sex_2020 == "F") ~ sometimes_treated  | district_2020 + ps_2020 ,   data = filter(raj_panch, treat_2020 == 0))
 summary(m_sometimes_psfe)
 
-m_sometimes_gpfe <- feols((sex_2020 == "F") ~ sometimes_treated  | district_2020 + ps_2020 + gp_2020 , vcov = ~gp_2020, data = filter(raj_panch, treat_2020 == 0))
+m_sometimes_gpfe <- feols((sex_2020 == "F") ~ sometimes_treated  | district_2020 + ps_2020 + gp_2020 ,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_sometimes_gpfe)
 
 # TeX
@@ -137,8 +135,8 @@ etable(m_sometimes_list,
        tex = TRUE, 
        style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
        interaction.combine = "$\times$",
-       file = here("..", "tables", "long_term_sometimes.tex"), 
-       dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat", 
+       file = "tables/long_term_sometimes.tex", 
+       dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat in Raj", 
                  "treat_2010" = "Quota in 2010", 
                  "treat_2005" = "Quota in 2005",
                  "treat_2015" = "Quota in 2015",
@@ -146,7 +144,7 @@ etable(m_sometimes_list,
                  "district_2020" = "District (2020)",
                  "ps_2020" = "Panchayat Samiti (2020)",
                  "gp_2020" = "Gram Panchayat (2020)"), #  notes = "Robust standard errors clustered at gram panchayat level",
-       signif.code = NA,
+       
        replace = TRUE)
 
 
@@ -158,13 +156,13 @@ etable(m_sometimes_list,
 m_once <- feols((sex_2020 == "F") ~ once , data = filter(raj_panch, treat_2020 == 0))
 summary(m_once)
 
-m_once_dfe <- feols((sex_2020 == "F") ~ once  | district_2020 , vcov = ~gp_2020,  data = filter(raj_panch, treat_2020 == 0))
+m_once_dfe <- feols((sex_2020 == "F") ~ once  | district_2020 ,   data = filter(raj_panch, treat_2020 == 0))
 summary(m_once_dfe)
 
-m_once_psfe <- feols((sex_2020 == "F") ~ once  | district_2020 + ps_2020 , vcov = ~gp_2020,  data = filter(raj_panch, treat_2020 == 0))
+m_once_psfe <- feols((sex_2020 == "F") ~ once  | district_2020 + ps_2020 ,   data = filter(raj_panch, treat_2020 == 0))
 summary(m_once_psfe)
 
-m_once_gpfe <- feols((sex_2020 == "F") ~ once  | district_2020 + ps_2020 + gp_2020 , vcov = ~gp_2020, data = filter(raj_panch, treat_2020 == 0))
+m_once_gpfe <- feols((sex_2020 == "F") ~ once  | district_2020 + ps_2020 + gp_2020 ,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_once_gpfe)
 
 # TeX
@@ -183,7 +181,7 @@ etable(m_once_list,
                  "district_2020" = "District (2020)",
                  "ps_2020" = "Panchayat Samiti (2020)",
                  "gp_2020" = "Gram Panchayat (2020)"), #  notes = "Robust standard errors clustered at gram panchayat level",
-       signif.code = NA,
+       
        replace = TRUE)
 
 # med intensity: Twice treated (treat_2005 + treat_2010 + treat_2015 == 2) Dummy activated if the gp received treatment twice over 15 years
@@ -191,13 +189,13 @@ etable(m_once_list,
 m_twice <- feols((sex_2020 == "F") ~ twice , data = filter(raj_panch, treat_2020 == 0))
 summary(m_twice)
 
-m_twice_dfe <- feols((sex_2020 == "F") ~ twice  | district_2020 , vcov = ~gp_2020,  data = filter(raj_panch, treat_2020 == 0))
+m_twice_dfe <- feols((sex_2020 == "F") ~ twice  | district_2020 ,   data = filter(raj_panch, treat_2020 == 0))
 summary(m_twice_dfe)
 
-m_twice_psfe <- feols((sex_2020 == "F") ~ twice  | district_2020 + ps_2020 , vcov = ~gp_2020,  data = filter(raj_panch, treat_2020 == 0))
+m_twice_psfe <- feols((sex_2020 == "F") ~ twice  | district_2020 + ps_2020 ,   data = filter(raj_panch, treat_2020 == 0))
 summary(m_twice_psfe)
 
-m_twice_gpfe <- feols((sex_2020 == "F") ~ twice  | district_2020 + ps_2020 + gp_2020 , vcov = ~gp_2020, data = filter(raj_panch, treat_2020 == 0))
+m_twice_gpfe <- feols((sex_2020 == "F") ~ twice  | district_2020 + ps_2020 + gp_2020 ,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_twice_gpfe)
 
 # TeX
@@ -207,7 +205,7 @@ etable(m_twice_list,
        tex = TRUE, 
        style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
        interaction.combine = "$\times$",
-       file = here("..", "tables", "long_term_med_intensity.tex"), 
+       file = "tables/long_term_med_intensity.tex", 
        dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat", 
                  "treat_2010" = "Quota in 2010", 
                  "treat_2005" = "Quota in 2005",
@@ -216,7 +214,7 @@ etable(m_twice_list,
                  "district_2020" = "District (2020)",
                  "ps_2020" = "Panchayat Samiti (2020)",
                  "gp_2020" = "Gram Panchayat (2020)"), #  notes = "Robust standard errors clustered at gram panchayat level",
-       signif.code = NA,
+       
        replace = TRUE)
 
 # never treated
@@ -224,13 +222,13 @@ etable(m_twice_list,
 m_no_treat <- feols((sex_2020 == "F") ~ never_treated , data = filter(raj_panch, treat_2020 == 0))
 summary(m_no_treat)
 
-m_no_treat_dfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 , vcov = ~gp_2020,  data = filter(raj_panch, treat_2020 == 0))
+m_no_treat_dfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 ,   data = filter(raj_panch, treat_2020 == 0))
 summary(m_no_treat_dfe)
 
-m_no_treat_psfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 + ps_2020 , vcov = ~gp_2020,  data = filter(raj_panch, treat_2020 == 0))
+m_no_treat_psfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 + ps_2020 ,   data = filter(raj_panch, treat_2020 == 0))
 summary(m_no_treat_psfe)
 
-m_no_treat_gpfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 + ps_2020 + gp_2020 , vcov = ~gp_2020, data = filter(raj_panch, treat_2020 == 0))
+m_no_treat_gpfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 + ps_2020 + gp_2020 ,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_no_treat_gpfe)
 
 # TeX
@@ -249,5 +247,69 @@ etable(m_no_treat_list,
                  "district_2020" = "District (2020)",
                  "ps_2020" = "Panchayat Samiti (2020)",
                  "gp_2020" = "Gram Panchayat (2020)"), #  notes = "Robust standard errors clustered at gram panchayat level",
-       signif.code = NA,
+       
        replace = TRUE)
+
+
+
+
+# WWW v OOO seats ---------------------------------------------------------
+
+filtered_data <- filter(raj_panch, treat_2020 == 0)
+
+filtered_data <- filtered_data %>%
+     mutate(max_compare = case_when(
+          always_treated == 1 ~ "Always Treated",
+          never_treated == 1 ~ "Never Treated",
+          TRUE ~ "Other"
+     ))
+
+filtered_data <- filter(filtered_data, max_compare %in% c("Always Treated", "Never Treated"))
+
+
+m_max_compare <- feols((sex_2020 == "F") ~ max_compare, data = filtered_data)
+summary(m_max_compare) 
+
+m_max_compare_dfe <- feols((sex_2020 == "F") ~ max_compare | district_2020 , data = filtered_data)
+summary(m_max_compare_dfe)
+
+m_max_compare_psfe <- feols((sex_2020 == "F") ~ max_compare | district_2020 + ps_2020 , data = filtered_data)
+summary(m_max_compare_psfe)
+
+m_max_compare_list <- list(m_max_compare, m_max_compare_dfe, m_max_compare_psfe)
+
+etable(m_max_compare_list, 
+       tex = TRUE, 
+       style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
+       interaction.combine = "$\times$",
+       file = "tables/long_term_max_compare.tex", 
+       dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat", 
+                 "max_compareNever Treated" = "$WWW$ v $OOO$ seats comparison", 
+                 "district_2020" = "District (2020)",
+                 "ps_2020" = "Panchayat Samiti (2020)",
+                 "gp_2020" = "Gram Panchayat (2020)"), #  notes = "Robust standard errors clustered at gram panchayat level",
+       
+       replace = TRUE)
+
+
+
+# Correlation across treatment statuses
+
+model1 <- lm(treat_2020 ~ treat_2015, data = raj_panch)
+model2 <- lm(treat_2015 ~ treat_2010, data = raj_panch)
+model3 <- lm(treat_2010 ~ treat_2005, data = raj_panch)
+model4 <- lm(treat_2020 ~ treat_2005 + treat_2010 + treat_2015, data = raj_panch)
+
+models <- list(model1, model2, model3, model4)
+
+library(stargazer)
+stargazer(model1, model2, model3, model4,
+          title = "Treatment Correlation across the years in Rajasthan",
+          dep.var.labels = c("Treatment 2020", "Treatment 2015", "Treatment 2010"),
+          covariate.labels = c("Treatment 2015", "Treatment 2010", "Treatment 2005"),
+          column.labels = c("21 $\\sim$ 15", 
+                            "15 $\\sim$ 10", 
+                            "10 $\\sim$ 5", 
+                            "21 $\\sim$ 05 + 10 + 15"),
+          align = TRUE,
+          out = "/Users/varun/Library/CloudStorage/Dropbox/USC/quota_raj/tables/raj_treatment_reg.tex")
