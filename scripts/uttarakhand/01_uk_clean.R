@@ -1,34 +1,29 @@
+# Load libs
 
 library(readr)
 library(dplyr)
 library(xtable)
 library(fuzzyjoin)
+library(arrow)
 library(stringr)
 library(here)
 library(tidyr)
 library(fixest)
 library(kableExtra)
+library(janitor)
+
 # Load data ---------------------------------------------------------------
+data_dir <- here("data/uttarakhand")
+uk <- read_csv(here(data_dir, "uttarakhand-panchayat-elections.csv"))
 
-data_dir <- here("..", "data/uttarakhand")
-ukhand_files <- here(data_dir, "uttarakhand-panchayat-elections.csv")
-ukhand_data <- readr::read_csv(ukhand_files)
-colnames(ukhand_data) <- tolower(colnames(ukhand_data))
-
-
-names(ukhand_data)
-levels(as.factor(ukhand_data$year))
-# Clean raw data ---------------------------------------
-
-
-
-ukhand_data <- ukhand_data %>% 
+# Rename cols
+uk <- uk %>% 
      rename(
-          year = `year`,
+          year = `Year`,
           elected_position = `निर्वाचित पद`,
           district = `जनपद`,
           declared_result = `घोषित परिणाम`,
-         unopposed_winner = `निर्विरोध निर्वाचित`,
+          unopposed_winner = `निर्विरोध निर्वाचित`,
           development_block = `विकास खण्‍ड`,
           gram_panchayat = `ग्राम पंचायत`,
           reservation_status = `आरक्षण स्थिति`,
@@ -48,7 +43,7 @@ ukhand_data <- ukhand_data %>%
           received_votes_2 = `प्राप्‍त मत.2`
      )
 
-
+# Translation
 translation_dict <- c(
      "अनारक्षित" = "Unreserved",
      "महिला" = "Female",
@@ -76,165 +71,79 @@ translation_dict <- c(
      "अनु0ज0जाति" = "Scheduled Tribe"
 )
 
+uk <- uk %>%
+     mutate(winner_name = trimws(winner_name, "both"),
+            candidate_name = trimws(candidate_name, "both"),
+            gram_panchayat = trimws(gram_panchayat, "both"),
+            gram_panchayat = trimws(gsub("^[0-9]+-", "", gram_panchayat), "both"),
+            district = trimws(district, "both"),
+            development_block = trimws(development_block, "both"),
+            key = paste0(district, gram_panchayat),
+            reservation_status = case_when(
+                 reservation_status %in% names(translation_dict) ~ translation_dict[reservation_status],
+                 TRUE ~ reservation_status),
+            treat = ifelse(reservation_status %in% c("Female",
+                                                     "Other Backward Class Female",
+                                                     "Scheduled Tribe Female", 
+                                                     "Scheduled Caste Female",
+                                                     "General Female"), 1, 0),
+            dalit = ifelse(reservation_status %in% c("Scheduled Tribe Female",
+                                                     "Scheduled Tribe",
+                                                     "Scheduled Caste Female",
+                                                     "Scheduled Caste"), 1, 0),
+            obc =  ifelse(reservation_status %in% c("Other Backward Class",
+                                                    "Other Backward Class Female"), 1, 0))
 
-ukhand_data <- ukhand_data %>%
-     mutate(reservation_status = case_when(
-          reservation_status %in% names(translation_dict) ~ translation_dict[reservation_status],
-          TRUE ~ reservation_status
-     ))
+uk_gp <- uk %>% 
+     filter(elected_position == "प्रधान (ग्राम पंचायत)")%>% 
+     filter(winner_name == candidate_name) %>%
+     group_by(year, key) %>%
+     filter(n() == 1) %>%
+     ungroup()
 
-unique(ukhand_data$reservation_status)
+uk_gp_wide <- uk_gp[, c("key", "year", "reservation_status", "winner_name")] %>%
+     pivot_wider(
+          id_cols = key,
+          names_from = year,
+          values_from = c(reservation_status, winner_name),
+          names_sep = "_",
+          values_fill = list(reservation_status = NA, winner_name = NA)
+     ) %>%
+     filter(!is.na(reservation_status_2008) & !is.na(reservation_status_2014) & !is.na(reservation_status_2019))
 
+# Fuzzy join
+select_cols = c("key", "year", "reservation_status", "winner_name")
 
+uk_gp_2008 <- uk_gp[uk_gp$year == 2008, select_cols] %>%
+     rename_with(~ paste0(., "_2008"))
+uk_gp_2014 <- uk_gp[uk_gp$year == 2014, select_cols ] %>%
+     rename_with(~ paste0(., "_2014"))
+uk_gp_2019 <- uk_gp[uk_gp$year == 2019, select_cols ] %>%
+     rename_with(~ paste0(., "_2019"))
 
-ukhand_data <- ukhand_data %>% 
-     dplyr::mutate(treat = ifelse(ukhand_data$reservation_status %in% c("Female","Other Backward Class Female","Scheduled Tribe Female", 
-                                                                           "Scheduled Caste Female", "General Female"), 1, 0),
-                   dalit = ifelse(ukhand_data$reservation_status %in% c("Scheduled Tribe Female", "Scheduled Tribe",
-                                                                       "Scheduled Caste Female","Scheduled Caste"), 1, 0),
-                   obc =  ifelse(ukhand_data$reservation_status %in% c("Other Backward Class","Other Backward Class Female"), 1, 0))
-
-
-ukhand_data <- ukhand_data %>% 
-     filter(elected_position == "प्रधान (ग्राम पंचायत)")
-
-
-
-
-ukhand_panch <- ukhand_data[ukhand_data$winner_name == ukhand_data$candidate_name, ] #remove duplicates
-
-rm(ukhand_data)
-# sum(is.na(ukhand_data$district_panchayat_ward)) == nrow(ukhand_data) #worthless column
-# sum(is.na(ukhand_data$zilla_panchayat_ward)) == nrow(ukhand_data) ##worthless column
-
-
-data_2008 <- filter(ukhand_panch, year == 2008)
-data_2008$gram_panchayat <- trimws(data_2008$gram_panchayat, "both")
-
-
-data_2008$key <- paste0(data_2008$district, data_2008$development_block, 
-                        data_2008$gram_panchayat)#, data_2008$uniqueid)
-
-
-# remove unnecessary columns for present analysis that is creating suplications (repeated rows due to father_husband_name)
-data_2008 <- data_2008 %>% 
-     select(-c(declared_result, unopposed_winner,
-               runner_up_name, election_symbol_1, secured_votes, vote_difference, candidate_name, election_symbol_2,
-               received_votes_2, district_panchayat_ward, zilla_panchayat_ward, serial_number, father_husband_name))
-
-
-cleaned_data_2008 <- unique(data_2008)
-
-
-# Check for duplicates in the key column
-duplicated_keys <- cleaned_data_2008 %>% 
-     group_by(key) %>% 
-     summarise(count = n()) %>% 
-     filter(count > 1) %>% 
-     pull(key)
-
-# Filter the original dataframe to extract rows with duplicated keys
-duplicates_df <- cleaned_data_2008 %>% 
-     filter(key %in% duplicated_keys)
-
-# Remove the duplicated rows from the original dataframe
-cleaned_data_2008 <- cleaned_data_2008 %>% 
-     filter(!(key %in% duplicated_keys))
-
-
-
-
-
-
-
-data_2014 <- filter(ukhand_panch, year == 2014)
-data_2014$gram_panchayat_new <- gsub("^\\d+-", "", data_2014$gram_panchayat)
-data_2014$gram_panchayat_new <- trimws(data_2014$gram_panchayat_new, "both")
-data_2014$key <- paste0(data_2014$district, data_2014$development_block, 
-                        data_2014$gram_panchayat_new)#, data_2014$uniqueid)
-
-
-
-data_2014 <- data_2014 %>% 
-     select(-c(declared_result, unopposed_winner,
-               runner_up_name, election_symbol_1, secured_votes, vote_difference, candidate_name, election_symbol_2,
-               received_votes_2, district_panchayat_ward, zilla_panchayat_ward, serial_number, father_husband_name, gram_panchayat))
-
-cleaned_data_2014 <- unique(data_2014)
-
-# Check for duplicates in the key column
-duplicated_keys_14 <- cleaned_data_2014 %>% 
-     group_by(key) %>% 
-     summarise(count = n()) %>% 
-     filter(count > 1) %>% 
-     pull(key)
-
-# Filter the original dataframe to extract rows with duplicated keys
-duplicates_df_14 <- cleaned_data_2014 %>% 
-     filter(key %in% duplicated_keys_14)
-
-# Remove the duplicated rows from the original dataframe
-cleaned_data_2014 <- cleaned_data_2014 %>% 
-     filter(!(key %in% duplicated_keys_14))
-
-
-
-names(cleaned_data_2008) <- paste0(names(cleaned_data_2008), "_2008")
-names(cleaned_data_2014) <- paste0(names(data_2014), "_2014")
-
-
-data_08_14_fuzzy <- cleaned_data_2008 %>% 
-     stringdist_inner_join(cleaned_data_2014, 
+data_08_14_fuzzy <- uk_gp_2008 %>% 
+     stringdist_inner_join(uk_gp_2014, 
                            by = c('key_2008' = 'key_2014'),
                            ignore_case = TRUE,
-                           distance_col = "dist")
+                           distance_col = "dist",
+                           max_dist = 1)
 
-
-# test <- data_08_14_fuzzy %>% 
-#      filter(dist == 0)
-
-data_2019 <- filter(ukhand_panch, year == 2019)
-data_2019$gram_panchayat <- trimws(data_2019$gram_panchayat, "both")
-
-data_2019$key <- paste0(data_2019$district, data_2019$development_block, 
-                        data_2019$gram_panchayat)#, data_2019$unique_id)
-
-
-data_2019 <- data_2019 %>% 
-     select(-c(declared_result, unopposed_winner,
-               runner_up_name, election_symbol_1, secured_votes, vote_difference, candidate_name, election_symbol_2,
-               received_votes_2, district_panchayat_ward, zilla_panchayat_ward, serial_number, father_husband_name))
-
-cleaned_data_2019 <- unique(data_2019)
-
-# Check for duplicates in the key column
-duplicated_keys_19 <- cleaned_data_2019 %>% 
-     group_by(key) %>% 
-     summarise(count = n()) %>% 
-     filter(count > 1) %>% 
-     pull(key)
-
-# Filter the original dataframe to extract rows with duplicated keys
-duplicated_keys_19 <- cleaned_data_2019 %>% 
-     filter(key %in% duplicated_keys_19)
-
-# Remove the duplicated rows from the original dataframe
-cleaned_data_2019 <- cleaned_data_2019 %>% 
-     filter(!(key %in% duplicated_keys_19))
-
-
-
-names(data_2019) <- paste0(names(data_2019), "_2019")
-
-
+data_08_14_fuzzy <- data_08_14_fuzzy %>%
+     group_by(key_2008) %>%
+     slice_min(order_by = dist, n = 1) %>%
+     ungroup()
 
 data_08_14_19_fuzzy <- data_08_14_fuzzy %>% 
-     stringdist_inner_join(data_2019, 
+     stringdist_inner_join(uk_gp_2019, 
                            by = c('key_2014' = 'key_2019'),
                            ignore_case = TRUE,
-                           distance_col = "dist")
+                           distance_col = "dist_14_19",
+                           max_dist = 1)
 
+data_08_14_19_fuzzy <- data_08_14_19_fuzzy %>%
+     group_by(key_2014) %>%
+     slice_min(order_by = dist_14_19, n = 1) %>%
+     ungroup()
 
-
-
-
+write_parquet(data_08_14_fuzzy, "data/uttarakhand/data_08_14_fuzzy.parquet")
+write_parquet(data_08_14_19_fuzzy, "data/uttarakhand/data_08_14_19_fuzzy.parquet")
