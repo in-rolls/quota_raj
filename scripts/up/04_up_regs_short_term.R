@@ -64,31 +64,24 @@ etable(models_10_15_list,
 
 
 
-# 2015 ---> 2021 ----------------------------------------------------------
 
-m_15_21 <- feols((sex_2021 == "महिला") ~ treat_2015, data = filter(up_all, treat_2021 == 0))
-summary(m_15_21)
+# Poster Tables -----------------------------------------------------------
 
-m_15_21_dfe <- feols((sex_2021 == "महिला") ~ treat_2015 | district_name_eng_2021, data = filter(up_all, treat_2021 == 0))
-summary(m_15_21_dfe)
+m_05_10_psfe <- feols((cand_sex_fin_2010 =="महिला") ~ treat_2005 | district_name_eng_2010 + block_name_eng_2010 + gp_name_2010, data = filter(up_all, treat_2010 == 0))
+summary(m_05_10_psfe)
 
-m_15_21_psfe <- feols((sex_2021 == "महिला") ~ treat_2015 | district_name_eng_2021 + block_name_eng_2021, data = filter(up_all, treat_2021 == 0))
-summary(m_15_21_psfe)
+m_10_15_psfe <- feols((sex_2015 == "महिला") ~ treat_2010 | district_name_eng_2015 + block_name_eng_2015 + gp_name_2015, data = filter(up_all, treat_2015 == 0))
+summary(m_10_15_psfe)
 
-models_15_21_list <- list(m_15_21, m_15_21_dfe, m_15_21_psfe)
+models_short_term_list <- list(m_05_10_psfe, m_10_15_psfe)
 
 
-etable(models_15_21_list, 
-       # vcov = list(NULL, ~gp_name_eng_2021, ~gp_name_eng_2021),
-       # se = c("standard", "cluster","cluster"),
+etable(models_short_term_list, 
+       tex = TRUE, 
        style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
        interaction.combine = " $\times $ ",
-       tex = TRUE, 
-       file = "tables/up_models_15_21.tex", 
-       dict = c( 'sex_2021 =="महिला"' = "2021 rep is a woman in an open seat in UP", 
-                 "treat_2015" = "Quota Treatment in 2015", 
-                 "district_name_eng_2021" = "District (2021)",
-                 "block_name_eng_2021" = "Panchayat Block (2021)",
-                 "gp_name_eng_2021" = "Gram Panchayat (2021)"),
+       file = "tables/up_poster_short_term_models.tex", 
+       dict = c('cand_sex_fin_2010 =="महिलाा"' = "2010 Open Seat W rep",
+                'cand_sex_fin_2010 =="महिलाा"' = "2010 Open Seat W rep"),
        replace = TRUE)
 

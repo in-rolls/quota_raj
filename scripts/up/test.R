@@ -11,7 +11,7 @@ library(fixest)
 
 # Short Run Effects of Quotas (05-->10) -----------------------------------
 
-load("data/up/up_all_recoded.RData")
+load("data/up/up_all_fuzzy_recoded.RData")
 
 # Long Term ---------------------------------------------------------------
 
