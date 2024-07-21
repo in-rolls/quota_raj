@@ -29,7 +29,7 @@ treated_units_df <- raj_sarpanch %>%
 
 n_districts <- length(unique(raj_sarpanch$District))
 n_cat_gp <- 4 #only G(W), OBC(@), SC(W), ST
-samples_per_group <- ceiling(750 / (n_districts * n_cat_gp)) 
+samples_per_group <- ceiling(500 / (n_districts * n_cat_gp)) 
 
 
 
@@ -40,7 +40,7 @@ sampled_mobile_nos <- treated_units_df %>%
      ungroup()
 
 
-remaining_samples <- 750 - nrow(sampled_mobile_nos)
+remaining_samples <- 500 - nrow(sampled_mobile_nos)
 
 #sample additional observations from the treated data to reach 750
 if (remaining_samples > 0) {
@@ -54,7 +54,12 @@ if (remaining_samples > 0) {
 
 
 # write.csv(sampled_mobile_nos, "data/rajasthan/sarpanch_election_data/background/sampled_mobile_nos.csv", row.names = FALSE)
-# 
+ 
+library(writexl)
+
+
+write_xlsx(sampled_mobile_nos, "data/rajasthan/sarpanch_election_data/background/sampled_mobile_nos.xlsx")
+
 
 ronit_trial <- anti_join(raj_sarpanch, sampled_mobile_nos)
 ronit_trial <- ronit_trial %>% 
@@ -64,4 +69,41 @@ ronit_trial_nos <-sample_n(ronit_trial, 25)
 
 
 #  write.csv(ronit_trial_nos, "data/rajasthan/sarpanch_election_data/background/trial_nos.csv", row.names = FALSE)
+
+
+# Non-Quota Seats ---------------------------------------------------------
+
+
+
+open_units_df <- raj_sarpanch %>% 
+     filter(treat_2020 == 0 & MobileNo != 0)
+
+
+n_districts <- length(unique(raj_sarpanch$District))
+n_cat_gp <- 4 #only G(W), OBC(@), SC(W), ST
+samples_per_group <- ceiling(500 / (n_districts * n_cat_gp)) 
+
+
+
+set.seed(12091986)  
+sampled_mobile_nos_open <- open_units_df %>%
+     group_by(District, CategoryOfGramPanchyat) %>%
+     sample_n(min(samples_per_group, n()), replace = FALSE) %>%
+     ungroup()
+
+
+remaining_samples_open <- 500 - nrow(sampled_mobile_nos_open)
+
+#sample additional observations from the treated data to reach 750
+if (remaining_samples_open > 0) {
+     set.seed(12101986)
+     additional_samples <- open_units_df %>%
+          filter(!MobileNo %in% sampled_mobile_nos_open$MobileNo) %>%
+          sample_n(remaining_samples, replace = FALSE) 
+     
+     sampled_mobile_nos_open <- bind_rows(sampled_mobile_nos_open, additional_samples)
+}
+
+ write_xlsx(sampled_mobile_nos_open, "data/rajasthan/sarpanch_election_data/background/sampled_mobile_nos_open.xlsx")
+
 

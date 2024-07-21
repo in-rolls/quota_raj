@@ -12,6 +12,13 @@ library(fixest)
 # Load data ---------------------------------------------------------------
 
 load("data/rajasthan/sarpanch_election_data/raj_panch.RData")
+
+summary(lm((sex_2021 =="महिला") ~ always_treated, data = subset(up_all, treat_2021 == 0)))
+summary(lm((sex_2021 =="महिला") ~ as.factor(count_treated), data = subset(up_all, treat_2021 == 0)))
+summary(lm((sex_2021 =="महिला") ~ as.factor(treat_all), data = subset(up_all, treat_2021 == 0)))
+summary(lm((sex_2021 =="महिला") ~ treat_2005*treat_2010*treat_2015, data = subset(up_all, treat_2021 == 0)))
+  
+  
 # 2005 * 2010 * 2015 full interaction
 
 m_long_term <- feols((sex_2020 == "F") ~ treat_2015 * treat_2010 * treat_2005,  data = filter(raj_panch, treat_2020 == 0))
@@ -26,23 +33,25 @@ summary(m_long_term_psfe)
 m_long_term_gpfe <- feols((sex_2020 == "F") ~ treat_2015 * treat_2010 * treat_2005  | district_2020 + ps_2020 + gp_2020 ,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_long_term_gpfe)
 
+
 # TeX
 models_long_term_list <- list(m_long_term, m_long_term_dfe, m_long_term_psfe, m_long_term_gpfe)
 
 etable(models_long_term_list, 
        tex = TRUE, 
        style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
-       interaction.combine = "$\times$",
-       file = "tables/longterm_interaction.tex", 
-       dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat in Raj", 
-                 "treat_2010" = "Quota in 2010", 
-                 "treat_2005" = "Quota in 2005",
-                 "treat_2015" = "Quota in 2015",
-                 "district_2020" = "District (2020)",
-                 "ps_2020" = "Panchayat Samiti (2020)",
-                 "gp_2020" = "Gram Panchayat (2020)"), #  notes = "Robust standard errors clustered at gram panchayat level",
-
+       interaction.combine = " $\\times $ ",
+       file = "tables/raj_longterm_interaction.tex", 
+       dict = c('sex_2020 == "F"' = "2020 rep is a woman in an open seat in Raj", 
+                "treat_2010" = "Quota in 2010", 
+                "treat_2005" = "Quota in 2005",
+                "treat_2015" = "Quota in 2015",
+                "always_treated" = "Always treated (quota in 2005, 10, & 15)",
+                "district_2020" = "District (2020)",
+                "ps_2020" = "Panchayat Samiti (2020)",
+                "gp_2020" = "Gram Panchayat (2020)"), #  notes = "Robust standard errors clustered at gram panchayat level",
        replace = TRUE)
+
 
 
 
@@ -57,7 +66,7 @@ summary(m_always_lt_dfe)
 m_always_lt_psfe <- feols((sex_2020 == "F") ~ always_treated  | district_2020 + ps_2020 ,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_always_lt_psfe)
 
-m_always_lt_gpfe <- feols((sex_2020 == "F") ~ always_treated  | district_2020 + ps_2020 + gp_2020, , data = filter(raj_panch, treat_2020 == 0))
+m_always_lt_gpfe <- feols((sex_2020 == "F") ~ always_treated  | I(paste0(district_2020, district_2020,ps_2020)), , data = filter(raj_panch, treat_2020 == 0))
 summary(m_always_lt_gpfe)
 
 
@@ -67,7 +76,7 @@ m_always_lt_list <- list(m_always_lt, m_always_lt_dfe, m_always_lt_psfe, m_alway
 etable(m_always_lt_list, 
        tex = TRUE, 
        style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
-       interaction.combine = "$\times$",
+       interaction.combine = " $\\times $ ",
        file = "tables/long_term_always.tex", 
        dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat in Raj", 
                  "treat_2010" = "Quota in 2010", 
@@ -81,26 +90,27 @@ etable(m_always_lt_list,
 
 # Never treated treat_2005 + treat_2010 + treat_2015 = 0
 
-m_always_never <- feols((sex_2020 == "F") ~ never_treated,  data = filter(raj_panch, treat_2020 == 0))
-summary(m_always_never)
+  
+m_never <- feols((sex_2020 == "F") ~ never_treated,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_never)
 
-m_always_never_dfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020,   data = filter(raj_panch, treat_2020 == 0))
-summary(m_always_never_dfe)
+m_never_dfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020,   data = filter(raj_panch, treat_2020 == 0))
+summary(m_never_dfe)
 
-m_always_never_psfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 + ps_2020 ,  data = filter(raj_panch, treat_2020 == 0))
-summary(m_always_never_psfe)
+m_never_psfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 + ps_2020 ,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_never_psfe)
 
-m_always_never_gpfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 + ps_2020 + gp_2020 ,  data = filter(raj_panch, treat_2020 == 0))
-summary(m_always_never_gpfe)
+m_never_gpfe <- feols((sex_2020 == "F") ~ never_treated  | I(paste0(district_2020, district_2020,ps_2020)) ,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_never_gpfe)
 
 
 # TeX
-m_always_never_list <- list(m_always_never, m_always_never_dfe, m_always_never_psfe, m_always_never_gpfe)
+m_never_list <- list(m_never, m_never_dfe, m_never_psfe, m_never_gpfe)
 
-etable(m_always_never_list, 
+etable(m_never_list, 
        tex = TRUE, 
        style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
-       interaction.combine = " $\times $ ",
+       interaction.combine = " $\\times $ ",
        file = "tables/long_term_never.tex", 
        dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat in Raj", 
                  "treat_2010" = "Quota in 2010", 
@@ -159,10 +169,10 @@ summary(m_once)
 m_once_dfe <- feols((sex_2020 == "F") ~ once  | district_2020 ,   data = filter(raj_panch, treat_2020 == 0))
 summary(m_once_dfe)
 
-m_once_psfe <- feols((sex_2020 == "F") ~ once  | district_2020 + ps_2020 ,   data = filter(raj_panch, treat_2020 == 0))
+m_once_psfe <- feols((sex_2020 == "F") ~ once  | I(paste0(district_2020, district_2020,ps_2020)) ,   data = filter(raj_panch, treat_2020 == 0))
 summary(m_once_psfe)
 
-m_once_gpfe <- feols((sex_2020 == "F") ~ once  | district_2020 + ps_2020 + gp_2020 ,  data = filter(raj_panch, treat_2020 == 0))
+m_once_gpfe <- feols((sex_2020 == "F") ~ once  |  I(paste0(district_2020, district_2020,ps_2020)),  data = filter(raj_panch, treat_2020 == 0))
 summary(m_once_gpfe)
 
 # TeX
@@ -172,7 +182,7 @@ etable(m_once_list,
        tex = TRUE, 
        style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
        interaction.combine = "$\times$",
-       file = here("..", "tables", "long_term_low_intensity.tex"), 
+       file = "tables/long_term_low_intensity.tex", 
        dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat", 
                  "treat_2010" = "Quota in 2010", 
                  "treat_2005" = "Quota in 2005",
@@ -195,7 +205,7 @@ summary(m_twice_dfe)
 m_twice_psfe <- feols((sex_2020 == "F") ~ twice  | district_2020 + ps_2020 ,   data = filter(raj_panch, treat_2020 == 0))
 summary(m_twice_psfe)
 
-m_twice_gpfe <- feols((sex_2020 == "F") ~ twice  | district_2020 + ps_2020 + gp_2020 ,  data = filter(raj_panch, treat_2020 == 0))
+m_twice_gpfe <- feols((sex_2020 == "F") ~ twice  | I(paste0(district_2020, district_2020,ps_2020)),  data = filter(raj_panch, treat_2020 == 0))
 summary(m_twice_gpfe)
 
 # TeX
@@ -228,7 +238,7 @@ summary(m_no_treat_dfe)
 m_no_treat_psfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 + ps_2020 ,   data = filter(raj_panch, treat_2020 == 0))
 summary(m_no_treat_psfe)
 
-m_no_treat_gpfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 + ps_2020 + gp_2020 ,  data = filter(raj_panch, treat_2020 == 0))
+m_no_treat_gpfe <- feols((sex_2020 == "F") ~ never_treated  | I(paste0(district_2020, district_2020,ps_2020)) ,  data = filter(raj_panch, treat_2020 == 0))
 summary(m_no_treat_gpfe)
 
 # TeX
@@ -255,36 +265,39 @@ etable(m_no_treat_list,
 
 # WWW v OOO seats ---------------------------------------------------------
 
-filtered_data <- filter(raj_panch, treat_2020 == 0)
+raj_max_contrast <- filter(raj_panch, treat_2020 == 0 & (never_treated == 1 | always_treated == 1))
 
-filtered_data <- filtered_data %>%
-     mutate(max_compare = case_when(
-          always_treated == 1 ~ "Always Treated",
-          never_treated == 1 ~ "Never Treated",
-          TRUE ~ "Other"
-     ))
-
-filtered_data <- filter(filtered_data, max_compare %in% c("Always Treated", "Never Treated"))
+raj_max_contrast <- raj_max_contrast %>%
+     mutate(treatment_category = ifelse(never_treated == 1, "Never Treated", "Always Treated"))
 
 
-m_max_compare <- feols((sex_2020 == "F") ~ max_compare, data = filtered_data)
-summary(m_max_compare) 
+raj_max_contrast$treatment_category <- factor(raj_max_contrast$treatment_category, levels = c("Never Treated", "Always Treated"))
 
-m_max_compare_dfe <- feols((sex_2020 == "F") ~ max_compare | district_2020 , data = filtered_data)
-summary(m_max_compare_dfe)
+m_never_v_always <- feols((sex_2020 == "F") ~ treatment_category, data = raj_max_contrast)
+summary(m_never_v_always) 
 
-m_max_compare_psfe <- feols((sex_2020 == "F") ~ max_compare | district_2020 + ps_2020 , data = filtered_data)
-summary(m_max_compare_psfe)
+m_never_v_always_dfe <- feols((sex_2020 == "F") ~ treatment_category | district_2020   , data = raj_max_contrast)
+summary(m_never_v_always_dfe) 
 
-m_max_compare_list <- list(m_max_compare, m_max_compare_dfe, m_max_compare_psfe)
+m_never_v_always_psfe <- feols((sex_2020 == "F") ~ treatment_category | district_2020 + ps_2020 , data = raj_max_contrast)
+summary(m_never_v_always_psfe) 
 
-etable(m_max_compare_list, 
+m_never_v_always_gpfe <- feols((sex_2020 == "F") ~ treatment_category | I(paste0(district_2020, district_2020,ps_2020)), data = raj_max_contrast)
+summary(m_never_v_always_gpfe) 
+
+
+
+
+m_raj_max_compare_list <- list(m_never_v_always, m_never_v_always_dfe, m_never_v_always_psfe)
+
+
+etable(m_raj_max_compare_list, 
        tex = TRUE, 
        style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
        interaction.combine = "$\times$",
-       file = "tables/long_term_max_compare.tex", 
-       dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat", 
-                 "max_compareNever Treated" = "$WWW$ v $OOO$ seats comparison", 
+       file = "tables/raj_max_contrast.tex", 
+       dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat in Raj", 
+                 "treatment_categoryAlways Treated" = "Always treated vs. Never Treated", 
                  "district_2020" = "District (2020)",
                  "ps_2020" = "Panchayat Samiti (2020)",
                  "gp_2020" = "Gram Panchayat (2020)"), #  notes = "Robust standard errors clustered at gram panchayat level",
@@ -292,24 +305,57 @@ etable(m_max_compare_list,
        replace = TRUE)
 
 
-
 # Correlation across treatment statuses
 
-model1 <- lm(treat_2020 ~ treat_2015, data = raj_panch)
-model2 <- lm(treat_2015 ~ treat_2010, data = raj_panch)
-model3 <- lm(treat_2010 ~ treat_2005, data = raj_panch)
-model4 <- lm(treat_2020 ~ treat_2005 + treat_2010 + treat_2015, data = raj_panch)
+model1 <- feols(treat_2020 ~ treat_2015, data = raj_panch)
+model2 <- feols(treat_2015 ~ treat_2010, data = raj_panch)
+model3 <- feols(treat_2010 ~ treat_2005, data = raj_panch)
+model4 <- feols(treat_2020 ~ treat_2005 + treat_2010 + treat_2015, data = raj_panch)
 
 models <- list(model1, model2, model3, model4)
 
-library(stargazer)
-stargazer(model1, model2, model3, model4,
-          title = "Treatment Correlation across the years in Rajasthan",
-          dep.var.labels = c("Treatment 2020", "Treatment 2015", "Treatment 2010"),
-          covariate.labels = c("Treatment 2015", "Treatment 2010", "Treatment 2005"),
-          column.labels = c("21 $\\sim$ 15", 
-                            "15 $\\sim$ 10", 
-                            "10 $\\sim$ 5", 
-                            "21 $\\sim$ 05 + 10 + 15"),
-          align = TRUE,
-          out = "/Users/varun/Library/CloudStorage/Dropbox/USC/quota_raj/tables/raj_treatment_reg.tex")
+etable(models, 
+       tex = TRUE, 
+       style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
+       interaction.combine = " $\\times $ ",
+       file = "tables/raj_treatment_reg.tex",
+       dict = c( 'treat_2005' = "Treatment 2005",
+                 'treat_2010' = "Treatment  2010",
+                 'treat_2015' = "Treatment 2015",
+                 'treat_2020' = "Treatment 2020"), 
+       replace = TRUE)
+
+
+
+# Poster Tables -----------------------------------------------------------
+
+m_always_lt_gpfe <- feols((sex_2020 == "F") ~ always_treated  | district_2020 + ps_2020 , , data = filter(raj_panch, treat_2020 == 0))
+summary(m_always_lt_gpfe)
+
+m_never_gpfe <- feols((sex_2020 == "F") ~ never_treated  | district_2020 + ps_2020  ,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_never_gpfe)
+
+m_sometimes_gpfe <- feols((sex_2020 == "F") ~ sometimes_treated  | district_2020 + ps_2020  ,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_sometimes_gpfe)
+
+
+raj_max_contrast_poster <- filter(raj_panch, treat_2020 == 0 & (never_treated == 1 | always_treated == 1))
+
+raj_max_contrast_poster <- raj_max_contrast_poster %>%
+     mutate(treatment_category = ifelse(never_treated == 1, "Never Treated", "Always Treated"))
+
+
+raj_max_contrast_poster$treatment_category <- factor(raj_max_contrast_poster$treatment_category, levels = c("Never Treated", "Always Treated"))
+
+m_never_v_always_gpfe <- feols((sex_2020 == "F") ~ treatment_category | district_2020 + ps_2020, data = raj_max_contrast_poster)
+summary(m_never_v_always_gpfe) 
+
+models_long_term_list <- list(m_always_lt_gpfe, m_never_gpfe, m_sometimes_gpfe,m_never_v_always_gpfe)
+
+
+etable(models_long_term_list, 
+       tex = TRUE, 
+       style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
+       interaction.combine = " $\times $ ",
+       file = "tables/raj_poster_long_term_models.tex",
+       replace = TRUE)
