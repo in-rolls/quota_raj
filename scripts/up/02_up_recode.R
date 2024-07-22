@@ -33,18 +33,18 @@ up_all <- up_all %>%
           dalit_2015 = ifelse(up_all$gp_reservation_status_eng_2015 %in% c("Scheduled Caste - Female", "Scheduled Tribe - Female"), 1, 0),
           dalit_2020 = ifelse(up_all$gp_reservation_status_eng_2021 %in% c("Scheduled Caste Female", "Scheduled Tribe Female"), 1, 0),
           
-          always_treated = ifelse((treat_2005 + treat_2010 + treat_2015) == 3, 1, 0),
-          never_treated = ifelse((treat_2005 + treat_2010 + treat_2015) == 0, 1, 0),
-          sometimes_treated = ifelse((treat_2005 + treat_2010 + treat_2015) > 0, 1, 0),
+          twice_treated = ifelse((treat_2005 + treat_2010) == 2, 1, 0),
+          never_treated = ifelse((treat_2005 + treat_2010 ) == 0, 1, 0),
+          sometimes_treated = ifelse((treat_2005 + treat_2010 ) > 0, 1, 0),
           
-          count_treated = (treat_2005 + treat_2010 + treat_2015),
+          count_treated = (treat_2005 + treat_2010 ),
 
-          once = ifelse((treat_2005 + treat_2010 + treat_2015) == 1, 1, 0),
-          twice = ifelse((treat_2005 + treat_2010 + treat_2015) == 2, 1, 0),
+          once = ifelse((treat_2005 + treat_2010 ) == 1, 1, 0),
+         
           inter_always_treated = ifelse((treat_2010 == 1) & (treat_2005 == 1), 1, 0),
           inter_sometimes_treated = ifelse((treat_2010 == 1) | (treat_2005 == 1), 1, 0),
           inter_never_treated = ifelse(treat_2005 + treat_2010 == 0, 1, 0),
-          treat_all = paste(treat_2005, treat_2010, treat_2015, sep = "_"),
+          treat_all = paste(treat_2005, treat_2010, sep = "_"),
           
           all_sc_2005 = ifelse(grepl("Scheduled", gp_res_status_fin_eng_2005, ignore.case = TRUE), 1, 0),
           all_sc_2010 = ifelse(grepl("Scheduled", gp_res_status_fin_eng_2010, ignore.case = TRUE), 1, 0),

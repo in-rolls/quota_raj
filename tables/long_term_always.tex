@@ -3,22 +3,22 @@
 \centering
 \begin{tabular}{lcccc}
    \toprule
-    & \multicolumn{4}{c}{\textit{2020 rep is a woman in an open seat in Raj}}\\
-                                              & [i]                   & [ii]          & [iii]         & [iv]\\  
+    & \multicolumn{4}{c}{\textit{sex\_2015=="महिला"}}\\
+                                                                                    & [i]            & [ii]          & [iii]         & [iv]\\  
    \midrule 
-   Constant                                   & 0.1062$^{***}$        &               &               &   \\   
-                                              & (0.0048)              &               &               &   \\   
-   Always treated (quota in 2005, 10, \& 15)  & -0.0062               & -0.0196       & -0.0243       & -0.1554$^{**}$\\   
-                                              & (0.0241)              & (0.0239)      & (0.0253)      & (0.0761)\\   
+   Constant                                                                         & 0.1636$^{***}$ &               &               &   \\   
+                                                                                    & (0.0034)       &               &               &   \\   
+   twice\_treated                                                                   & 0.0210$^{**}$  & 0.0225$^{**}$ & 0.0184$^{*}$  & 0.0184$^{**}$\\   
+                                                                                    & (0.0082)       & (0.0107)      & (0.0109)      & (0.0087)\\   
     \\
-   Standard-Errors & IID & \multicolumn{3}{c}{Gram Panchayat (2020)} \\ 
-   Observations                               & 4,351                 & 4,351         & 4,351         & 4,351\\  
-   R$^2$                                      & $1.52\times 10^{-5}$  & 0.02378       & 0.08715       & 0.98948\\  
-   Within R$^2$                               &                       & 0.00015       & 0.00023       & 0.01163\\  
+   Standard-Errors & IID & \multicolumn{2}{c}{district\_name\_eng\_2015} & district\_name\_eng\_2015,block\_name\_eng\_2015)) \\ 
+   Observations                                                                     & 14,197         & 14,197        & 14,197        & 14,197\\  
+   R$^2$                                                                            & 0.00046        & 0.02360       & 0.05676       & 0.05676\\  
+   Within R$^2$                                                                     &                & 0.00053       & 0.00035       & 0.00035\\  
     \\
-   District (2020) fixed effects              &                       & $\checkmark$  & $\checkmark$  & $\checkmark$\\   
-   Panchayat Samiti (2020) fixed effects      &                       &               & $\checkmark$  & $\checkmark$\\   
-   Gram Panchayat (2020) fixed effects        &                       &               &               & $\checkmark$\\   
+   district\_name\_eng\_2015 fixed effects                                          &                & $\checkmark$  & $\checkmark$  & \\  
+   block\_name\_eng\_2015 fixed effects                                             &                &               & $\checkmark$  & \\  
+   I(paste0(district\_name\_eng\_2015, block\_name\_eng\_2015)) fixed effects       &                &               &               & $\checkmark$\\   
    \bottomrule
 \end{tabular}
 \par\endgroup
