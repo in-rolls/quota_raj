@@ -40,7 +40,7 @@ up_all <- up_all %>%
           count_treated = (treat_2005 + treat_2010 ),
 
           once = ifelse((treat_2005 + treat_2010 ) == 1, 1, 0),
-          twice = ifelse((treat_2005 + treat_2010 ) == 2, 1, 0),
+         
           inter_always_treated = ifelse((treat_2010 == 1) & (treat_2005 == 1), 1, 0),
           inter_sometimes_treated = ifelse((treat_2010 == 1) | (treat_2005 == 1), 1, 0),
           inter_never_treated = ifelse(treat_2005 + treat_2010 == 0, 1, 0),

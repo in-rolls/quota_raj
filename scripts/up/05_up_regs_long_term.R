@@ -22,7 +22,7 @@ summary(lm((sex_2015 =="महिला") ~ treat_2005*treat_2010, data = subset
 
 #always is twice here
 
-summary(lm((sex_2015 =="महिला") ~ twice, data = subset(up_all, treat_2015 == 0)))
+summary(lm((sex_2015 =="महिला") ~ twice_treated, data = subset(up_all, treat_2015 == 0)))
 # always treated treat_2005 + treat_2010 + treat_2015 = 3
 
 m_always_lt <- feols((sex_2015 == "महिला") ~ twice_treated,  data = filter(up_all, treat_2015 == 0))
@@ -54,8 +54,9 @@ etable(m_always_lt_list,
                  "twice_treated" = "Always treated (quota in 2005, & 10)",
                  "district_name_eng_2015" = "District (2015)",
                  "block_name_eng_2015" = "Panchayat Block (2015)",
-                 "I(paste0(district_name_eng_2015, block_name_eng_2015))" = "District - Block combined",
+                 "I(paste0(district_name_eng_2015, block_name_eng_2015))" = "(District ,Block)",
                  "gp_name_eng_2015" = "Gram Panchayat (2015)"), #  notes = "Robust standard errors clustered at gram panchayat level",
+se.row = FALSE,
        replace = TRUE)
 
 # Never treated treat_2005 + treat_2010 + treat_2015 = 0
@@ -80,12 +81,12 @@ etable(m_never_list,
        tex = TRUE, 
        style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
        interaction.combine = " $\times $ ",
-       file = "tables/up_long_term_always.tex", 
+       file = "tables/up_long_term_never.tex", 
        dict = c( 'sex_2015 == "महिला"' = "2015 rep is a woman in an open seat in UP", 
                  "treat_2010" = "Quota in 2010", 
                  "treat_2005" = "Quota in 2005",
                  "treat_2015" = "Quota in 2015",
-                 "never_treated" = "Never treated (No quota in 2005, 10, & 15)",
+                 "never_treated" = "Never treated (No quota in 2005, & 10)",
                  "district_name_eng_2015" = "District (2015)",
                  "block_name_eng_2015" = "Panchayat Block (2015)",
                  "gp_name_eng_2015" = "Gram Panchayat (2015)"), #  notes = "Robust standard errors clustered at gram panchayat level",
@@ -121,11 +122,12 @@ etable(m_sometimes_list,
             "treat_2010" = "Quota in 2010", 
             "treat_2005" = "Quota in 2005",
             "treat_2015" = "Quota in 2015",
-            "sometimes_treated" = "Sometimes treated (treat_05 + treat_10 + treat_15 > 0)",
+            "sometimes_treated" = "Sometimes treated (treat_05 + treat_10 > 0)",
             "district_name_eng_2015" = "District (2015)",
             "block_name_eng_2015" = "Panchayat Block (2015)",
             "gp_name_eng_2015" = "Gram Panchayat (2015)"),
        replace = TRUE)
+
 
 
 # 2005 * 2010  interaction
@@ -151,6 +153,7 @@ etable(models_long_term_list,
        interaction.combine = " $\\times$ ",
        file = "tables/up_longterm_interaction.tex", 
        dict = c( 'sex_2015 == "महिला"' = "2015 rep is a woman in an open seat in UP", 
+                 "I(paste0(district_name_eng_2015, block_name_eng_2015))" = "(District, Block)",
                  "treat_2010" = "Quota in 2010", 
                  "treat_2005" = "Quota in 2005",
                  "treat_2015" = "Quota in 2015",
@@ -158,10 +161,21 @@ etable(models_long_term_list,
                  "district_name_eng_2015" = "District (2015)",
                  "block_name_eng_2015" = "Panchayat Block (2015)",
                  "gp_name_eng_2015" = "Gram Panchayat (2015)"), #  notes = "Robust standard errors clustered at gram panchayat level",
-       
+       se.row=FALSE,
        replace = TRUE)
+library(broom)
 
-
+coefs <- tidy(m_long_term_gpfe) %>%
+     filter(term != "(Intercept)")  
+ggplot(coefs, aes(x = term, y = estimate)) +
+     geom_point(color = "red") +
+     geom_errorbar(aes(ymin = estimate - 1.96 * std.error, ymax = estimate + 1.96 * std.error), width = 0.2) +
+     coord_flip() +
+     labs(title = "DV: 2015 rep is a woman in an open seat in UP",
+          caption = "Interaction of quotas in 2005 & 2010 (95% CI)")+ 
+    
+     theme_minimal() 
+     
 
 
 
@@ -195,42 +209,11 @@ etable(m_once_list,
                  "once" = "Treated once in 2005, 10 or 15",
                  "district_name_eng_2015" = "District (2015)",
                  "block_name_eng_2015" = "Panchayat Block (2015)",
+                 "I(paste0(district_name_eng_2015, block_name_eng_2015))" = "(District, Block)",
                  "gp_name_eng_2015" = "Gram Panchayat (2015)"), #  notes = "Robust standard errors clustered at gram panchayat level",
-       
+       se.row=FALSE,
        replace = TRUE)
 
-# med intensity: Twice treated (treat_2005 + treat_2010 + treat_2015 == 2) Dummy activated if the gp received treatment twice over 15 years
-
-m_twice <- feols((sex_2015 == "महिला") ~ twice , data = filter(up_all, treat_2015 == 0))
-summary(m_twice)
-
-m_twice_dfe <- feols((sex_2015 == "महिला") ~ twice  | district_name_eng_2015 ,  data = filter(up_all, treat_2015 == 0))
-summary(m_twice_dfe)
-
-m_twice_psfe <- feols((sex_2015 == "महिला") ~ twice  | district_name_eng_2015 + block_name_eng_2015 ,  data = filter(up_all, treat_2015 == 0))
-summary(m_twice_psfe)
-
-m_twice_gpfe <- feols((sex_2015 == "महिला") ~ twice  |I(paste0(district_name_eng_2015, block_name_eng_2015)) , data = filter(up_all, treat_2015 == 0))
-summary(m_twice_gpfe)
-
-# TeX
-m_twice_list <- list(m_twice, m_twice_dfe, m_twice_psfe, m_twice_gpfe)
-
-etable(m_twice_list, 
-       tex = TRUE, 
-       style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
-       interaction.combine = " $\\times $ ",
-       file = "tables/up_long_term_med_intensity.tex", 
-       dict = c( 'sex_2015 == "महिला"' = "2015 rep is a woman in an open seat in UP", 
-                 "treat_2010" = "Quota in 2010", 
-                 "treat_2005" = "Quota in 2005",
-                 "treat_2015" = "Quota in 2015",
-                 "twice" = "Treated twice in 2005, 2010 and 2010",
-                 "district_name_eng_2015" = "District (2015)",
-                 "block_name_eng_2015" = "Panchayat Block (2015)",
-                 "gp_name_eng_2015" = "Gram Panchayat (2015)"), #  notes = "Robust standard errors clustered at gram panchayat level",
-       
-       replace = TRUE)
 
 # never treated
 
@@ -261,8 +244,9 @@ etable(m_no_treat_list,
                  "never_treated" = "Never treated in 2005, 2010 and 2010",
                  "district_name_eng_2015" = "District (2015)",
                  "block_name_eng_2015" = "Panchayat Block (2015)",
+                 "I(paste0(district_name_eng_2015, block_name_eng_2015))" = "(District, Block)",
                  "gp_name_eng_2015" = "Gram Panchayat (2015)"), #  notes = "Robust standard errors clustered at gram panchayat level",
-       
+       se.row=FALSE,
        replace = TRUE)
 
 
@@ -306,8 +290,9 @@ etable(m_max_compare_list,
                  "treatment_categoryTwice Treated" = "Always treated vs. Never Treated", 
                  "district_name_eng_2015" = "District (2015)",
                  "block_name_eng_2015" = "Panchayat Samiti (2015)",
+                 "I(paste0(district_name_eng_2015, block_name_eng_2015)" = "(District, Block)",
                  "gp_name_eng_2015" = "Gram Panchayat (2015)"), #  notes = "Robust standard errors clustered at gram panchayat level",
-       
+       se.row=FALSE,
        replace = TRUE)
 
 
@@ -331,17 +316,21 @@ etable(models,
        replace = TRUE)
 
 
-# Poster Tables -----------------------------------------------------------
 
 
-m_always_lt_gpfe <- feols((sex_2015 == "महिला") ~ twice_treated  |district_name_eng_2015 + block_name_eng_2015 , data = filter(up_all, treat_2015 == 0))
+
+
+# Main Section Tables -----------------------------------------------------------
+
+
+m_always_lt_gpfe <- feols((sex_2015 == "महिला") ~ twice_treated  | I(paste0(district_name_eng_2015, block_name_eng_2015)), data = filter(up_all, treat_2015 == 0))
 summary(m_always_lt_gpfe)
 
 
-m_never_gpfe <- feols((sex_2015 == "महिला") ~ never_treated  | district_name_eng_2015 + block_name_eng_2015  , data = filter(up_all, treat_2015 == 0))
+m_never_gpfe <- feols((sex_2015 == "महिला") ~ never_treated  | I(paste0(district_name_eng_2015, block_name_eng_2015)), data = filter(up_all, treat_2015 == 0))
 summary(m_never_gpfe)
 
-m_sometimes_gpfe <- feols((sex_2015 == "महिला") ~ sometimes_treated  | district_name_eng_2015 + block_name_eng_2015  , data = filter(up_all, treat_2015 == 0))
+m_sometimes_gpfe <- feols((sex_2015 == "महिला") ~ sometimes_treated  | I(paste0(district_name_eng_2015, block_name_eng_2015)), data = filter(up_all, treat_2015 == 0))
 summary(m_sometimes_gpfe)
 
 up_max_contrast_poster <- filter(up_all, treat_2015 == 0 & (never_treated == 1 | twice_treated == 1))
@@ -352,7 +341,7 @@ up_max_contrast_poster <- up_max_contrast_poster %>%
 
 up_max_contrast_poster$treatment_category <- factor(up_max_contrast_poster$treatment_category, levels = c("Never Treated", "Twice Treated"))
 
-m_never_v_twice_gpfe <- feols((sex_2015 == "महिला") ~ treatment_category | district_name_eng_2015 + block_name_eng_2015 , data = up_max_contrast_poster)
+m_never_v_twice_gpfe <- feols((sex_2015 == "महिला") ~ treatment_category | I(paste0(district_name_eng_2015, block_name_eng_2015)), data = up_max_contrast_poster)
 summary(m_never_v_twice_gpfe) 
 
 models_long_term_list <- list(m_always_lt_gpfe, m_never_gpfe, m_sometimes_gpfe, m_never_v_twice_gpfe)
@@ -362,6 +351,18 @@ etable(models_long_term_list,
        tex = TRUE, 
        style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
        interaction.combine = " $\times $ ",
-       file = "tables/up_poster_long_term_models.tex",
+       file = "tables/up_main_long_term_models.tex",
+       dict = c( 'sex_2015 == "महिला"' = "2015 rep is a woman in an open sea in UP", 
+                 "treatment_categoryTwice Treated" = " Max Contrast ($WW$ v. $OO$)", 
+                 "district_name_eng_2015" = "District (2015)",
+                 "block_name_eng_2015" = "Panchayat Samiti (2015)",
+                 "gp_name_eng_2015" = "Gram Panchayat (2015)",
+                 'treat_2005' = "Treatment 2005",
+                 'treat_2010' = "Treatment  2010",
+                 'treat_2015' = "Treatment 2015",
+                 "I(paste0(district_name_eng_2015, block_name_eng_2015))" = "(District, Block)",
+                 "never_treated" = "Never treated in 2005, and 2010",
+                 "sometimes_treated" = "Sometimes treated (Treatment in 2005 or 2010)"), #  notes = "Robust standard errors clustered at gram panchayat level",
+       se.row=FALSE,
        replace = TRUE)
 
