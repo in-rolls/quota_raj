@@ -4,21 +4,21 @@
 \begin{tabular}{lcccc}
    \toprule
     & \multicolumn{4}{c}{\textit{2015 rep is a woman in an open seat in UP}}\\
-                                                                & [i]            & [ii]          & [iii]                 & [iv]\\  
+                                                                                    & [i]            & [ii]          & [iii]                 & [iv]\\  
    \midrule 
-   Constant                                                     & 0.1586$^{***}$ &               &                       &   \\   
-                                                                & (0.0057)       &               &                       &   \\   
-   Sometimes treated (treat\_05 + treat\_10 + treat\_15 > 0)    & 0.0123$^{*}$   & 0.0119$^{**}$ & 0.0077                & 0.0319\\   
-                                                                & (0.0069)       & (0.0054)      & (0.0061)              & (0.0457)\\   
+   Constant                                                                         & 0.1586$^{***}$ &               &                       &   \\   
+                                                                                    & (0.0057)       &               &                       &   \\   
+   Sometimes treated (treat\_05 + treat\_10 + treat\_15 > 0)                        & 0.0123$^{*}$   & 0.0119$^{**}$ & 0.0077                & 0.0077\\   
+                                                                                    & (0.0069)       & (0.0054)      & (0.0061)              & (0.0066)\\   
     \\
-   Standard-Errors & IID & \multicolumn{3}{c}{District (2015)} \\ 
-   Observations                                                 & 14,197         & 14,197        & 14,197                & 14,196\\  
-   R$^2$                                                        & 0.00023        & 0.02328       & 0.05651               & 0.87185\\  
-   Within R$^2$                                                 &                & 0.00021       & $8.92\times 10^{-5}$  & 0.00146\\  
+   Standard-Errors & IID & \multicolumn{2}{c}{District (2015)} & district\_name\_eng\_2015,block\_name\_eng\_2015)) \\ 
+   Observations                                                                     & 14,197         & 14,197        & 14,197                & 14,197\\  
+   R$^2$                                                                            & 0.00023        & 0.02328       & 0.05651               & 0.05651\\  
+   Within R$^2$                                                                     &                & 0.00021       & $8.92\times 10^{-5}$  & $8.92\times 10^{-5}$\\   
     \\
-   District (2015) fixed effects                                &                & $\checkmark$  & $\checkmark$          & $\checkmark$\\   
-   Panchayat Block (2015) fixed effects                         &                &               & $\checkmark$          & $\checkmark$\\   
-   Gram Panchayat (2015) fixed effects                          &                &               &                       & $\checkmark$\\   
+   District (2015) fixed effects                                                    &                & $\checkmark$  & $\checkmark$          & \\  
+   Panchayat Block (2015) fixed effects                                             &                &               & $\checkmark$          & \\  
+   I(paste0(district\_name\_eng\_2015, block\_name\_eng\_2015)) fixed effects       &                &               &                       & $\checkmark$\\   
    \bottomrule
 \end{tabular}
 \par\endgroup

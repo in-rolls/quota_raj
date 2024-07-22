@@ -1,23 +1,23 @@
 
 \begingroup
 \centering
-\begin{tabular}{lccc}
+\begin{tabular}{lcccc}
    \toprule
-    & \multicolumn{3}{c}{\textit{cand\_sex\_fin\_2010=="महिला"}}\\
-                                        & [i]            & [ii]          & [iii]\\  
+    & \multicolumn{4}{c}{\textit{2010 rep is a woman in an open seat in UP}}\\
+                                        & [i]            & [ii]          & [iii]         & [iv]\\  
    \midrule 
-   Constant                             & 0.1469$^{***}$ &               &   \\   
-                                        & (0.0050)       &               &   \\   
-   Quota Treatment in 2005              & 0.0089         & 0.0093        & 0.0113\\   
-                                        & (0.0074)       & (0.0088)      & (0.0089)\\   
+   Constant                             & 0.1477$^{***}$ &               &               &   \\   
+                                        & (0.0041)       &               &               &   \\   
+   Quota Treatment in 2005              & 0.0102$^{*}$   & 0.0110        & 0.0108        & 0.0108$^{*}$\\   
+                                        & (0.0060)       & (0.0070)      & (0.0072)      & (0.0063)\\   
     \\
-   Standard-Errors & IID & \multicolumn{2}{c}{District (2010)} \\ 
-   Observations                         & 9,493          & 9,493         & 9,493\\  
-   R$^2$                                & 0.00015        & 0.02388       & 0.08325\\  
-   Within R$^2$                         &                & 0.00017       & 0.00025\\  
+   Observations                         & 14,472         & 14,472        & 14,472        & 14,472\\  
+   R$^2$                                & 0.00020        & 0.02399       & 0.07544       & 0.07544\\  
+   Within R$^2$                         &                & 0.00023       & 0.00022       & 0.00022\\  
     \\
-   District (2010) fixed effects        &                & $\checkmark$  & $\checkmark$\\   
-   Panchayat Block (2010) fixed effects &                &               & $\checkmark$\\   
+   District (2010) fixed effects        &                & $\checkmark$  & $\checkmark$  & \\  
+   Panchayat Block (2010) fixed effects &                &               & $\checkmark$  & \\  
+   District - Block fixed effects       &                &               &               & $\checkmark$\\   
    \bottomrule
 \end{tabular}
 \par\endgroup
