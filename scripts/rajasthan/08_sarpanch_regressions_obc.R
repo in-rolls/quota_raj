@@ -70,7 +70,7 @@ etable(obc_15_20_list,
 # OBC Long Term -----------------------------------------------------------
 
 
-obc_subset_20 <- raj_panch %>% filter(sc_2020==1)
+obc_subset_20 <- raj_panch %>% filter(obc_2020==1)
 
 obc_lt <- feols((sex_2020 =="F") ~ treat_2005 * treat_2010 * treat_2015, data = filter(obc_subset_20, obc_2020 == 0))
 summary(obc_lt)
