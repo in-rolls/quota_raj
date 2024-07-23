@@ -165,16 +165,48 @@ etable(models_long_term_list,
        replace = TRUE)
 library(broom)
 
-coefs <- tidy(m_long_term_gpfe) %>%
-     filter(term != "(Intercept)")  
-ggplot(coefs, aes(x = term, y = estimate)) +
-     geom_point(color = "red") +
-     geom_errorbar(aes(ymin = estimate - 1.96 * std.error, ymax = estimate + 1.96 * std.error), width = 0.2) +
-     coord_flip() +
-     labs(title = "DV: 2015 rep is a woman in an open seat in UP",
-          caption = "Interaction of quotas in 2005 & 2010 (95% CI)")+ 
-    
-     theme_minimal() 
+
+
+# 2005 + 2010 additive
+
+m_long_term_add <- feols((sex_2015 == "महिला") ~ treat_2010 + treat_2005,  data = filter(up_all, treat_2015 == 0))
+summary(m_long_term_add)
+
+m_long_term_add_dfe <- feols((sex_2015 == "महिला") ~ treat_2010 + treat_2005  | district_name_eng_2015,  data = filter(up_all, treat_2015 == 0))
+summary(m_long_term_add_dfe)
+
+m_long_term_add_psfe <- feols((sex_2015 == "महिला") ~ treat_2010 + treat_2005  | district_name_eng_2015 + block_name_eng_2015 ,  data = filter(up_all, treat_2015 == 0))
+summary(m_long_term_add_psfe)
+
+m_long_term_add_gpfe <- feols((sex_2015 == "महिला") ~+ treat_2010 + treat_2005  | I(paste0(district_name_eng_2015 ,block_name_eng_2015)),  data = filter(up_all, treat_2015 == 0))
+summary(m_long_term_add_gpfe)
+
+
+
+
+# TeX
+models_long_term_add_list <- list(m_long_term_add, m_long_term_add_dfe, m_long_term_add_psfe, m_long_term_add_gpfe)
+
+etable(models_long_term_add_list, 
+       tex = TRUE, 
+       style.tex = style.tex("aer", model.format = "[i]", depvar.style = "*"),
+       interaction.combine = " $\\times $ ",
+       file = "tables/up_longterm_add.tex", 
+       dict = c('sex_2015 == "महिला"' = "2015 Rep is a Woman in an Open Seat in UP", 
+                "treat_2010" = "Quota in 2010", 
+                "treat_2005" = "Quota in 2005",
+                "treat_2015" = "Quota in 2015",
+                "always_treated" = "Always Treated (Quota in 2005, 2010, & 2015)",
+                "district_name_eng_2015" = "District (2015)",
+                "I(paste0(district_name_eng_2015, block_name_eng_2015))" = "(District, Samiti)",
+                "block_name_eng_2015" = "Panchayat Samiti (2015)",
+                "gp_2020" = "Gram Panchayat (2020)"),
+       se.row = FALSE,
+       replace = TRUE)
+
+
+
+
      
 
 

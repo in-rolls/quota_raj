@@ -57,6 +57,44 @@ etable(models_long_term_list,
        replace = TRUE)
 
 
+# 2005 + 2010 + 2015 additive
+
+m_long_term_add <- feols((sex_2020 == "F") ~ treat_2015 + treat_2010 + treat_2005,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_long_term_add)
+
+m_long_term_add_dfe <- feols((sex_2020 == "F") ~ treat_2015 + treat_2010 + treat_2005  | district_2020,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_long_term_add_dfe)
+
+m_long_term_add_psfe <- feols((sex_2020 == "F") ~ treat_2015 + treat_2010 + treat_2005  | district_2020 + ps_2020 ,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_long_term_add_psfe)
+
+m_long_term_add_gpfe <- feols((sex_2020 == "F") ~ treat_2015 + treat_2010 + treat_2005  | I(paste0(district_2020 ,ps_2020)),  data = filter(raj_panch, treat_2020 == 0))
+summary(m_long_term_add_gpfe)
+
+
+
+
+# TeX
+models_long_term_add_list <- list(m_long_term_add, m_long_term_add_dfe, m_long_term_add_psfe, m_long_term_add_gpfe)
+
+etable(models_long_term_add_list, 
+       tex = TRUE, 
+       style.tex = style.tex("aer", model.format = "[i]", depvar.style = "*"),
+       interaction.combine = " $\\times $ ",
+       file = "tables/raj_longterm_add.tex", 
+       dict = c('sex_2020 == "F"' = "2020 Rep is a Woman in an Open Seat in Raj", 
+                "treat_2010" = "Quota in 2010", 
+                "treat_2005" = "Quota in 2005",
+                "treat_2015" = "Quota in 2015",
+                "always_treated" = "Always Treated (Quota in 2005, 2010, & 2015)",
+                "district_2020" = "District (2020)",
+                "I(paste0(district_2020, ps_2020))" = "(District, Samiti)",
+                "ps_2020" = "Panchayat Samiti (2020)",
+                "gp_2020" = "Gram Panchayat (2020)"),
+       se.row = FALSE,
+       replace = TRUE)
+
+
 
 
   # always treated treat_2005 + treat_2010 + treat_2015 = 3
