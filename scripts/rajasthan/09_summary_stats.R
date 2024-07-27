@@ -87,21 +87,6 @@ tab2 <- raj_summ %>%
           n = n()
      )
 
-library(stargazer)
-stargazer(tab1, type = "latex", summary = FALSE, rownames = FALSE,
-          title = "Summary Statistics by Category of Gram Panchayat",
-          align = TRUE, 
-          digits = 2, 
-          style = "default",
-          out = "tables/up_desc_stat1.tex")
-
-stargazer(tab2, type = "latex", summary = FALSE, rownames = FALSE,
-          title = "Summary Statistics by Category of Gram Panchayat",
-          align = TRUE, 
-          digits = 2, 
-          style = "default",
-          out = "tables/up_desc_stat2.tex")
-     
 tab1_latex <- kable(tab1, format = "latex", booktabs = TRUE, caption = "Summary Statistics by Category of Gram Panchayat - Panel 1", label = "tab:summary_statistics1") %>%
      kable_styling(latex_options = c("hold_position"))
 
