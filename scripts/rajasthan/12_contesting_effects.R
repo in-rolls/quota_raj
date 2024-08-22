@@ -32,14 +32,18 @@ contest <- contest %>%
      group_by(key_2020) %>% 
      mutate(prop_women = mean(women_contestants_bin), na.rm=TRUE) %>% 
      mutate(women_present = ifelse(sum(women_contestants_bin, na.rm = TRUE) > 0, 1, 0)) %>%
-     ungroup()
+     ungroup() %>% 
+     group_by(nameofgrampanchayat) %>% 
+     mutate(num_women = sum(women_contestants_bin, na.rm = TRUE),
+            total_contestants = n()) %>% 
+ungroup()
 
 
 load("data/rajasthan/sarpanch_election_data/raj_panch.RData")
 raj_panch <- raj_panch %>% mutate(key_2020 = tolower(key_2020))
 
 
-contest_prop <- contest %>% select(key_2020, prop_women, women_present)
+contest_prop <- contest %>% select(key_2020, prop_women, women_present, num_women,total_contestants)
 contest_prop <- contest_prop %>% distinct()
 raj_panch <- raj_panch %>% left_join(contest_prop, by = "key_2020") #raj_panch$contest_prop has proportion of female contestants. Logic test, prop_women should be 1 in treat_2020==1
 
@@ -283,5 +287,148 @@ etable(models_mul_list,
                  'treat_2020' = "Treatment 2020"),
        se.row=FALSE,
        replace = TRUE)
+
+
+
+# Number of Women ---------------------------------------------------------
+
+m_always_num_gpfe <- feols(num_women ~ always_treated  | I(paste0(district_2020, ps_2020)) , data = filter(raj_panch, treat_2020 == 0))
+summary(m_always_num_gpfe)
+
+
+m_never_num_gpfe <- feols(num_women ~ never_treated  | I(paste0(district_2020, ps_2020))  ,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_never_num_gpfe)
+
+m_sometimes_num_gpfe <- feols(num_women ~ sometimes_treated  | I(paste0(district_2020, ps_2020))  ,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_sometimes_num_gpfe)
+
+
+raj_max_contrast_poster <- filter(raj_panch, treat_2020 == 0 & (never_treated == 1 | always_treated == 1))
+
+raj_max_contrast_poster <- raj_max_contrast_poster %>%
+     mutate(treatment_category = ifelse(never_treated == 1, "Never Treated", "Always Treated"))
+
+
+raj_max_contrast_poster$treatment_category <- factor(raj_max_contrast_poster$treatment_category, levels = c("Never Treated", "Always Treated"))
+
+m_never_v_always_num_gpfe <- feols(num_women ~ treatment_category | I(paste0(district_2020, ps_2020)),  data = raj_max_contrast_poster)
+summary(m_never_v_always_num_gpfe) 
+
+models_contests_list <- list(m_always_num_gpfe, m_never_num_gpfe, m_sometimes_num_gpfe,m_never_v_always_num_gpfe)
+
+
+etable(models_contests_list, 
+        tex = TRUE, 
+        style.tex = style.tex("aer", model.format = "[i]", depvar.style = "*"),
+        interaction.combine = " $\times$ ",
+        file = "tables/raj_contesting_numW.tex",
+        dict = c( 
+             'treat_2005' = "Treatment 2005",
+             'num_women' = "Number of Women running in an Open Seat in Raj",
+             'treat_2010' = "Treatment 2010",
+             'treat_2015' = "Treatment 2015",
+             'treat_2020' = "Treatment 2020",
+             "treatment_categoryAlways Treated" = "Max Contrast ($WWW$ vs. $OO0$)", 
+             "never_treated" = "Never treated in 2005, 2010, and 2015",
+             "sometimes_treated" = "Sometimes treated (treat_05 + treat_10 + treat_15 > 0)",
+             "always_treated" = "Always treated (quota in 2005, 10, & 15)"
+        ), 
+        replace = TRUE)
+
+
+
+# Total Contestats  ---------------------------------------------------------
+
+m_always_num_gpfe <- feols(total_contestants ~ always_treated  | I(paste0(district_2020, ps_2020)) , data = filter(raj_panch, treat_2020 == 0))
+summary(m_always_num_gpfe)
+
+
+m_never_num_gpfe <- feols(total_contestants ~ never_treated  | I(paste0(district_2020, ps_2020))  ,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_never_num_gpfe)
+
+m_sometimes_num_gpfe <- feols(total_contestants ~ sometimes_treated  | I(paste0(district_2020, ps_2020))  ,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_sometimes_num_gpfe)
+
+
+raj_max_contrast_poster <- filter(raj_panch, treat_2020 == 0 & (never_treated == 1 | always_treated == 1))
+
+raj_max_contrast_poster <- raj_max_contrast_poster %>%
+     mutate(treatment_category = ifelse(never_treated == 1, "Never Treated", "Always Treated"))
+
+
+raj_max_contrast_poster$treatment_category <- factor(raj_max_contrast_poster$treatment_category, levels = c("Never Treated", "Always Treated"))
+
+m_never_v_always_num_gpfe <- feols(total_contestants ~ treatment_category | I(paste0(district_2020, ps_2020)),  data = raj_max_contrast_poster)
+summary(m_never_v_always_num_gpfe) 
+
+models_contests_list <- list(m_always_num_gpfe, m_never_num_gpfe, m_sometimes_num_gpfe,m_never_v_always_num_gpfe)
+
+
+etable(models_contests_list, 
+       tex = TRUE, 
+       style.tex = style.tex("aer", model.format = "[i]", depvar.style = "*"),
+       interaction.combine = " $\times$ ",
+       file = "tables/raj_contesting_total.tex",
+       dict = c( 
+            'treat_2005' = "Treatment 2005",
+            'total_contestants' = "Total Contestants in an Open Seat in Raj",
+            'treat_2010' = "Treatment 2010",
+            'treat_2015' = "Treatment 2015",
+            'treat_2020' = "Treatment 2020",
+            "treatment_categoryAlways Treated" = "Max Contrast ($WWW$ vs. $OO0$)", 
+            "never_treated" = "Never treated in 2005, 2010, and 2015",
+            "sometimes_treated" = "Sometimes treated (treat_05 + treat_10 + treat_15 > 0)",
+            "always_treated" = "Always treated (quota in 2005, 10, & 15)"
+       ), 
+       replace = TRUE)
+
+
+
+
+
+# number of women multiplicative ------------------------------------------
+
+m_num_mul <- feols(num_women ~ treat_2005 * treat_2010 * treat_2015 , data = filter(raj_panch, treat_2020 == 0))
+summary(m_num_mul)
+
+m_num_mul_dfe <- feols(num_women ~ treat_2005 * treat_2010 * treat_2015  | district_2020,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_num_mul_dfe)
+
+m_num_mul_psfe <- feols(num_women ~ treat_2005 * treat_2010 * treat_2015  | district_2020 + ps_2020,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_num_mul_psfe)
+
+m_num_mul_gpfe <- feols(num_women ~ treat_2005 * treat_2010 * treat_2015  | I(paste0(district_2020, ps_2020)),  data = filter(raj_panch, treat_2020 == 0))
+summary(m_num_mul_gpfe)
+
+models_mul_list <- list(m_num_mul, m_num_mul_dfe, m_num_mul_psfe, m_num_mul_gpfe)
+
+
+etable(models_mul_list, 
+       tex = TRUE, 
+       style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
+       interaction.combine = " $\times $ ",
+       file = "tables/raj_num_contest.tex",
+       dict = c( 'treat_2005' = "Treatment 2005",
+                 'num_women' = "Number of women running in an open seat",
+                 'treat_2010' = "Treatment  2010",
+                 'treat_2015' = "Treatment 2015",
+                 'treat_2020' = "Treatment 2020",
+                 'district_2020' = "District 2020",
+                 'I(paste0(district_2020, ps_2020))' = "(District, Samiti)",
+                 'ps_2020' = "Panchayat Samiti 2020",
+                 "treatment_categoryAlways Treated" = " Max Contrast ($WWW$ v. $OO0$)", 
+                 "never_treated" = "Never treated in 2005, 2010 and 2010",
+                 "sometimes_treated" = "Sometimes treated (treat_05 + treat_10 + treat_15 > 0)",
+                 "always_treated" = "Always treated (quota in 2005, 10, & 15)"), 
+       se.row=FALSE,
+       replace = TRUE)
+
+
+
+
+
+# FEmale Cand Vote Share --------------------------------------------------
+
+
 
 

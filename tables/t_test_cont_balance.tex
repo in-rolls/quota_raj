@@ -1,0 +1,38 @@
+\begin{table}[ht]
+\centering
+\caption{T-Test Results by Covariate Family} 
+\label{tab:t_tests}
+\begin{tabular}{lrrrrrrr}
+  \hline
+Family & Variable & Mean Control & Mean Treatment & Sample_Size_Control & Sample_Size_Treatment & t_Statistic & p_Value \\ 
+  \hline
+geography & Area_of_Village & 884.53 & 779.08 & 2712 & 2562 & 2.50 & 0.01 \\ 
+  geography & River_Irrigation & 0.62 & 0.26 & 2712 & 2562 & 1.70 & 0.09 \\ 
+  geography & Lake_Irrigation & 0.01 & 0.07 & 2712 & 2562 & -0.93 & 0.35 \\ 
+  geography & Waterfall_Irrigation & 0.02 & 0.01 & 2712 & 2562 & 0.52 & 0.61 \\ 
+  geography & Forest_Land & 63.96 & 75.48 & 2712 & 2562 & -1.39 & 0.17 \\ 
+  geography & Total_Irrigated_Area & 161.89 & 137.76 & 2712 & 2562 & 1.50 & 0.13 \\ 
+  population_hh & Number_of_Households & 198.46 & 191.57 & 2712 & 2562 & 1.09 & 0.28 \\ 
+  population_hh & Total_Males & 601.65 & 583.96 & 2712 & 2562 & 0.91 & 0.36 \\ 
+  population_hh & Total_Population & 1169.49 & 1131.83 & 2712 & 2562 & 1.00 & 0.32 \\ 
+  population_hh & Scheduled_Castes_Population & 218.69 & 222.67 & 2712 & 2562 & -0.44 & 0.66 \\ 
+  population_hh & Scheduled_Castes_Males & 113.85 & 116.08 & 2712 & 2562 & -0.48 & 0.63 \\ 
+  population_hh & Scheduled_Tribes_Population & 164.14 & 152.58 & 2712 & 2562 & 1.15 & 0.25 \\ 
+  population_hh & Scheduled_Tribes_Males & 83.65 & 78.52 & 2712 & 2562 & 1.00 & 0.32 \\ 
+  water_sanitation & Tap_Water & 1.69 & 1.68 & 2712 & 2562 & 0.83 & 0.40 \\ 
+  water_sanitation & Well_Water & 1.18 & 1.20 & 2712 & 2562 & -2.25 & 0.02 \\ 
+  water_sanitation & Tank_Water & 1.69 & 1.70 & 2712 & 2562 & -1.16 & 0.25 \\ 
+  water_sanitation & Tubewell_Water & 1.63 & 1.60 & 2712 & 2562 & 2.01 & 0.04 \\ 
+  water_sanitation & Handpump_Water & 1.22 & 1.19 & 2712 & 2562 & 2.96 & 0.00 \\ 
+  water_sanitation & River_Water & 1.88 & 1.88 & 2712 & 2562 & 0.46 & 0.65 \\ 
+  water_sanitation & Canal_Water & 1.81 & 1.79 & 2712 & 2562 & 1.99 & 0.05 \\ 
+  water_sanitation & Lake_Water & 2.00 & 2.00 & 2712 & 2562 & 0.50 & 0.62 \\ 
+  water_sanitation & Spring_Water & 2.00 & 2.00 & 2712 & 2562 & -0.29 & 0.77 \\ 
+  water_sanitation & Other_Drinking_Water_Sources & 1.99 & 1.98 & 2712 & 2562 & 1.41 & 0.16 \\ 
+  town_dist & Distance_to_Nearest_Town & 24.26 & 22.66 & 2712 & 2562 & 3.67 & 0.00 \\ 
+   \hline
+\end{tabular}
+\end{table}
+\footnotetext{\textit{Note}: The p-values indicate whether there is a\
+    statistically significant difference between the treatment and control groups. \
+    Low p-values (typically <0.05) suggest a potential imbalance between groups, while high p-values indicate that the groups are more balanced with respect to the covariates. Significance levels: ***p < 0.001, **p < 0.01, *p < 0.05.}
