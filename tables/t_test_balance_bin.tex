@@ -1,0 +1,39 @@
+\begin{table}[ht]
+\centering
+\caption{T-Test Results by Covariate Family (Binary Variables)} 
+\label{tab:t_tests_bin}
+\begin{tabular}{lrrrrrrr}
+  \hline
+Family & Variable & Mean Control & Mean Treatment & Sample Size Control & Sample Size Treatment & t Statistic & p Value \\ 
+  \hline
+education & Educational_Facilities & 0.90 & 0.88 & 2712 & 2562 & 2.26 & 0.02 \\ 
+  health & Medical_Facilities & 0.34 & 0.34 & 2712 & 2562 & -0.01 & 0.99 \\ 
+  health & Number_of_Primary_Health_Centres & 0.05 & 0.05 & 2712 & 2562 & 0.61 & 0.54 \\ 
+  health & Number_of_Primary_Health_Sub_Centres & 0.20 & 0.19 & 2712 & 2562 & 1.02 & 0.31 \\ 
+  health & Number_of_Other_Medical_Facilities & 0.01 & 0.00 & 2712 & 2562 & 0.25 & 0.80 \\ 
+  health & Number_of_TB_Clinics & 0.00 & 0.00 & 2712 & 2562 & -0.07 & 0.94 \\ 
+  communications & Post_Telegraph_Telephone_Facilities & 0.57 & 0.55 & 2712 & 2562 & 0.99 & 0.32 \\ 
+  communications & Communication_Facilities & 0.47 & 0.47 & 2712 & 2562 & 0.31 & 0.75 \\ 
+  communications & Number_of_Telegraph_Offices & 0.01 & 0.01 & 2712 & 2562 & 0.99 & 0.32 \\ 
+  communications & Number_of_Post_and_Telegraph_Offices & 0.01 & 0.01 & 2712 & 2562 & 1.01 & 0.31 \\ 
+  transport & Bus_Services & 0.47 & 0.47 & 2712 & 2562 & 0.22 & 0.83 \\ 
+  transport & Railway_Services & 0.02 & 0.02 & 2712 & 2562 & 0.12 & 0.91 \\ 
+  transport & Navigable_Waterways & 0.00 & 0.00 & 2712 & 2562 & -1.00 & 0.32 \\ 
+  finance & Banking_Facilities & 0.07 & 0.07 & 2712 & 2562 & 0.45 & 0.65 \\ 
+  finance & Credit_Societies & 0.15 & 0.16 & 2712 & 2562 & -0.16 & 0.87 \\ 
+  recreation & Recreational_and_Cultural_Facilities & 0.01 & 0.01 & 2712 & 2562 & 1.93 & 0.05 \\ 
+  roads & Paved_Road_Access & 0.56 & 0.56 & 2712 & 2562 & -0.61 & 0.54 \\ 
+  roads & Mud_Road_Access & 0.71 & 0.69 & 2712 & 2562 & 1.43 & 0.15 \\ 
+  roads & Footpath_Access & 0.71 & 0.71 & 2712 & 2562 & -0.08 & 0.93 \\ 
+  roads & Navigable_River_Access & 0.00 & 0.00 & 2712 & 2562 & -1.00 & 0.32 \\ 
+  power & Power_Supply & 0.87 & 0.86 & 2712 & 2562 & 1.04 & 0.30 \\ 
+  power & Electricity_for_Domestic_Use & 0.95 & 0.96 & 2712 & 2562 & -1.03 & 0.30 \\ 
+  power & Electricity_for_Agricultural_Use & 0.61 & 0.66 & 2712 & 2562 & -1.88 & 0.06 \\ 
+  power & Electricity_for_Other_Purposes & 0.10 & 0.10 & 2712 & 2562 & -0.14 & 0.89 \\ 
+  power & Electricity_for_All_Purposes & 0.61 & 0.62 & 2712 & 2562 & -0.74 & 0.46 \\ 
+   \hline
+\end{tabular}
+\end{table}
+\footnotetext{\textit{Note}: The p-values indicate whether there is a\
+    statistically significant difference between the treatment and control groups. \
+    Low p-values (typically <0.05) suggest a potential imbalance between groups, while high p-values indicate that the groups are more balanced with respect to the covariates. Significance levels: ***p < 0.001, **p < 0.01, *p < 0.05.}

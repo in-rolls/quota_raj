@@ -270,3 +270,41 @@ etable(m_no_treat_list,
 
 
 
+# WWW v OOO seats ---------------------------------------------------------
+
+filtered_data <- filter(up_all, treat_2021 == 0)
+
+filtered_data <- filtered_data %>%
+     mutate(max_compare = case_when(
+          always_treated == 1 ~ "Always Treated",
+          never_treated == 1 ~ "Never Treated",
+          TRUE ~ "Other"
+     ))
+
+filtered_data <- filter(filtered_data, max_compare %in% c("Always Treated", "Never Treated"))
+
+
+m_max_compare <- feols((sex_2021 == "महिला") ~ max_compare, data = filtered_data)
+summary(m_max_compare) 
+
+m_max_compare_dfe <- feols((sex_2021 == "महिला") ~ max_compare | district_name_eng_2021 , data = filtered_data)
+summary(m_max_compare_dfe)
+
+m_max_compare_psfe <- feols((sex_2021 == "महिला") ~ max_compare | district_name_eng_2021 + block_name_eng_2021 , data = filtered_data)
+summary(m_max_compare_psfe)
+
+m_max_compare_list <- list(m_max_compare, m_max_compare_dfe, m_max_compare_psfe)
+
+etable(m_max_compare_list, 
+       tex = TRUE, 
+       style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
+       interaction.combine = "$\times$",
+       file = "tables/up_long_term_max_compare.tex", 
+       dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat", 
+                 "max_compareNever Treated" = "$WWW$ v $OOO$ seats comparison", 
+                 "district_2020" = "District (2020)",
+                 "ps_2020" = "Panchayat Samiti (2020)",
+                 "gp_2020" = "Gram Panchayat (2020)"), #  notes = "Robust standard errors clustered at gram panchayat level",
+       
+       replace = TRUE)
+
