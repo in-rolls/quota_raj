@@ -10,11 +10,20 @@ library(fixest)
 library(arrow)
 library(tidyverse)
 library(stringi)
+library(lfe)  # For clustered standard errors
+library(ggplot2)
+library(coefplot)
+library(lmtest)
+library(sandwich)
+library(multiwayvcov)
+
+
+# Pre-Processing for Balance Tests ----------------------------------------
 
 
 # load("data/rajasthan/sarpanch_election_data/raj_panch.RData")
 raj_lgd_shrug <- read_parquet("data/rajasthan/shrug_lgd_raj_elex_05_10.parquet")
-shrug_vd <- read_csv("data/rajasthan/pc01_vd_clean_shrid.csv")
+shrug_vd <- read_csv("data/rajasthan/shrug-vd01-csv/pc01_vd_clean_shrid.csv.zip")
 raj_lgd_vd_merge <- merge(raj_lgd_shrug, shrug_vd, by = "shrid2") #amazing match
 
 # Treatment Dummies --------------------------------------------------------
@@ -162,41 +171,41 @@ variable_names_mapping <- c(
 
 # Continuous Vars
 covariate_families_cont <- list(
-geography = c("pc01_vd_area", "pc01_vd_river_irr", "pc01_vd_lake_irr", "pc01_vd_w_fall", "pc01_vd_land_fores", "pc01_vd_tot_irr"),
-population_hh = c("pc01_vd_t_hh", "pc01_vd_t_m", "pc01_vd_t_p", "pc01_vd_sc_p", "pc01_vd_sc_m", "pc01_vd_st_p", "pc01_vd_st_m"), #"pc01_vd_sc_f", "pc01_vd_st_f"),
-water_sanitation = c("pc01_vd_tap", "pc01_vd_well", "pc01_vd_tank", "pc01_vd_tubewell", "pc01_vd_handpump", "pc01_vd_river", "pc01_vd_canal", "pc01_vd_lake", "pc01_vd_spring", "pc01_vd_other"),
+geography = c( "pc01_vd_river_irr", "pc01_vd_lake_irr", "pc01_vd_land_fores"), #pc01_vd_w_fall pc01_vd_area pc01_vd_tot_irr
+#population_hh = c("pc01_vd_t_hh", "pc01_vd_t_m", "pc01_vd_t_p", "pc01_vd_sc_p", "pc01_vd_sc_m", "pc01_vd_st_p", "pc01_vd_st_m"), #"pc01_vd_sc_f", "pc01_vd_st_f"
+water_sanitation = c("pc01_vd_tap", "pc01_vd_well", "pc01_vd_tank", "pc01_vd_tubewell", "pc01_vd_handpump", "pc01_vd_river", "pc01_vd_canal", "pc01_vd_other"), #pc01_vd_lake pc01_vd_spring
 town_dist = c("pc01_vd_dist_town"))
 
 # Dummy Vars
 covariate_families_bin <- list(
 education = c("pc01_vd_edu_fac"),
-health = c( "pc01_vd_medi_fac", "pc01_vd_ph_cntr", "pc01_vd_phs_cnt", "pc01_vd_oth_cntr", "pc01_vd_tb_cln"),
-communications = c("pc01_vd_p_t_fac", "pc01_vd_comm_fac", "pc01_vd_tele_off","pc01_vd_post_tele"),
-transport = c("pc01_vd_bs_fac", "pc01_vd_rs_fac", "pc01_vd_nw_fac"),
+health = c( "pc01_vd_medi_fac", "pc01_vd_ph_cntr", "pc01_vd_phs_cnt", "pc01_vd_oth_cntr"),# "pc01_vd_tb_cln"),
+communications = c("pc01_vd_p_t_fac", "pc01_vd_tele_off"),#"pc01_vd_post_tele"), pc01_vd_comm_fac
+transport = c( "pc01_vd_rs_fac", "pc01_vd_nw_fac"), #pc01_vd_bs_fac
 finance = c("pc01_vd_bank_fac", "pc01_vd_crsoc_fac"),
 recreation = c("pc01_vd_rc_fac"),
-roads = c("pc01_vd_app_pr", "pc01_vd_app_mr", "pc01_vd_app_fp", "pc01_vd_app_navriv"),
+roads = c("pc01_vd_app_pr", "pc01_vd_app_mr", "pc01_vd_app_fp"), # "pc01_vd_app_navriv"),
 power = c("pc01_vd_power_supl", "pc01_vd_power_dom", "pc01_vd_power_agr", "pc01_vd_power_oth", "pc01_vd_power_all")
 )
 
-all_covariates <- c(
-covariate_families_bin$education,
-covariate_families_bin$health,
-covariate_families_bin$communications,
-covariate_families_bin$transport,
-covariate_families_bin$finance,
-covariate_families_bin$recreation,
-covariate_families_bin$roads,
-covariate_families_bin$power,
-covariate_families_cont$geography,
-covariate_families_cont$population_hh,
-covariate_families_cont$water_sanitation,
-covariate_families_cont$town_dist
+covariates <- c(
+     covariate_families_cont$geography,
+     covariate_families_cont$population_hh,
+     covariate_families_cont$water_sanitation,
+     covariate_families_cont$town_dist,
+     covariate_families_bin$education,
+     covariate_families_bin$health,
+     covariate_families_bin$communications,
+     covariate_families_bin$transport,
+     covariate_families_bin$finance,
+     covariate_families_bin$recreation,
+     covariate_families_bin$roads,
+     covariate_families_bin$power
 )
 
 
 
-# T-TEst ------------------------------------------------------------------
+# T-Test ------------------------------------------------------------------
 perform_t_tests <- function(vars, data) {
      results <- lapply(vars, function(var) {
           # Calculate sample sizes
@@ -322,32 +331,7 @@ etable(balance_tests_cont,
        se.row=FALSE,        replace = TRUE)
 
 
-# Regressins --------------------------------------------------------------
-
-# Load necessary libraries
-library(dplyr)
-library(lfe)  # For clustered standard errors
-library(ggplot2)
-library(coefplot)
-library(lmtest)
-library(sandwich)
-library(multiwayvcov)
-
-# Combine all covariates
-covariates <- c(
-     covariate_families_cont$geography,
-     covariate_families_cont$population_hh,
-     covariate_families_cont$water_sanitation,
-     covariate_families_cont$town_dist,
-     covariate_families_bin$education,
-     covariate_families_bin$health,
-     covariate_families_bin$communications,
-     covariate_families_bin$transport,
-     covariate_families_bin$finance,
-     covariate_families_bin$recreation,
-     covariate_families_bin$roads,
-     covariate_families_bin$power
-)
+# Regressions --------------------------------------------------------------
 
 # Remove duplicates so that all are valid column names
 covariates <- unique(covariates)
@@ -413,116 +397,75 @@ coef_plot_2010 <- ggplot(plot_data_2010, aes(x = Estimate, y = reorder(Term, Est
 
 ggsave("plots/coefficient_plot_2010.png", plot = coef_plot_2010, width = 7, height = 7)
 
-# F-Test ------------------------------------------------------------------
-# VErify this
-library(lmtest)
 
-model <- lm(treat_2005 ~ ., data = raj_lgd_vd_merge[, c("treat_2005", covariates)])
 
-# Omnibus F-test
-anova_result <- anova(model)
-print(anova_result)
+# Randomization Inference -------------------------------------------------
 
-# extract f-stat hand-code (Check anova object first)
-sum_sq_model <- sum(anova_result$`Sum Sq`[1:(nrow(anova_result) - 1)])  # Exclude Residuals
-df_model <- sum(anova_result$`Df`[1:(nrow(anova_result) - 1)])  # Exclude Residuals
-sum_sq_residuals <- anova_result$`Sum Sq`[nrow(anova_result)]  
-df_residuals <- anova_result$`Df`[nrow(anova_result)]  
+# Run regression and extract F statistic
 
-#  Mean Squares
-ms_model <- sum_sq_model / df_model
-ms_residuals <- sum_sq_residuals / df_residuals
+r_check_05 <- lm(treat_2005 ~ ., data = raj_lgd_vd_merge[, c("treat_2005", covariates)])
+fstat <- summary(r_check_05)$fstatistic[1]
+fstat
 
-# F-statistic
-f_statistic_05 <- ms_model / ms_residuals
-f_statistic_05
+# Check Multicollinearity
+library(car)
+vif_values <- vif(r_check)
+vif_values
 
-map_rownames <- function(rownames, mapping) {
-     mapped_names <- mapping[match(rownames, names(mapping))]
-     mapped_names[is.na(mapped_names)] <- rownames[is.na(mapped_names)]
-     return(mapped_names)
+multi <- c()       # VIF > 10
+mod_multi <- c()   # 5 < VIF <= 10
+non_multi <- c()   # VIF <= 5
+
+# Iterate through VIF values and classify variables
+for (i in seq_along(vif_values)) {
+     if (vif_values[i] > 10) {
+          multi <- c(multi, names(vif_values)[i])
+     } 
+     else if (vif_values[i] > 5 & vif_values[i] <= 10) {
+          mod_multi <- c(mod_multi, names(vif_values)[i])
+     }
+     else {
+          non_multi <- c(non_multi, names(vif_values)[i])
+     }
+} 
+multi
+mod_multi
+non_multi
+
+
+# Loop through randomized assignments of treatment and recalculate f-statistic
+null <- raj_lgd_vd_merge
+fstat_null <- vector(mode = "numeric", length = 10000)
+
+sum(null$treat_2005)
+nrow(null)
+
+for (i in seq_along(fstat_null)) {
+     null$Z_sim_05 <- complete_ra(N = 5274, m = 1894)
+     r_check <- lm(Z_sim_05 ~ ., data = null[, c("Z_sim_05", covariates)])
+     fstat_null[[i]] <- summary(r_check)$fstatistic[1]
 }
 
-rownames(anova_result) <- names(variable_names_mapping)[match(rownames(anova_result), variable_names_mapping)]
-print(xtable(anova_result, 
-             caption = "Analysis of Variance for treat_2005"),
-      type = "latex",
-      file = "tables/anova_05.tex",
-      include.rownames = TRUE)
 
-compute_f_statistic <- function(data, formula) {
-     # Fit the linear model
-     model <- lm(formula, data = data)
-     anova_result <- anova(model)
+p <- sum(abs(fstat_null) >= fstat)/length(fstat_null) 
+p
 
-     sum_sq_model <- sum(anova_result$`Sum Sq`[1:(nrow(anova_result) - 1)])  # Exclude Residuals
-     df_model <- sum(anova_result$`Df`[1:(nrow(anova_result) - 1)])  # Exclude Residuals
-     sum_sq_residuals <- anova_result$`Sum Sq`[nrow(anova_result)] 
-     df_residuals <- anova_result$`Df`[nrow(anova_result)]  
+r_check_10 <- lm(treat_2010 ~ ., data = raj_lgd_vd_merge[, c("treat_2010", covariates)])
+fstat <- summary(r_check_10)$fstatistic[1]
+fstat
 
-     ms_model <- sum_sq_model / df_model
-     ms_residuals <- sum_sq_residuals / df_residuals
-     f_statistic <- ms_model / ms_residuals
-     return(f_statistic)
+
+
+sum(null$treat_2010)
+
+for (i in seq_along(fstat_null)) {
+     null$Z_sim_10 <- complete_ra(N = 5274, m = 2562)
+     r_check <- lm(Z_sim_10 ~ ., data = null[, c("Z_sim_10", covariates)])
+     fstat_null[[i]] <- summary(r_check)$fstatistic[1]
 }
 
-num_permutations <- 5000
-permuted_f_statistics_05 <- numeric(num_permutations)
 
-for (i in 1:num_permutations) {
-     shuffled_data <- raj_lgd_vd_merge[, c("treat_2005", covariates)]
-     shuffled_data$treat_2005 <- sample(shuffled_data$treat_2005)
-     
-     #  F-stat on permuted data
-     permuted_f_statistics_05[i] <- compute_f_statistic(shuffled_data, treat_2005 ~ .)
-}
-p_value_05 <- mean(permuted_f_statistics_05 >= original_f_statistic)
+# Calculate two sided p-value
+p <- sum(abs(fstat_null) >= fstat)/length(fstat_null) 
+p
 
-cat("Original F-statistic:", f_statistic_05, "\n")
-cat("P-value from Randomization Inference:", p_value_05, "\n")
-
-
-# 2010 F-Stat
-library(lmtest)
-
-model_10 <- lm(treat_2010 ~ ., data = raj_lgd_vd_merge[, c("treat_2010", covariates)])
-
-# Omnibus F-test
-anova_result_10 <- anova(model_10)
-print(anova_result_10)
-
-# extract f-stat hand-code (Check anova object first)
-sum_sq_model <- sum(anova_result_10$`Sum Sq`[1:(nrow(anova_result_10) - 1)])  # Exclude Residuals
-df_model <- sum(anova_result_10$`Df`[1:(nrow(anova_result_10) - 1)])  # Exclude Residuals
-sum_sq_residuals <- anova_result_10$`Sum Sq`[nrow(anova_result_10)]  
-df_residuals <- anova_result_10$`Df`[nrow(anova_result_10)] 
-
-# Mean Squares
-ms_model <- sum_sq_model / df_model
-ms_residuals <- sum_sq_residuals / df_residuals
-
-# F-statistic
-f_statistic_10 <- ms_model / ms_residuals
-f_statistic_10
-
-rownames(anova_result_10) <- names(variable_names_mapping)[match(rownames(anova_result_10), variable_names_mapping)]
-print(xtable(anova_result_10, 
-             caption = "Analysis of Variance for treat_2010"),
-      type = "latex",
-      file = "tables/anova_10.tex",
-      include.rownames = TRUE)
-
-num_permutations <- 5000
-permuted_f_statistics_10 <- numeric(num_permutations)
-
-for (i in 1:num_permutations) {
-     shuffled_data <- raj_lgd_vd_merge[, c("treat_2010", covariates)]
-     shuffled_data$treat_2010 <- sample(shuffled_data$treat_2010)
-     
-     #  F-stat on permuted data
-     permuted_f_statistics_10[i] <- compute_f_statistic(shuffled_data, treat_2010 ~ .)
-}
-p_value <- mean(permuted_f_statistics_10 >= original_f_statistic)
-
-cat("Original F-statistic:", f_statistic_10, "\n")
-cat("P-value from Randomization Inference:", p_value_10, "\n")
