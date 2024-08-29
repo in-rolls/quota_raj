@@ -430,5 +430,149 @@ etable(models_mul_list,
 # FEmale Cand Vote Share --------------------------------------------------
 
 
+rm(list=ls())
+
+#has 
+winner_sarpanch <- readr::read_csv("data/rajasthan/sarpanch_election_data/background/WinnerSarpanch_2020.csv")
+winner_sarpanch <- winner_sarpanch %>% 
+     rename_all(tolower) %>% 
+     mutate_all(tolower) %>% 
+     filter(electiontype!="by election") %>% 
+     mutate(key_2020 = trimws(key_2020))
+
+contest_sarpanch <- readr::read_csv("data/rajasthan/sarpanch_election_data/background/ContestingSarpanch_2020.csv")
+contest_sarpanch <- contest_sarpanch %>% 
+     rename_all(tolower) %>% 
+     mutate_all(tolower) %>% 
+     filter(electiontype!="by election") %>% 
+     mutate(key_2020 = paste0(district,panchayatsamiti,nameofgrampanchayat),
+            key_2020 = trimws(key_2020))
+
+
+get_gender <- contest_sarpanch %>% 
+     select(nameofcontestingcandidate, gender) %>% 
+     distinct(nameofcontestingcandidate, .keep_all = TRUE) %>% 
+     rename(sex = gender)#not the best move
+
+
+winner_sarpanch <- winner_sarpanch %>%
+     left_join(get_gender, 
+               by = c("runnerupcandidatename" = "nameofcontestingcandidate")) %>% 
+     rename(runnerup_gender = sex)
+
+winner_sarpanch <- winner_sarpanch %>%
+     left_join(get_gender, 
+               by = c("runnerupcandidatename" = "nameofcontestingcandidate")) %>% 
+     rename(runnerup_gender = sex)
+
+# Merge again to get winner gender
+winner_sarpanch <- winner_sarpanch %>%
+     left_join(get_gender, 
+               by = c("winnercandidatename" = "nameofcontestingcandidate")) %>% 
+     rename(winner_gender = sex)
+
+
+
+winner_sarpanch <- winner_sarpanch %>%
+     mutate(
+          votesecurebywinner = as.numeric(gsub("[^0-9]", "", votesecurebywinner)),
+          votesecurebyrunnerup = as.numeric(gsub("[^0-9]", "", votesecurebyrunnerup)),
+          totalvalidvotes = as.numeric(gsub("[^0-9]", "", totalvalidvotes))
+     )
+winner_sarpanch <- winner_sarpanch %>% 
+     mutate(
+          fem_vote_share = case_when(
+               winner_gender == "f" & runnerup_gender == "f" ~ (votesecurebywinner + votesecurebyrunnerup) / totalvalidvotes,
+               winner_gender == "f" & runnerup_gender != "f" ~ votesecurebywinner / totalvalidvotes,
+               winner_gender != "f" & runnerup_gender == "f" ~ votesecurebyrunnerup / totalvalidvotes,
+               TRUE ~ 0  # No female candidates
+          )
+     )
+
+
+winner_sarpanch <- winner_sarpanch %>% 
+     mutate(top_two = votesecurebywinner + votesecurebyrunnerup,
+            top_two_prop = top_two/totalvalidvotes) 
+
+summary(winner_sarpanch$top_two_prop)
+
+
+load("data/rajasthan/sarpanch_election_data/raj_panch.RData")
+raj_panch <- raj_panch %>% mutate(key_2020 = tolower(key_2020))
+
+
+winner_sarpanch$new_key <- paste0(winner_sarpanch$district, winner_sarpanch$panchayatsamiti, winner_sarpanch$nameofgrampanchyat)
+winner_sarpanch <- winner_sarpanch %>% 
+     mutate(new_key = trimws(new_key)) 
+
+
+winner_sarpanch$panchayatsamiti <- gsub("panchayat samiti", "", as.character(winner_sarpanch$panchayatsamiti))
+
+winner_sarpanch$new_key <- paste0(gsub(" ", "", winner_sarpanch$district),
+                           gsub(" ", "", winner_sarpanch$panchayatsamiti),
+                           gsub(" ", "", winner_sarpanch$nameofgrampanchyat))
+
+vote_share_analysis <- winner_sarpanch %>% select(new_key, fem_vote_share)
+raj_panch <- raj_panch %>% left_join(vote_share_analysis, c("key_2020" = "new_key")) 
+
+ 
+m_fem_vote_sh <- feols(fem_vote_share ~ treat_2005 * treat_2010 * treat_2015 , data = filter(raj_panch, treat_2020 == 0))
+summary(m_fem_vote_sh)
+
+m_fem_vote_sh_dfe <- feols(fem_vote_share ~ treat_2005 * treat_2010 * treat_2015  | district_2020,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_fem_vote_sh_dfe)
+
+m_fem_vote_sh_psfe <- feols(fem_vote_share ~ treat_2005 * treat_2010 * treat_2015  | district_2020 + ps_2020,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_fem_vote_sh_psfe)
+
+m_fem_vote_sh_gpfe <- feols(fem_vote_share ~ treat_2005 * treat_2010 * treat_2015  | I(paste0(district_2020, ps_2020)),  data = filter(raj_panch, treat_2020 == 0))
+summary(m_fem_vote_sh_gpfe)
+
+
+m_always_fem_vote_sh_gpfe <- feols(fem_vote_share ~ always_treated  | I(paste0(district_2020, ps_2020)) , data = filter(raj_panch, treat_2020 == 0))
+summary(m_always_fem_vote_sh_gpfe)
+
+m_never_fem_vote_sh_gpfe <- feols(fem_vote_share ~ never_treated  | I(paste0(district_2020, ps_2020))  ,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_never_fem_vote_sh_gpfe)
+
+m_sometimes_fem_vote_sh_gpfe <- feols(fem_vote_share ~ sometimes_treated  | I(paste0(district_2020, ps_2020))  ,  data = filter(raj_panch, treat_2020 == 0))
+summary(m_sometimes_fem_vote_sh_gpfe)
+
+
+raj_max_contrast_poster <- filter(raj_panch, treat_2020 == 0 & (never_treated == 1 | always_treated == 1))
+
+raj_max_contrast_poster <- raj_max_contrast_poster %>%
+     mutate(treatment_category = ifelse(never_treated == 1, "Never Treated", "Always Treated"))
+
+
+raj_max_contrast_poster$treatment_category <- factor(raj_max_contrast_poster$treatment_category, levels = c("Never Treated", "Always Treated"))
+
+m_never_v_always_votesh_gpfe <- feols(fem_vote_share ~ treatment_category | I(paste0(district_2020, ps_2020)),  data = raj_max_contrast_poster)
+summary(m_never_v_always_votesh_gpfe) 
+
+
+m_fem_vote_sh_list <- list(m_fem_vote_sh, m_fem_vote_sh_dfe, m_fem_vote_sh_psfe, m_fem_vote_sh_gpfe,
+                           m_always_fem_vote_sh_gpfe,m_never_fem_vote_sh_gpfe,m_sometimes_fem_vote_sh_gpfe,m_never_v_always_votesh_gpfe)
+
+
+etable(m_fem_vote_sh_list, 
+       tex = TRUE, 
+       style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
+       interaction.combine = " $ \times $ ",
+       file = "tables/raj_fem_vote_share.tex",
+       dict = c( 'treat_2005' = "Treatment 2005",
+                 'prop_women' == "Proportion of women running in an open seat",
+                 'treat_2010' = "Treatment  2010",
+                 'treat_2015' = "Treatment 2015",
+                 'treat_2020' = "Treatment 2020",
+                 'district_2020' = "District 2020",
+                 'I(paste0(district_2020, ps_2020))' = "(District, Samiti)",
+                 'ps_2020' = "Panchayat Samiti 2020",
+                 "treatment_categoryAlways Treated" = " Max Contrast ($WWW$ v. $OO0$)", 
+                 "never_treated" = "Never treated in 2005, 2010 and 2010",
+                 "sometimes_treated" = "Sometimes treated (treat_05 + treat_10 + treat_15 > 0)",
+                 "always_treated" = "Always treated (quota in 2005, 10, & 15)"), 
+       se.row=FALSE,
+       replace = TRUE)
 
 

@@ -407,6 +407,40 @@ r_check_05 <- lm(treat_2005 ~ ., data = raj_lgd_vd_merge[, c("treat_2005", covar
 fstat <- summary(r_check_05)$fstatistic[1]
 fstat
 
+# Loop through randomized assignments of treatment and recalculate f-statistic
+null <- raj_lgd_vd_merge
+fstat_null <- vector(mode = "numeric", length = 500)
+
+sum(null$treat_2005)
+nrow(null)
+
+for (i in seq_along(fstat_null)) {
+     null$Z_sim_05 <- complete_ra(N = 5274, m = 1894)
+     r_check <- lm(Z_sim_05 ~ ., data = null[, c("Z_sim_05", covariates)])
+     fstat_null[[i]] <- summary(r_check)$fstatistic[1]
+}
+
+p <- sum(abs(fstat_null) >= fstat)/length(fstat_null) 
+p
+
+r_check_10 <- lm(treat_2010 ~ ., data = raj_lgd_vd_merge[, c("treat_2010", covariates)])
+fstat <- summary(r_check_10)$fstatistic[1]
+fstat
+
+sum(null$treat_2010)
+
+for (i in seq_along(fstat_null)) {
+     null$Z_sim_10 <- complete_ra(N = 5274, m = 2562)
+     r_check <- lm(Z_sim_10 ~ ., data = null[, c("Z_sim_10", covariates)])
+     fstat_null[[i]] <- summary(r_check)$fstatistic[1]
+}
+
+
+# Calculate two sided p-value
+p <- sum(abs(fstat_null) >= fstat)/length(fstat_null) 
+p
+
+
 # Check Multicollinearity
 library(car)
 vif_values <- vif(r_check)
@@ -431,41 +465,3 @@ for (i in seq_along(vif_values)) {
 multi
 mod_multi
 non_multi
-
-
-# Loop through randomized assignments of treatment and recalculate f-statistic
-null <- raj_lgd_vd_merge
-fstat_null <- vector(mode = "numeric", length = 10000)
-
-sum(null$treat_2005)
-nrow(null)
-
-for (i in seq_along(fstat_null)) {
-     null$Z_sim_05 <- complete_ra(N = 5274, m = 1894)
-     r_check <- lm(Z_sim_05 ~ ., data = null[, c("Z_sim_05", covariates)])
-     fstat_null[[i]] <- summary(r_check)$fstatistic[1]
-}
-
-
-p <- sum(abs(fstat_null) >= fstat)/length(fstat_null) 
-p
-
-r_check_10 <- lm(treat_2010 ~ ., data = raj_lgd_vd_merge[, c("treat_2010", covariates)])
-fstat <- summary(r_check_10)$fstatistic[1]
-fstat
-
-
-
-sum(null$treat_2010)
-
-for (i in seq_along(fstat_null)) {
-     null$Z_sim_10 <- complete_ra(N = 5274, m = 2562)
-     r_check <- lm(Z_sim_10 ~ ., data = null[, c("Z_sim_10", covariates)])
-     fstat_null[[i]] <- summary(r_check)$fstatistic[1]
-}
-
-
-# Calculate two sided p-value
-p <- sum(abs(fstat_null) >= fstat)/length(fstat_null) 
-p
-
