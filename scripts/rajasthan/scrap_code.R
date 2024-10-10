@@ -1124,4 +1124,44 @@ writeLines(as.character(final_results_latex), con = "tables/raj_win_ttest_result
 
 
 
+# 2020 Close elections? ---------------------------------------------------
+
+
+close_elec <- readr::read_csv("data/rajasthan/sarpanch_election_data/background/WinnerSarpanch_2020.csv")
+names(close_elec) <- tolower(names(close_elec))
+close_elec <- close_elec %>%
+     mutate_all(tolower) %>%
+     rename(key = key_2020) %>%
+     filter(electiontype != "by election") %>%
+     distinct(key, .keep_all = TRUE) %>% 
+     mutate(margin = (as.integer(votesecurebywinner) - as.integer(votesecurebyrunnerup))/as.integer(totalvalidvotes),
+            winner_percentage = (as.integer(votesecurebywinner)/as.integer(totalvalidvotes)))%>% 
+     filter(margin > 0) %>% 
+     # new_key = paste0(district,panchayatsamiti)) %>% 
+     mutate(across(where(is.numeric), ~ round(.x, 3))) %>% 
+     group_by(district) %>% 
+     summarize(
+          avg_valid_votes = mean(as.numeric(totalvalidvotes), na.rm = TRUE),
+          avg_winner_vote_percentage = mean(winner_percentage, na.rm = TRUE), 
+          lowest_percentage = min(winner_percentage, na.rm = TRUE), 
+          highest_percentage = max(winner_percentage, na.rm = TRUE), 
+          median_percentage = median(winner_percentage, na.rm = TRUE), 
+          avg_winner_margin = mean(margin, na.rm = TRUE), 
+          closest_margin = min(margin, na.rm = TRUE), 
+          median_margin = median(margin, na.rm = TRUE), 
+          largest_margin = max(margin, na.rm = TRUE) 
+     ) %>% 
+     mutate(across(where(is.numeric), ~ round(.x, 3)),
+            avg_valid_votes = round(avg_valid_votes, 0),
+            closest_margin = round(closest_margin, 3) )
+
+library(kableExtra)
+summary_table <- kable(close_elec, format = "latex", booktabs = TRUE, 
+                       caption = "Summary Statistics for Election Metrics by District") %>%
+     kable_styling(latex_options = c("hold_position")) 
+
+
+writeLines(summary_table, "tables/close_elec.tex")
+
+
 
