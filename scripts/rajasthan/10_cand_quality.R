@@ -40,10 +40,10 @@ raj_summ_clean <- raj_summ_clean %>%
      mutate(unemployed = ifelse(contestingcandidateoccupation == "unemployed", 1, 0))
 
 unemployed_test <- t.test(unemployed ~ treat, data = raj_summ_clean)
-assets_test <- t.test(win ~ treat, data = raj_summ_clean)
+assets_test <- t.test(log(win) ~ treat, data = raj_summ_clean)
 
 results <- data.frame(
-     Variable = c("Age", "Total Children", "Graduation Status", "Unemployed", "Assets"),
+     Variable = c("Age", "Total Children", "Graduation Status", "Unemployed", "Assets (log)"),
      Mean_Non_Gender_Quota = c(age_test$estimate[1], total_children_test$estimate[1],
                                grad_status_test$estimate[1], unemployed_test$estimate[1],
                                assets_test$estimate[1]),
@@ -98,7 +98,6 @@ save_kable(output_file, file = output_path)
 
 rm(list = ls())
 # Libraries ---------------------------------------------------------------
-
 # Load necessary libraries
 library(dplyr)
 library(readr)
@@ -158,11 +157,11 @@ winner_ttest_clean <- winner_ttest_clean %>%
      mutate(unemployed = ifelse(contestingcandidateoccupation == "unemployed", 1, 0))
 
 unemployed_test <- t.test(unemployed ~ treat, data = winner_ttest_clean)
-assets_test <- t.test(win ~ treat, data = winner_ttest_clean)
+assets_test <- t.test(log(win) ~ treat, data = winner_ttest_clean)
 
 
 winner_results <- data.frame(
-     Variable = c("Age", "Total Children", "Graduation Status", "Unemployed", "Assets"),
+     Variable = c("Age", "Total Children", "Graduation Status", "Unemployed", "Assets (log)"),
      Mean_Non_Gender_Quota = c(age_test$estimate[1], total_children_test$estimate[1],
                                grad_status_test$estimate[1], unemployed_test$estimate[1],
                                assets_test$estimate[1]),
@@ -198,8 +197,6 @@ winner_results <- data.frame(
                       ifelse(assets_test$p.value < 0.001, "***", 
                              ifelse(assets_test$p.value < 0.01, "**", 
                                     ifelse(assets_test$p.value < 0.05, "*", "ns")))))
-
-# Print results
 print(winner_results)
 
 
@@ -211,29 +208,4 @@ output_file <- winner_results %>%
      row_spec(0, bold = TRUE)  
 output_path <- "tables/winner_t_test_results.tex"
 save_kable(output_file, file = output_path)
-
-
-
-
-
-
-
-
-
-# Prepare summary statistics - Panel 1
-winner_tab1 <- winner_ttest %>%
-     group_by(categoryofgrampanchayat) %>%
-     summarize(
-          mean_age = round(mean(as.integer(age), na.rm = TRUE), 2),
-          prop_married = round(mean(martialstatus == "married", na.rm = TRUE), 2),
-          prop_unmarried = round(mean(martialstatus == "unmarried", na.rm = TRUE), 2),
-          mean_children = round(mean(as.integer(childrenbefore27111995) + as.integer(childrenonorafter28111995), na.rm = TRUE), 2),
-          n = n()
-     )
-
-# Winsorizing the total value of capital assets
-winner_ttest <- winner_ttest %>%
-     mutate(win = winsor(as.integer(totalvalueofcapitalassets), trim = 0.1, na.rm = TRUE))
-
-
 
