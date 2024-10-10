@@ -10,18 +10,45 @@ library(kableExtra)
 library(fixest)
 library(tidyverse)
 library(broom)
-
+library(pwr)
 # Load data ---------------------------------------------------------------
+
+
+# MDE ---------------------------------------------------------------------
+
+
+alpha <- 0.05  
+power <- 0.80  
+n <- 20000     # UP
+benchmark_odds <- 5  # Odds ratio of 5, Bhavnani 5 times
+
+
+p_control <- 0.16
+
+# Calculate p_treatment based on the odds ratio
+p_treatment <- benchmark_odds * p_control / (1 + (benchmark_odds - 1) * p_control)
+
+effect_size <- p_treatment - p_control
+
+z_alpha <- qnorm(1 - alpha / 2)  # Two-tailed
+z_beta <- qnorm(power)
+
+# Calculate MDE
+mde <- (z_alpha + z_beta) * sqrt((p_control * (1 - p_control) / (n / 2)) + (p_treatment * (1 - p_treatment) / (n / 2)))
+
+# Print the results
+cat("Minimum Detectable Effect (MDE) based on given parameters:", mde, "\n")
+
 
 load("data/rajasthan/sarpanch_election_data/raj_panch.RData")
 
 
-gps <- c(
-     "gp_2020" = length(unique(raj_panch$gp_2020)),
-     "gp_2015" = length(unique(raj_panch$gp_2015)),
-     "gp_2010" = length(unique(raj_panch$gp_2010)),
-     "gp_2005" = length(unique(raj_panch$gp_2005))
-)
+# gps <- c(
+#      "gp_2020" = length(unique(raj_panch$gp_2020)),
+#      "gp_2015" = length(unique(raj_panch$gp_2015)),
+#      "gp_2010" = length(unique(raj_panch$gp_2010)),
+#      "gp_2005" = length(unique(raj_panch$gp_2005))
+# )
 
 pss <- c(
      "ps_2020" = length(unique(raj_panch$ps_2020)),
@@ -35,6 +62,13 @@ districts <- c(
      "dist_2015" = length(unique(raj_panch$dist_name_2015)),
      "dist_2010" = length(unique(raj_panch$dist_name_2010)),
      "dist_2005" = length(unique(raj_panch$dist_name_2005))
+)
+
+gps <- c(
+     "gp_2020" = length(unique(raj_panch$key_2020)),
+     "gp_2015" = length(unique(raj_panch$key_2015)),
+     "gp_2010" = length(unique(raj_panch$key_2010)),
+     "gp_2005" = length(unique(raj_panch$key_2005))
 )
 
 

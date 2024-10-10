@@ -494,7 +494,14 @@ winner_sarpanch <- winner_sarpanch %>%
      mutate(top_two = votesecurebywinner + votesecurebyrunnerup,
             top_two_prop = top_two/totalvalidvotes) 
 
-summary(winner_sarpanch$top_two_prop)
+winner_sarpanch <- winner_sarpanch %>% 
+     mutate(
+          treat = ifelse(categoryofgrampanchyat %in% c("general (woman)", "obc (woman)", "sc (woman)", "st (woman)"), 1, 0),
+     )
+
+
+summary(winner_sarpanch$top_two_prop) #need this to justify using two two candidates only
+summary(winner_sarpanch$top_two_prop[winner_sarpanch$treat == 0]) #need this to justify using two two candidates only
 
 
 load("data/rajasthan/sarpanch_election_data/raj_panch.RData")
@@ -558,10 +565,10 @@ m_fem_vote_sh_list <- list(m_fem_vote_sh, m_fem_vote_sh_dfe, m_fem_vote_sh_psfe,
 etable(m_fem_vote_sh_list, 
        tex = TRUE, 
        style.tex = style.tex("aer",model.format = "[i]",depvar.style = "*"),
-       interaction.combine = " $ \times $ ",
+       interaction.combine = " $\\times $ ",
        file = "tables/raj_fem_vote_share.tex",
        dict = c( 'treat_2005' = "Treatment 2005",
-                 'prop_women' == "Proportion of women running in an open seat",
+                 'fem_vote_share' = "Vote share of winner and runner-up in $2020$ open seat",
                  'treat_2010' = "Treatment  2010",
                  'treat_2015' = "Treatment 2015",
                  'treat_2020' = "Treatment 2020",
