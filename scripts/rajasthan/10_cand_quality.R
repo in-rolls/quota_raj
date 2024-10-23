@@ -147,14 +147,16 @@ winner_ttest_clean <- winner_ttest %>%
             total_children = as.integer(total_children),
             grad_status = as.integer(grad_status))
 
-age_test <- t.test(age ~ treat, data = winner_ttest_clean)
-total_children_test <- t.test(total_children ~ treat, data = winner_ttest_clean)
-grad_status_test <- t.test(grad_status ~ treat, data = winner_ttest_clean)
-
 #unemployed bin
 
 winner_ttest_clean <- winner_ttest_clean %>%
      mutate(unemployed = ifelse(contestingcandidateoccupation == "unemployed", 1, 0))
+
+age_test <- t.test(age ~ treat, data = winner_ttest_clean)
+total_children_test <- t.test(total_children ~ treat, data = winner_ttest_clean)
+grad_status_test <- t.test(grad_status ~ treat, data = winner_ttest_clean)
+
+
 
 unemployed_test <- t.test(unemployed ~ treat, data = winner_ttest_clean)
 assets_test <- t.test(log(win) ~ treat, data = winner_ttest_clean)
@@ -209,3 +211,75 @@ output_file <- winner_results %>%
 output_path <- "tables/winner_t_test_results.tex"
 save_kable(output_file, file = output_path)
 
+
+
+
+
+# Members Who Answered the Phone ------------------------------------------
+
+
+
+library(broom)
+library(psych)
+library(kableExtra)
+library(tidyverse)
+raj_member_reply <- read_csv("data/rajasthan/phone_survey_response/member_answered_phone.csv")
+names(raj_member_reply) <- tolower(names(raj_member_reply))
+
+raj_member_reply <- raj_member_reply %>%
+     mutate_all(tolower) 
+
+winner_ttest_clean <- winner_ttest_clean %>% 
+     rename(key = key_2020)
+
+winner_ttest_clean <- winner_ttest_clean %>% 
+     filter(winner_ttest_clean$treat==1)
+
+winner_ttest_clean <- winner_ttest_clean %>%
+     mutate(member_reply_dummy = ifelse(key %in% raj_member_reply$key, 1, 0))
+
+sum(winner_ttest_clean$member_reply_dummy, na.rm = TRUE) #should be 35
+
+
+
+mean_values <- winner_ttest_clean %>%
+     filter(member_reply_dummy == 1) %>%
+     summarise(
+          mean_age = mean(age, na.rm = TRUE),
+          mean_total_children = mean(total_children, na.rm = TRUE),
+          mean_grad_status = mean(grad_status, na.rm = TRUE),
+          mean_unemployed = mean(unemployed, na.rm = TRUE),
+          mean_assets = mean(log(win), na.rm = TRUE)
+     )
+mean_values
+
+
+mean_values_table <- mean_values %>%
+     kable("latex", 
+           caption = "Summary Statistics for Phone Respondents \\label{tab:phone_reply_char}", 
+           col.names = c("Mean Age", "Mean Total Children", "Graduation Status", "Unemployed Status", "Log of Assets"),
+           digits = 2,  
+           booktabs = TRUE) 
+
+
+mean_values_table <- mean_values_table %>%
+     add_footnote("\\begin{minipage}{\\linewidth}
+                   \\scriptsize
+                   \\emph{Notes:} Table shows characteristics -- age, number of children, total value of capital assets (winsorized at 10\%), and unemployment status -- of representatives who answered our phone calls. $\mathcal{N} = 35$.
+                   \\end{minipage}",
+                  escape = FALSE)  # Ensure LaTeX code is not escaped
+
+mean_values_path <- "tables/mean_values_respondents.tex"
+save_kable(mean_values_table, file = mean_values_path)
+
+
+
+# panchayat_stats <- winner_ttest_clean %>%
+#      filter(member_reply_dummy == 1) %>%
+#      group_by(categoryofgrampanchayat) %>%
+#      summarise(
+#           count = n(),
+#           proportion = count / nrow(winner_ttest_clean %>% filter(member_reply_dummy == 1))
+#      )
+# 
+# panchayat_stats

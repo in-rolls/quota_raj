@@ -1165,3 +1165,78 @@ writeLines(summary_table, "tables/close_elec.tex")
 
 
 
+
+
+
+# Phone response t-test ---------------------------------------------------
+
+age_phone_reply <- t.test(age ~ member_reply_dummy, data = winner_ttest_clean)
+total_children_phone_reply <- t.test(total_children ~ member_reply_dummy, data = winner_ttest_clean)
+grad_status_phone_reply <- t.test(grad_status ~ member_reply_dummy, data = winner_ttest_clean)
+
+unemployed_phone_reply <- t.test(unemployed ~ member_reply_dummy, data = winner_ttest_clean)
+assets_phone_reply <- t.test(log(win) ~ member_reply_dummy, data = winner_ttest_clean)
+
+n_no_reply <- table(winner_ttest_clean$member_reply_dummy)[1] 
+n_reply <- table(winner_ttest_clean$member_reply_dummy)[2]
+
+phone_response_results <- data.frame(
+     Variable = c("Age", "Total Children", "Graduation Status", "Unemployed", "Assets (log)"),
+     Mean_No_Phone_Reply = c(age_phone_reply$estimate[1], total_children_phone_reply$estimate[1],
+                             grad_status_phone_reply$estimate[1], unemployed_phone_reply$estimate[1],
+                             assets_test_phone_reply$estimate[1]),
+     Mean_Phone_Replied = c(age_phone_reply$estimate[2], total_children_phone_reply$estimate[2],
+                            grad_status_phone_reply$estimate[2], unemployed_phone_reply$estimate[2],
+                            assets_phone_reply$estimate[2]),
+     Difference = c(age_phone_reply$estimate[2] - age_phone_reply$estimate[1],
+                    total_children_phone_reply$estimate[2] - total_children_phone_reply$estimate[1],
+                    grad_status_phone_reply$estimate[2] - grad_status_phone_reply$estimate[1],
+                    unemployed_phone_reply$estimate[2] - unemployed_phone_reply$estimate[1],
+                    assets_phone_reply$estimate[2] - assets_phone_reply$estimate[1]),
+     t_value = c(age_phone_reply$statistic, total_children_phone_reply$statistic,
+                 grad_status_phone_reply$statistic, unemployed_phone_reply$statistic,
+                 assets_phone_reply$statistic),
+     Std_Error = c(age_phone_reply$stderr, total_children_phone_reply$stderr,
+                   grad_status_phone_reply$stderr, unemployed_phone_reply$stderr,
+                   assets_phone_reply$stderr),
+     # p_value = c(age_phone_reply$p.value, total_children_phone_reply$p.value,
+     #             grad_status_phone_reply$p.value, unemployed_phone_reply$p.value,
+     #             assets_phone_reply$p.value),
+     N_No_Phone_Reply = c(n_no_reply, n_no_reply, n_no_reply, n_no_reply, n_no_reply),  
+     N_Phone_Replied = c(n_reply, n_reply, n_reply, n_reply, n_reply), 
+     Significance = c(ifelse(age_phone_reply$p.value < 0.001, "***", 
+                             ifelse(age_phone_reply$p.value < 0.01, "**", 
+                                    ifelse(age_phone_reply$p.value < 0.05, "*", "ns"))),
+                      ifelse(total_children_phone_reply$p.value < 0.001, "***", 
+                             ifelse(total_children_phone_reply$p.value < 0.01, "**", 
+                                    ifelse(total_children_phone_reply$p.value < 0.05, "*", "ns"))),
+                      ifelse(grad_status_phone_reply$p.value < 0.001, "***", 
+                             ifelse(grad_status_phone_reply$p.value < 0.01, "**", 
+                                    ifelse(grad_status_phone_reply$p.value < 0.05, "*", "ns"))),
+                      ifelse(unemployed_phone_reply$p.value < 0.001, "***", 
+                             ifelse(unemployed_phone_reply$p.value < 0.01, "**", 
+                                    ifelse(unemployed_phone_reply$p.value < 0.05, "*", "ns"))),
+                      ifelse(assets_phone_reply$p.value < 0.001, "***", 
+                             ifelse(assets_phone_reply$p.value < 0.01, "**", 
+                                    ifelse(assets_phone_reply$p.value < 0.05, "*", "ns")))))
+print(phone_response_results)
+
+
+output_file <- phone_response_results %>%
+     kable("latex", 
+           caption = "T-Test Results: Rajasthan Winners", 
+           col.names = c("Variable", 
+                         "Mean Non-Member Phone Response", 
+                         "Mean Member Phone Response", 
+                         "Difference", 
+                         "t-value", 
+                         "Std. Error", 
+                         "N Non-Member Phone Response", 
+                         "N Member Phone Response", 
+                         "Significance"), 
+           digits = 3) %>% 
+     row_spec(0, bold = TRUE)
+
+output_path <- "tables/phone_response_results_t_test.tex"
+save_kable(output_file, file = output_path)
+
