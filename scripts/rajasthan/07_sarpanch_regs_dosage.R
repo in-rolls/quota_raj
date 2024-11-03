@@ -1,3 +1,5 @@
+library(tidyverse)
+library(fixest)
 load("data/rajasthan/sarpanch_election_data/raj_panch.RData")
 
 
@@ -6,18 +8,18 @@ load("data/rajasthan/sarpanch_election_data/raj_panch.RData")
 # never_treated = ifelse(treat_2005 + treat_2010 + treat_2015 == 0, 1, 0),
 # sometimes_treated = ifelse(treat_2005 + treat_2010 + treat_2015 > 0, 1, 0),
 
-raj_panch <- raj_panch %>%
-     mutate(max_contrast = case_when(
-          always_treated == 1 ~ "Always Treated",
-          never_treated == 1 ~ "Never Treated",
-          TRUE ~ NA_character_ 
-     ))
-
-
-# Convert max_contrast to a factor with levels for proper comparison
-raj_panch$max_contrast <- factor(raj_panch$max_contrast, 
-                                 levels = c("Never Treated", "Always Treated"))
-
+# raj_panch <- raj_panch %>%
+#      mutate(max_contrast = case_when(
+#           always_treated == 1 ~ "Always Treated",
+#           never_treated == 1 ~ "Never Treated",
+#           TRUE ~ NA_character_ 
+#      ))
+# 
+# 
+# # # Convert max_contrast to a factor with levels for proper comparison
+# # raj_panch$max_contrast <- factor(raj_panch$max_contrast, 
+# #                                  levels = c("Never Treated", "Always Treated"))
+# 
 
 raj_panch <- raj_panch %>%
      mutate(treatment_status = case_when(
@@ -36,16 +38,35 @@ raj_panch$treatment_status <- relevel(raj_panch$treatment_status, ref = "0")
 # Check levels 
 levels(raj_panch$treatment_status)  
 
+raj_panch <- raj_panch %>% 
+     mutate(count_treated = (treat_2005 + treat_2010 + treat_2015))
+
+unique(raj_panch$count_treated)
+
 # Dosage Tables -----------------------------------------------------------
 
-m_dosage <- feols((sex_2020 == "F") ~ treatment_status, 
+m_dosage_old <- feols((sex_2020 == "F") ~ treatment_status, 
                   data = filter(raj_panch, treat_2020 == 0))
-summary(m_dosage)
-
+summary(m_dosage_old)
 
 m_dosage_gpfe <- feols((sex_2020 == "F") ~ treatment_status| gp_2020, 
                        data = filter(raj_panch, treat_2020 == 0))
 summary(m_dosage_gpfe)
+
+
+# new dosage spec ---------------------------------------------------------
+
+m_dosage_new <- feols((sex_2020 == "F") ~ as.factor(count_treated), 
+                  data = filter(raj_panch, treat_2020 == 0))
+summary(m_dosage_new)
+
+m_dosage_new_fe <- feols((sex_2020 == "F") ~ as.factor(count_treated)| gp_2020,, 
+                      data = filter(raj_panch, treat_2020 == 0))
+summary(m_dosage_new_fe)
+
+coefplot(m_dosage_new_fe)
+coefplot(m_dosage_new)
+
 
 models_long_term_list <- list(m_dosage, m_dosage_gpfe)
 
