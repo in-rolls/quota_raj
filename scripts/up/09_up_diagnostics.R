@@ -127,7 +127,24 @@ count_obc_seats <- c(
 
 count_obc_seats
 
+count_scst_women <- c(
+     sum(up_all$all_sc_2005 == 1 & up_all$cand_sex_fin_2005 == "महिला"),
+     sum(up_all$all_sc_2010 == 1 & up_all$cand_sex_fin_2010 == "महिला"),
+     sum(up_all$all_sc_2015 == 1 & sex_2015 == "महिला"),
+     sum(up_all$all_sc_2020 == 1 & sex_2021 == "महिला")
+)
 
+count_scst_women
+
+
+count_scst_seats <- c(
+     sum(up_all$all_sc_2005 == 1),
+     sum(up_all$all_sc_2010 == 1),
+     sum(up_all$all_sc_2015 == 1),
+     sum(up_all$all_sc_2020 == 1)
+)
+
+count_obc_seats
 
 summary_table <- data.frame(
      Year = c("2005", "2010", "2015", "2021"),
@@ -151,7 +168,6 @@ data_muradabad_open <- up_all %>%
      select(matches("_2021$|_2015$")) %>%
      select(elected_sarpanch_name_2021, sex_2021, treat_2021, gp_reservation_status_eng_2021, result_2021, gp_2021, gp_2015) %>%
      filter(sex_2021 == "महिला")
-     
 
 # data_muradabad_quota <- up_all %>% 
 #      filter(district_name_2021 == "मुरादाबाद" & treat_2021 == 1) %>% 
