@@ -60,12 +60,26 @@ m_dosage_new <- feols((sex_2020 == "F") ~ as.factor(count_treated),
                   data = filter(raj_panch, treat_2020 == 0))
 summary(m_dosage_new)
 
-m_dosage_new_fe <- feols((sex_2020 == "F") ~ as.factor(count_treated)| gp_2020,, 
+m_dosage_new_fe <- feols((sex_2020 == "F") ~ as.factor(count_treated)| gp_2020,
                       data = filter(raj_panch, treat_2020 == 0))
 summary(m_dosage_new_fe)
 
 coefplot(m_dosage_new_fe)
-coefplot(m_dosage_new)
+coefplot(m_dosage_new,
+         dict = c( 'sex_2020 == "F"' = "2020 rep is a woman in an open seat in Raj", 
+                   'as.factor(count_treated)1' = "Once", 
+                   'as.factor(count_treated)2' = "Twice",
+                   'as.factor(count_treated)3' = "Always",
+                   '(Intercept)' = "Constant"),
+         grid = FALSE,
+         zero.par = list(col = "red", lwd = .5),
+         # ci.fill = TRUE,
+         # ci.join = TRUE,
+         # pt.join = TRUE,
+         ci.lty = 1,
+         main = "Quota Dosage: 2020 rep is a woman in an open seat",
+         sub = "Rajasthan")
+
 
 
 models_long_term_list <- list(m_dosage, m_dosage_gpfe)

@@ -26,7 +26,6 @@ summary(m_long_term)
 m_long_term_gpfe <- feols((sex_2020 == "F") ~ treat_2015 * treat_2010 * treat_2005  | I(paste0(district_2020 ,ps_2020)),  data = filter(raj_panch, treat_2020 == 0))
 summary(m_long_term_gpfe)
 
-
 # TeX
 models_long_term_list <- list(m_long_term, m_long_term_gpfe)
 
@@ -47,4 +46,31 @@ etable(models_long_term_list,
        se.row = FALSE,
        replace = TRUE)
 
-
+# Beamer
+#par(bg = "#F5F5F5")
+coefplot(m_long_term_gpfe,
+         interaction.combine = " $\times $ ",
+         dict = c('sex_2020 == "F"' = "2020 Rep is a Woman in an Open Seat in Raj", 
+                  "treat_2010" = "2010 quota", 
+                  "treat_2005" = "2005 quota",
+                  "treat_2015" = "2015 quota",
+                  'treat_2015:treat_2010:treat_2005' = "2005 x 2010 x 2015",
+                  'treat_2015:treat_2010' = "2010 x 2015",
+                  'treat_2015:treat_2005' = "2005 x 2015",
+                  'treat_2010:treat_2005' = "2005 x 2010",
+                  "always_treated" = "Always Treated (Quota in 2005, 2010, & 2015)",
+                  "district_2020" = "District FE (2020)",
+                  "ps_2020" = "Panchayat Samiti FE (2020)",
+                  "gp_2020" = "Gram Panchayat FE (2020)",
+                  '(Intercept)' = "Constant"),
+         grid = FALSE,
+         zero.par = list(col = "red", lwd = 1),
+         # ci_level = 0.90,
+         #= ci.fill = TRUE,
+         # ci.join = TRUE,
+          pt.join = TRUE,
+         ci.lty = 1,
+         horiz = TRUE,
+         # bg = "#E0E0E0",
+         main = "2020 rep is a woman in an open seat",
+         sub = "Rajasthan")

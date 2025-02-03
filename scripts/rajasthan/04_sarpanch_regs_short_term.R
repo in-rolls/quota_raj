@@ -25,7 +25,7 @@ summary(m_10_15_psfe)
 m_15_20_psfe <- feols((sex_2020 == "F") ~ treat_2015 | I(paste0(district_2020, ps_2020)),  data = filter(raj_panch, treat_2020 == 0))
 summary(m_15_20_psfe)
 
-models_short_term_list <- list(m_05_10_psfe, m_10_15_psfe, m_15_20_psfe)
+     models_short_term_list <- list(m_05_10_psfe, m_10_15_psfe, m_15_20_psfe)
 
 etable(models_short_term_list, 
        tex = TRUE, 
@@ -44,3 +44,19 @@ etable(models_short_term_list,
                 "I(paste0(dist_name_2010, samiti_name_2010))" = "(District, Panchayat Samiti)"),
        se.row = FALSE, 
        replace = TRUE)
+
+
+coefplot(models_short_term_list,
+         dict = c('treat_2005' = "2005 ~ 10", 
+                  'treat_2010' = "2010 ~ 15", 
+                  'treat_2015' = "2015 ~ 20"),
+         grid = FALSE,
+         zero.par = list(col = "red", lwd = 1),
+         # ci.fill = TRUE,
+         # ci.join = TRUE,
+         # pt.join = TRUE,
+         ci.lty = 1,
+         horiz = TRUE,
+         # bg = "#E0E0E0",
+         main = "Short Term Effects",
+         sub = "Rajasthan")  # Custom x-axis labels
