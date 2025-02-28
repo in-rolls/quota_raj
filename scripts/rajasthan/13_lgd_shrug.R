@@ -204,6 +204,10 @@ covariates <- c(
 )
 
 
+# Treat Het
+# m_05_10_psfe <- feols((sex_2010 =="F") ~ treat_2005 * pc01_vd_dist_town | I(paste0(dist_name_2010, samiti_name_2010)),  data = filter(raj_lgd_vd_merge, treat_2010 == 0))
+# summary(m_05_10_psfe)
+
 
 # T-Test ------------------------------------------------------------------
 perform_t_tests <- function(vars, data) {
