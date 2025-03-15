@@ -1240,3 +1240,72 @@ output_file <- phone_response_results %>%
 output_path <- "tables/phone_response_results_t_test.tex"
 save_kable(output_file, file = output_path)
 
+
+
+
+# Randomization Inference -------------------------------------------------
+
+# Run regression and extract F statistic
+
+r_check_05 <- lm(treat_2005 ~ ., data = raj_lgd_vd_merge[, c("treat_2005", covariates)])
+fstat <- summary(r_check_05)$fstatistic[1]
+fstat
+
+# Loop through randomized assignments of treatment and recalculate f-statistic
+null <- raj_lgd_vd_merge
+fstat_null <- vector(mode = "numeric", length = 500)
+
+sum(null$treat_2005)
+nrow(null)
+
+for (i in seq_along(fstat_null)) {
+     null$Z_sim_05 <- complete_ra(N = 5274, m = 1894)
+     r_check <- lm(Z_sim_05 ~ ., data = null[, c("Z_sim_05", covariates)])
+     fstat_null[[i]] <- summary(r_check)$fstatistic[1]
+}
+
+p <- sum(abs(fstat_null) >= fstat)/length(fstat_null) 
+p
+
+r_check_10 <- lm(treat_2010 ~ ., data = raj_lgd_vd_merge[, c("treat_2010", covariates)])
+fstat <- summary(r_check_10)$fstatistic[1]
+fstat
+
+sum(null$treat_2010)
+
+for (i in seq_along(fstat_null)) {
+     null$Z_sim_10 <- complete_ra(N = 5274, m = 2562)
+     r_check <- lm(Z_sim_10 ~ ., data = null[, c("Z_sim_10", covariates)])
+     fstat_null[[i]] <- summary(r_check)$fstatistic[1]
+}
+
+
+# Calculate two sided p-value
+p <- sum(abs(fstat_null) >= fstat)/length(fstat_null) 
+p
+
+
+# Check Multicollinearity
+library(car)
+vif_values <- vif(r_check)
+vif_values
+
+multi <- c()       # VIF > 10
+mod_multi <- c()   # 5 < VIF <= 10
+non_multi <- c()   # VIF <= 5
+
+# Iterate through VIF values and classify variables
+for (i in seq_along(vif_values)) {
+     if (vif_values[i] > 10) {
+          multi <- c(multi, names(vif_values)[i])
+     } 
+     else if (vif_values[i] > 5 & vif_values[i] <= 10) {
+          mod_multi <- c(mod_multi, names(vif_values)[i])
+     }
+     else {
+          non_multi <- c(non_multi, names(vif_values)[i])
+     }
+} 
+multi
+mod_multi
+non_multi

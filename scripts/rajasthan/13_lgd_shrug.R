@@ -204,9 +204,6 @@ covariates <- c(
 )
 
 
-# Treat Het
-# m_05_10_psfe <- feols((sex_2010 =="F") ~ treat_2005 * pc01_vd_dist_town | I(paste0(dist_name_2010, samiti_name_2010)),  data = filter(raj_lgd_vd_merge, treat_2010 == 0))
-# summary(m_05_10_psfe)
 
 
 # T-Test ------------------------------------------------------------------
@@ -367,7 +364,7 @@ coef_plot_2005 <- ggplot(plot_data_2005, aes(x = Estimate, y = reorder(Term, Est
      geom_vline(xintercept = 0, color = "red", linetype = "solid") +
      
      theme(
-          panel.grid.major = element_blank(),  # Remove major grid lines
+          panel.grid.major = element_blank(),  
           panel.grid.minor = element_blank(),  # Remove minor grid lines
           axis.title.y = element_text(size = 12),
           axis.title.x = element_text(size = 12),
@@ -403,69 +400,161 @@ ggsave("plots/coefficient_plot_2010.png", plot = coef_plot_2010, width = 7, heig
 
 
 
-# Randomization Inference -------------------------------------------------
 
-# Run regression and extract F statistic
+# District Level Regs -----------------------------------------------------
 
-r_check_05 <- lm(treat_2005 ~ ., data = raj_lgd_vd_merge[, c("treat_2005", covariates)])
-fstat <- summary(r_check_05)$fstatistic[1]
-fstat
 
-# Loop through randomized assignments of treatment and recalculate f-statistic
-null <- raj_lgd_vd_merge
-fstat_null <- vector(mode = "numeric", length = 500)
+districts <- unique(raj_lgd_vd_merge$dist_name_new_2010)
+all_covs <- c(unlist(covariate_families_cont), unlist(covariate_families_bin))
 
-sum(null$treat_2005)
-nrow(null)
+results <- data.frame(district=character(), p_value=numeric(), significant=logical())
 
-for (i in seq_along(fstat_null)) {
-     null$Z_sim_05 <- complete_ra(N = 5274, m = 1894)
-     r_check <- lm(Z_sim_05 ~ ., data = null[, c("Z_sim_05", covariates)])
-     fstat_null[[i]] <- summary(r_check)$fstatistic[1]
+#  F-test 
+for(dist in districts) {
+     dist_data <- raj_lgd_vd_merge[raj_lgd_vd_merge$dist_name_new_2010 == dist,]
+     
+     #  regs
+     formula <- paste("treat_2010 ~", paste(all_covs, collapse=" + "))
+     model <- try(lm(formula, data=dist_data), silent=TRUE)
+     
+     if(class(model)[1] == "try-error") next
+     
+     #  F-test p-value
+     f_stat <- summary(model)$fstatistic
+     if(!is.null(f_stat)) {
+          p_val <- pf(f_stat[1], f_stat[2], f_stat[3], lower.tail=FALSE)
+          
+          results <- rbind(results, 
+                           data.frame(district=dist, 
+                                      p_value=p_val, 
+                                      significant=(p_val < 0.05)))
+     }
 }
 
-p <- sum(abs(fstat_null) >= fstat)/length(fstat_null) 
-p
-
-r_check_10 <- lm(treat_2010 ~ ., data = raj_lgd_vd_merge[, c("treat_2010", covariates)])
-fstat <- summary(r_check_10)$fstatistic[1]
-fstat
-
-sum(null$treat_2010)
-
-for (i in seq_along(fstat_null)) {
-     null$Z_sim_10 <- complete_ra(N = 5274, m = 2562)
-     r_check <- lm(Z_sim_10 ~ ., data = null[, c("Z_sim_10", covariates)])
-     fstat_null[[i]] <- summary(r_check)$fstatistic[1]
-}
+results <- results[order(results$p_value),]
+print(results[results$significant,])
 
 
-# Calculate two sided p-value
-p <- sum(abs(fstat_null) >= fstat)/length(fstat_null) 
-p
+plot_data <- results[!is.na(results$district),]
+
+plot_data$log_p <- -log10(plot_data$p_value) #not needed, but makes for better plots
+
+# Sort by p-value
+plot_data <- plot_data[order(plot_data$p_value, decreasing = TRUE),]
+
+ggplot(plot_data, aes(x = reorder(district, -log_p), y = log_p, fill = significant)) +
+     geom_bar(stat = "identity") +
+     geom_hline(yintercept = -log10(0.05), linetype = "dashed", color = "red") +
+     coord_flip() +
+     labs(
+          title = "Districts with Imbalance",
+          subtitle = "F-test of covariates predicting treatment status",
+          x = "District",
+          y = "-log10(p-value)",
+          caption = "red line = 0.05 significance threshold"
+     ) +
+     scale_fill_manual(values = c("grey", "black")) +
+     theme_minimal() +
+     theme(
+          legend.position = "none",
+          panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank()) 
 
 
-# Check Multicollinearity
-library(car)
-vif_values <- vif(r_check)
-vif_values
 
-multi <- c()       # VIF > 10
-mod_multi <- c()   # 5 < VIF <= 10
-non_multi <- c()   # VIF <= 5
 
-# Iterate through VIF values and classify variables
-for (i in seq_along(vif_values)) {
-     if (vif_values[i] > 10) {
-          multi <- c(multi, names(vif_values)[i])
-     } 
-     else if (vif_values[i] > 5 & vif_values[i] <= 10) {
-          mod_multi <- c(mod_multi, names(vif_values)[i])
-     }
-     else {
-          non_multi <- c(non_multi, names(vif_values)[i])
-     }
-} 
-multi
-mod_multi
-non_multi
+# Urban Rural Divide ------------------------------------------------------
+
+model_cont <- feols((sex_2010 == "F") ~ treat_2005 * pc01_vd_dist_town | 
+                     I(paste0(dist_name_2010, samiti_name_2010)), 
+                data = filter(raj_lgd_vd_merge, treat_2010 == 0))
+
+beta_treat <- coef(model_cont)["treat_2005"] 
+beta_interact <- coef(model_cont)["treat_2005:pc01_vd_dist_town"] 
+
+# Plot (crude but works!)
+distances <- seq(0, 50, by = 1)
+treatment_effects <- beta_treat + beta_interact * distances
+
+# Create marginal effects plot
+plot_data <- data.frame(
+     distance = distances,
+     effect = treatment_effects
+)
+
+
+se_treat <- se(model_cont)["treat_2005"]
+se_interact <- se(model_cont)["treat_2005:pc01_vd_dist_town"]
+plot_data$se <- sqrt(se_treat^2 + (distances^2 * se_interact^2))
+plot_data$lower <- plot_data$effect - 1.96 * plot_data$se
+plot_data$upper <- plot_data$effect + 1.96 * plot_data$se
+
+ggplot(plot_data, aes(x = distance, y = effect)) +
+     geom_line(size = 1) +
+     geom_ribbon(aes(ymin = lower, ymax = upper), alpha = 0.1) +
+     geom_hline(yintercept = 0, linetype = "dashed", color = 'red') +
+     labs(
+          x = "Distance to Town (km)",
+          y = "Effect of 2005 Treatment on Female Representation (2010)") +
+     theme_minimal( ) +
+     theme(panel.grid.major = element_blank(),  
+           panel.grid.minor = element_blank())
+
+
+
+# median ------------------------------------------------------------------
+
+raj_lgd_vd_merge <- raj_lgd_vd_merge %>% 
+     mutate(near_town = pc01_vd_dist_town <= median(pc01_vd_dist_town, na.rm=TRUE))
+
+model2 <- feols((sex_2010 == "F") ~ treat_2005*near_town | 
+                     I(paste0(dist_name_2010, samiti_name_2010)), 
+                data = filter(raj_lgd_vd_merge, treat_2010 == 0))
+
+
+
+# distance quantiles ------------------------------------------------------
+
+raj_lgd_vd_merge <- raj_lgd_vd_merge %>%
+  mutate(dist_quantile = case_when(
+    pc01_vd_dist_town <= quantile(pc01_vd_dist_town, 0.25, na.rm = TRUE) ~ "Q1_Closest",
+    pc01_vd_dist_town <= quantile(pc01_vd_dist_town, 0.50, na.rm = TRUE) ~ "Q2",
+    pc01_vd_dist_town <= quantile(pc01_vd_dist_town, 0.75, na.rm = TRUE) ~ "Q3",
+    TRUE ~ "Q4_Farthest"
+  ))
+
+# Q4_Farthest=  reference category
+raj_lgd_vd_merge$dist_quantile <- relevel(factor(raj_lgd_vd_merge$dist_quantile), ref = "Q4_Farthest")
+
+
+model_quantiles <- feols((sex_2010 == "F") ~ treat_2005*dist_quantile | 
+                        I(paste0(dist_name_2010, samiti_name_2010)), 
+                       data = filter(raj_lgd_vd_merge, treat_2010 == 0))
+
+#get coef
+coefs <- coef(model_quantiles)
+ses <- se(model_quantiles)
+
+# df with coefficients of interest
+coef_data <- data.frame(
+     term = c("treat_2005", "treat_2005:dist_quantileQ3", 
+              "treat_2005:dist_quantileQ2", "treat_2005:dist_quantileQ1_Closest"),
+     estimate = coefs[c("treat_2005", "treat_2005:dist_quantileQ3", 
+                        "treat_2005:dist_quantileQ2", "treat_2005:dist_quantileQ1_Closest")],
+     se = ses[c("treat_2005", "treat_2005:dist_quantileQ3", 
+                "treat_2005:dist_quantileQ2", "treat_2005:dist_quantileQ1_Closest")]
+)
+
+coef_data$label <- c("Q4 (Farthest)", "Q3", "Q2", "Q1 (Closest)")
+
+# CI
+coef_data$conf.low <- coef_data$estimate - 1.96 * coef_data$se
+coef_data$conf.high <- coef_data$estimate + 1.96 * coef_data$se
+
+
+ggplot(coef_data, aes(x = label, y = estimate)) +
+     geom_point(size = 3) +
+     geom_errorbar(aes(ymin = conf.low, ymax = conf.high), width = 0.2) +
+     geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+     coord_flip() +
+     theme_minimal() +
+     labs(x = "", y = "Effect on Female Representation (2010)")
