@@ -7,15 +7,13 @@ library(kableExtra)
 library(here)
 library(fixest)
 
+# Source utils
+source(here("scripts/00_utils.R"))
 
-# UP_All Anaysis ----------------------------------------------------------
-
+# Load dat.
 up_all <- read_parquet("data/up/up_all_fuzzy.parquet")
 
-
-# Reservation_Status -----------------------------------------------------
-
-# Treatment dummies
+# Recode
 up_all <- up_all %>%
      mutate(
           treat_2005 = ifelse(grepl("Female", gp_res_status_fin_eng_2005, ignore.case = TRUE), 1, 0),
@@ -66,6 +64,5 @@ up_all <- up_all %>%
           cluster_key_2021 = paste(district_name_eng_2021, block_name_eng_2021, gp_name_eng_2021))
 
 
-save(up_all, file = "data/up/up_all_fuzzy_recoded.RData")
-
+write_parquet(up_all, here("data/up/up_all_fuzzy_recoded.parquet"))
 
