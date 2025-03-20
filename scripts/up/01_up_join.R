@@ -226,3 +226,102 @@ write_parquet(up_05_10_ff, sink = "data/up/up_05_10_fuzzy.parquet")
 write_parquet(up_10_15_ff, sink = "data/up/up_10_15_fuzzy.parquet")
 write_parquet(up_05_10_15_21_ff,   sink = "data/up/up_all_fuzzy.parquet")
 write_parquet(up_all, sink = "data/up/up_all.parquet")
+
+
+jeff <- haven::read_dta((here("data/up/weaver_data_2.dta"))) 
+
+jeff <- jeff %>%
+     mutate(election = as.numeric(election)) %>% 
+     mutate(election = recode(election, `-1` = 2010, `0` = 2015, `1` = 2020))
+
+jeff_wide <- jeff %>%
+     pivot_wider(
+          id_cols = gp_id,
+          names_from = election,
+          values_from = c(
+               reservation,
+               reservation_female,
+               winner_female,
+               winner_votes,
+               runnerup_votes,
+               winner_total_assets,
+               margin_of_victory,
+               total_candidates_cancelled,
+               total_candidates_returned,
+               total_candidates,
+               result_type,
+               total_electorate,
+               total_votes,
+               total_votes_valid,
+               total_votes_invalid,
+               turnout,
+               margin_of_victory_votes,
+               total_candidates_sc,
+               total_candidates_st,
+               total_candidates_obc,
+               total_candidates_gen,
+               total_candidates_female,
+               avg_education,
+               avg_criminal_history,
+               avg_total_assets_asinh,
+               avg_zero_moveable,
+               avg_zero_immoveable,
+               avg_age,
+               frac_candidates_sc,
+               frac_candidates_st,
+               frac_candidates_obc,
+               frac_candidates_highcaste,
+               frac_candidates_female,
+               avg_m_education,
+               avg_m_criminal_history,
+               runnerup_female,
+               winner_age,
+               runnerup_age,
+               winner_education,
+               runnerup_education,
+               winner_caste,
+               runnerup_caste,
+               winner_moveable_assets,
+               runnerup_moveable_assets,
+               winner_moveable_assets_asinh,
+               runnerup_moveable_assets_asinh,
+               winner_immoveable_assets,
+               runnerup_immoveable_assets,
+               winner_immoveable_assets_asinh,
+               runnerup_immoveable_assets_asinh,
+               winner_total_assets,
+               runnerup_total_assets,
+               winner_total_assets_asinh,
+               runnerup_total_assets_asinh,
+               winner_criminal_history,
+               runnerup_criminal_history,
+               winner_votes,
+               runnerup_votes,
+               winner_percent,
+               runnerup_percent,
+               winner_deposit,
+               runnerup_deposit,
+               winner_sc,
+               runnerup_sc,
+               winner_obc,
+               runnerup_obc,
+               winner_gen_caste,
+               runnerup_gen_caste,
+               winner_st,
+               runnerup_st,
+               winner_m_education,
+               runnerup_m_education,
+               winner_m_criminal_history,
+               runnerup_m_criminal_history,
+               winner_zero_moveable_assets,
+               runnerup_zero_moveable_assets,
+               winner_zero_immoveable_assets,
+               runnerup_zero_moveable_assets
+          )
+     )
+
+write_parquet(jeff_wide, here("data/up/jeff_wide.parquet"))
+
+# Brief sanity check
+summary(lm(winner_female_2020 ~ reservation_female_2010 + reservation_female_2015, 
+           data = jeff_wide[jeff_wide$reservation_female_2020 == 0, ]))
