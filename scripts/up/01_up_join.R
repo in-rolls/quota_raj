@@ -7,6 +7,9 @@ library(fuzzyjoin)
 library(here)
 library(progress)
 
+# Load utils
+source(here("scripts/00_utils.R"))
+
 # Load dat
 up_2005 <- read_parquet("data/up/up_gp_sarpanch_2005_fixed_with_transliteration.parquet")
 up_2010 <- read_parquet("data/up/up_gp_sarpanch_2010_fixed_with_transliteration.parquet")
