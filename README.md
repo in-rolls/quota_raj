@@ -5,3 +5,11 @@ What are the consequences of gender quotas on women's descriptive and substantiv
 ### Authors
 
 Varun, K. R. and Gaurav Sood
+
+## 🔗 Adjacent Repositories
+
+- [in-rolls/quota_elite_quality](https://github.com/in-rolls/quota_elite_quality) — Effect of Gender Quotas on Some Qualities of Elites
+- [in-rolls/quota](https://github.com/in-rolls/quota) — Effects of Randomly Assigned Reservations for Women Leaders in Indian Local Government on Allocation and Development Outcomes
+- [in-rolls/mnrega_social](https://github.com/in-rolls/mnrega_social) — MNREGA Social Audit Data
+- [in-rolls/last_sex](https://github.com/in-rolls/last_sex) — Sex ratio by last name
+- [in-rolls/indian-politician-bios](https://github.com/in-rolls/indian-politician-bios) — Biographical data of political candidates in India; rich data on Indian MPs
