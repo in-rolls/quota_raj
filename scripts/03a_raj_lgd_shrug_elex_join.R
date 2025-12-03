@@ -10,6 +10,9 @@ library(readr)
 library(progress)
 library(janitor)
 
+# Get utils
+source("scripts/00_utils.R")
+
 # Load dat
 lgd_raj <- read_csv("data/lgd/raj_village_gp_mapping_2024.csv") %>% 
      clean_names() %>%
@@ -28,7 +31,7 @@ lgd_up <- read_csv("data/lgd/up_village_gp_mapping_2024.csv") %>%
 lgd <- bind_rows(lgd_raj, lgd_up)
 
 # VD, PCA
-sh_pca_01 <- read_csv("data/shrug/shrug-pca01-csv/pc01_pca_clean_shrid.csv")
+sh_pca_01 <- read_csv("data/shrug/shrug-pca01-csv/pc01_pca_clean_shrid.csv.zip")
 sh_pca_01 <- sh_pca_01 %>%
      separate(shrid2, 
               into = c("census_yr", 
@@ -52,18 +55,19 @@ shrug_lgd <- sh_pca_01 %>%
                             "subdistrict_census_2011_code", 
                             "village_census_2011_code")) %>%
      mutate(state = ifelse(state_id == "08", "Rajasthan", "Uttar Pradesh"),
-            key = normalize_string(paste(district_name, subdistrict_name, local_body_name)),
+            key = normalize_string(paste(district_name, subdistrict_name, local_body_name, sep = "")),
             state_key = normalize_string(paste(state, district_name, subdistrict_name, local_body_name)))
 
-## Merge to Elex/MNREGA
-mnrega_elex_raj_05_10 <- read_parquet("data/raj/mnrega_elex_raj_05_10.parquet")
+## Merge to Elex
+elex_raj_05_10 <- read_parquet("data/rajasthan/sarpanch_election_data/raj_panch.parquet") %>%
+     mutate(key_2015 = tolower(key_2015))
 shrug_lgd_elex_strict <- shrug_lgd %>%
-     inner_join(mnrega_elex_raj_05_10, by = c("key" = "match_name.x"))
+     inner_join(elex_raj_05_10, by = c("key" = "key_2015"))
 
 # Process each row
 process_row <- function(row) {
 
-     election_subset <- mnrega_elex_raj_05_10 %>%
+     election_subset <- elex_raj_05_10 %>%
           filter(normalize_string(dist_name_new_2010) == normalize_string(row$district_name))
      
      # If no matching district found, return NULL
@@ -72,7 +76,7 @@ process_row <- function(row) {
      match_result <- stringdist_left_join(
           row,
           election_subset,
-          by = c("key" = "match_name.x"),
+          by = c("key" = "match_name"),
           method = "jw",
           ignore_case = TRUE,
           distance_col = "dist_elex_lgd_match"
@@ -99,3 +103,4 @@ shrug_lgd_elex <- shrug_lgd_elex %>%
      select(-dup_x, -dup_y)
 
 write_parquet(shrug_lgd_elex, sink = "data/raj/shrug_lgd_raj_elex_05_10.parquet")
+write_parquet(shrug_lgd_elex_strict, sink = "data/raj/shrug_lgd_raj_elex_05_10_strict.parquet")
