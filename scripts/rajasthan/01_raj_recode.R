@@ -3,6 +3,7 @@ library(readr)
 library(dplyr)
 library(arrow)
 library(stringi)
+library(here)
 
 # Get utils
 source("scripts/00_utils.R")
