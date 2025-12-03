@@ -99,8 +99,8 @@ chi_sq_out <- chi_squared_results_table %>% kable("latex",
                                    label = "chi_square_reserved_over_time",
                                    col_names = c("Years", "Chi-Square", "DF", "p-value"),
                                    escape = FALSE,
-                                   align = c("l", "r", "r", "r"))
+                                   align = c("l", "r", "r", "r")) %>%
+     kable_styling(latex_options = c("hold_position", "scale_down"))
                          
-
-save_kable(chi_sq_out, file = here("tables/balance_table_raj.tex"))
+save_kable(chi_sq_out, file = here("tables/reserved_or_not_chi_sq_raj.tex"))
 
