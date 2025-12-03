@@ -101,3 +101,4 @@ stargazer(model1, model2, model3, model4,
           column.labels = c("21 ~ 15", "15 ~ 10", "10 ~ 5", "21 ~ 05 + 10 + 15"),
           align = TRUE,
           out = "tables/up_treatment_reg.tex")
+
