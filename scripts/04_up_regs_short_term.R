@@ -6,13 +6,11 @@ library(stringi)
 library(kableExtra)
 library(here)
 library(fixest)
+library(here)
 
-
-
-load("data/up/up_all_recoded.RData")
-
-
-# Main Tables Tables -----------------------------------------------------------
+# Load data
+up <- read_parquet(here("data/up/up_all_fuzzy_recoded.parquet"))
+jw <- read_parquet(here("data/up/jeff_wide.parquet"))
 
 m_05_10_psfe <- feols((cand_sex_fin_2010 =="महिला") ~ treat_2005 |  I(paste0(district_name_eng_2010, block_name_eng_2010)), data = filter(up_all, treat_2010 == 0))
 summary(m_05_10_psfe)

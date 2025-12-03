@@ -11,7 +11,7 @@ library(fixest)
 source(here("scripts/00_utils.R"))
 
 # Load dat.
-up_all <- read_parquet("data/up/up_all_fuzzy.parquet")
+up_all <- read_parquet(here("data/up/up_all_fuzzy.parquet"))
 
 # Recode
 up_all <- up_all %>%

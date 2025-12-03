@@ -7,8 +7,6 @@ library(kableExtra)
 library(here)
 library(fixest)
 
-
-
 load("data/up/up_all_recoded.RData")
 
 # Long Term Interaction ---------------------------------------------------

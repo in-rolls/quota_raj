@@ -1,23 +1,39 @@
 
-\begingroup
-\centering
-\begin{tabular}{lccc}
-   \toprule
-    & \textit{Treatment  2010} & \multicolumn{2}{c}{\textit{Treatment 2015}}\\
-                   & [i]            & [ii]           & [iii]\\  
-   \midrule 
-   Constant        & 0.337$^{***}$  & 0.377$^{***}$  & 0.441$^{***}$\\   
-                   & (0.004)        & (0.004)        & (0.005)\\   
-   Treatment 2005  & -0.020$^{***}$ &                & -0.137$^{***}$\\   
-                   & (0.006)        &                & (0.006)\\   
-   Treatment  2010 &                & -0.110$^{***}$ & -0.113$^{***}$\\   
-                   &                & (0.007)        & (0.007)\\   
-    \\
-   Observations    & 21,536         & 21,536         & 21,536\\  
-   R$^2$           & 0.00045        & 0.01182        & 0.03247\\  
-   Adjusted R$^2$  & 0.00040        & 0.01177        & 0.03238\\  
-   \bottomrule
-\end{tabular}
-\par\endgroup
-
-
+% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+% Date and time: Thu, Mar 20, 2025 - 13:45:16
+% Requires LaTeX packages: dcolumn 
+\begin{table}[!htbp] \centering 
+  \caption{Regression Results} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} } 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-5} 
+\\[-1.8ex] & \multicolumn{1}{c}{Treatment 2021} & \multicolumn{1}{c}{Treatment 2015} & \multicolumn{1}{c}{Treatment 2010} & \multicolumn{1}{c}{treat\_2021} \\ 
+ & \multicolumn{1}{c}{21 ~ 15} & \multicolumn{1}{c}{15 ~ 10} & \multicolumn{1}{c}{10 ~ 5} & \multicolumn{1}{c}{21 ~ 05 + 10 + 15} \\ 
+\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)} & \multicolumn{1}{c}{(4)}\\ 
+\hline \\[-1.8ex] 
+ Treatment 2015 & -0.284^{***} &  &  & -0.289^{***} \\ 
+  & (0.007) &  &  & (0.007) \\ 
+  & & & & \\ 
+ Treatment 2010 &  & -0.112^{***} &  & 0.023^{***} \\ 
+  &  & (0.007) &  & (0.007) \\ 
+  & & & & \\ 
+ Treatment 2005 &  &  & -0.023^{***} & -0.049^{***} \\ 
+  &  &  & (0.006) & (0.006) \\ 
+  & & & & \\ 
+ Constant & 0.441^{***} & 0.380^{***} & 0.339^{***} & 0.457^{***} \\ 
+  & (0.004) & (0.004) & (0.004) & (0.006) \\ 
+  & & & & \\ 
+\hline \\[-1.8ex] 
+Observations & \multicolumn{1}{c}{21,614} & \multicolumn{1}{c}{21,614} & \multicolumn{1}{c}{21,614} & \multicolumn{1}{c}{21,614} \\ 
+R$^{2}$ & \multicolumn{1}{c}{0.081} & \multicolumn{1}{c}{0.012} & \multicolumn{1}{c}{0.001} & \multicolumn{1}{c}{0.084} \\ 
+Adjusted R$^{2}$ & \multicolumn{1}{c}{0.081} & \multicolumn{1}{c}{0.012} & \multicolumn{1}{c}{0.001} & \multicolumn{1}{c}{0.084} \\ 
+Residual Std. Error & \multicolumn{1}{c}{0.455 (df = 21612)} & \multicolumn{1}{c}{0.472 (df = 21612)} & \multicolumn{1}{c}{0.469 (df = 21612)} & \multicolumn{1}{c}{0.454 (df = 21610)} \\ 
+F Statistic & \multicolumn{1}{c}{1,895.470$^{***}$ (df = 1; 21612)} & \multicolumn{1}{c}{268.059$^{***}$ (df = 1; 21612)} & \multicolumn{1}{c}{12.441$^{***}$ (df = 1; 21612)} & \multicolumn{1}{c}{659.407$^{***}$ (df = 3; 21610)} \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{4}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
