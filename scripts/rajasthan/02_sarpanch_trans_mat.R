@@ -1,5 +1,4 @@
 # Load libs
-
 library(readr)
 library(dplyr)
 library(xtable)
@@ -8,71 +7,27 @@ library(stringr)
 library(here)
 library(kableExtra)
 
+# Get utils
+source("scripts/00_utils.R")
+
 # Load data
-raj_panch <- read_csv("data/rajasthan/sarpanch_election_data/sp_2005_2010_2015_2020_fin2.csv")
+raj_panch <- arrow::read_parquet("data/rajasthan/sarpanch_election_data/raj_panch.parquet")
 
-# Create reservation dummies, caste group dummies -------------------------
+# Transition Matrices ------------------------------------------------------
 
-# inefficient but does the job
-raj_panch <- raj_panch %>%
-     mutate(
-          treat_2005 = ifelse(raj_panch$reservation_2005 %in% c("GEN W", "OBC W", "SC W", "ST W"), 1, 0),
-          treat_2010 = ifelse(raj_panch$reservation_2010 %in% c("GENW", "OBCW", "SCW", "STW"), 1, 0),
-          treat_2015 = ifelse(raj_panch$reservation_2015 %in% c("General (Woman)", "OBC (Woman)", "SC (Woman)", "ST (Woman)"), 1, 0),
-          treat_2020 = ifelse(raj_panch$reservation_2020 %in% c("General (Woman)", "OBC (Woman)", "SC (Woman)", "ST (Woman)"), 1, 0),
-          obc_2005 = ifelse(raj_panch$reservation_2005 %in% c("OBC W"), 1, 0),
-          obc_2010 = ifelse(raj_panch$reservation_2010 %in% c("OBCW"), 1, 0),
-          obc_2015 = ifelse(raj_panch$reservation_2015 %in% c("OBC (Woman)"), 1, 0),
-          obc_2020 = ifelse(raj_panch$reservation_2020 %in% c("OBC (Woman)"), 1, 0),
-          dalit_2005 = ifelse(raj_panch$reservation_2005 %in% c("SC W", "ST W"), 1, 0),
-          dalit_2010 = ifelse(raj_panch$reservation_2010 %in% c("SCW", "STW"), 1, 0),
-          dalit_2015 = ifelse(raj_panch$reservation_2015 %in% c("SC (Woman)", "ST (Woman)"), 1, 0),
-          dalit_2020 = ifelse(raj_panch$reservation_2020 %in% c("SC (Woman)", "ST (Woman)"), 1, 0),
-          always_treated = ifelse(treat_2005 + treat_2010 + treat_2015 == 3, 1, 0),
-          never_treated = ifelse(treat_2005 + treat_2010 + treat_2015 == 0, 1, 0),
-          sometimes_treated = ifelse(treat_2005 + treat_2010 + treat_2015 > 0, 1, 0),
-          once = ifelse(treat_2005 + treat_2010 + treat_2015 == 1, 1, 0),
-          twice = ifelse(treat_2005 + treat_2010 + treat_2015 == 2, 1, 0),
-          inter_always_treated = ifelse(treat_2010 == 1 & treat_2005 == 1, 1, 0),
-          inter_sometimes_treated = ifelse(treat_2010 == 1 | treat_2005 == 1, 1, 0),
-          inter_never_treated = ifelse(treat_2005 + treat_2010 == 0, 1, 0),
-          sc_2005 = ifelse(raj_panch$reservation_2010 %in% c("SC",  "ST" , "SC W" , "ST W"), 1, 0),
-          sc_2010 = ifelse(raj_panch$reservation_2010 %in% c("SC",  "ST" , "SCW" , "STW"), 1, 0),
-          sc_2015 = ifelse(raj_panch$reservation_2015 %in% c("SC",  "SC (Woman)" , "SCW" , "ST (Woman)"), 1, 0),
-          sc_2020 = ifelse(raj_panch$reservation_2020 %in% c("SC",  "SC (Woman)" , "SCW" , "ST (Woman)"), 1, 0),
-          all_obc_2005 = ifelse(raj_panch$reservation_2005 %in% c("OBC",  "OBC W"), 1, 0),
-          
-          all_obc_2010 = ifelse(raj_panch$reservation_2010 %in% c("OBC",  "OBCW"), 1, 0),
-          all_obc_2015 = ifelse(raj_panch$reservation_2015 %in% c("OBC",  "OBC (Woman)"), 1, 0),
-          all_obc_2020 = ifelse(raj_panch$reservation_2020 %in% c("OBC",  "OBC (Woman)"), 1, 0),
-          fe_key_2010 = paste(dist_name_2010, samiti_name_2010),
-          cluster_key_2010 = paste(dist_name_2010, samiti_name_2010, gp_2010),
-          fe_key_2015 = paste(dist_name_2015,samiti_name_2015),
-          cluster_key_2015 = paste(dist_name_2015,samiti_name_2015, gp_2015),
-          fe_key_2020 = paste(district_2020, ps_2020),
-          cluster_key_2020 = paste(district_2020, ps_2020, gp_2020)
-     )
-
-
-# Transition Matrces ------------------------------------------------------
-
-# comparing wiht previous reservation status
-
-trans_05_10 <- table(raj_panch$reservation_2005, raj_panch$reservation_2010)
-trans_10_15 <- table(raj_panch$reservation_2010, raj_panch$reservation_2015)
-trans_15_20 <- table(raj_panch$reservation_2015, raj_panch$reservation_2020)
+# comparing with previous reservation status
+trans_05_10 <- table(raj_panch$female_res_2005, raj_panch$female_res_2010)
+trans_10_15 <- table(raj_panch$female_res_2010, raj_panch$female_res_2015)
+trans_15_20 <- table(raj_panch$female_res_2015, raj_panch$female_res_2020)
 
 #comparison with 2005 that had 33% 
-
-trans_05_15 <- table(raj_panch$reservation_2005, raj_panch$reservation_2015) #comparison with 2005 that had 33%. (not necessary, but for completeness sake!) 
-trans_05_20 <- table(raj_panch$reservation_2005, raj_panch$reservation_2020)
+trans_05_15 <- table(raj_panch$female_res_2005, raj_panch$female_res_2015) #comparison with 2005 that had 33%. (not necessary, but for completeness sake!) 
+trans_05_20 <- table(raj_panch$female_res_2005, raj_panch$female_res_2020)
 
 
 #comparison with 2010, first election with 50%
-
-trans_10_15 <- table(raj_panch$reservation_2010, raj_panch$reservation_2015)
-trans_10_20 <- table(raj_panch$reservation_2010, raj_panch$reservation_2020)
-
+trans_10_15 <- table(raj_panch$female_res_2010, raj_panch$female_res_2015)
+trans_10_20 <- table(raj_panch$female_res_2010, raj_panch$female_res_2020)
 
 print(trans_matrices <- list(
      `2005-2010` = trans_05_10,
@@ -84,19 +39,16 @@ print(trans_matrices <- list(
      `2010-2020` = trans_10_20
 ))
 
-
-
-
 #write_to_latex(trans_matrices_store, here("..", "tables", "tran_matrices.tex"))
 
 #only look at 0-1 transitions
-bin_trans_05_10 <- table(raj_panch$treat_2005, raj_panch$treat_2010)
-bin_trans_10_15 <- table(raj_panch$treat_2010, raj_panch$treat_2015)
-bin_trans_15_20 <- table(raj_panch$treat_2015, raj_panch$treat_2020)
-bin_trans_05_15 <- table(raj_panch$treat_2005, raj_panch$treat_2015)
-bin_trans_05_20 <- table(raj_panch$treat_2005, raj_panch$treat_2020)
-bin_trans_10_15 <- table(raj_panch$treat_2010, raj_panch$treat_2015)
-bin_trans_10_20 <- table(raj_panch$treat_2010, raj_panch$treat_2020)
+bin_trans_05_10 <- table(raj_panch$female_res_2005, raj_panch$female_res_2010)
+bin_trans_10_15 <- table(raj_panch$female_res_2010, raj_panch$female_res_2015)
+bin_trans_15_20 <- table(raj_panch$female_res_2015, raj_panch$female_res_2020)
+bin_trans_05_15 <- table(raj_panch$female_res_2005, raj_panch$female_res_2015)
+bin_trans_05_20 <- table(raj_panch$female_res_2005, raj_panch$female_res_2020)
+bin_trans_10_15 <- table(raj_panch$female_res_2010, raj_panch$female_res_2015)
+bin_trans_10_20 <- table(raj_panch$female_res_2010, raj_panch$female_res_2020)
 
 bin_trans_matrices <- list(
      `2005-2010` = bin_trans_05_10,
@@ -141,6 +93,14 @@ chi_squared_results <- data.frame(
                           chi_sq_test_10_15$p.value, chi_sq_test_10_20$p.value, chi_sq_test_15_20$p.value), digits = 4)
 )
 
-chi_squared_results_table <- kable(chi_squared_results, format = "latex", caption = "Chi-Squared Test Results", booktabs = TRUE)
+chi_sq_out <- chi_squared_results_table %>% kable("latex", 
+                                   caption = "Are Reservations Predictable Over Time", 
+                                   booktabs = TRUE,
+                                   label = "chi_square_reserved_over_time",
+                                   col_names = c("Years", "Chi-Square", "DF", "p-value"),
+                                   escape = FALSE,
+                                   align = c("l", "r", "r", "r"))
+                         
 
-cat(chi_squared_results_table, file = here("..", "tables", "chi_squared_results.tex"))
+save_kable(chi_sq_out, file = here("tables/balance_table_raj.tex"))
+
