@@ -46,8 +46,8 @@ winners_ref <- winners_ref %>%
 
 contestants <- contestants %>%
     mutate(is_winner = ifelse(
-        paste0(key, nameofcontestingcandidate) %in%
-            paste0(winners_ref$key_2020, winners_ref$winnercandidatename), 1, 0
+        paste(key, nameofcontestingcandidate, sep = "|||") %in%
+            paste(winners_ref$key_2020, winners_ref$winnercandidatename, sep = "|||"), 1, 0
     ))
 
 raj_vars <- c("age", "total_children", "grad_status", "unemployed", "log_assets")

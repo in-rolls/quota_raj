@@ -635,7 +635,12 @@ tex_lines_full <- c(tex_lines_full,
     paste0("\\parbox{\\linewidth}{\\scriptsize \\emph{Notes: } ", notes_text_full, "}")
 )
 
-writeLines(tex_lines_full, here("tabs", "long_term_random_rotation_full.tex"))
-cat("Created: tabs/long_term_random_rotation_full.tex\n")
+# 15-year table not output: sample too small for reliable inference
+# Only 3 Raj districts (208 obs) and 0 UP districts pass all three chi-square tests
+# writeLines(tex_lines_full, here("tabs", "long_term_random_rotation_full.tex"))
+cat("NOTE: 15-year random rotation table not output.\n")
+cat("Only", length(random_raj_all), "Raj districts (", nrow(raj_lt_full), "obs) and",
+    length(random_up_all), "UP districts pass all three chi-square tests.\n")
+cat("Sample too small for reliable inference. See README.\n")
 
 cat("\n=== Long-Term Random Rotation Analysis Complete ===\n")
