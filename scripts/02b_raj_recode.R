@@ -99,11 +99,21 @@ winner_sex_2020 <- winner_2020 %>%
     ) %>%
     mutate(
         winner_sex_from_cand = ifelse(Gender == "F", 1L, 0L),
-        ps_clean = gsub(" PANCHAYAT SAMITI$", "", PanchayatSamiti, ignore.case = TRUE),
-        match_key = normalize_string(paste(District, ps_clean, NameOfGramPanchyat))
+        ps_clean = gsub(" PANCHAYAT SAMITI$", "", PanchayatSamiti, ignore.case = TRUE)
+    ) %>%
+    filter(!is.na(winner_sex_from_cand)) %>%
+    left_join(crosswalk_district, by = c("District" = "district_raw")) %>%
+    mutate(district_std = ifelse(is.na(district_std), District, district_std)) %>%
+    left_join(
+        crosswalk_samiti %>% select(district_std, samiti_raw, samiti_std),
+        by = c("district_std", "ps_clean" = "samiti_raw")
+    ) %>%
+    mutate(
+        samiti_std = ifelse(is.na(samiti_std), ps_clean, samiti_std),
+        gp_std = normalize_string(NameOfGramPanchyat),
+        match_key = normalize_string(paste(district_std, samiti_std, gp_std))
     ) %>%
     select(match_key, winner_sex_from_cand) %>%
-    filter(!is.na(winner_sex_from_cand)) %>%
     distinct(match_key, .keep_all = TRUE)
 
 cat("Winner sex data for 2020:", nrow(winner_sex_2020), "GPs\n")
@@ -134,9 +144,13 @@ p_2020 <- prepare_source(src_2020, 2020)
 # Panel 1: 2005-2010
 # =============================================================================
 cat("\n--- Creating 2005-2010 Panel ---\n")
+cat("  Input: 2005 =", nrow(p_2005), ", 2010 =", nrow(p_2010), "\n")
 
-raj_05_10 <- p_2005 %>%
-    inner_join(p_2010, by = "match_key") %>%
+raj_05_10_raw <- p_2005 %>% inner_join(p_2010, by = "match_key")
+n_after_join <- nrow(raj_05_10_raw)
+cat("  After inner_join:", n_after_join, "\n")
+
+raj_05_10 <- raj_05_10_raw %>%
     group_by(match_key) %>%
     filter(n() == 1) %>%
     ungroup() %>%
@@ -151,16 +165,22 @@ raj_05_10 <- p_2005 %>%
         dist_samiti_2010 = paste0(tolower(district_std_2010), "_", tolower(samiti_std_2010))
     )
 
-cat("Raj 05-10 panel N:", nrow(raj_05_10), "\n")
+n_duplicates <- n_after_join - nrow(raj_05_10)
+cat("  Duplicates dropped:", n_duplicates, "\n")
+cat("  Final panel N:", nrow(raj_05_10), "\n")
 write_parquet(raj_05_10, here("data/raj/raj_05_10.parquet"))
 
 # =============================================================================
 # Panel 2: 2010-2015
 # =============================================================================
 cat("\n--- Creating 2010-2015 Panel ---\n")
+cat("  Input: 2010 =", nrow(p_2010), ", 2015 =", nrow(p_2015), "\n")
 
-raj_10_15 <- p_2010 %>%
-    inner_join(p_2015, by = "match_key") %>%
+raj_10_15_raw <- p_2010 %>% inner_join(p_2015, by = "match_key")
+n_after_join <- nrow(raj_10_15_raw)
+cat("  After inner_join:", n_after_join, "\n")
+
+raj_10_15 <- raj_10_15_raw %>%
     group_by(match_key) %>%
     filter(n() == 1) %>%
     ungroup() %>%
@@ -175,16 +195,22 @@ raj_10_15 <- p_2010 %>%
         dist_samiti_2015 = paste0(tolower(district_std_2015), "_", tolower(samiti_std_2015))
     )
 
-cat("Raj 10-15 panel N:", nrow(raj_10_15), "\n")
+n_duplicates <- n_after_join - nrow(raj_10_15)
+cat("  Duplicates dropped:", n_duplicates, "\n")
+cat("  Final panel N:", nrow(raj_10_15), "\n")
 write_parquet(raj_10_15, here("data/raj/raj_10_15.parquet"))
 
 # =============================================================================
 # Panel 3: 2015-2020
 # =============================================================================
 cat("\n--- Creating 2015-2020 Panel ---\n")
+cat("  Input: 2015 =", nrow(p_2015), ", 2020 =", nrow(p_2020), "\n")
 
-raj_15_20 <- p_2015 %>%
-    inner_join(p_2020, by = "match_key") %>%
+raj_15_20_raw <- p_2015 %>% inner_join(p_2020, by = "match_key")
+n_after_join <- nrow(raj_15_20_raw)
+cat("  After inner_join:", n_after_join, "\n")
+
+raj_15_20 <- raj_15_20_raw %>%
     group_by(match_key) %>%
     filter(n() == 1) %>%
     ungroup() %>%
@@ -201,19 +227,31 @@ raj_15_20 <- p_2015 %>%
         dist_samiti_2020 = paste0(tolower(district_std_2020), "_", tolower(samiti_std_2020))
     )
 
-cat("Raj 15-20 panel N:", nrow(raj_15_20), "\n")
-cat("  With winner sex 2020:", sum(!is.na(raj_15_20$female_winner_2020)), "\n")
+n_duplicates <- n_after_join - nrow(raj_15_20)
+cat("  Duplicates dropped:", n_duplicates, "\n")
+cat("  Final panel N:", nrow(raj_15_20), "\n")
+n_winner_sex_matched <- sum(!is.na(raj_15_20$female_winner_2020))
+cat("  Winner sex 2020 matched:", n_winner_sex_matched, "/", nrow(raj_15_20),
+    "(", round(100 * n_winner_sex_matched / nrow(raj_15_20), 1), "%)\n")
 write_parquet(raj_15_20, here("data/raj/raj_15_20.parquet"))
 
 # =============================================================================
 # Panel 4: Full 4-way Panel (2005-2020)
 # =============================================================================
 cat("\n--- Creating 4-way Panel (2005-2020) ---\n")
+cat("  Input: 2005 =", nrow(p_2005), ", 2010 =", nrow(p_2010),
+    ", 2015 =", nrow(p_2015), ", 2020 =", nrow(p_2020), "\n")
 
-raj_05_20 <- p_2005 %>%
-    inner_join(p_2010, by = "match_key") %>%
-    inner_join(p_2015, by = "match_key") %>%
-    inner_join(p_2020, by = "match_key") %>%
+raj_05_20_step1 <- p_2005 %>% inner_join(p_2010, by = "match_key")
+cat("  After 2005-2010 join:", nrow(raj_05_20_step1), "\n")
+
+raj_05_20_step2 <- raj_05_20_step1 %>% inner_join(p_2015, by = "match_key")
+cat("  After adding 2015:", nrow(raj_05_20_step2), "\n")
+
+raj_05_20_step3 <- raj_05_20_step2 %>% inner_join(p_2020, by = "match_key")
+cat("  After adding 2020:", nrow(raj_05_20_step3), "\n")
+
+raj_05_20 <- raj_05_20_step3 %>%
     group_by(match_key) %>%
     filter(n() == 1) %>%
     ungroup() %>%
@@ -240,8 +278,12 @@ raj_05_20 <- p_2005 %>%
         dist_samiti_2010 = paste0(tolower(district_std_2010), "_", tolower(samiti_std_2010))
     )
 
-cat("Raj 05-20 (4-way) panel N:", nrow(raj_05_20), "\n")
-cat("  With winner sex 2020:", sum(!is.na(raj_05_20$female_winner_2020)), "\n")
+n_duplicates <- nrow(raj_05_20_step3) - nrow(raj_05_20)
+cat("  Duplicates dropped:", n_duplicates, "\n")
+cat("  Final panel N:", nrow(raj_05_20), "\n")
+n_winner_sex_matched <- sum(!is.na(raj_05_20$female_winner_2020))
+cat("  Winner sex 2020 matched:", n_winner_sex_matched, "/", nrow(raj_05_20),
+    "(", round(100 * n_winner_sex_matched / nrow(raj_05_20), 1), "%)\n")
 write_parquet(raj_05_20, here("data/raj/raj_05_20.parquet"))
 
 # =============================================================================

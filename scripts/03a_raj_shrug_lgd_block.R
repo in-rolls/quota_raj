@@ -100,11 +100,21 @@ if (nrow(missing_samitis) > 0) {
 cat("Block crosswalk coverage check complete\n")
 
 elex_with_block <- elex %>%
+    mutate(
+        dist_name_lower = tolower(dist_name_new_2010),
+        samiti_name_lower = tolower(samiti_name_new_2010)
+    ) %>%
     left_join(
-        block_xwalk %>% select(elex_district, elex_samiti, lgd_block_code, lgd_block_name),
-        by = c("dist_name_new_2010" = "elex_district",
-               "samiti_name_new_2010" = "elex_samiti")
-    )
+        block_xwalk %>%
+            mutate(
+                elex_district_lower = tolower(elex_district),
+                elex_samiti_lower = tolower(elex_samiti)
+            ) %>%
+            select(elex_district_lower, elex_samiti_lower, lgd_block_code, lgd_block_name),
+        by = c("dist_name_lower" = "elex_district_lower",
+               "samiti_name_lower" = "elex_samiti_lower")
+    ) %>%
+    select(-dist_name_lower, -samiti_name_lower)
 
 cat("Election rows with block code:", sum(!is.na(elex_with_block$lgd_block_code)),
     "of", nrow(elex_with_block), "\n")
@@ -347,6 +357,9 @@ print(table(elex_matched$match_quality, useNA = "ifany"))
 # STEP 9: Link to SHRUG via LGD code
 # ============================================================================
 
+# NOTE: Multiple SHRUG villages may map to one LGD GP code. We keep the first match.
+# SHRUG covariates reflect one village per GP, not GP-level aggregates.
+# For robustness, consider: group_by(LGD_code) %>% summarize(across(starts_with("pc01"), mean))
 shrug_lgd <- read_csv("data/shrug_gp_xwalk/data/shrug_LGD_matched.csv", show_col_types = FALSE) %>%
     filter(state_name == "rajasthan") %>%
     select(shrid2, LGD_code, local_body_name) %>%

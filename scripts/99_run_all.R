@@ -80,58 +80,45 @@ cat("\n### PHASE 8: LONG-TERM EFFECTS ###\n")
 run_script("08_long_term.R")
 
 # =============================================================================
-# Phase 11: Candidate Quality
+# Phase 9: Descriptive Tables
 # =============================================================================
-cat("\n### PHASE 11: CANDIDATE QUALITY ###\n")
+cat("\n### PHASE 9: DESCRIPTIVE TABLES ###\n")
+
+run_script("02_descriptive_tables.R")
+
+# =============================================================================
+# Phase 10: Candidate Quality
+# =============================================================================
+cat("\n### PHASE 10: CANDIDATE QUALITY ###\n")
 
 run_script("11_candidate_quality.R")
+
+# =============================================================================
+# Phase 11: Phone Surveys
+# =============================================================================
+cat("\n### PHASE 11: PHONE SURVEYS ###\n")
+
+run_script("12a_raj_phone_survey.R")
+run_script("12b_raj_jaipur_phone_survey.R")
+
+# =============================================================================
+# Phase 12: Weaver Replication
+# =============================================================================
+cat("\n### PHASE 12: WEAVER REPLICATION ###\n")
+
+run_script("13_weaver_replication.R")
+
+# =============================================================================
+# Phase 13: Power Analysis
+# =============================================================================
+cat("\n### PHASE 13: POWER ANALYSIS ###\n")
+
+run_script("14_power_analysis.R")
 
 # =============================================================================
 # Summary
 # =============================================================================
 cat("\n=======================================================\n")
 cat("   PIPELINE COMPLETE\n")
-cat("=======================================================\n\n")
-
-cat("Data files created:\n")
-cat("  data/crosswalks/lgd_up_block_gp.csv\n")
-cat("  data/crosswalks/lgd_up_blocks.csv\n")
-cat("  data/raj/raj_05_10.parquet\n")
-cat("  data/raj/raj_10_15.parquet\n")
-cat("  data/raj/raj_15_20.parquet\n")
-cat("  data/raj/raj_05_20.parquet\n")
-cat("  data/raj/shrug_gp_raj_05_10_block.parquet\n")
-cat("  data/raj/shrug_gp_raj_10_15_block.parquet\n")
-cat("  data/raj/shrug_gp_raj_15_20_block.parquet\n")
-cat("  data/raj/shrug_gp_raj_05_20_block.parquet\n")
-cat("  data/up/up_05_10.parquet\n")
-cat("  data/up/up_10_15.parquet\n")
-cat("  data/up/up_15_21.parquet\n")
-cat("  data/up/up_05_21.parquet\n")
-cat("  data/up/shrug_gp_up_05_10_block.parquet\n")
-cat("  data/up/shrug_gp_up_10_15_block.parquet\n")
-cat("  data/up/shrug_gp_up_15_21_block.parquet\n")
-cat("  data/up/shrug_gp_up_05_21_block.parquet\n")
-
-cat("\nTables created:\n")
-cat("  tabs/balance_electoral.tex\n")
-cat("  tabs/balance_combined.tex\n")
-cat("  tabs/reserved_or_not_chi_sq_raj.tex\n")
-cat("  tabs/up_chi_squared_results.tex\n")
-cat("  tabs/raj_treatment_reg.tex\n")
-cat("  tabs/up_treatment_reg.tex\n")
-cat("  tabs/short_term_combined.tex\n")
-cat("  tabs/short_term_full_sample.tex\n")
-cat("  tabs/treatment_rotation.tex\n")
-cat("  tabs/placebo_combined.tex\n")
-cat("  tabs/short_term_shrug_covariates.tex\n")
-cat("  tabs/het_effects_town.tex\n")
-cat("  tabs/het_effects_infra.tex\n")
-cat("  tabs/het_effects_power.tex\n")
-cat("  tabs/long_term_combined.tex\n")
-cat("  tabs/dosage_combined.tex\n")
-cat("  tabs/cand_characteristics_combined.tex\n")
-cat("  tabs/mean_values_respondents.tex\n")
-cat("  tabs/up_cand_characteristics.tex\n")
-
-cat("\n=======================================================\n")
+cat("=======================================================\n")
+cat("Check individual script output above for files created.\n")
