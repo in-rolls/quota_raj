@@ -1,0 +1,36 @@
+\begin{table}[htbp]
+\centering
+\caption{\label{tab:weaver_long}Long-Term Effects: Weaver UP Replication}
+{\centering\scriptsize
+\begingroup
+\begin{tabular}{@{}lccc@{}}
+   \toprule
+    & \multicolumn{3}{c}{\textit{Woman Elected}}\\
+                                                       & No FE        & FE            & Cov+FE \\   
+                                                       & [i]          & [ii]          & [iii]\\  
+   \midrule 
+   Constant                                            & 0.18$^{***}$ &               &   \\   
+                                                       & (0.00)      &               &   \\   
+   $\text{Quota}_{2010}$                               & 0.00        & 0.00         & 0.00\\   
+                                                       & (0.00)      & (0.00)       & (0.00)\\   
+   $\text{Quota}_{2015}$                               & 0.04$^{***}$ & 0.04$^{***}$  & 0.04$^{***}$\\   
+                                                       & (0.00)      & (0.00)       & (0.00)\\   
+   $\text{Quota}_{2010} \times \text{Quota}_{2015}$    & 0.00        & 0.00         & 0.00\\   
+                                                       & (0.00)      & (0.00)       & (0.00)\\   
+   Turnout                                             &              &               & 0.00$^{***}$\\   
+                                                       &              &               & (0.00)\\   
+   Candidates                                          &              &               & -0.00\\   
+                                                       &              &               & (0.00)\\   
+   Avg Age                                             &              &               & -0.00$^{***}$\\   
+                                                       &              &               & (0.00)\\   
+   R$^2$                                               & 0.00        & 0.00         & 0.00\\  
+   Observations                                        & 36,925       & 36,925        & 36,893\\  
+   (District, Samiti) FE                    &              & $\checkmark$  & $\checkmark$\\   
+   \bottomrule
+\end{tabular}
+\par\endgroup
+\par}
+
+\vspace{0.5ex}
+\parbox{\linewidth}{\scriptsize \emph{Notes: } $^{***}$p$<$0.01; $^{**}$p$<$0.05; $^{*}$p$<$0.1. The dependent variable is whether a woman was elected in an open seat in 2020. All models include 2010 quota, 2015 quota, and their interaction. Model [i] uses heteroskedasticity-robust SE. Model [ii] adds (District, Samiti) FE. Model [iii] adds covariates (turnout, candidates, avg age) with FE.}
+\end{table}
