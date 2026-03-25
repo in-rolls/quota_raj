@@ -281,43 +281,6 @@
       "Maintainer": "Dirk Eddelbuettel <edd@debian.org>",
       "Repository": "CRAN"
     },
-    "RcppEigen": {
-      "Package": "RcppEigen",
-      "Version": "0.3.4.0.2",
-      "Source": "Repository",
-      "Type": "Package",
-      "Title": "'Rcpp' Integration for the 'Eigen' Templated Linear Algebra Library",
-      "Date": "2024-08-23",
-      "Authors@R": "c(person(\"Doug\", \"Bates\", role = \"aut\", comment = c(ORCID = \"0000-0001-8316-9503\")), person(\"Dirk\", \"Eddelbuettel\", role = c(\"aut\", \"cre\"), email = \"edd@debian.org\", comment = c(ORCID = \"0000-0001-6419-907X\")), person(\"Romain\", \"Francois\", role = \"aut\", comment = c(ORCID = \"0000-0002-2444-4226\")), person(\"Yixuan\", \"Qiu\", role = \"aut\", comment = c(ORCID = \"0000-0003-0109-6692\")), person(\"Authors of\", \"Eigen\", role = \"cph\", comment = \"Authorship and copyright in included Eigen library as detailed in inst/COPYRIGHTS\"))",
-      "Copyright": "See the file COPYRIGHTS for various Eigen copyright details",
-      "Description": "R and 'Eigen' integration using 'Rcpp'. 'Eigen' is a C++ template library for linear algebra: matrices, vectors, numerical solvers and related algorithms.  It supports dense and sparse matrices on integer, floating point and complex numbers, decompositions of such matrices, and solutions of linear systems. Its performance on many algorithms is comparable with some of the best implementations based on 'Lapack' and level-3 'BLAS'. The 'RcppEigen' package includes the header files from the 'Eigen' C++ template library. Thus users do not need to install 'Eigen' itself in order to use 'RcppEigen'. Since version 3.1.1, 'Eigen' is licensed under the Mozilla Public License (version 2); earlier version were licensed under the GNU LGPL version 3 or later. 'RcppEigen' (the 'Rcpp' bindings/bridge to 'Eigen') is licensed under the GNU GPL version 2 or later, as is the rest of 'Rcpp'.",
-      "License": "GPL (>= 2) | file LICENSE",
-      "LazyLoad": "yes",
-      "Depends": [
-        "R (>= 3.6.0)"
-      ],
-      "LinkingTo": [
-        "Rcpp"
-      ],
-      "Imports": [
-        "Rcpp (>= 0.11.0)",
-        "stats",
-        "utils"
-      ],
-      "Suggests": [
-        "Matrix",
-        "inline",
-        "tinytest",
-        "pkgKitten",
-        "microbenchmark"
-      ],
-      "URL": "https://github.com/RcppCore/RcppEigen, https://dirk.eddelbuettel.com/code/rcpp.eigen.html",
-      "BugReports": "https://github.com/RcppCore/RcppEigen/issues",
-      "NeedsCompilation": "yes",
-      "Author": "Doug Bates [aut] (<https://orcid.org/0000-0001-8316-9503>), Dirk Eddelbuettel [aut, cre] (<https://orcid.org/0000-0001-6419-907X>), Romain Francois [aut] (<https://orcid.org/0000-0002-2444-4226>), Yixuan Qiu [aut] (<https://orcid.org/0000-0003-0109-6692>), Authors of Eigen [cph] (Authorship and copyright in included Eigen library as detailed in inst/COPYRIGHTS)",
-      "Maintainer": "Dirk Eddelbuettel <edd@debian.org>",
-      "Repository": "CRAN"
-    },
     "arrow": {
       "Package": "arrow",
       "Version": "23.0.1.1",
@@ -1488,58 +1451,6 @@
       "Repository": "CRAN",
       "Encoding": "UTF-8"
     },
-    "estimatr": {
-      "Package": "estimatr",
-      "Version": "1.0.6",
-      "Source": "Repository",
-      "Type": "Package",
-      "Title": "Fast Estimators for Design-Based Inference",
-      "Authors@R": "c(person(\"Graeme\", \"Blair\", email = \"graeme.blair@gmail.com\", role = c(\"aut\", \"cre\")), person(\"Jasper\", \"Cooper\", email = \"jjc2247@columbia.edu\", role = c(\"aut\")), person(\"Alexander\", \"Coppock\", email = \"alex.coppock@yale.edu\", role = c(\"aut\")), person(\"Macartan\", \"Humphreys\", email = \"macartan@gmail.com\", role = c(\"aut\")), person(\"Luke\", \"Sonnet\", email = \"luke.sonnet@gmail.com\", role = c(\"aut\")), person(\"Neal\", \"Fultz\", email = \"nfultz@gmail.com\", role = c(\"ctb\")), person(\"Lily\", \"Medina\", email = \"lilymiru@gmail.com\", role = c(\"ctb\")), person(\"Russell\", \"Lenth\", email = \"russell-lenth@uiowa.edu\", role = c(\"ctb\")), person(\"Molly\", \"Offer-Westort\", email = \"mollyow@uchicago.edu\", role = c(\"ctb\")))",
-      "Description": "Fast procedures for small set of commonly-used, design-appropriate estimators with robust standard errors and confidence intervals. Includes estimators for linear regression, instrumental variables regression, difference-in-means, Horvitz-Thompson estimation, and regression improving precision of experimental estimates by interacting treatment with centered pre-treatment covariates introduced by Lin (2013) <doi:10.1214/12-AOAS583>.",
-      "URL": "https://declaredesign.org/r/estimatr/, https://github.com/DeclareDesign/estimatr",
-      "BugReports": "https://github.com/DeclareDesign/estimatr/issues",
-      "License": "MIT + file LICENSE",
-      "Depends": [
-        "R (>= 3.6.0)"
-      ],
-      "Imports": [
-        "Formula",
-        "generics",
-        "methods",
-        "Rcpp (>= 0.12.16)",
-        "rlang (>= 0.2.0)"
-      ],
-      "LinkingTo": [
-        "Rcpp",
-        "RcppEigen"
-      ],
-      "Encoding": "UTF-8",
-      "RoxygenNote": "7.3.2",
-      "LazyData": "true",
-      "Suggests": [
-        "fabricatr (>= 0.10.0)",
-        "randomizr (>= 0.20.0)",
-        "AER",
-        "clubSandwich",
-        "emmeans (>= 1.4)",
-        "estimability",
-        "margins",
-        "modelsummary",
-        "prediction",
-        "RcppEigen",
-        "sandwich",
-        "stargazer",
-        "testthat",
-        "car"
-      ],
-      "Enhances": [
-        "texreg"
-      ],
-      "NeedsCompilation": "yes",
-      "Author": "Graeme Blair [aut, cre], Jasper Cooper [aut], Alexander Coppock [aut], Macartan Humphreys [aut], Luke Sonnet [aut], Neal Fultz [ctb], Lily Medina [ctb], Russell Lenth [ctb], Molly Offer-Westort [ctb]",
-      "Maintainer": "Graeme Blair <graeme.blair@gmail.com>",
-      "Repository": "CRAN"
-    },
     "evaluate": {
       "Package": "evaluate",
       "Version": "1.0.3",
@@ -2565,52 +2476,6 @@
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
       "Repository": "CRAN"
     },
-    "janitor": {
-      "Package": "janitor",
-      "Version": "2.2.1",
-      "Source": "Repository",
-      "Title": "Simple Tools for Examining and Cleaning Dirty Data",
-      "Authors@R": "c(person(\"Sam\", \"Firke\", email = \"samuel.firke@gmail.com\", role = c(\"aut\", \"cre\")), person(\"Bill\", \"Denney\", email = \"wdenney@humanpredictions.com\", role = \"ctb\"), person(\"Chris\", \"Haid\", email = \"chrishaid@gmail.com\", role = \"ctb\"), person(\"Ryan\", \"Knight\", email = \"ryangknight@gmail.com\", role = \"ctb\"), person(\"Malte\", \"Grosser\", email = \"malte.grosser@gmail.com\", role = \"ctb\"), person(\"Jonathan\", \"Zadra\", email = \"jonathan.zadra@sorensonimpact.com\", role = \"ctb\"))",
-      "Description": "The main janitor functions can: perfectly format data.frame column names; provide quick counts of variable combinations (i.e., frequency tables and crosstabs); and explore duplicate records. Other janitor functions nicely format the tabulation results. These tabulate-and-report functions approximate popular features of SPSS and Microsoft Excel. This package follows the principles of the \"tidyverse\" and works well with the pipe function %>%. janitor was built with beginning-to-intermediate R users in mind and is optimized for user-friendliness.",
-      "URL": "https://github.com/sfirke/janitor, https://sfirke.github.io/janitor/",
-      "BugReports": "https://github.com/sfirke/janitor/issues",
-      "Depends": [
-        "R (>= 3.1.2)"
-      ],
-      "Imports": [
-        "dplyr (>= 1.0.0)",
-        "hms",
-        "lifecycle",
-        "lubridate",
-        "magrittr",
-        "purrr",
-        "rlang",
-        "stringi",
-        "stringr",
-        "snakecase (>= 0.9.2)",
-        "tidyselect (>= 1.0.0)",
-        "tidyr (>= 0.7.0)"
-      ],
-      "License": "MIT + file LICENSE",
-      "RoxygenNote": "7.2.3",
-      "Suggests": [
-        "dbplyr",
-        "knitr",
-        "rmarkdown",
-        "RSQLite",
-        "sf",
-        "testthat (>= 3.0.0)",
-        "tibble",
-        "tidygraph"
-      ],
-      "VignetteBuilder": "knitr",
-      "Encoding": "UTF-8",
-      "Config/testthat/edition": "3",
-      "NeedsCompilation": "no",
-      "Author": "Sam Firke [aut, cre], Bill Denney [ctb], Chris Haid [ctb], Ryan Knight [ctb], Malte Grosser [ctb], Jonathan Zadra [ctb]",
-      "Maintainer": "Sam Firke <samuel.firke@gmail.com>",
-      "Repository": "CRAN"
-    },
     "jquerylib": {
       "Package": "jquerylib",
       "Version": "0.1.4",
@@ -2954,53 +2819,6 @@
       "Maintainer": "Lionel Henry <lionel@rstudio.com>",
       "Repository": "CRAN"
     },
-    "margins": {
-      "Package": "margins",
-      "Version": "0.3.28",
-      "Source": "Repository",
-      "Type": "Package",
-      "Title": "Marginal Effects for Model Objects",
-      "Description": "An R port of the margins command from 'Stata', which can be used to calculate marginal (or partial) effects from model objects.",
-      "License": "MIT + file LICENSE",
-      "Authors@R": "c(person(\"Thomas J.\", \"Leeper\", role = c(\"aut\"),  comment = c(ORCID = \"0000-0003-4097-6326\")), person(\"Jeffrey\", \"Arnold\",  role = c(\"ctb\")), person(\"Vincent\", \"Arel-Bundock\",  role = c(\"ctb\")), person(\"Jacob A.\", \"Long\",  role = c(\"ctb\"), comment = c(ORCID = \"0000-0002-1582-6214\")), person(\"Ben\",\"Bolker\",email=\"bolker@mcmaster.ca\",  role=c(\"ctb\",\"cre\"), comment=c(ORCID=\"0000-0002-2127-0443\")) )",
-      "URL": "https://github.com/bbolker/margins",
-      "BugReports": "https://github.com/bbolker/margins/issues",
-      "Imports": [
-        "utils",
-        "stats",
-        "prediction (>= 0.3.6)",
-        "data.table",
-        "graphics",
-        "grDevices",
-        "MASS"
-      ],
-      "Suggests": [
-        "methods",
-        "knitr",
-        "rmarkdown",
-        "testthat",
-        "ggplot2",
-        "gapminder",
-        "sandwich",
-        "stargazer",
-        "lme4"
-      ],
-      "Enhances": [
-        "AER",
-        "betareg",
-        "nnet",
-        "ordinal",
-        "survey"
-      ],
-      "ByteCompile": "true",
-      "VignetteBuilder": "knitr",
-      "Encoding": "UTF-8",
-      "RoxygenNote": "7.3.2",
-      "NeedsCompilation": "no",
-      "Author": "Thomas J. Leeper [aut] (<https://orcid.org/0000-0003-4097-6326>), Jeffrey Arnold [ctb], Vincent Arel-Bundock [ctb], Jacob A. Long [ctb] (<https://orcid.org/0000-0002-1582-6214>), Ben Bolker [ctb, cre] (<https://orcid.org/0000-0002-2127-0443>)",
-      "Maintainer": "Ben Bolker <bolker@mcmaster.ca>",
-      "Repository": "CRAN"
-    },
     "memoise": {
       "Package": "memoise",
       "Version": "2.0.1",
@@ -3202,31 +3020,6 @@
       "Maintainer": "R Core Team <R-core@R-project.org>",
       "Repository": "CRAN"
     },
-    "nnet": {
-      "Package": "nnet",
-      "Version": "7.3-20",
-      "Source": "Repository",
-      "Priority": "recommended",
-      "Date": "2025-01-01",
-      "Depends": [
-        "R (>= 3.0.0)",
-        "stats",
-        "utils"
-      ],
-      "Suggests": [
-        "MASS"
-      ],
-      "Authors@R": "c(person(\"Brian\", \"Ripley\", role = c(\"aut\", \"cre\", \"cph\"), email = \"Brian.Ripley@R-project.org\"), person(\"William\", \"Venables\", role = \"cph\"))",
-      "Description": "Software for feed-forward neural networks with a single hidden layer, and for multinomial log-linear models.",
-      "Title": "Feed-Forward Neural Networks and Multinomial Log-Linear Models",
-      "ByteCompile": "yes",
-      "License": "GPL-2 | GPL-3",
-      "URL": "http://www.stats.ox.ac.uk/pub/MASS4/",
-      "NeedsCompilation": "yes",
-      "Author": "Brian Ripley [aut, cre, cph], William Venables [cph]",
-      "Maintainer": "Brian Ripley <Brian.Ripley@R-project.org>",
-      "Repository": "CRAN"
-    },
     "numDeriv": {
       "Package": "numDeriv",
       "Version": "2016.8-1.1",
@@ -3359,74 +3152,6 @@
       "BugReports": "https://github.com/r-lib/pkgconfig/issues",
       "Encoding": "UTF-8",
       "NeedsCompilation": "no",
-      "Repository": "CRAN"
-    },
-    "prediction": {
-      "Package": "prediction",
-      "Version": "0.3.18",
-      "Source": "Repository",
-      "Type": "Package",
-      "Title": "Tidy, Type-Safe 'prediction()' Methods",
-      "Description": "A one-function package containing prediction(), a type-safe alternative to predict() that always returns a data frame. The summary() method provides a data frame with average predictions, possibly over counterfactual versions of the data (à la the margins command in 'Stata'). Marginal effect estimation is provided by the related package, 'margins' <https://cran.r-project.org/package=margins>. The package currently supports common model types (e.g., lm, glm) from the 'stats' package, as well as numerous other model classes from other add-on packages. See the README file or main package documentation page for a complete listing.",
-      "License": "MIT + file LICENSE",
-      "Authors@R": "c(person(\"Thomas J.\", \"Leeper\", role = c(\"aut\"),  comment = c(ORCID = \"0000-0003-4097-6326\")), person(\"Carl\", \"Ganz\", role = \"ctb\"), person(\"Vincent\", \"Arel-Bundock\", role = \"ctb\", comment = c(ORCID = \"0000-0003-2042-7063\")), person(\"Ben\",\"Bolker\",email=\"bolker@mcmaster.ca\",  role=c(\"ctb\",\"cre\"), comment=c(ORCID=\"0000-0002-2127-0443\")) )",
-      "URL": "https://github.com/bbolker/prediction",
-      "BugReports": "https://github.com/bbolker/prediction/issues",
-      "Depends": [
-        "R (>= 3.5.0)"
-      ],
-      "Imports": [
-        "utils",
-        "stats",
-        "data.table"
-      ],
-      "Suggests": [
-        "datasets",
-        "methods",
-        "testthat"
-      ],
-      "Enhances": [
-        "AER",
-        "aod",
-        "betareg",
-        "biglm",
-        "brglm",
-        "caret",
-        "crch",
-        "e1071",
-        "earth",
-        "ff",
-        "gam (>= 1.15)",
-        "gee",
-        "glmnet",
-        "glmx",
-        "kernlab",
-        "lme4",
-        "MASS",
-        "mclogit",
-        "mda",
-        "mlogit",
-        "MNP",
-        "nlme",
-        "nnet",
-        "ordinal",
-        "plm",
-        "pscl",
-        "quantreg",
-        "rpart",
-        "sampleSelection",
-        "speedglm",
-        "survey (>= 3.31-5)",
-        "survival",
-        "truncreg",
-        "VGAM"
-      ],
-      "ByteCompile": "true",
-      "Encoding": "UTF-8",
-      "RoxygenNote": "7.3.1",
-      "NeedsCompilation": "no",
-      "Author": "Thomas J. Leeper [aut] (<https://orcid.org/0000-0003-4097-6326>), Carl Ganz [ctb], Vincent Arel-Bundock [ctb] (<https://orcid.org/0000-0003-2042-7063>), Ben Bolker [ctb, cre] (<https://orcid.org/0000-0002-2127-0443>)",
-      "Maintainer": "Ben Bolker <bolker@mcmaster.ca>",
       "Repository": "CRAN"
     },
     "prettyunits": {
@@ -4516,41 +4241,6 @@
       "NeedsCompilation": "yes",
       "Author": "Edzer Pebesma [aut, cre] (ORCID: <https://orcid.org/0000-0001-8049-7069>), Roger Bivand [ctb] (ORCID: <https://orcid.org/0000-0003-2392-6140>), Etienne Racine [ctb], Michael Sumner [ctb], Ian Cook [ctb], Tim Keitt [ctb], Robin Lovelace [ctb], Hadley Wickham [ctb], Jeroen Ooms [ctb] (ORCID: <https://orcid.org/0000-0002-4035-0289>), Kirill Müller [ctb], Thomas Lin Pedersen [ctb], Dan Baston [ctb], Dewey Dunnington [ctb] (ORCID: <https://orcid.org/0000-0002-9415-4582>)",
       "Maintainer": "Edzer Pebesma <edzer.pebesma@uni-muenster.de>",
-      "Repository": "CRAN"
-    },
-    "snakecase": {
-      "Package": "snakecase",
-      "Version": "0.11.1",
-      "Source": "Repository",
-      "Date": "2023-08-27",
-      "Title": "Convert Strings into any Case",
-      "Description": "A consistent, flexible and easy to use tool to parse and convert strings into cases like snake or camel among others.",
-      "Authors@R": "c( person(\"Malte\", \"Grosser\", , \"malte.grosser@gmail.com\", role = c(\"aut\", \"cre\")))",
-      "Maintainer": "Malte Grosser <malte.grosser@gmail.com>",
-      "Depends": [
-        "R (>= 3.2)"
-      ],
-      "Imports": [
-        "stringr",
-        "stringi"
-      ],
-      "Suggests": [
-        "testthat",
-        "covr",
-        "tibble",
-        "purrrlyr",
-        "knitr",
-        "rmarkdown",
-        "magrittr"
-      ],
-      "URL": "https://github.com/Tazinho/snakecase",
-      "BugReports": "https://github.com/Tazinho/snakecase/issues",
-      "Encoding": "UTF-8",
-      "License": "GPL-3",
-      "RoxygenNote": "6.1.1",
-      "VignetteBuilder": "knitr",
-      "NeedsCompilation": "no",
-      "Author": "Malte Grosser [aut, cre]",
       "Repository": "CRAN"
     },
     "sp": {
@@ -5718,36 +5408,6 @@
       "Author": "Hadley Wickham [aut, cre], Jim Hester [aut], Jeroen Ooms [aut], Posit Software, PBC [cph, fnd], R Foundation [ctb] (Copy of R-project homepage cached as example)",
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
       "Repository": "CRAN"
-    },
-    "xtable": {
-      "Package": "xtable",
-      "Version": "1.8-4",
-      "Source": "Repository",
-      "Date": "2019-04-08",
-      "Title": "Export Tables to LaTeX or HTML",
-      "Authors@R": "c(person(\"David B.\", \"Dahl\", role=\"aut\"), person(\"David\", \"Scott\", role=c(\"aut\",\"cre\"), email=\"d.scott@auckland.ac.nz\"), person(\"Charles\", \"Roosen\", role=\"aut\"), person(\"Arni\", \"Magnusson\", role=\"aut\"), person(\"Jonathan\", \"Swinton\", role=\"aut\"), person(\"Ajay\", \"Shah\", role=\"ctb\"), person(\"Arne\", \"Henningsen\", role=\"ctb\"), person(\"Benno\", \"Puetz\", role=\"ctb\"), person(\"Bernhard\", \"Pfaff\", role=\"ctb\"), person(\"Claudio\", \"Agostinelli\", role=\"ctb\"), person(\"Claudius\", \"Loehnert\", role=\"ctb\"), person(\"David\", \"Mitchell\", role=\"ctb\"), person(\"David\", \"Whiting\", role=\"ctb\"), person(\"Fernando da\", \"Rosa\", role=\"ctb\"), person(\"Guido\", \"Gay\", role=\"ctb\"), person(\"Guido\", \"Schulz\", role=\"ctb\"), person(\"Ian\", \"Fellows\", role=\"ctb\"), person(\"Jeff\", \"Laake\", role=\"ctb\"), person(\"John\", \"Walker\", role=\"ctb\"), person(\"Jun\", \"Yan\", role=\"ctb\"), person(\"Liviu\", \"Andronic\", role=\"ctb\"), person(\"Markus\", \"Loecher\", role=\"ctb\"), person(\"Martin\", \"Gubri\", role=\"ctb\"), person(\"Matthieu\", \"Stigler\", role=\"ctb\"), person(\"Robert\", \"Castelo\", role=\"ctb\"), person(\"Seth\", \"Falcon\", role=\"ctb\"), person(\"Stefan\", \"Edwards\", role=\"ctb\"), person(\"Sven\", \"Garbade\", role=\"ctb\"), person(\"Uwe\", \"Ligges\", role=\"ctb\"))",
-      "Maintainer": "David Scott <d.scott@auckland.ac.nz>",
-      "Imports": [
-        "stats",
-        "utils"
-      ],
-      "Suggests": [
-        "knitr",
-        "plm",
-        "zoo",
-        "survival"
-      ],
-      "VignetteBuilder": "knitr",
-      "Description": "Coerce data to LaTeX and HTML tables.",
-      "URL": "http://xtable.r-forge.r-project.org/",
-      "Depends": [
-        "R (>= 2.10.0)"
-      ],
-      "License": "GPL (>= 2)",
-      "Repository": "CRAN",
-      "NeedsCompilation": "no",
-      "Author": "David B. Dahl [aut], David Scott [aut, cre], Charles Roosen [aut], Arni Magnusson [aut], Jonathan Swinton [aut], Ajay Shah [ctb], Arne Henningsen [ctb], Benno Puetz [ctb], Bernhard Pfaff [ctb], Claudio Agostinelli [ctb], Claudius Loehnert [ctb], David Mitchell [ctb], David Whiting [ctb], Fernando da Rosa [ctb], Guido Gay [ctb], Guido Schulz [ctb], Ian Fellows [ctb], Jeff Laake [ctb], John Walker [ctb], Jun Yan [ctb], Liviu Andronic [ctb], Markus Loecher [ctb], Martin Gubri [ctb], Matthieu Stigler [ctb], Robert Castelo [ctb], Seth Falcon [ctb], Stefan Edwards [ctb], Sven Garbade [ctb], Uwe Ligges [ctb]",
-      "Encoding": "UTF-8"
     },
     "yaml": {
       "Package": "yaml",
