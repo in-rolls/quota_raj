@@ -1,0 +1,771 @@
+\documentclass[12pt]{article}
+
+% ------------------------------------------------------------------
+% CORE DOCUMENT SETUP & FONT (XeLaTeX with Libertinus)
+% ------------------------------------------------------------------
+\usepackage[quiet]{fontspec}
+\usepackage{libertinus-otf}
+\usepackage[stretch=10,shrink=10]{microtype}
+\usepackage[margin=1in]{geometry} % Standard margins
+% \usepackage{adjustbox} % For handling wide tables
+
+% ------------------------------------------------------------------
+% LAYOUT & SPACING
+% ------------------------------------------------------------------
+\usepackage{setspace} % For line spacing (e.g., \onehalfspacing)
+\usepackage{fancyhdr} % For customizing headers/footers
+\usepackage{placeins} % Provides \FloatBarrier to stop floats from moving
+\usepackage{pdflscape} % For landscape pages
+\usepackage{framed} % For framed boxes/environments
+\usepackage[all]{nowidow} % Prevents widows and orphans
+
+
+% ------------------------------------------------------------------
+% HYPERLINKS, REFERENCES, & DOCUMENT STRUCTURE
+% ------------------------------------------------------------------
+% Must be loaded early, usually after core setup but before many other packages
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=black, % Often set to black or dark-gray for printing/academic style
+    urlcolor=blue
+}
+\usepackage[all]{hypcap} % Correctly position hyperlinks to figures/tables
+\usepackage{varioref} % Extends \autoref capabilities
+\usepackage[title,titletoc,page]{appendix} % Handles appendix structure
+\usepackage{minitoc} % For sectional tables of contents
+\usepackage{tocloft} % For customizing TOC, list of tables/figures
+
+% ------------------------------------------------------------------
+% TABLES, FIGURES, & CAPTIONS (Grouping Redundant Packages)
+% ------------------------------------------------------------------
+% NOTE: Removed duplicate loading of caption/subcaption/threeparttable
+\usepackage{graphicx}
+ % For including figures
+\usepackage{subcaption} % Handles subfigures and subtables (modern standard)
+\usepackage{caption} % Customizes captions (must be loaded before subcaption in some cases)
+\usepackage{booktabs} % Best practice for professional table rules (\toprule, \midrule)
+\usepackage[table]{xcolor} % For table cell coloring (\cellcolor)
+\usepackage{dcolumn} % For aligning numbers on decimal point in stargazer tables
+\usepackage{threeparttable} % For aligning notes under tables (best practice for academic notes)
+\usepackage{siunitx} % For formatting units and aligning numbers by decimal point (must have)
+\usepackage{multirow} % For cells spanning multiple rows
+\usepackage{bigdelim} % For large delimiters in tables (like \rdelim)
+\usepackage{xltabular} % Combines xtabular (multi-page tables) and tabularx (fixed width columns)
+
+% ------------------------------------------------------------------
+% MISCELLANEOUS UTILITIES
+% ------------------------------------------------------------------
+\usepackage{natbib} % Citation package (assuming you use BibTeX/BibLaTeX)
+\usepackage{enumitem} % For customizing lists (spacing, labels, etc.)
+\usepackage{epigraph} % For block quotes
+\usepackage{pifont} % For Zapf Dingbats symbols (cmark/xmark)
+\newcommand{\xmark}{\ding{53}}%
+\newcommand{\cmark}{\ding{51}}%
+\AtBeginDocument{\renewcommand{\checkmark}{\text{\ding{51}}}}%
+\usepackage{tikz} % For drawing graphics
+\usepackage{comment} % For commenting out large blocks of text
+
+\usetikzlibrary{positioning, calc, arrows, arrows.meta, decorations.markings, decorations.pathmorphing, shapes.misc, matrix, shapes, fit, tikzmark}
+
+\tikzset{
+    block/.style = {rectangle, draw, text centered, rounded corners, minimum height=1.5em},
+    line/.style = {draw, -latex'},
+    snake/.style = {decorate, decoration={snake}},
+}
+
+% ------------------------------------------------------------------
+% MANUAL/CUSTOM COMMANDS (Keep these at the very end)
+% ------------------------------------------------------------------
+% Make the "Part I" text invisible
+\renewcommand \thepart{}
+\renewcommand \partname{}
+
+\setlength{\epigraphwidth}{\textwidth}
+\renewcommand{\arraystretch}{1.15}
+\title{The Limits of Electoral Gender Quotas in Rural Local Bodies}
+
+% Intercepted: Male Gatekeeping and the Limits of Gender Quotas in Rural India
+% "Intercepted: Gender Quotas and  Male Gatekeeping  in Rural India
+
+
+%The Limits of Gender Quotas: Formal Inclusion, Effective Exclusion in Rural India"
+
+%The Limits of Gender Quotas: De Jure Representation and De Facto Gatekeeping in Rural India
+%The Limits of Electoral Gender Quotas: Evidence from Rural India
+%Formal Inclusion, Effective Exclusion: Gender Quotas and Barriers to Women's Representation in Rural India
+
+%\thanks{The authors gratefully acknowledge The Center for International Studies at the University of Southern California for funding a part of this research. We thank audiences at the 2025 Rebecca B. Morton Conference on Experimental Political Science in New York University, 2025 New Perspectives on the Political Economy of Development Conference at University of Southern California,   PIPE Workshop 2024 in USC Price School of Public Policy, Brown-Harvard South Asia seminar 2024, CIS Comparative Workshop Series (2024 -- 25) in the University of Southern California, Annual Meeting of the American Political Science Association 2024,  PolMeth 2024 poster presentation session, SoCal Pipe at UCLA Fall 2024, CLASS workshop in Gould School of Law. We are grateful to Aidan Milliff, Alexander Coppock, Alyssa Heinze, Amanda Clayton, Amna Salam, Ana Catalano Weeks, Arturas Rozenas, Christian Phillips, Chris Dawes, Claire Adida,  Don Green, Erik Hanson, Evan Lieberman, Feyaad Allie, Gwyneth McClendon, Jason Lyall, Jeff Weaver, Jennifer Piscopo, Jessica Sun, Julia Payson, Luke Sanford, Marcel Fafchamps, Maria Silfa, Par Zetterberg, Pradeep Chhibber, Rebecca Weitz-Shapiro,  Rikhil Bhavnani,  Shikhar Singh,  Thibaud Marcesse,  Tom Pepinsky, and Zuheir Desai for helpful comments. All errors are our responsibility.}
+% \usepackage{floatrow}
+% \floatsetup[table]{framestyle=,framearound=none,heightadjust=none}
+% \floatsetup[figure]{framestyle=,framearound=none,heightadjust=none}
+
+\author{Varun Karekurve-Ramachandra\thanks{Assistant Professor, Department of Political Science and International Relations, University of Southern California, Email: \href{mailto:varun.rama@usc.edu}{varun.rama@usc.edu}} \and Gaurav Sood\thanks{Independent Researcher, Email: \href{mailto:gsood07@gmail.com}{gsood07@gmail.com}}} 
+
+\date{\today}
+
+\begin{document}
+
+% Redefine \addcontentsline to suppress entries in the TOC/LOT/LOF for the main body
+\newcommand{\nocontentsline}[3]{}
+\let\oldaddcontentsline\addcontentsline
+\let\addcontentsline\nocontentsline
+
+\maketitle
+
+
+\newcommand{\foo}{\color{black}\makebox[0pt]{\textbullet}\hskip-0.5pt\vrule width 1pt\hspace{\labelsep}}
+
+%%%%%%%END TIMELINE CODE%%%%%%%
+
+
+
+\begin{abstract}
+\noindent Mandatory gender quotas guarantee women's representation, but do the gains persist beyond the mandate? We study over 25,000 local government bodies across four election cycles spanning fifteen years in rural India, where seats are randomly reserved for women. In Rajasthan, short-run effects of prior reservation on women's electoral success are null to negative. In Uttar Pradesh, effects are positive and statistically significant but small: 1--4 percentage points on a base of 15--19\%, an order of magnitude below the approximately 15 percentage point effects documented in urban settings. Minimum detectable effects of 1.7--4.0 percentage points (at 80\% power) confirm these are not power failures. Cumulative exposure over multiple election cycles does not reliably compound: in UP, where the data are most informative, all two-way interactions between quota assignments in different cycles are zero or negative, meaning double exposure adds nothing over single-period exposure. The one significant three-way interaction does not survive restriction to districts with cleaner identification. Novel phone audits of 1,000 randomly sampled representatives reveal a mechanism: male relatives answered 85\% of calls to quota-seat officeholders, and only 9\% of calls reached the elected woman herself --- compared with 76\% in open seats. Women elected under quotas are also younger, less educated, and less wealthy than their open-seat counterparts. These patterns suggest that quotas achieve \textit{de jure} representation but, in settings where male relatives govern by proxy, do not create the conditions --- voter exposure to female leadership, political skill acquisition, candidacy pipeline expansion --- for women to retain power once the mandate is lifted.
+
+
+\vspace{6mm}
+
+\bigskip
+
+\noindent \textbf{Keywords:} Women in Politics, Gender Quotas, India, Local Government
+
+\end{abstract}
+
+\thispagestyle{empty}
+
+\newpage
+\FloatBarrier
+
+\setcounter{page}{1}
+\doublespacing
+
+%\epigraph{\textit{``In the previous elections, the government reserved this seat for females. But Brij Bhushan is a wise man. He made his wife run for elections and won as well (...) What we mean is Manju Devi is the official \textit{Pradhan}, and Brij Bhushan is her husband, the \textit{Pradhanpati}. He's the one who handles all the business of the Panchayat office around here.''} \\
+   
+%   -- \textit{Panchayat}, Season $1$, Episode $1$, Amazon Prime Video, $2020$ \citep{panchayat_poster}}
+   
+%\textit{``You are speaking to the "Pratinidhi" (representative)''}\\
+
+%-- Father-in-law of an elected representative, when we tried to contact the representative (July, 2024.Name and location withheld)
+%}
+
+\section{Introduction}
+
+Women's representation in elected office matters for both intrinsic and instrumental reasons. Equal citizenship is difficult to reconcile with decision-making bodies in which half the population is largely absent. Evidence from India's randomized political reservations shows that female leaders shift spending toward public goods preferred by women \citep{chattopadhyay2004women}, that exposure to women leaders narrows gender gaps in aspirations by 25--32\% and eliminates gender gaps in educational attainment \citep{beaman2012female}, and that women's political voice strengthens institutional responsiveness, including greater reporting of crimes against women \citep{iyer2012power}. Yet women remain underrepresented across elected bodies worldwide, and many countries have adopted electoral quotas in response. The policy expectation is that quotas will catalyze self-sustaining change: shift policy priorities, reduce discrimination through voter exposure to female leaders, and expand the pipeline of women willing and able to contest elections.
+
+This paper tests whether that expectation is met in the setting where the most influential evidence for quota effectiveness originates. We examine twenty years of electoral data from over 20,000 rural governance bodies (Gram Panchayats) across four election cycles in Rajasthan and Uttar Pradesh, two of the poorest Indian states with a combined rural population exceeding 150 million. India's 73rd Constitutional Amendment mandates that at least one third of local government seats be reserved for women. In both states, the assignment of reservation status is randomized or as-if random, and the policy rotates across GPs over time. This provides repeated natural experiments: we observe the same GPs cycling in and out of reservation over multiple elections, allowing us to estimate both the short-run effect of a single cycle of reservation and the cumulative effect of sustained exposure.
+
+We find that prior reservation has limited effects on women's subsequent electoral success in rural India. In Rajasthan, short-run estimates are zero or negative across three election transitions; the negative estimate appears to reflect compositional effects of non-random quota rotation rather than a genuine backlash. In Uttar Pradesh, short-run effects are positive and statistically significant but small: 2--4 percentage points on a base of 15--19\%. These estimates are precise enough to rule out effects of the magnitude reported in urban settings: \citet{bhavnani2009electoral} found a 15 percentage point increase in women's winning probability following quota removal in Mumbai, and our minimum detectable effects of 1.7--4.0 percentage points (at 80\% power) would detect such an effect with over 99\% power. Candidacy effects are null. The long-run interaction models reveal that double exposure to quotas adds nothing over single-period exposure: all two-way interactions are negative or zero. The one significant cumulative effect (in UP) is driven by a three-way interaction that does not survive restriction to districts with cleaner identification. Results are robust to covariate adjustment, fixed effects, placebo tests, and replication with independently collected data.
+
+We document two features of the institutional environment that explain why the theorized pathways from quotas to lasting representation fail to operate. First, male relatives perform the representative function in the vast majority of quota seats. In our phone audit of 1,000 randomly sampled Sarpanches in Rajasthan, only 9\% of calls to quota-seat representatives reached the elected officeholder; 85\% were answered by male family members, predominantly spouses and sons, who refused to transfer calls in three quarters of cases. This proxy governance severs the causal chain at its first link: if citizens interact with male relatives rather than the female officeholder, voters cannot update their beliefs about women's leadership, women in office cannot accumulate political capital, and other potential female candidates do not observe a demonstration of female governance. In open seats, by contrast, 76\% of calls reached the representative directly. Among the small number of women who won open seats without a quota, the pattern resembles quota seats: male relatives intercepted the majority of calls. Male proxy governance thus appears to be a feature of female-held seats broadly, but quotas massively expand the number of seats in which it operates.
+
+Second, women elected under quotas are less professionalized than open-seat winners. In Rajasthan, quota-seat winners are younger, have 12 percentage points lower graduation rates (12\% vs.\ 24\%), own fewer assets, and are far more likely to report being unemployed (61\% vs.\ 10\%). These gaps may reinforce rather than challenge voter stereotypes about women's political competence, further weakening the exposure channel.
+
+A suggestive piece of evidence on scope conditions comes from extending the phone audit to urban Jaipur, where 32\% of calls to quota-seat representatives reached the elected officeholder, compared with 9\% in rural areas. Proxy governance is less prevalent in urban settings, though it remains the norm even there. This gradient is consistent with the gap between our rural results and the large urban effects reported by \citet{bhavnani2009electoral}, and suggests that the conditions under which quotas generate lasting representation---women actually governing, a professionalized female candidate pool, voter exposure to female leadership---are more likely to be met in urban settings where household structures and labor markets differ.
+
+Our contribution is threefold. First, we provide the largest and longest test of whether electoral quotas create lasting change in women's representation, covering over 20,000 electoral bodies across twenty years. Previous studies examined single cities or limited time periods \citep{bhavnani2009electoral, beaman2009powerful, duflo2004}. Our data allow us to decompose the effects of single and repeated quota exposure and to distinguish short-run from cumulative impacts. Second, our phone audit provides direct evidence of male proxy governance at scale. This reveals how formal inclusion can coexist with effective exclusion from power, a pattern consistent with research on strategic compliance with gender mandates \citep{valdini2019inclusion, meguid2025strategic}. Third, the contrast between our rural null-to-small results, the urban Jaipur audit, and \citet{bhavnani2009electoral}'s large urban effects helps delineate the institutional scope conditions under which quotas can and cannot catalyze lasting change.
+
+The implication is not that quotas are ineffective. Quotas guarantee descriptive representation, and compliance with India's mandate has placed nearly a million women in elected local office. The implication is that quotas alone are insufficient to generate self-sustaining female representation in settings where household-level power structures prevent women from exercising the authority that office confers. Complementary interventions that address proxy governance directly may be necessary for quotas to fulfill their transformative potential.
+
+\section{Theoretical Framework}\label{sec:theory}
+
+Gender quotas guarantee women's descriptive representation while the mandate is in force. The policy question is whether this mandated inclusion generates lasting change: does reserving seats for women in one election increase the probability that women win or contest those seats in subsequent open elections? We outline the channels through which theory predicts quotas should generate self-sustaining representation, the conditions under which those channels may fail, and the testable predictions that follow.
+
+\subsection{How Quotas Can Generate Lasting Representation}\label{subsec:when_works}
+
+Existing research identifies three pathways through which temporary quotas can create conditions for women to compete successfully without institutional protection.
+
+\paragraph{Policy responsiveness.} Women representatives may prioritize policies that address needs disproportionately borne by women. \citet{chattopadhyay2004women} show that female leaders in India shift spending toward drinking water and road infrastructure. If voters attribute these policy gains to female leadership, demand for women candidates may persist after quotas are removed, especially in settings where women demonstrate decision-making authority while in office \citep{duflo2004}.
+
+\paragraph{Exposure and attitude change.} Seeing women govern can transform voters' beliefs about female political competence. \citet{beaman2009powerful} show that exposure to female leaders reduces statistical discrimination (voters learn women can govern effectively) and may reduce taste-based discrimination (voters become more comfortable with female authority). Quota-elected women can also serve as role models, changing the aspirations of other women and girls \citep{beaman2012female, alexander2012change, gilardi2015temporary, ladam2018prominent, holman2018gender}. This channel has a critical precondition: voters must directly observe women exercising political authority. If the female officeholder is not the person citizens interact with, the exposure mechanism has no raw material to work on.
+
+\paragraph{Pipeline expansion.} Having women in office expands the pool of politically active women. Quota-elected officeholders may recruit other women into political networks, mentor potential candidates, and demonstrate that political careers are feasible \citep{barnes2020gender, goyal2025local, prillaman2023strength}. This pipeline effect depends on women in quota seats actually participating in governance, building networks, and acquiring the skills and visibility that make them credible sponsors of future candidates.
+
+All three pathways share a common structure: quotas create a temporary condition (women in office), which triggers a mechanism (voter learning, skill acquisition, network formation), which produces a durable outcome (sustained representation without mandates). The mechanism requires that women elected under quotas exercise genuine political authority. If this precondition is not met, the temporary condition does not trigger the mechanism, and the durable outcome does not follow.
+
+\subsection{Why Quotas May Fail}\label{subsec:when_fails}
+
+The pathways above assume that formal office translates into substantive authority. In settings where women's autonomy is severely constrained, two features of the institutional environment may prevent this translation.
+
+\paragraph{Male proxy governance.} Incumbent male actors with entrenched interests may use quotas to retain power \citep{tate2004black, dahlerup2008gender, bush2011international, valdini2019inclusion, weeks2023mannerparteien, meguid2024strategic}.\footnote{See pp.~368--376 in \citealt{thakur2015brothers} for an example from the Indian state of Bihar.} In settings where women's political agency is curtailed by household power structures, male relatives may perform the representative function while women hold office in name. The elected woman is the \textit{de jure} officeholder; a husband, father-in-law, or son is the \textit{de facto} decision-maker. This proxy governance breaks all three pathways simultaneously. Voters who interact with male proxies cannot update their beliefs about female leadership; women who do not govern do not acquire political skills or build constituent relationships; and the demonstration other women observe is of family power, not female political competence. Male proxies may still deliver beneficial policies, but voters attribute these outcomes to the male relative, not the female officeholder, preventing the attitude change that the exposure channel requires.
+
+\paragraph{Candidate professionalization.} The pool of women who contest under quotas may differ systematically from the pool of candidates in open seats. If quota-elected women are less educated, less experienced, and less economically independent than their open-seat counterparts, they may lack the resources and autonomy to resist proxy governance, and voters may perceive them as less competent \citep{weeks2015quotas, allen2016measuring}. These perceptions can reinforce rather than challenge existing stereotypes about women's political capacity \citep{hansen1997talking, atkeson2003not}. The candidate-quality channel and the proxy-governance channel are mutually reinforcing: less professionalized candidates are more susceptible to proxy governance, and proxy governance prevents candidates from acquiring the experience that would professionalize them.
+
+\subsection{Predictions}\label{subsec:predictions}
+
+This framework generates four testable predictions.
+
+First, if the pathways from Section~\ref{subsec:when_works} operate, reserving a seat for a woman in election $t$ should increase the probability that a woman wins or contests that seat in election $t+1$ when it is open. If the barriers from Section~\ref{subsec:when_fails} dominate, this effect should be zero or small.
+
+Second, if quotas work through gradual erosion of discrimination and incremental pipeline expansion, the effect should be larger for GPs exposed to quotas over multiple election cycles. The dose-response prediction is that sustained exposure compounds: two cycles of reservation should produce a larger effect than one, and three larger than two. If, however, proxy governance and weak candidate professionalization persist across cycles, cumulative exposure should add little.
+
+Third, if the barriers to quota effectiveness are features of underdeveloped, remote settings---where patriarchal household structures are strongest and the female candidate pool is thinnest---then quota effects should be larger in more developed GPs, closer to towns, with better infrastructure and electrification. The development-moderation prediction is that the within-sample gradient on development proxies should be positive. This prediction also speaks to the gap between the large effects documented in urban Mumbai \citep{bhavnani2009electoral} and the effects we estimate in rural settings.
+
+Fourth, if proxy governance is widespread, a direct measure of who exercises political authority should reveal that citizens overwhelmingly interact with male relatives rather than the female officeholder when contacting quota-seat representatives. The contrast with open-seat representatives, where the officeholder is typically male and performs the representative function directly, provides a benchmark.
+
+We test these predictions using electoral panel data, a phone audit of elected representatives, and candidate-level administrative records from two Indian states.
+
+\section{Institutional Background}\label{sec:background}
+
+India's rural local governance operates through a three-tier system of Panchayati Raj Institutions (Figure~\vref{fig:local_govts}). At the top is the Zilla Parishad, the elected body at the administrative district level. Below it is the Panchayat Samiti (PS), which operates at the block level. At the base is the Gram Panchayat (GP), typically comprising one or more villages, and the unit at which quotas are assigned. Our study focuses on the GP level.
+
+Each GP is governed by an elected body of ward members headed by the Sarpanch (president). The Sarpanch wields significant executive power: overseeing village development, managing service delivery, presiding over meetings of the Gram Sabha (the assembly of all registered voters in the GP), and identifying beneficiaries for government welfare schemes.\footnote{For details on governance responsibilities, see \url{https://www.pria.org/panchayathub/panchayat_text_view.php}.} Elections are non-partisan and held every five years, a feature that distinguishes this setting from the partisan urban contexts (such as Mumbai municipal wards) where scholars have documented large and lasting effects of quotas \citep{bhavnani2009electoral}.
+
+India's 73rd Constitutional Amendment (1992) mandates that at least one third of Sarpanch positions be reserved for women. Many states, including Rajasthan and Uttar Pradesh, have raised this threshold to 50\%. In both states, gender quotas are implemented alongside caste-based reservations for Scheduled Castes (SC), Scheduled Tribes (ST), and Other Backward Classes (OBC), producing a cross-classified assignment in which some seats are reserved on both gender and caste dimensions. Our analysis focuses on the gender dimension: we compare GPs where the Sarpanch seat was reserved for women (quota seats) with GPs where any candidate could contest (open seats), regardless of caste reservation status.
+
+Rajasthan and Uttar Pradesh together account for roughly 20\% of India's population. Rajasthan is India's largest state by area with over 70 million residents; Uttar Pradesh is the most populous with over 200 million. In both states, more than 70\% of the population is rural (Figure~\vref{fig:india_map}). Table~\vref{tab:gp_summary_combined} reports the number of GPs, Panchayat Samitis, and districts in each state across the election cycles in our data.
+
+\begin{figure}[htbp]
+    \centering
+    
+    \begin{tikzpicture}[
+        node distance=1.5cm,
+        block/.style={
+            rectangle,
+            draw=black!70,
+            fill=white!10,
+            thick,
+            minimum width=5cm,
+            minimum height=1cm,
+            align=center,
+            font=\scriptsize,
+            rounded corners=2pt
+        },
+        arrow/.style={
+            ->,
+            >=stealth,
+            thick,
+            black!70
+        }
+    ]
+        \node [block] (district) {Zilla Parishad\\[-2pt]{\scriptsize\textit{(District level)}}};
+        \node [block, below=of district] (ps) {Panchayat Samiti\\[-2pt]{\scriptsize\textit{(Block level)}}};
+        \node [block, below=of ps, fill=gray!5, draw=black!50] (local) {Gram Panchayat\\[-2pt]{\scriptsize\textit{(Village level -- unit of treatment)}}};
+        
+        \draw [arrow] (district) -- (ps);
+        \draw [arrow] (ps) -- (local);
+    \end{tikzpicture}
+    
+    \vspace{\medskipamount}
+    
+    \caption{Local Governance Structure in Rajasthan and Uttar Pradesh}
+    \label{fig:local_govts}
+    \vspace{\medskipamount}
+    \parbox{0.85\textwidth}{\scriptsize
+        \emph{Notes:} The Zilla Parishad operates at the administrative district level. Panchayat Samitis are intermediate bodies at the block level. Gram Panchayats are collections of one or more villages and the unit at which gender quotas are assigned.
+    }
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{../figs/india_map_up_raj.pdf}
+    
+    \vspace{\medskipamount}
+    
+    \caption{Study States: Rajasthan and Uttar Pradesh}
+    \label{fig:india_map}
+    \vspace{\medskipamount}
+    \parbox{0.9\textwidth}{\scriptsize
+        \emph{Notes:} Green: Rajasthan (largest state by area, population $>$70 million, $>$70\% rural). Red: Uttar Pradesh (most populous state, population $>$200 million, $>$75\% rural).\footnote{Rajasthan: Urban Development and Housing Ministry, \url{https://urban.rajasthan.gov.in}. Uttar Pradesh: Ministry of Jal Shakti, Department of Drinking Water and Sanitation, \url{https://ejalshakti.gov.in}.}
+    }
+\end{figure}
+
+\subsection{Data}
+
+We assemble four data sources for this study (Table~\vref{tab:data_sources}).
+
+\paragraph{Electoral data.} We scraped GP-level election records from the Rajasthan and Uttar Pradesh State Election Commissions for four cycles each: 2005, 2010, 2015, and 2020 in Rajasthan, and 2005, 2010, 2015, and 2021 in UP. For each GP-election, we observe the reservation status of the Sarpanch seat (reserved for women, or open) and the sex of the elected Sarpanch. In Rajasthan 2015, the winner's sex was missing from official records and was manually coded from names. For Rajasthan 2020, we additionally collected candidate-level affidavit data (age, education, assets) from the SEC. Table~\vref{tab:gp_summary_combined} summarizes the electoral data. Between 2005 and 2020, the number of GPs in Rajasthan grew from roughly 5,400 to 7,600 ($\uparrow 40\%$), reflecting delimitation driven by population growth and urbanization. The number of Panchayat Samitis increased from 221 to 282 ($\uparrow 28\%$), while the number of districts remained stable with only Pratapgarh added in 2008. In UP, the number of GPs, blocks, and districts remained approximately constant across cycles. As a validation check, we replicate the UP short-run results using independently collected data from \citet{weaver_data}.
+
+\paragraph{Linking GPs across election cycles.} Constructing a panel of GPs across elections requires matching administrative units whose names vary over time due to transliteration inconsistencies, OCR errors in digitized records, and administrative renaming. We proceed in three steps. First, we standardize raw names within each election year using transliteration normalization (via the \texttt{stringi} package) and manual correction of OCR artifacts (e.g., ``JAW AJA'' $\rightarrow$ Jawaja, ``BANSW ARA'' $\rightarrow$ Banswara). Second, we construct validated crosswalks at each level of the administrative hierarchy. For districts, we manually map every raw election district name to its canonical SHRUG or LGD equivalent, handling spelling variants (Chittorgarh/Chittaurgarh), abbreviations (S. Madhopur/Sawai Madhopur), OCR errors, and post-2010 renamings (Allahabad $\rightarrow$ Prayagraj, Faizabad $\rightarrow$ Ayodhya). For sub-district units (Panchayat Samitis in Rajasthan, blocks in UP), we build analogous crosswalks to LGD block codes, achieving 100\% coverage of election units. In UP, this includes tracking blocks that moved between districts when Shamli, Sambhal, Hapur, and Amethi were carved out after 2010. Third, we match GPs across cycles by joining on normalized district-samiti-GP name strings, and manually verify a random sample of matches for accuracy. In Rajasthan, delimitation redefined roughly a quarter of GPs in each of the 2010--2015 and 2015--2020 cycles (approximately 1,000 new GPs created per cycle and twice as many boundary changes). We restrict the analysis to GPs with consistent definitions across the relevant electoral cycles. Results are robust to less conservative matching rules.
+
+\paragraph{Village-level covariates.} We link GPs to pre-treatment village characteristics via two additional data sources. The Local Government Directory (LGD), the Indian government's authoritative registry of rural administrative units, provides the mapping between GPs and census villages for 2020.\footnote{\url{https://lgdirectory.gov.in/}} We use this mapping, together with the GP-to-LGD crosswalks described above, to join election data to village-level attributes from the Socioeconomic High-resolution Rural-Urban Geographic Platform for India (SHRUG 2.0; \citealp{asher2019socioeconomic}), which harmonizes data from the 1991 and 2001 Census Abstracts and Village Directories \citep{pcindia, chandramouli2011census}. We aggregate village-level covariates---population, female population, SC/ST composition, medical facilities, schools, water infrastructure, banking, power supply, and road access---to the GP level and use these for balance tests and covariate-adjusted specifications.
+
+\paragraph{Phone audit data.} In 2024, we conducted a phone survey of Sarpanches elected in the 2020 Rajasthan elections, sampling separately from quota and open seats. We report these results separately in Section~\ref{sec:phone_audit}.
+
+\subsection{Research Design}
+
+\paragraph{Assignment mechanism.} In Rajasthan, quota assignment is randomized by lottery within each Panchayat Samiti \citep{duflo2004, nilekani2010reservation, brule2023actually}. In Uttar Pradesh, assignment follows an as-if random rule based on population size within blocks. The random procedure eliminates the concern that quotas are imposed on constituencies with a pre-existing proclivity for electing women. Under independence, the difference in means between previously-reserved and previously-open GPs identifies the causal effect of the quota.
+
+\paragraph{Estimand and identification.} Our estimand is the effect of reserving the Sarpanch position for women in election $t$ on the probability that a woman wins in the subsequent election $t+1$, conditional on the seat being open in $t+1$. Identification requires two conditions: (a) $\text{Quota}_{g,t}$ is independent of potential outcomes, and (b) conditioning on $\text{Open}_{g,t+1}$ does not induce a spurious association between $\text{Quota}_{g,t}$ and the outcome. Condition (a) is standard and testable via balance checks. Condition (b) warrants discussion because of quota rotation.
+
+\paragraph{Rotation: mechanics and implications.} Tables~\ref{tab:treat_corr} and \ref{tab:long_term_treat_rotation} document that both states rotate quota assignments across cycles: a GP reserved in election $t$ is less likely to be reserved in $t+1$. In Rajasthan, the 2005--2010 transition shows no rotation ($\hat{\beta} \approx 0.01$, $p > 0.3$), consistent with independent lottery draws. The chi-square test confirms independence ($\chi^2 = 1.41$, $p = 0.23$; Table~\ref{tab:chi_square_reserved_over_time}). Subsequent transitions show strong rotation ($\hat{\beta} = -0.40$ to $-0.29$, $p < 0.01$), indicating a policy shift after 2010. In UP, even the first transition shows modest but significant rotation ($\hat{\beta} = -0.02$, $p < 0.01$), with stronger rotation in later periods ($\hat{\beta} = -0.11$ to $-0.28$). The chi-square test rejects independence for all transitions except 2005--2021 (Table~\ref{tab:up_chi_squared_results}). The 4-way balanced panel yields nearly identical rotation coefficients (Appendix Table~\ref{tab:long_term_treat_rotation}).
+
+Rotation has two mechanical consequences for estimation. First, it determines the composition of the estimation sample. Because we observe outcomes only for GPs that are open in $t+1$, rotation means that previously-reserved GPs are over-represented among open seats in $t+1$ relative to what pure random assignment would produce. This is a feature of the estimand---we define the effect conditional on the seat being open---not a threat to internal validity. Second, conditioning on $\text{Open}_{g,t+1}$ is conditioning on a variable that is causally downstream of $\text{Quota}_{g,t}$ (since rotation links the two). If the rotation rule operated through GP characteristics---for instance, if larger or more developed GPs were systematically rotated out of reservation earlier---then conditioning on open status could induce collider bias, creating a spurious association between $\text{Quota}_{g,t}$ and the outcome among the estimation sample.
+
+The threat is therefore specific: rotation biases estimates only if it is confounded, i.e., correlated with GP characteristics that also predict the outcome. If rotation is purely a function of prior quota status and operates through a mechanical rule (lottery-based in Rajasthan, population-rule-based in UP) that is orthogonal to GP-level determinants of female electoral success, conditioning on open status is harmless.
+
+A separate question is whether candidates can anticipate the rotation pattern and respond strategically. If a female Sarpanch elected under quota in $t$ knows with high probability that her seat will be open in $t+1$, she may invest differently in building a political base than she would under uncertain future reservation status. This is part of the treatment effect, not a threat to identification: the estimand captures the full causal chain from reservation to subsequent electoral outcomes, including any behavioral responses to the anticipated political environment. The concern would arise if anticipation were asymmetric---if candidates in reserved GPs could predict future openness but candidates in open GPs could not predict future reservation. But the rotation pattern is public information: once it becomes known that the state rotates quotas, all potential candidates can update. The anticipation channel is weakest for the earliest transitions in our data, which are also the transitions with the least rotation and the cleanest identification.
+
+\paragraph{Balance.} We assess whether the identifying assumption holds by testing balance on pre-treatment covariates from the 2001 Census Village Directory (SHRUG). In Rajasthan, balance is excellent across all three short-run panels. Joint likelihood ratio tests yield $p = 0.12$ (2005$\rightarrow$2010), $p = 0.52$ (2010$\rightarrow$2015), and $p = 0.57$ (2015$\rightarrow$2020); randomization inference omnibus tests are nearly identical (Table~\vref{tab:balance_raj_2005_2010}). Two individual covariates in the first panel reach conventional significance (handpumps $p = 0.04$, wells $p = 0.01$), consistent with chance given fifteen tests.
+
+In UP, joint tests reject balance for all three panels ($p < 0.01$; Table~\vref{tab:balance_up_2005_2010}). The 2010$\rightarrow$2015 panel is best balanced, with most individual $p$-values above 0.20. The 2005$\rightarrow$2010 and 2015$\rightarrow$2021 panels show statistically significant differences on population, female population, and infrastructure variables. These rejections reflect the large sample sizes ($N \approx 13{,}000$--$21{,}000$) rather than substantive imbalance: standardized differences (Cohen's $d$) across all panels and covariates fall below 0.12, well under the conventional threshold of 0.20 for a ``small'' effect.
+
+Balance on electoral covariates reinforces these conclusions. In Rajasthan, prior female winner rates do not differ between quota and open GPs ($p = 0.51$), and caste composition is balanced ($\chi^2$ $p = 0.62$). In UP, OBC and SC/ST reservation shares differ between quota and open GPs, consistent with the rotation pattern (Table~\vref{tab:balance_electoral}). These imbalances are on covariates that can be controlled for, and we verify that estimates are stable across specifications with and without controls and fixed effects.
+
+\paragraph{Placebo tests.} If quota assignment is effectively random with respect to the outcome, future treatment should not predict past outcomes. We regress the outcome in election $t-1$ (woman elected in an open seat) on quota status at $t$. Across all six panels and both FE specifications, every placebo coefficient is zero to two decimal places and statistically insignificant (Table~\vref{tab:placebo_combined}).
+
+\paragraph{Power.} Minimum detectable effects at 80\% power and $\alpha = 0.05$ are approximately 3.3--4.0 percentage points in Rajasthan (35--40\% of the control mean) and 1.7--1.9 percentage points in UP (10--12\% of the control mean). For comparison, \citet{bhavnani2009electoral} found a 15 percentage point effect in urban Mumbai (Appendix Table~\vref{tab:power_analysis}).
+
+\paragraph{Summary.} In Rajasthan, the earliest panel (2005$\rightarrow$2010) offers the cleanest identification: quota assignment is lottery-based, rotation is absent, balance is excellent, and placebo tests are null. Later panels have rotation but maintain good covariate balance. In UP, assignment is as-if random, and mild rotation exists from the start. Covariate imbalances are statistically detectable but substantively trivial ($d < 0.12$), and estimates are robust to controlling for them. The consistency of results across specifications---with and without FE, with and without covariates, on full samples and random-rotation-district subsets---provides confidence that the estimates reflect the causal effect of quotas.
+
+\subsection{Estimation}
+
+We estimate:
+
+\begin{equation}\label{eq:estimation_eqn}
+\text{FemaleWinner}_{g,t+1} = \beta \cdot \text{Quota}_{g,t} + \lambda_{d} + \varepsilon_{g,t+1},
+\end{equation}
+
+\noindent where $g$ indexes GPs, $\text{FemaleWinner}_{g,t+1}$ is an indicator for a woman winning the open seat in election $t+1$, $\text{Quota}_{g,t}$ indicates whether GP $g$ was reserved for women in election $t$, and $\lambda_d$ denotes district-samiti (Rajasthan) or district-block (UP) fixed effects. The coefficient $\beta$ is the intent-to-treat (ITT) estimate. We estimate Equation~\ref{eq:estimation_eqn} separately for each short-run panel ($t \rightarrow t+1$) and report all specifications with and without fixed effects.
+
+For the long-run analysis, we estimate effects of quota assignment in 2005 on outcomes in 2015 or 2020/2021, restricting to GPs open in the outcome year. We also estimate a treatment intensity specification that includes $\text{Quota}_{g,2005}$, $\text{Quota}_{g,2010}$, and their interaction, recovering the marginal and cumulative effects of single and repeated exposure to reservation.
+
+In the appendix, we report: (i) specifications on the SHRUG-matched subsample with village-level covariates aggregated to the GP level; (ii) the full-panel analog of each short-run regression predicting reservation status as a function of lagged status; (iii) placebo and falsification tests on full panels; (iv) interaction specifications with proximity to towns, infrastructure, and power supply; and (v) a replication of the UP short-run results using independently collected data from \citet{weaver_data}.
+
+\section{Results}\label{sec:results}
+
+\subsection{Short-run Effects}
+
+Table~\vref{tab:short_term_main} reports estimates of Equation~\ref{eq:estimation_eqn} for each short-run panel, with and without district-samiti (Rajasthan) or district-block (UP) fixed effects. The outcome is whether a woman wins an open GP seat in election $t+1$; the treatment is quota assignment in election $t$.\footnote{Gender quotas are implemented alongside caste quotas. In seats with both caste and gender quotas, men and women from reserved caste groups may contest, whereas in open seats anyone can run. Our results indicate that when a seat loses its gender quota, women are not substantially winning or contesting regardless of caste category.}
+
+In Rajasthan, the 2005$\rightarrow$2010 panel yields an estimate of 1 percentage point ($p > 0.10$). The 2010$\rightarrow$2015 panel yields $-2$ percentage points without fixed effects and $-3$ percentage points with fixed effects (both $p < 0.05$). The 2015$\rightarrow$2020 panel yields a precise zero. In Uttar Pradesh, effects are consistently positive and statistically significant: 2 percentage points for 2005$\rightarrow$2010 ($p < 0.01$), 1 percentage point for 2010$\rightarrow$2015 ($p < 0.01$ without FE, $p < 0.05$ with FE), and 4 percentage points for 2015$\rightarrow$2021 ($p < 0.01$).
+
+The negative Rajasthan estimate for 2010$\rightarrow$2015 warrants comment. This is the first transition where strong rotation appears ($\hat{\beta} = -0.40$ for lagged quota predicting current quota; Table~\ref{tab:treat_corr}). When we restrict to the nine districts (of 33) where within-district chi-squared tests fail to reject independence of quota assignment, the estimate flips to $+2$ percentage points (Table~\ref{tab:short_term_random_rotation}), though the restricted sample ($N = 955$) lacks power. The negative full-sample estimate thus likely reflects compositional differences between quota and open GPs introduced by non-random rotation, not a genuine backlash effect of quotas.
+
+The UP effects, while statistically significant, are small in absolute terms. The control mean (proportion of women winning open seats without prior reservation) ranges from 15\% to 19\% across panels, so a 2--4 percentage point increase represents a 10--25\% gain relative to the baseline. These magnitudes are an order of magnitude smaller than the approximately 15 percentage point effect reported by \citet{bhavnani2009electoral} in urban Mumbai. Our null and small results are not driven by lack of power: minimum detectable effects range from 1.7 to 4.0 percentage points at 80\% power (Appendix Table~\ref{tab:power_analysis}), and we would detect a Bhavnani-sized effect with $>$99\% power in every panel.
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Short-run Effects}
+    \label{tab:short_term_main}
+    \input{../tabs/short_term_combined.tex}
+\end{table}
+
+\subsection{Long-run Effects}
+
+Gender quota policies aim to create a self-sustaining cycle of women's representation. If such dynamics exist, they should emerge with cumulative exposure to reservation over multiple election cycles. We test this using the full interaction model, regressing whether a woman wins an open seat in the final election (2020 in Rajasthan, 2021 in UP) on quota status in each prior election and all two- and three-way interactions.
+
+Table~\vref{tab:long_run_interaction} reports the results. In Rajasthan, the individual treatment indicators for 2005 and 2015 are not significant. The 2010 quota indicator is positive and significant (6 percentage points without FE, $p < 0.05$; 8 percentage points with FE, $p < 0.01$). Among the interactions, only $\text{Quota}_{2005} \times \text{Quota}_{2015}$ is significant (8 percentage points, $p < 0.05$). The three-way interaction ($\text{Quota}_{2005} \times \text{Quota}_{2010} \times \text{Quota}_{2015}$) is $-5$ to $-6$ percentage points and not significant. The cumulative effect for GPs reserved in all three prior elections---the sum of all seven coefficients---is approximately 8 percentage points without FE and 9 percentage points with FE, but the linear combination is not statistically significant.
+
+In UP, the most recent quota (2015) has the largest individual effect (4--5 percentage points, $p < 0.01$), consistent with the short-run finding that the 2015$\rightarrow$2021 panel has the largest effect. The three-way interaction is positive and significant (8--9 percentage points, $p < 0.01$), suggesting that cumulative exposure to reservation does compound. The total cumulative effect for always-reserved GPs is approximately 12 percentage points with FE. Even this significant UP effect is smaller than the effects reported in urban settings by \citet{bhavnani2009electoral} and \citet{beaman2009powerful}. We find no evidence of backlash: no individual coefficient or linear combination is significantly negative.
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Long-run Effects}
+    \label{tab:long_run_interaction}
+    \input{../tabs/long_term_combined.tex}
+\end{table}
+
+\subsection{Candidacy Effects}
+
+Quotas might affect electoral dynamics through candidacy rather than winning \citep{o2020can, auerbach2016electoral}. Even if more women do not win once quotas are withdrawn, quotas might encourage more women to contest when the seat becomes open. We test this using candidate-level data from the 2020 Rajasthan elections, estimating the full interaction model on four outcomes: the proportion of candidates who are women, the number of women candidates, whether at least one woman ran, and women's vote share among the top two candidates.
+
+Table~\vref{tab:candidacy_combined} reports the results. Across all four outcomes, we find no statistically significant candidacy effects. Point estimates on the individual quota indicators are small and negative (1--3 percentage points for the proportion outcome), though some two-way interactions are marginally positive ($\text{Quota}_{2005} \times \text{Quota}_{2010}$: 5 percentage points, $p < 0.10$ without FE; $\text{Quota}_{2005} \times \text{Quota}_{2015}$: 5 percentage points, $p < 0.05$ without FE). These interaction effects do not survive the inclusion of fixed effects. On average, the top two candidates in the 2020 Rajasthan election capture 70\% of total votes (70\% in open seats), so the vote share analysis among the top two provides a meaningful test.
+
+\section{Robustness}\label{sec:robustness}
+
+We subject the main results to four sets of robustness checks.
+
+\paragraph{Covariate adjustment.} We re-estimate the short-run models on the SHRUG-matched subsample, controlling for log population, SC share, and literacy rate from the 2001 Census, aggregated to the GP level. Estimates are virtually unchanged (Appendix Table~\ref{tab:shrug_covariates}). The Rajasthan 2005$\rightarrow$2010 coefficient remains zero with controls; the 2010$\rightarrow$2015 coefficient remains $-3$ percentage points ($p < 0.01$). UP coefficients are identical to the main specification: 1 percentage point for 2005$\rightarrow$2010 ($p < 0.05$), 1 percentage point for 2010$\rightarrow$2015 (not significant), and 4 percentage points for 2015$\rightarrow$2021 ($p < 0.01$). The stability of estimates across specifications with and without covariates is consistent with the balance evidence in Section~\ref{sec:background}: observable imbalances are too small to drive the results.
+
+\paragraph{Random-rotation district restriction.} We restrict to districts where within-district chi-squared tests fail to reject independence of consecutive quota assignments ($p > 0.05$), eliminating districts where rotation could confound the comparison. Table~\ref{tab:short_term_random_rotation} reports the results. In Rajasthan, all 32 districts pass for the 2005$\rightarrow$2010 transition (the coefficient is unchanged at 1 percentage point), 9 of 33 pass for 2010$\rightarrow$2015, and 12 of 33 for 2015$\rightarrow$2020. The restricted-sample estimates are positive (2 percentage points) but not significant, consistent with both no effect and a small positive effect attenuated by low power. In UP, 48 of 63 districts pass for 2005$\rightarrow$2010, and the estimate remains 2 percentage points ($p < 0.01$). For 2010$\rightarrow$2015, only 14 of 54 districts pass, and the estimate is zero. No UP districts pass for 2015$\rightarrow$2021, so that panel cannot be estimated in this restricted sample. The long-run analog, restricted to districts where independence holds for both the 2005$\rightarrow$2010 and 2010$\rightarrow$2015 transitions, yields null effects in both states (Appendix Table~\ref{tab:long_term_random_rotation}): all coefficients and the interaction term are zero, though the samples are small (Rajasthan $N = 592$, UP $N = 1{,}772$).
+
+\paragraph{Placebo tests.} We regress past outcomes (woman elected in an open seat at $t-1$) on future quota status (at $t$). If assignment is effectively random, future treatment should have no predictive power for past outcomes. Table~\ref{tab:placebo_combined} confirms this: across all six panels and both FE specifications, every coefficient is zero to two decimal places and not significant.
+
+\paragraph{Replication with independent data.} We replicate the UP analyses using independently collected data from \citet{weaver_data}, which covers 2010, 2015, and 2020 elections with substantially larger samples ($N \approx 37{,}000$--$39{,}000$). The short-run estimates (Table~\ref{tab:weaver_short}) are 2 percentage points for 2010$\rightarrow$2015 ($p < 0.01$) and 4 percentage points for 2015$\rightarrow$2020 ($p < 0.01$), matching our main UP results. The long-run interaction model (Table~\ref{tab:weaver_long}) shows a significant 2015 quota effect (4 percentage points, $p < 0.01$) with a zero interaction term, consistent with our finding that the most recent quota drives the long-run result in UP.
+
+
+\section{Why Women Do Not Win or Run}\label{sec:mechanisms}
+
+The results establish that gender quotas have limited effects on women's chances of winning or contesting open seats after quota removal. We explore four channels that help explain this pattern.
+
+\subsection{Male Proxy Governance}\label{sec:phone_audit}
+
+The theoretical case for quotas generating lasting representation rests on a chain of assumptions. Voters observe women governing, update their beliefs about female leadership capacity \citep{beaman2009powerful}, and become more willing to elect women in future open contests. Women who serve under quotas acquire political skills, name recognition, and constituent relationships that position them to re-contest \citep{bhavnani2009electoral}. Other potential female candidates observe a demonstration of female political success and are inspired to enter politics \citep{o2020can}. Each link in this chain requires that women elected under quotas actually exercise political authority. If male relatives govern in their name, the chain breaks at the first link: voters interact with male proxies, not female leaders; the women themselves do not acquire governing experience; and the demonstration effect is of male, not female, political competence.
+
+To measure who exercises day-to-day political authority, we conducted a phone audit exploiting a feature of Indian local politics: elected representatives extensively use mobile phones for citizen engagement, a practice documented in media accounts \citep{rigillo2018whatsapp} and confirmed in our interviews with political staff.\footnote{Author's phone interview with former secretarial staff (name and affiliation withheld on request), December 20, 2024.} We scraped official electoral records from the Rajasthan State Election Commission containing the self-reported mobile phone numbers of all 2020 winners.\footnote{The study protocol was reviewed by the IRB under protocol number UP-24-00498.} We block-sampled 500 Sarpanches from seats reserved for women across districts and contacted them between July and August 2024, with the average call lasting just over 90 seconds.
+
+\paragraph{Results from quota seats.} Panel A of Table~\vref{tab:full_survey} reports the results. Of 500 sampled, 377 (75\%) answered. Of those who answered, only 35 (9.3\%) were the elected representatives themselves. Male relatives answered in 319 cases (84.6\%): spouses accounted for 173 (45.9\%), sons for 46 (12.2\%), and other males for 100 (26.5\%). Six calls (1.6\%) were answered by a female relative, and 11 (2.9\%) could not be classified. When we requested to speak with the actual representative, 283 of 377 respondents (75.1\%) refused to transfer the call. Reasons included the representative being unavailable, claims by the respondent that they were the ``sarpanch pati'' (husband of the sarpanch, i.e., the de facto representative), assertions that the representative was illiterate, or disconnection without explanation.
+
+Two cases illustrate the pattern. In one, the elected representative initially answered but transferred the call to her spouse when we began asking about panchayat governance. In another, a father-in-law answered and insisted that he was the ``Pratinidhi'' (representative).
+
+\paragraph{Comparison with open seats.} To benchmark these patterns, we contacted 487 randomly sampled representatives from open seats using the same protocol.\footnote{Our initial sample contained 507 numbers; 20 were invalid, leaving an effective sample of 487.} The response rate was 83\% (400 of 487). In open seats, 76.2\% of answered calls reached the elected representative directly (Panel B of Table~\vref{tab:full_survey}). The contrast is stark: a citizen calling a quota-seat representative speaks with the actual officeholder less than one in ten times; a citizen calling an open-seat representative does so three quarters of the time.
+
+Among the 42 women in our open-seat sample who won without a gender quota, the pattern resembles quota seats rather than open seats overall: of 32 who answered, only 5 (16\%) were the elected representatives; male relatives intercepted the remaining 26 calls. In three cases, male family members explicitly claimed to manage panchayat affairs on behalf of the female member. Male proxy governance thus appears to be a feature of female-held seats generally, not of quota seats specifically, though quotas massively increase the number of seats in which it operates.
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Phone Audit Response Distribution}
+    \label{tab:full_survey}
+    \setlength{\tabcolsep}{4pt}
+
+    \begin{subtable}[t]{0.45\linewidth}
+        \centering\scriptsize
+        \caption*{\textbf{Panel A: Gender-Quota Seats}}
+        \input{../tabs/phone_survey}
+    \end{subtable}
+    \hspace{2em}
+    \begin{subtable}[t]{0.45\linewidth}
+        \centering\scriptsize
+        \caption*{\textbf{Panel B: Open Seats}}
+        \input{../tabs/phone_survey_openseats}
+    \end{subtable}
+
+    \vspace{\medskipamount}
+
+    \parbox{0.9\textwidth}{\scriptsize
+        \emph{Notes:} Phone audit of elected Sarpanches in Rajasthan. We attempted to contact each representative up to three times between 10:00 am and 6:30 pm, conducting the conversation in Hindi. In addition to noting the initial point of contact, we asked respondents about their previous electoral experience, family involvement in politics, regularity of gram sabha meetings, and attendance at these meetings. The survey script is provided in Appendix Section~\ref{sec:phone_survey_script}.
+
+        \medskip
+
+        \emph{Panel A:} Block-sampled 500 quota-seat winners across Rajasthan, contacted July--August 2024 (average call duration: one minute).
+
+        \medskip
+
+        \emph{Panel B:} Block-sampled 500 open-seat winners across Rajasthan, contacted August--December 2024.
+    }
+\end{table}
+
+\paragraph{Implications.} If male relatives perform the representative function in the vast majority of quota seats, the three channels through which quotas are theorized to build lasting female representation are each attenuated. First, voters do not observe female leadership. The citizen who calls about a road or a water connection speaks to the sarpanch's husband, not the sarpanch. The role-model channel requires that voters attribute governance outcomes to the female officeholder; proxy governance severs this attribution. Second, women elected under quotas do not accumulate the political capital---skills, networks, name recognition, constituent relationships---that would position them to re-contest when the seat becomes open. The 2008 Panchayati Raj Ministry report finds that over 89\% of women representatives did not contest another election after their term \citep[pp.~26, 63]{ministry2008}; this is consistent with officeholders who never governed in practice having no basis on which to build a political career. Third, potential female candidates observe not a demonstration of successful female governance but a demonstration that the formal officeholder's family retains power regardless of the name on the ballot. The candidacy pipeline effect is undermined: the signal other women receive is not ``women can govern'' but ``families govern through women.'' These findings complement work by \citet{cheema2020canvassing, khan2021count, prillaman2023strength} and \citet{kumar2024} on male household members as constraints on women's political participation.
+
+\paragraph{Validity.} A concern is that gender gaps in mobile phone ownership, rather than proxy governance, drive the results. Rural phone ownership rates differ substantially by sex: 81\% for men aged 15--49 versus 57\% for women \citep[Fig.~2.2, p.~7]{mospi2025mobile}. Two features of our setting mitigate this concern. First, the phone numbers we call are self-reported by candidates in officially sworn affidavits filed under Section 125A of India's Representation of the People Act, 1951, which prohibits false or concealed information under penalty of imprisonment \citep[p.~52]{india_rpa_1951}. Phone ownership among political elites filing such affidavits likely exceeds population rates. Second, the contrast between quota seats (9\% representative answers) and open seats (76\% representative answers) is too large to be explained by differential phone ownership alone. What we cannot rule out is that women politicians are systematically less likely than men to answer calls from unknown numbers. Evidence on this specific behavior among political elites does not exist to our knowledge. Phone interception also captures only one dimension of proxy governance; male control likely extends to other spheres of political work---gram sabha meetings, interactions with block officials, disbursement decisions---that our audit cannot observe.
+
+\subsection{Candidate Characteristics}\label{sec:cand_char}
+
+Reservation does not simply replace a male incumbent with an equivalent female leader. It changes the composition of the candidate pool and the characteristics of winners. If quota-elected women are less professionalized than open-seat winners on dimensions that voters associate with competence, the exposure mechanism is further weakened: even voters who do interact with the officeholder may not update positively \citep{hansen1997talking, atkeson2003not, weeks2015quotas}.
+
+Table~\vref{tab:main_cand_char} compares observable characteristics of winners and candidates in quota versus open seats in the 2020 Rajasthan elections, using data from officially sworn candidate affidavits. Winners in open seats are 1.5 years older than winners in quota seats ($p < 0.01$), have 12 percentage points higher graduation rates (24\% vs.\ 12\%, $p < 0.01$), own more assets (log assets 12.92 vs.\ 12.55, $p < 0.01$), and are far less likely to report being unemployed (10\% vs.\ 61\%, $p < 0.01$). These patterns hold across the full candidate pool: all-candidate comparisons show nearly identical gaps. Similar patterns appear in UP (Table~\ref{tab:up_cand_char}): open-seat winners are older, more educated, and (where available) wealthier than quota-seat winners, with the education gap narrowing slightly over time.
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Candidate Characteristics: Quota vs.\ Open Seats (Rajasthan 2020)}
+    \label{tab:main_cand_char}
+    \input{../tabs/cand_characteristics_combined.tex}
+\end{table}
+
+The unemployment gap deserves a caveat: self-reported unemployment is shaped by gender norms, with men potentially less likely to classify themselves as unemployed even when not formally employed. Still, the composite picture across age, education, and assets points in the same direction: women elected under quotas are less professionalized on observable dimensions.
+
+Among the 35 quota-elected representatives who answered our phone calls (out of 377), respondents are younger (mean age 37.4) and more likely to be employed than the broader quota-winner population (Table~\ref{tab:phone_reply_char}). This is consistent with women who actually exercise political authority being a positively selected subset of those who hold office under quotas.
+
+These patterns align with the 2008 Panchayati Raj Ministry report \citep[pp.~26, 63]{ministry2008} and earlier studies \citep[Table~VII]{duflo2004, ban2008tokenism, raabe2009effects}. \citet[Tables~5--6]{gajwani2015gender} find comparable education levels but document knowledge disparities and less contact with higher-level officials among quota-elected women. The candidate characteristics we observe may also reflect the broader pool of women willing to contest under quotas, potentially leading to lower average qualifications as the pool expands \citep{bhavnani2024does}.
+
+\subsection{Does Cumulative Exposure Help?}\label{sec:cumulative}
+
+If proxy governance and weaker candidate profiles are features of early-stage quota implementation, they might erode with repeated exposure. A GP reserved for women across multiple consecutive elections has more time to develop a female political network, accustom voters to female leadership, and weaken incumbent male proxies. The prediction is a dose-response relationship: GPs reserved in two or three prior cycles should show larger effects than those reserved in only one.
+
+The long-run interaction model (Table~\ref{tab:long_run_interaction}) provides a direct test. In Rajasthan, the individual quota indicators for 2005 and 2015 are not significant. The 2010 indicator is positive (6--8 pp, $p < 0.05$), and the $\text{Quota}_{2005} \times \text{Quota}_{2015}$ interaction is positive (8 pp, $p < 0.05$). But the three-way interaction ($\text{Quota}_{2005} \times \text{Quota}_{2010} \times \text{Quota}_{2015}$) is $-5$ to $-6$ percentage points and not significant. The sum of all seven coefficients---the cumulative effect for GPs reserved in all three prior elections---is approximately 9 percentage points with fixed effects, but the linear combination is not statistically significant. There is no evidence that repeated reservation in Rajasthan builds toward a self-sustaining increase in female representation.
+
+In UP, the coefficient structure undermines a simple dose-response interpretation. Only the most recent quota (2015) has a meaningful individual effect (5 pp with FE, $p < 0.01$). The 2005 indicator contributes 2 percentage points ($p < 0.10$), and the 2010 indicator is zero. More importantly, all three two-way interactions are negative or zero: $\text{Quota}_{2005} \times \text{Quota}_{2010}$ is $-0.02$, $\text{Quota}_{2005} \times \text{Quota}_{2015}$ is $-0.02$, and $\text{Quota}_{2010} \times \text{Quota}_{2015}$ is $-0.00$. This means that a GP reserved in any two prior periods does no better than one reserved only in the most recent period. Being reserved in both 2005 and 2010 but not 2015 yields a cumulative effect of zero ($0.02 + 0.00 - 0.02$). Being reserved in 2005 and 2015 but not 2010 yields approximately 5 percentage points ($0.02 + 0.05 - 0.02$), which is simply the 2015 effect. Double exposure adds nothing.
+
+The three-way interaction is large and significant (9 pp, $p < 0.01$), and the total cumulative effect for always-reserved GPs sums to approximately 12 percentage points with FE. But this result is driven entirely by the three-way term overcoming the negative two-way interactions. The pattern is not one of gradual compounding---two cycles of exposure have no marginal value over one---but rather a discontinuous jump that appears only for the small group of GPs reserved in all three prior elections. This is difficult to interpret as a general dose-response effect and may instead reflect unobserved characteristics of always-reserved GPs in the full sample.
+
+Consistent with this concern, when we restrict to districts where quota assignment passes within-district independence tests for both the 2005$\rightarrow$2010 and 2010$\rightarrow$2015 transitions, the cumulative exposure estimates collapse entirely (Table~\ref{tab:long_term_random_rotation}). $\text{Quota}_{2005}$, $\text{Quota}_{2010}$, and their interaction are all zero to two decimal places in both Rajasthan ($N = 592$) and UP ($N = 1{,}772$). These restricted samples are small, but the complete absence of any signal---not even a directionally positive point estimate---is notable.
+
+The cumulative exposure channel thus provides no reliable evidence that sustained reservation overcomes the barriers to women's post-quota representation. In Rajasthan, the cumulative effect is not significant. In UP, the full-sample result depends on a single three-way interaction term that rescues otherwise null or negative two-way interactions, and the result disappears in the cleaner restricted sample.
+
+\subsection{Does Development Moderate the Quota Effect?}\label{sec:het_effects}
+
+A natural explanation for the contrast between our findings and the large effects reported by \citet{bhavnani2009electoral} in urban Mumbai is that development moderates the quota effect. In more urbanized, better-connected settings, several of the barriers we document may be weaker. Voters are more likely to have encountered women in professional roles outside the home, potentially making them more receptive to female political leadership. The female candidate pool may be deeper and more professionalized, weakening the candidate-quality channel. Household structures may be less patriarchal, reducing the scope for proxy governance. If this account is correct, quota effects should increase along the development gradient within our sample: GPs closer to towns, with more infrastructure, or with electrification should show larger gains from quota exposure.
+
+We test this by interacting the quota treatment with three GP-level markers of development drawn from the 2001 Census Village Directory (via SHRUG): proximity to the nearest town (above vs.\ below median distance), an infrastructure index (whether the sum of education, medical, power, and banking facilities exceeds the median), and whether the village has power supply.
+
+Table~\vref{tab:het_effects} reports the results for all six short-run panels. None of the 18 interaction terms (3 moderators $\times$ 6 panels) is significant at the 5\% level. The few marginally significant coefficients do not exhibit a consistent pattern across panels or states. In Rajasthan, proximity to town is associated with lower female representation in 2015$\rightarrow$2020 ($-4$ to $-5$ pp, $p < 0.05$), but this is a level effect on the outcome, not an interaction with treatment. The interactions themselves are uniformly small and insignificant. In UP, being near a town is associated with slightly lower baseline female representation in 2005$\rightarrow$2010 ($-3$ pp, $p < 0.01$), but the quota$\times$town interaction is again zero.
+
+This null rules out one natural interpretation of the gap between our results and \citet{bhavnani2009electoral}: that quotas fail only in the most remote and patriarchal GPs and would succeed in better-resourced ones. Within the rural setting, more developed GPs show no greater gains from quota exposure than less developed ones. The gap with Bhavnani's Mumbai result may instead reflect a qualitative urban-rural difference---in labor markets, household structures, or the density of female public-sphere participation---that is not captured by a within-rural development gradient. Combined with the proxy governance and candidate-quality evidence, the pattern suggests that the barriers to women's post-quota political success are structural features of rural political households and family-controlled candidacy networks, not resource constraints that vary smoothly with infrastructure or connectivity.
+
+\section{Conclusion}\label{sec:conclusion}
+
+Gender quotas in rural India have transformed the composition of local elected bodies. Of roughly 40,000 state legislators since 1950, just over 2,000 have been women ($\approx$5\%). In contrast, more than 250,000 local bodies currently have over 2 million representatives, nearly half of whom are women (Appendix Table~\vref{tab:state_local_totals}).\footnote{Based on data from the Government of India's Ministry of Panchayati Raj and the Local Government Directory (\href{https://lgdirectory.gov.in}{https://lgdirectory.gov.in}); female representative estimates from \citet{chaubey2003urban}.} High policy compliance with gender quota mandates is a genuine achievement.
+
+Our findings indicate, however, that this achievement is contingent on the mandate itself. Across four election cycles in Rajasthan and four in Uttar Pradesh, we find that reserving a GP seat for women in one election has limited effects on the probability that a woman wins or runs for that seat in subsequent open elections. Short-run effects range from zero to 4 percentage points; these estimates are precise enough to rule out the approximately 15 percentage point effects reported in urban Mumbai by \citet{bhavnani2009electoral}. Long-run interaction models show that double exposure to quotas adds nothing over single-period exposure, and the one significant cumulative effect (in UP) does not survive restriction to districts with cleaner identification. Candidacy effects are null. These patterns are robust to covariate adjustment, fixed effects, restriction to random-rotation districts, placebo tests, and replication with independently collected data.
+
+We document two features of the institutional environment that help explain why the theorized channels from quotas to lasting representation do not operate in this setting. First, male relatives perform the representative function in the vast majority of quota seats. In our phone audit of rural Rajasthan, only 9\% of calls to quota-seat Sarpanches reached the elected representative; 85\% were answered by male family members. Without direct citizen interaction with female leaders, voters cannot update their beliefs about women's political competence, women in office cannot accumulate political capital, and other potential female candidates do not observe a demonstration of female governance. Second, women elected under quotas are less professionalized than open-seat winners on observable dimensions: they are younger, less educated, less wealthy, and far more likely to report being unemployed. These gaps may reinforce rather than challenge existing stereotypes about women's political capacity.
+
+We cannot adjudicate between all competing explanations for the null results. Quotas may delegitimize women politicians, whom voters perceive as beneficiaries of a mandate rather than competitive candidates \citep[p.~111]{krook2006gender}. Taste-based discrimination may prevent women from winning open seats regardless of their performance \citep{desai2024women}. Our data are consistent with these accounts but do not isolate them from the proxy governance and candidate-quality channels.
+
+A suggestive piece of evidence on scope conditions comes from extending the phone audit to urban Jaipur. In urban quota seats, 31.7\% of calls reached the elected representative (20 of 63 answered), compared with 9.3\% in rural quota seats (Table~\ref{tab:jaipur_quota}). In urban open seats, 88.4\% of calls reached the representative (129 of 146), compared with 76.2\% in rural open seats (Table~\ref{tab:jaipur_open}). Proxy governance is less prevalent in urban areas, though it remains the norm in urban quota seats: two thirds of answered calls were still intercepted by non-members, the vast majority of whom were men. This urban-rural gradient in proxy governance is consistent with the gap between our null rural results and \citet{bhavnani2009electoral}'s large urban effects. It suggests that the conditions under which quotas can generate lasting representation---women actually exercising political authority, a professionalized female candidate pool, voter exposure to female leadership---are more likely to be met in urban settings where household structures, labor markets, and the density of women in public life differ from rural India.
+
+The policy implication is not that quotas are ineffective. Quotas guarantee descriptive representation, and that matters. The implication is that quotas alone are insufficient to create the conditions for women to retain political power once the mandate is lifted. As \citet[p.~128]{nanivadekar2006quotas} argues, institutional transformation is easier to achieve than attitudinal transformation. Our evidence suggests that the binding constraint is not the absence of a legal mandate but the persistence of household-level power structures that quotas do not reach. Complementary interventions that address proxy governance directly---whether through transparency requirements, training programs that build women's independent political networks, or enforcement mechanisms that ensure elected women exercise their authority---may be necessary for quotas to fulfill their transformative potential.
+
+\clearpage
+\newpage
+\bibliographystyle{chicago-apsr}
+\bibliography{quota_raj}
+
+\clearpage
+\newpage
+\begin{center}
+ \vspace{36pt}
+\LARGE{Supplementary Information for ``The Limits of Electoral Gender Quotas in Rural Local
+Bodies''}
+\end{center}
+
+\appendix
+\let\addcontentsline\oldaddcontentsline
+\doublespacing
+\thispagestyle{empty}
+\addcontentsline{toc}{section}{Appendix}
+
+% Reset numbering for tables and figures to use section-based prefixes (A.1, B.1, etc.)
+\counterwithin{table}{section}
+\counterwithin{figure}{section}
+
+\tableofcontents
+\clearpage
+\newpage
+
+\doublespacing
+
+% =============================================================================
+% APPENDIX A: DATA AND RESEARCH DESIGN
+% =============================================================================
+
+\section{Data and Research Design}\label{sec:app_data}
+
+\input{../tabs/data_sources}\FloatBarrier
+\input{../tabs/gp_summary}\FloatBarrier
+\input{../tabs/state_local_totals}\FloatBarrier
+
+% =============================================================================
+% APPENDIX B: IDENTIFICATION
+% =============================================================================
+
+\clearpage
+\section{Identification}\label{sec:app_identification}
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Treatment Rotation: Quota Assignment Correlation Across Election Cycles (2-Way Panel)}
+    \label{tab:treat_corr}
+    \input{../tabs/treatment_rotation.tex}
+\end{table}
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Treatment Rotation: Quota Assignment Correlation Across Election Cycles (4-Way Panel)}
+    \label{tab:long_term_treat_rotation}
+    \input{../tabs/long_term_treatment_rotation.tex}
+\end{table}
+\FloatBarrier
+
+Tables~\ref{tab:treat_corr} and \ref{tab:long_term_treat_rotation} validate that the rotation mandate operates as expected. We present two versions: Table~\ref{tab:treat_corr} uses 2-way panels that maximize sample size for each consecutive election pair (sample varies by transition), while Table~\ref{tab:long_term_treat_rotation} restricts to GPs present in all four election years (constant sample of 5,030 in Rajasthan and 21,536 in UP). The 4-way panel matches the sample used in our long-term analyses. Negative coefficients indicate rotation away from previously reserved GPs. In Rajasthan, the 2005--2010 transition shows no rotation ($\hat{\beta} \approx 0.01$), consistent with the rotation mandate taking effect only after 2010. Subsequent transitions show strong negative correlations ($\hat{\beta} \approx -0.30$ to $-0.44$), confirming rotation. In UP, all transitions show rotation, with coefficients ranging from $-0.02$ to $-0.29$. Results are consistent across both panel constructions.
+
+\input{../tabs/reserved_or_not_chi_sq_raj}
+\FloatBarrier
+
+\input{../tabs/up_chi_squared_results}
+\FloatBarrier
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Electoral Balance: 2010 Quota Assignment on 2005 Electoral Characteristics}
+    \label{tab:balance_electoral}
+    \input{../tabs/balance_electoral}
+\end{table}
+\FloatBarrier
+
+\input{../tabs/balance_raj}
+\input{../tabs/balance_up}
+\FloatBarrier
+
+% =============================================================================
+% APPENDIX C: POWER ANALYSIS
+% =============================================================================
+
+\clearpage
+\section{Power Analysis}\label{sec:app_power}
+
+To interpret our null results, we calculate minimum detectable effects (MDE) for each specification. The MDE represents the smallest true effect we could detect with 80\% power at $\alpha = 0.05$. Table~\ref{tab:power_analysis} shows that our MDEs range from 1.8 to 3.8 percentage points across specifications. For comparison, \citet{bhavnani2009electoral} found a 15 percentage point effect in urban Mumbai -- an effect size we would detect with $>$99\% power. Our null results are therefore not driven by lack of statistical power; rather, they reflect genuinely small or absent effects in the rural, non-partisan context we study.
+
+\input{../tabs/power_analysis}
+\FloatBarrier
+
+% =============================================================================
+% APPENDIX D: PLACEBO AND FALSIFICATION TESTS
+% =============================================================================
+
+\clearpage
+\section{Placebo and Falsification Tests}\label{sec:app_placebo}
+
+To verify random assignment, we conduct temporal falsification tests. If quota
+assignment is truly exogenous, future treatment should not predict past outcomes.
+Table~\ref{tab:placebo_combined} shows that 2010 treatment has no predictive power
+for 2005 outcomes in Rajasthan ($p > 0.5$), and 2015 treatment does not predict
+2010 outcomes ($p > 0.5$). Similar patterns hold for UP,
+though the 2015 lead treatment shows marginally significant effects ($p = 0.07$).
+
+Separately, we validate our main treatment effect using randomization inference
+with 1,000 permutations. Comparing the observed coefficient to the permuted null
+distribution, we find the effect is distinguishable from random chance in both
+Rajasthan ($\hat{\beta} = 0.02$, $p = 0.07$) and UP ($\hat{\beta} = 0.02$, $p < 0.01$).
+
+\begin{table}[!htbp]
+\centering
+\caption{Placebo Tests: Future Treatment Predicting Past Outcomes}
+\label{tab:placebo_combined}
+\input{../tabs/placebo_combined}
+\end{table}
+\FloatBarrier
+
+% =============================================================================
+% APPENDIX E: ROBUSTNESS CHECKS
+% =============================================================================
+
+\clearpage
+\section{Robustness Checks}\label{sec:app_robust}
+
+\subsection{Alternative Specifications}
+
+We assess robustness to alternative model specifications including: (1) no fixed effects with robust standard errors, (2) district-samiti fixed effects, (3) district fixed effects only, (4) GP-level clustering, and (5) district-level clustering. Coefficient estimates remain stable (approximately 2 percentage points) across all specifications in both states.
+
+% TODO: Tables robustness_alt_specs.tex and robustness_alt_specs_up.tex not yet generated
+% \begin{table}[!htbp]
+%     \centering
+%     \caption{Alternative Specifications (Rajasthan)}
+%     \label{tab:alt_specs_raj}
+%     \input{../tabs/robustness_alt_specs}
+% \end{table}
+
+% \begin{table}[!htbp]
+%     \centering
+%     \caption{Alternative Specifications (UP)}
+%     \label{tab:alt_specs_up}
+%     \input{../tabs/robustness_alt_specs_up}
+% \end{table}
+\FloatBarrier
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Short-Term Effects with Census Covariates}
+    \label{tab:shrug_covariates}
+    \input{../tabs/short_term_shrug_covariates.tex}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Short-Term Effects: Random Rotation Districts}
+    \label{tab:short_term_random_rotation}
+    \input{../tabs/short_term_random_rotation.tex}
+\end{table}
+\FloatBarrier
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Long-Term Effects: Random Rotation Districts (2005--2015)}
+    \label{tab:long_term_random_rotation}
+    \input{../tabs/long_term_random_rotation.tex}
+\end{table}
+\FloatBarrier
+
+% =============================================================================
+% APPENDIX F: HETEROGENEOUS EFFECTS
+% =============================================================================
+
+\clearpage
+\section{Heterogeneous Effects}\label{sec:app_het}
+
+We examine whether quota effects vary by village characteristics using data from the 2001 Census matched to our electoral panels via SHRUG. Specifically, we test for heterogeneity along three dimensions: proximity to towns, infrastructure availability, and power supply access. We include all three interactions simultaneously in a single model, allowing us to estimate the independent contribution of each moderator while controlling for the others.
+
+Table~\ref{tab:het_effects} presents heterogeneous effects by village characteristics from Census 2001. The three moderators are: (1) Near Town, a binary indicator for villages within the median distance to the nearest town; (2) High Infrastructure, indicating above-median sum of education facility, medical facility, power supply, and bank facility indicators; and (3) Has Power, indicating presence of power supply in the village.
+
+Across all specifications, we find no consistent evidence that quota effects vary meaningfully by these village characteristics. Point estimates for interaction terms are generally small and statistically insignificant, suggesting that the null effects documented in our main analysis are not masking heterogeneous treatment effects across different types of villages.
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Heterogeneous Effects by Village Characteristics}
+    \label{tab:het_effects}
+    \input{../tabs/het_effects_combined.tex}
+\end{table}
+\FloatBarrier
+
+% =============================================================================
+% APPENDIX G: PHONE SURVEY DETAILS
+% =============================================================================
+
+\clearpage
+\section{Phone Survey Details}\label{sec:app_phone}
+
+\subsection{Survey Script}\label{sec:phone_survey_script}
+
+We used the following script for our survey, conducted by a native Hindi speaker in India. The interviewer documented the date, time, and duration of each call. To monitor data quality, interviewers provided screenshots of call history, which we randomly sampled and matched against spreadsheet entries with perfect accuracy.
+
+\begin{quote}
+Hello, I am [RA name] talking on behalf of researchers based in the United States who want to study the panchayat system in Rajasthan. Am I talking to [representative name]?
+
+\medskip
+\textit{Notes to RA: If the name does not match, ask them to transfer the call to the actual representative. If they refuse, thank them and end the conversation, recording their reason.}
+
+\medskip
+If the actual representative answers: We obtained your phone number from the Rajasthan Election Commission's website. We want to understand governance in panchayats in Rajasthan. We have a few questions about your experience as an elected representative; this will take 2-3 minutes. We will not share any personal information and are not recording this call, but will take notes. Would you be willing to talk to us?
+\end{quote}
+
+\textit{If the respondent consents, proceed to questions:}
+\begin{enumerate}
+    \item Have you contested in elections before?
+    \item Has anybody from your family contested in elections before?
+    \item Are the Panchayat meetings held regularly?
+    \item Do you attend meetings regularly?
+\end{enumerate}
+
+\noindent\rule{\linewidth}{0.4pt}
+
+\subsection{Survey Results}
+
+\input{../tabs/mean_values_respondents}
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Urban Phone Survey Response Distribution (Jaipur)}
+    \label{tab:urban_survey}
+    \begin{subtable}[t]{0.45\linewidth}
+        \centering
+        \caption{Gender-Quota Seats}
+        \label{tab:jaipur_quota}
+        \input{../tabs/jaipur_urban_phone_survey_quota}
+    \end{subtable}
+    \hspace{2em}
+    \begin{subtable}[t]{0.45\linewidth}
+        \centering
+        \caption{Open Seats}
+        \label{tab:jaipur_open}
+        \input{../tabs/jaipur_urban_phone_survey_open}
+    \end{subtable}
+    \vspace{0.5ex}
+    \parbox{0.9\textwidth}{\scriptsize
+        \emph{Notes:} We contacted each representative up to three times between 10:00 am and 6:30 pm (average duration: one minute). \emph{Panel A:} All gender-quota seats in urban Jaipur, June--August 2024. Of 78 representatives, 63 (81\%) answered; only 20 (32\%) were the elected representatives themselves. Among 41 non-member respondents, 39 (95\%) were male. \emph{Panel B:} All open seats in urban Jaipur, June--August 2024.
+    }
+\end{table}
+\FloatBarrier
+
+% =============================================================================
+% APPENDIX H: ADDITIONAL ELECTORAL OUTCOMES
+% =============================================================================
+
+\clearpage
+\section{Additional Electoral Outcomes}\label{sec:app_outcomes}
+
+\input{../tabs/raj_candidacy_combined.tex}
+\FloatBarrier
+
+% =============================================================================
+% APPENDIX I: WEAVER DATA REPLICATION
+% =============================================================================
+
+\clearpage
+\section{Weaver Data Replication (Uttar Pradesh 2010--2020)}\label{sec:weaver}
+
+We replicate our main analyses using the Weaver dataset, covering 61,338 Gram Panchayats in Uttar Pradesh across the 2010, 2015, and 2020 elections. This dataset includes reservation status, winner characteristics (gender, age, education, assets), turnout, and candidate pool composition.
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Winner Characteristics in Uttar Pradesh}
+    \label{tab:up_cand_char}
+    \input{../tabs/up_cand_characteristics.tex}
+\end{table}
+
+\input{../tabs/weaver_short_term}
+\input{../tabs/weaver_long_term}
+
+\end{document}

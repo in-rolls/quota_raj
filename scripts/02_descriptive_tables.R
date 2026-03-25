@@ -46,10 +46,10 @@ up_2015 <- read_parquet(here("data/up/up_gp_sarpanch_2015_fixed_with_translitera
 up_2021 <- read_parquet(here("data/up/up_gp_sarpanch_2021_fixed_with_transliteration.parquet"))
 
 up_stats <- list(
-    gp_2005 = nrow(up_2005),
-    gp_2010 = nrow(up_2010),
-    gp_2015 = nrow(up_2015),
-    gp_2021 = nrow(up_2021),
+    gp_2005 = n_distinct(paste(up_2005$district_name, up_2005$block_name, up_2005$gp_name)),
+    gp_2010 = n_distinct(paste(up_2010$district_name, up_2010$block_name, up_2010$gp_name)),
+    gp_2015 = n_distinct(paste(up_2015$district_name, up_2015$block_name, up_2015$gp_name)),
+    gp_2021 = n_distinct(paste(up_2021$district_name, up_2021$block_name, up_2021$gp)),
     block_2005 = n_distinct(paste(up_2005$district_name, up_2005$block_name)),
     block_2010 = n_distinct(paste(up_2010$district_name, up_2010$block_name)),
     block_2015 = n_distinct(paste(up_2015$district_name, up_2015$block_name)),
@@ -58,7 +58,12 @@ up_stats <- list(
     dist_2010 = n_distinct(up_2010$district_name),
     dist_2015 = n_distinct(up_2015$district_name),
     dist_2021 = n_distinct(up_2021$district_name),
-    max_gp = max(nrow(up_2005), nrow(up_2010), nrow(up_2015), nrow(up_2021))
+    max_gp = max(
+        n_distinct(paste(up_2005$district_name, up_2005$block_name, up_2005$gp_name)),
+        n_distinct(paste(up_2010$district_name, up_2010$block_name, up_2010$gp_name)),
+        n_distinct(paste(up_2015$district_name, up_2015$block_name, up_2015$gp_name)),
+        n_distinct(paste(up_2021$district_name, up_2021$block_name, up_2021$gp))
+    )
 )
 
 # Phone survey: Sheet1 contains the full sampling frame with phone_answered column

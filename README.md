@@ -44,10 +44,9 @@ Download and place in `data/shrug/`:
 - `shrug-pc-keys-csv` - PC Keys for linking
 
 #### 2. SHRUG-LGD Crosswalk
-Request from Development Data Lab: https://www.devdatalab.org/
+Source: https://www.devdatalab.org/shrug_download/ (User Contributed Modules section)
 
-Place in `data/shrug_gp_xwalk/data/`:
-- `shrug_LGD_matched.csv`
+Download "SHRUG GP to shrids" by Pratik Mahajan, extract to `data/shrug_gp_xwalk/`
 
 #### 3. LGD (Local Government Directory)
 Source: https://lgdirectory.gov.in/
@@ -77,6 +76,23 @@ scripts/
 ├── 14_*.R          # Power analysis
 └── 99_run_all.R    # Master pipeline
 ```
+
+## Notes on Analysis
+
+### Random Rotation Subsample (08b)
+
+The random rotation analysis restricts to districts where chi-square tests fail to reject independence of quota assignment across transitions (p > 0.05).
+
+**10-year analysis (2005→2015)**: Requires independence for 05→10 AND 10→15
+- Rajasthan: 9/32 districts (592 open seats)
+- UP: 10/44 districts (1,772 open seats)
+- Results reported in `tabs/long_term_random_rotation.tex`
+
+**15-year analysis (2005→2020/21)**: Requires independence for ALL THREE transitions
+- Rajasthan: 3/32 districts (208 open seats in Churu, Jaisalmer, Sikar)
+- UP: 0/44 districts pass
+
+We do not report 15-year random rotation results because the sample is too small. With only 3 districts and 208 observations, the 7-coefficient interaction model cannot be reliably estimated, and any findings would likely reflect district-specific patterns rather than generalizable effects.
 
 ## Outputs
 
