@@ -27,7 +27,8 @@ cat("\n### PHASE 1: DATA EXTRACTION ###\n")
 
 run_script("01_extract_up_lgd.R")
 run_script("01a_raj_standardize_source.R")
-run_script("01d_raj_create_samiti_crosswalk.R")
+run_script("01d_raj_standardize_samiti_names.R")
+run_script("01e_raj_create_samiti_crosswalk.R")
 
 # =============================================================================
 # Phase 2: Create Panels
@@ -67,9 +68,9 @@ cat("\n### PHASE 7: SHORT-TERM EFFECTS ###\n")
 
 run_script("07_short_term.R")
 run_script("07b_treatment_rotation.R")
-run_script("07c_placebo_combined.R")
+run_script("07c_placebo.R")
 run_script("07d_shrug_covariates.R")
-run_script("07e_het_effects_combined.R")
+run_script("07e_het_effects.R")
 
 # =============================================================================
 # Phase 8: Long-Term Effects

@@ -62,7 +62,6 @@ generate_quota_table <- function(data, output_file) {
     kbl(df, format = "latex", booktabs = TRUE, escape = FALSE,
         col.names = c("Response Category", "N (\\%)"),
         align = c("l", "r")) %>%
-        kable_styling(font_size = 8) %>%
         pack_rows(paste0("Initial Contact (N = ", total, ")"), 1, 2, italic = TRUE) %>%
         pack_rows(paste0("Among Answered (N = ", answered, ")"), 3, 7, italic = TRUE) %>%
         save_kable(output_file)
@@ -106,7 +105,6 @@ generate_open_table <- function(data, output_file) {
     kbl(df, format = "latex", booktabs = TRUE, escape = FALSE,
         col.names = c("Response Category", "N (\\%)"),
         align = c("l", "r")) %>%
-        kable_styling(font_size = 8) %>%
         pack_rows(paste0("Initial Contact (N = ", total, ")"), 1, 2, italic = TRUE) %>%
         pack_rows(paste0("Among Answered (N = ", answered, ")"), 3, 5, italic = TRUE) %>%
         save_kable(output_file)
