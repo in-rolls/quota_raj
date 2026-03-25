@@ -66,9 +66,12 @@ recode_up_panel <- function(data, year1, year2) {
 cat("\n--- Creating 2005-2010 panel ---\n")
 
 up_05_10 <- read_parquet(here("data/up/up_05_10_fuzzy.parquet"))
+cat("  Input from fuzzy file:", nrow(up_05_10), "\n")
+
 up_05_10 <- recode_up_panel(up_05_10, 2005, 2010)
 
-cat("UP 05-10 panel N:", nrow(up_05_10), "\n")
+cat("  After recode:", nrow(up_05_10), "\n")
+cat("  Final panel N:", nrow(up_05_10), "\n")
 write_parquet(up_05_10, here("data/up/up_05_10.parquet"))
 
 # ============================================================================
@@ -77,9 +80,12 @@ write_parquet(up_05_10, here("data/up/up_05_10.parquet"))
 cat("\n--- Creating 2010-2015 panel ---\n")
 
 up_10_15 <- read_parquet(here("data/up/up_10_15_fuzzy.parquet"))
+cat("  Input from fuzzy file:", nrow(up_10_15), "\n")
+
 up_10_15 <- recode_up_panel(up_10_15, 2010, 2015)
 
-cat("UP 10-15 panel N:", nrow(up_10_15), "\n")
+cat("  After recode:", nrow(up_10_15), "\n")
+cat("  Final panel N:", nrow(up_10_15), "\n")
 write_parquet(up_10_15, here("data/up/up_10_15.parquet"))
 
 # ============================================================================
@@ -89,8 +95,10 @@ cat("\n--- Creating 2015-2021 panel ---\n")
 
 up_2015 <- read_parquet(here("data/up/up_gp_sarpanch_2015_fixed_with_transliteration.parquet"))
 up_2021 <- read_parquet(here("data/up/up_gp_sarpanch_2021_fixed_with_transliteration.parquet"))
+cat("  Input: 2015 raw =", nrow(up_2015), ", 2021 raw =", nrow(up_2021), "\n")
 
 up_2021 <- up_2021 %>% filter(result == 'विजेता')
+cat("  2021 after winner filter:", nrow(up_2021), "\n")
 
 up_2015_dedupe <- up_2015 %>%
     mutate(key = normalize_string(paste(district_name, block_name, gp_name))) %>%
@@ -98,16 +106,24 @@ up_2015_dedupe <- up_2015 %>%
     filter(!is.na(gp_reservation_status_eng) & gp_reservation_status_eng != "Unknown") %>%
     rename_with(~ paste0(., "_2015"))
 
+n_2015_dropped <- nrow(up_2015) - nrow(up_2015_dedupe)
+cat("  2015 after dedup + filter:", nrow(up_2015_dedupe), "(dropped", n_2015_dropped, ")\n")
+
 up_2021_dedupe <- up_2021 %>%
     mutate(key = normalize_string(paste(district_name, block_name, gp_name))) %>%
     filter(!duplicated(key) & !is.na(key)) %>%
     filter(!is.na(gp_reservation_status_eng) & gp_reservation_status_eng != "Unknown") %>%
     rename_with(~ paste0(., "_2021"))
 
+n_2021_dropped <- nrow(up_2021) - nrow(up_2021_dedupe)
+cat("  2021 after dedup + filter:", nrow(up_2021_dedupe), "(dropped", n_2021_dropped, ")\n")
+
 up_15_21 <- inner_join(up_2015_dedupe, up_2021_dedupe, by = c("key_2015" = "key_2021"))
+cat("  After inner_join:", nrow(up_15_21), "\n")
+
 up_15_21 <- recode_up_panel(up_15_21, 2015, 2021)
 
-cat("UP 15-21 panel N:", nrow(up_15_21), "\n")
+cat("  Final panel N:", nrow(up_15_21), "\n")
 write_parquet(up_15_21, here("data/up/up_15_21.parquet"))
 
 # ============================================================================
@@ -116,6 +132,7 @@ write_parquet(up_15_21, here("data/up/up_15_21.parquet"))
 cat("\n--- Creating 4-way panel (2005-2021) ---\n")
 
 up_all_fuzzy <- read_parquet(here("data/up/up_all_fuzzy.parquet"))
+cat("  Input from fuzzy file:", nrow(up_all_fuzzy), "\n")
 
 up_05_21 <- up_all_fuzzy %>%
     mutate(
@@ -164,7 +181,7 @@ up_05_21 <- up_all_fuzzy %>%
         female_winner_2021 = as.integer(sex_2021 == "महिला")
     )
 
-cat("UP 05-21 (4-way) panel N:", nrow(up_05_21), "\n")
+cat("  Final panel N:", nrow(up_05_21), "\n")
 write_parquet(up_05_21, here("data/up/up_05_21.parquet"))
 
 # ============================================================================
