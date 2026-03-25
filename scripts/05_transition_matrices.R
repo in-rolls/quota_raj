@@ -102,7 +102,9 @@ up_chi_results %>%
     knitr::kable(
         format = "latex",
         booktabs = TRUE,
-        col.names = c("Comparison", "Chi-Squared Statistic", "Degrees of Freedom", "P-Value")
+        col.names = c("Comparison", "Chi-Squared Statistic", "Degrees of Freedom", "P-Value"),
+        caption = "Chi-Squared Tests for Treatment Rotation in UP",
+        label = "tab:up_chi_squared_results"
     ) %>%
     kableExtra::kable_styling(latex_options = c("striped", "hold_position"), font_size = 8) %>%
     save_kable(here("tabs", "up_chi_squared_results.tex"))

@@ -146,7 +146,7 @@ p_2020 <- prepare_source(src_2020, 2020)
 cat("\n--- Creating 2005-2010 Panel ---\n")
 cat("  Input: 2005 =", nrow(p_2005), ", 2010 =", nrow(p_2010), "\n")
 
-raj_05_10_raw <- p_2005 %>% inner_join(p_2010, by = "match_key")
+raj_05_10_raw <- p_2005 %>% inner_join(p_2010, by = "match_key", relationship = "many-to-many")
 n_after_join <- nrow(raj_05_10_raw)
 cat("  After inner_join:", n_after_join, "\n")
 
@@ -176,7 +176,7 @@ write_parquet(raj_05_10, here("data/raj/raj_05_10.parquet"))
 cat("\n--- Creating 2010-2015 Panel ---\n")
 cat("  Input: 2010 =", nrow(p_2010), ", 2015 =", nrow(p_2015), "\n")
 
-raj_10_15_raw <- p_2010 %>% inner_join(p_2015, by = "match_key")
+raj_10_15_raw <- p_2010 %>% inner_join(p_2015, by = "match_key", relationship = "many-to-many")
 n_after_join <- nrow(raj_10_15_raw)
 cat("  After inner_join:", n_after_join, "\n")
 
@@ -206,7 +206,7 @@ write_parquet(raj_10_15, here("data/raj/raj_10_15.parquet"))
 cat("\n--- Creating 2015-2020 Panel ---\n")
 cat("  Input: 2015 =", nrow(p_2015), ", 2020 =", nrow(p_2020), "\n")
 
-raj_15_20_raw <- p_2015 %>% inner_join(p_2020, by = "match_key")
+raj_15_20_raw <- p_2015 %>% inner_join(p_2020, by = "match_key", relationship = "many-to-many")
 n_after_join <- nrow(raj_15_20_raw)
 cat("  After inner_join:", n_after_join, "\n")
 
@@ -242,13 +242,13 @@ cat("\n--- Creating 4-way Panel (2005-2020) ---\n")
 cat("  Input: 2005 =", nrow(p_2005), ", 2010 =", nrow(p_2010),
     ", 2015 =", nrow(p_2015), ", 2020 =", nrow(p_2020), "\n")
 
-raj_05_20_step1 <- p_2005 %>% inner_join(p_2010, by = "match_key")
+raj_05_20_step1 <- p_2005 %>% inner_join(p_2010, by = "match_key", relationship = "many-to-many")
 cat("  After 2005-2010 join:", nrow(raj_05_20_step1), "\n")
 
-raj_05_20_step2 <- raj_05_20_step1 %>% inner_join(p_2015, by = "match_key")
+raj_05_20_step2 <- raj_05_20_step1 %>% inner_join(p_2015, by = "match_key", relationship = "many-to-many")
 cat("  After adding 2015:", nrow(raj_05_20_step2), "\n")
 
-raj_05_20_step3 <- raj_05_20_step2 %>% inner_join(p_2020, by = "match_key")
+raj_05_20_step3 <- raj_05_20_step2 %>% inner_join(p_2020, by = "match_key", relationship = "many-to-many")
 cat("  After adding 2020:", nrow(raj_05_20_step3), "\n")
 
 raj_05_20 <- raj_05_20_step3 %>%
