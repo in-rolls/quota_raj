@@ -125,7 +125,8 @@ cat("\nElection GPs to match:", nrow(up_gps), "\n")
 exact_matches <- up_gps %>%
     inner_join(
         lgd_gps %>% select(gp_code, gp_name, block_code, lgd_key),
-        by = c("elex_key" = "lgd_key")
+        by = c("elex_key" = "lgd_key"),
+        relationship = "many-to-many"
     )
 
 cat("Exact GP matches:", nrow(exact_matches), "\n")
