@@ -24,3 +24,15 @@ ms/main.mtc0
 ms/main.out
 ms/main.toc
 ms/main.xdv
+data/archive_approach_a/raj/shrug_gp_raj_10_15.parquet
+data/archive_approach_a/raj/shrug_gp_raj_15_20.parquet
+data/archive_approach_a/raj/shrug_gp_raj_elex_05_10.parquet
+data/archive_approach_a/raj/shrug_lgd_raj_elex_05_10.parquet
+data/archive_approach_a/raj/shrug_lgd_raj_elex_05_10_strict.parquet
+data/archive_approach_a/up/shrug_lgd_up_10_15.parquet
+data/archive_approach_a/up/shrug_lgd_up_15_21.parquet
+data/archive_approach_a/up/shrug_lgd_up_elex_05_10.parquet
+scripts/archive_approach_a/02a_raj_lgd_shrug.R
+scripts/archive_approach_a/02a_raj_shrug_gp_module.R
+scripts/archive_approach_a/02b_up_lgd_shrug_join.R
+scripts/archive_approach_a/02c_shrug_all_panels.R
