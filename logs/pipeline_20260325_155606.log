@@ -1,0 +1,65 @@
+[2026-03-25 15:56:06] INFO: Pipeline started 
+[2026-03-25 15:56:06] INFO: Log file: /Users/soodoku/Documents/GitHub/quota_raj/logs/pipeline_20260325_155606.log 
+[2026-03-25 15:56:06] INFO: === PHASE 1: DATA EXTRACTION === 
+[2026-03-25 15:56:06] INFO: Starting: 01_extract_up_lgd.R 
+[2026-03-25 15:56:36] INFO: SUCCESS: 01_extract_up_lgd.R ( 29.7 s) 
+[2026-03-25 15:56:36] INFO: Starting: 01a_raj_standardize_source.R 
+[2026-03-25 15:56:42] INFO: SUCCESS: 01a_raj_standardize_source.R ( 5.9 s) 
+[2026-03-25 15:56:42] INFO: Starting: 01d_raj_standardize_samiti_names.R 
+[2026-03-25 15:56:42] INFO: SUCCESS: 01d_raj_standardize_samiti_names.R ( 0.4 s) 
+[2026-03-25 15:56:42] INFO: Starting: 01e_raj_create_samiti_crosswalk.R 
+[2026-03-25 15:56:42] INFO: SUCCESS: 01e_raj_create_samiti_crosswalk.R ( 0.2 s) 
+[2026-03-25 15:56:42] INFO: === PHASE 2: CREATE PANELS === 
+[2026-03-25 15:56:42] INFO: Starting: 02b_raj_recode.R 
+[2026-03-25 15:56:43] INFO: SUCCESS: 02b_raj_recode.R ( 1.1 s) 
+[2026-03-25 15:56:43] INFO: Starting: 02c_up_recode.R 
+[2026-03-25 15:56:47] INFO: SUCCESS: 02c_up_recode.R ( 3.5 s) 
+[2026-03-25 15:56:47] INFO: === PHASE 3: LINK TO SHRUG === 
+[2026-03-25 15:56:47] INFO: Starting: 03a_raj_shrug_lgd_block.R 
+[2026-03-25 15:56:52] INFO: SUCCESS: 03a_raj_shrug_lgd_block.R ( 5.4 s) 
+[2026-03-25 15:56:52] INFO: Starting: 03a_up_shrug_lgd_block.R 
+[2026-03-25 15:57:15] INFO: SUCCESS: 03a_up_shrug_lgd_block.R ( 22.7 s) 
+[2026-03-25 15:57:15] INFO: === PHASE 4: BALANCE TESTS === 
+[2026-03-25 15:57:15] INFO: Starting: 04_balance.R 
+[2026-03-25 15:59:37] INFO: SUCCESS: 04_balance.R ( 141.9 s) 
+[2026-03-25 15:59:37] INFO: Starting: 04a_balance_electoral.R 
+[2026-03-25 15:59:38] INFO: SUCCESS: 04a_balance_electoral.R ( 1 s) 
+[2026-03-25 15:59:38] INFO: === PHASE 5: TRANSITION MATRICES === 
+[2026-03-25 15:59:38] INFO: Starting: 05_transition_matrices.R 
+[2026-03-25 15:59:38] INFO: SUCCESS: 05_transition_matrices.R ( 0.4 s) 
+[2026-03-25 15:59:38] INFO: === PHASE 7: SHORT-TERM EFFECTS === 
+[2026-03-25 15:59:38] INFO: Starting: 07_short_term.R 
+[2026-03-25 15:59:39] INFO: SUCCESS: 07_short_term.R ( 0.9 s) 
+[2026-03-25 15:59:39] INFO: Starting: 07b_treatment_rotation.R 
+[2026-03-25 15:59:39] INFO: SUCCESS: 07b_treatment_rotation.R ( 0.1 s) 
+[2026-03-25 15:59:39] INFO: Starting: 07c_placebo.R 
+[2026-03-25 15:59:40] INFO: SUCCESS: 07c_placebo.R ( 0.6 s) 
+[2026-03-25 15:59:40] INFO: Starting: 07d_shrug_covariates.R 
+[2026-03-25 15:59:41] INFO: SUCCESS: 07d_shrug_covariates.R ( 1.1 s) 
+[2026-03-25 15:59:41] INFO: Starting: 07e_het_effects.R 
+[2026-03-25 15:59:42] INFO: SUCCESS: 07e_het_effects.R ( 1.1 s) 
+[2026-03-25 15:59:42] INFO: === PHASE 8: LONG-TERM EFFECTS === 
+[2026-03-25 15:59:42] INFO: Starting: 08_long_term.R 
+[2026-03-25 15:59:42] INFO: SUCCESS: 08_long_term.R ( 0.3 s) 
+[2026-03-25 15:59:42] INFO: === PHASE 9: DESCRIPTIVE TABLES === 
+[2026-03-25 15:59:42] INFO: Starting: 02_descriptive_tables.R 
+[2026-03-25 15:59:43] WARN: WARNING in 02_descriptive_tables.R : Expecting numeric in AE4 / R4C31: got a date 
+[2026-03-25 15:59:43] INFO: === PHASE 10: CANDIDATE QUALITY === 
+[2026-03-25 15:59:43] INFO: Starting: 11_candidate_quality.R 
+[2026-03-25 15:59:46] INFO: SUCCESS: 11_candidate_quality.R ( 3.2 s) 
+[2026-03-25 15:59:46] INFO: === PHASE 11: PHONE SURVEYS === 
+[2026-03-25 15:59:46] INFO: Starting: 12a_raj_phone_survey.R 
+[2026-03-25 15:59:47] INFO: SUCCESS: 12a_raj_phone_survey.R ( 0.1 s) 
+[2026-03-25 15:59:47] INFO: Starting: 12b_raj_jaipur_phone_survey.R 
+[2026-03-25 15:59:47] INFO: SUCCESS: 12b_raj_jaipur_phone_survey.R ( 0.1 s) 
+[2026-03-25 15:59:47] INFO: === PHASE 12: WEAVER REPLICATION === 
+[2026-03-25 15:59:47] INFO: Starting: 13_weaver_replication.R 
+[2026-03-25 15:59:47] INFO: SUCCESS: 13_weaver_replication.R ( 0.3 s) 
+[2026-03-25 15:59:47] INFO: === PHASE 13: POWER ANALYSIS === 
+[2026-03-25 15:59:47] INFO: Starting: 14_power_analysis.R 
+[2026-03-25 15:59:47] INFO: SUCCESS: 14_power_analysis.R ( 0.5 s) 
+[2026-03-25 15:59:47] INFO: === PIPELINE SUMMARY === 
+[2026-03-25 15:59:47] INFO: Successes: 22 
+[2026-03-25 15:59:47] INFO: Warnings: 1 
+[2026-03-25 15:59:47] INFO: Errors: 0 
+[2026-03-25 15:59:47] INFO: Log saved to: /Users/soodoku/Documents/GitHub/quota_raj/logs/pipeline_20260325_155606.log 
