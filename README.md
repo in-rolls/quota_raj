@@ -1,15 +1,98 @@
-## The Effect of Gender Quotas in Local Bodies on Women's Representation in Rural India
+# The Effect of Gender Quotas in Local Bodies on Women's Representation in Rural India
 
-What are the consequences of gender quotas on women's descriptive and substantive representation? Using a novel dataset of over 20,000 rural local governance bodies spanning 20 years, we find that randomly implemented gender quotas for women do not substantially increase the chances of women winning elections to the same seat once the seat is unreserved. Troublingly, even fifteen years of exposure to local women leaders has limited effects. We probe the reasons for this finding using an original phone survey. When we try to reach elected representatives in reserved seats using their official numbers, male relatives frequently intercept the call, suggesting ``gatekeeping.'' Data suggest that in poor, rural areas, quotas may fail to transform who is de facto in power. In all, unlike more hopeful findings from urban areas, our findings suggest that quotas mechanically improve the representation of women but do not create conditions for women to be in power after the quotas are withdrawn.
+Using a novel dataset of over 67,000 rural local governance bodies (Gram Panchayats) spanning 20 years across Rajasthan and Uttar Pradesh, we find that randomly implemented gender quotas for women do not substantially increase the chances of women winning elections once the seat is unreserved. Even fifteen years of exposure to local women leaders has limited effects.
 
-### Authors
+**Authors**: Varun, K. R. and Gaurav Sood
 
-Varun, K. R. and Gaurav Sood
+## Quick Start
 
-## 🔗 Adjacent Repositories
+```bash
+# 1. Clone and setup
+git clone https://github.com/soodoku/quota_raj.git
+cd quota_raj
 
-- [in-rolls/up-2023-electoral-rolls](https://github.com/in-rolls/up-2023-electoral-rolls)
-- [in-rolls/quota](https://github.com/in-rolls/quota) — Effects of Randomly Assigned Reservations for Women Leaders in Indian Local Government on Allocation and Development Outcomes
-- [in-rolls/mnrega_social](https://github.com/in-rolls/mnrega_social) — MNREGA Social Audit Data
-- [in-rolls/local_elections_kerala](https://github.com/in-rolls/local_elections_kerala) — Kerala Local Government Seat Reservation Data and Winner Attributes
-- [in-rolls/local_elections_up](https://github.com/in-rolls/local_elections_up) — UP Local Election Data --- GP and ULB. Seat reservation, winner, and candidates for some elections
+# 2. Install R dependencies
+R -e "renv::restore()"
+
+# 3. Obtain external data (see Data Dependencies below)
+
+# 4. Run full pipeline
+Rscript scripts/99_run_all.R
+
+# 5. Compile manuscript
+cd ms && latexmk -xelatex main.tex
+```
+
+## Data Dependencies
+
+### Included Data
+- **Rajasthan**: GP election data 2005-2020 in `data/raj/source/`
+
+### External Data (must be obtained separately)
+
+#### 1. SHRUG (Development Data Lab)
+Source: https://www.devdatalab.org/shrug_download/
+
+Download and place in `data/shrug/`:
+- `shrug-pca01-csv` - Population Census Abstracts 2001
+- `shrug-pca11-csv` - Population Census Abstracts 2011
+- `shrug-vd01-csv` - Village Directory 2001
+- `shrug-vd11-csv` - Village Directory 2011
+- `shrug-ec05-csv` - Economic Census 2005
+- `shrug-ec13-csv` - Economic Census 2013
+- `shrug-secc-mord-rural-csv` - SECC Rural
+- `shrug-pc-keys-csv` - PC Keys for linking
+
+#### 2. SHRUG-LGD Crosswalk
+Request from Development Data Lab: https://www.devdatalab.org/
+
+Place in `data/shrug_gp_xwalk/data/`:
+- `shrug_LGD_matched.csv`
+
+#### 3. LGD (Local Government Directory)
+Source: https://lgdirectory.gov.in/
+
+Download for Rajasthan and UP, place in `data/lgd/`:
+- Village-GP mapping files
+- Block/Panchayat Samiti files
+
+#### 4. UP Election Data
+Source: [in-rolls/local_elections_up](https://github.com/in-rolls/local_elections_up)
+
+## Code Organization
+
+```
+scripts/
+├── 00_*.R          # Configuration and utilities
+├── 01_*.R          # Data extraction, standardization, crosswalks
+├── 02_*.R          # Panel creation and recoding
+├── 03_*.R          # SHRUG linkage at block level
+├── 04_*.R          # Balance tests
+├── 05_*.R          # Transition matrices
+├── 07_*.R          # Short-term effects
+├── 08_*.R          # Long-term effects
+├── 10-11_*.R       # Candidate analysis
+├── 12_*.R          # Phone survey tables
+├── 13_*.R          # Weaver replication
+├── 14_*.R          # Power analysis
+└── 99_run_all.R    # Master pipeline
+```
+
+## Outputs
+
+**Tables** (`tabs/`): Balance tests, treatment effects, candidate characteristics (~25 LaTeX tables)
+
+**Figures** (`figs/`): Coefficient plots, treatment persistence, maps
+
+**Manuscript** (`ms/main.pdf`)
+
+## Requirements
+
+- R 4.5+
+- XeLaTeX (for manuscript compilation)
+
+## Related Repositories
+
+- [in-rolls/local_elections_up](https://github.com/in-rolls/local_elections_up) - UP Local Election Data
+- [in-rolls/quota](https://github.com/in-rolls/quota) - Effects of Reservations on Allocation and Development Outcomes
+- [in-rolls/local_elections_kerala](https://github.com/in-rolls/local_elections_kerala) - Kerala Local Government Data
