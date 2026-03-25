@@ -15,7 +15,8 @@ source(here("scripts/00_utils.R"))
 jw <- read_parquet(here("data/up/jeff_wide.parquet")) %>%
     mutate(
         across(where(is.labelled), as.numeric),
-        district_block = paste(district_code_ele15, block_code_ele15, sep = "_")
+        district_block_2015 = paste(district_code_ele15, block_code_ele15, sep = "_"),
+        district_block_2020 = paste(district_code_ele20, block_code_ele20, sep = "_")
     )
 
 cat("=== Weaver Data Replication ===\n")

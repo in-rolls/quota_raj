@@ -25,18 +25,18 @@ raj_stats <- list(
     gp_2010 = nrow(raj_2010),
     gp_2015 = nrow(raj_2015),
     gp_2020 = nrow(raj_2020),
-    samiti_2005 = n_distinct(paste(raj_2005$dist_name, raj_2005$samiti_name)),
-    samiti_2010 = n_distinct(paste(raj_2010$dist_name, raj_2010$samiti_name)),
-    samiti_2015 = n_distinct(paste(raj_2015$dist_name, raj_2015$samiti_name)),
-    samiti_2020 = n_distinct(paste(raj_2020$District, raj_2020$PanchayatSamiti)),
-    dist_2005 = n_distinct(raj_2005$dist_name),
-    dist_2010 = n_distinct(raj_2010$dist_name),
-    dist_2015 = n_distinct(raj_2015$dist_name),
-    dist_2020 = n_distinct(raj_2020$District),
+    samiti_2005 = n_distinct(paste(raj_2005$district_raw, raj_2005$samiti_raw)),
+    samiti_2010 = n_distinct(paste(raj_2010$district_raw, raj_2010$samiti_raw)),
+    samiti_2015 = n_distinct(paste(raj_2015$district_raw, raj_2015$samiti_raw)),
+    samiti_2020 = n_distinct(paste(raj_2020$district_raw, raj_2020$samiti_raw)),
+    dist_2005 = n_distinct(raj_2005$district_raw),
+    dist_2010 = n_distinct(raj_2010$district_raw),
+    dist_2015 = n_distinct(raj_2015$district_raw),
+    dist_2020 = n_distinct(raj_2020$district_raw),
     max_gp = max(nrow(raj_2005), nrow(raj_2010), nrow(raj_2015), nrow(raj_2020)),
-    women_res_2005 = round(100 * sum(grepl("W$", raj_2005$reservation)) / nrow(raj_2005), 1),
-    women_res_2010 = round(100 * sum(grepl("W$", raj_2010$reservation)) / nrow(raj_2010), 1),
-    women_res_2015 = round(100 * sum(grepl("Woman", raj_2015$reservation)) / nrow(raj_2015), 1)
+    women_res_2005 = round(100 * mean(raj_2005$female_reserved, na.rm = TRUE), 1),
+    women_res_2010 = round(100 * mean(raj_2010$female_reserved, na.rm = TRUE), 1),
+    women_res_2015 = round(100 * mean(raj_2015$female_reserved, na.rm = TRUE), 1)
 )
 
 # UP year files

@@ -1,0 +1,22 @@
+{\centering\scriptsize
+\begingroup
+\begin{tabular}{@{}lcccccc@{\hspace{1em}}cccccc@{}}
+   \toprule
+    & \multicolumn{6}{c}{Rajasthan} & \multicolumn{6}{c}{Uttar Pradesh} \\ 
+   \cmidrule(lr){2-7} \cmidrule(lr){8-13}
+    & \multicolumn{2}{c}{05$\rightarrow$10} & \multicolumn{2}{c}{10$\rightarrow$15} & \multicolumn{2}{c}{15$\rightarrow$20} & \multicolumn{2}{c}{05$\rightarrow$10} & \multicolumn{2}{c}{10$\rightarrow$15} & \multicolumn{2}{c}{15$\rightarrow$21} \\ 
+                                    & No FE  & FE            & No FE         & FE            & No FE         & FE            & No FE         & FE            & No FE         & FE            & No FE         & FE \\   
+                                    & [i]    & [ii]          & [iii]         & [iv]          & [v]           & [vi]          & [vii]         & [viii]        & [ix]          & [x]           & [xi]          & [xii]\\  
+   \midrule 
+   $\text{Quota}_{t-1}$             & 0.01   & 0.01          & -0.40$^{***}$ & -0.41$^{***}$ & -0.29$^{***}$ & -0.29$^{***}$ & -0.02$^{***}$ & -0.03$^{***}$ & -0.11$^{***}$ & -0.11$^{***}$ & -0.28$^{***}$ & -0.28$^{***}$\\   
+                                    & (0.01) & (0.01)        & (0.01)        & (0.03)        & (0.01)        & (0.03)        & (0.00)       & (0.00)       & (0.00)       & (0.00)       & (0.00)       & (0.00)\\   
+   R$^2$                            & 0.00 & 0.01          & 0.16          & 0.17          & 0.09          & 0.10          & 0.00        & 0.01          & 0.01          & 0.01          & 0.08          & 0.08\\  
+   Observations                     & 7,667  & 7,667         & 7,341         & 7,341         & 7,768         & 7,768         & 39,552        & 39,552        & 34,598        & 34,598        & 42,563        & 42,563\\  
+   (District, Samiti) FE &  & $\checkmark$  &  & $\checkmark$  &  & $\checkmark$  &  & $\checkmark$  &  & $\checkmark$  &  & $\checkmark$\\   
+   \bottomrule
+\end{tabular}
+\par\endgroup
+\par}
+
+\vspace{0.5ex}
+\parbox{\linewidth}{\scriptsize \emph{Notes: } $^{***}$p$<$0.01; $^{**}$p$<$0.05; $^{*}$p$<$0.1. Outcome: quota status in election $t$. Treatment: quota status in election $t-1$. Sample includes all GPs (not restricted to open seats). A negative coefficient indicates rotation away from previously reserved GPs, consistent with the rotation mandate. Heteroskedasticity-robust standard errors.}
