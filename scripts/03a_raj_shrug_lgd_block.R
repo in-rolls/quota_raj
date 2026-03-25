@@ -357,15 +357,17 @@ print(table(elex_matched$match_quality, useNA = "ifany"))
 # STEP 9: Link to SHRUG via LGD code
 # ============================================================================
 
-# NOTE: Multiple SHRUG villages may map to one LGD GP code. We keep the first match.
-# SHRUG covariates reflect one village per GP, not GP-level aggregates.
-# For robustness, consider: group_by(LGD_code) %>% summarize(across(starts_with("pc01"), mean))
+# Aggregate SHRUG covariates across villages within each LGD GP
 shrug_lgd <- read_csv("data/shrug_gp_xwalk/data/shrug_LGD_matched.csv", show_col_types = FALSE) %>%
     filter(state_name == "rajasthan") %>%
-    select(shrid2, LGD_code, local_body_name) %>%
     group_by(LGD_code) %>%
-    slice(1) %>%
-    ungroup()
+    summarize(
+        shrid2 = first(shrid2),
+        local_body_name = first(local_body_name),
+        n_villages = n(),
+        across(starts_with("pc01"), ~mean(.x, na.rm = TRUE)),
+        .groups = "drop"
+    )
 
 cat("\nSHRUG GPs for Rajasthan:", n_distinct(shrug_lgd$LGD_code), "\n")
 

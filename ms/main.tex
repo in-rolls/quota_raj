@@ -285,7 +285,7 @@ We assemble four data sources for this study (Table~\vref{tab:data_sources}).
 
 \paragraph{Estimand and identification.} Our estimand is the effect of reserving the Sarpanch position for women in election $t$ on the probability that a woman wins in the subsequent election $t+1$, conditional on the seat being open in $t+1$. Identification requires two conditions: (a) $\text{Quota}_{g,t}$ is independent of potential outcomes, and (b) conditioning on $\text{Open}_{g,t+1}$ does not induce a spurious association between $\text{Quota}_{g,t}$ and the outcome. Condition (a) is standard and testable via balance checks. Condition (b) warrants discussion because of quota rotation.
 
-\paragraph{Rotation: mechanics and implications.} Tables~\ref{tab:treat_corr} and \ref{tab:long_term_treat_rotation} document that both states rotate quota assignments across cycles: a GP reserved in election $t$ is less likely to be reserved in $t+1$. In Rajasthan, the 2005--2010 transition shows no rotation ($\hat{\beta} \approx 0.01$, $p > 0.3$), consistent with independent lottery draws. The chi-square test confirms independence ($\chi^2 = 1.41$, $p = 0.23$; Table~\ref{tab:chi_square_reserved_over_time}). Subsequent transitions show strong rotation ($\hat{\beta} = -0.40$ to $-0.29$, $p < 0.01$), indicating a policy shift after 2010. In UP, even the first transition shows modest but significant rotation ($\hat{\beta} = -0.02$, $p < 0.01$), with stronger rotation in later periods ($\hat{\beta} = -0.11$ to $-0.28$). The chi-square test rejects independence for all transitions except 2005--2021 (Table~\ref{tab:up_chi_squared_results}). The 4-way balanced panel yields nearly identical rotation coefficients (Appendix Table~\ref{tab:long_term_treat_rotation}).
+\paragraph{Rotation: mechanics and implications.} Tables~\ref{tab:treat_corr} and \ref{tab:long_term_treat_rotation} document that both states rotate quota assignments across cycles: a GP reserved in election $t$ is less likely to be reserved in $t+1$. In Rajasthan, the 2005--2010 transition shows no rotation ($\hat{\beta} \approx 0.01$, $p > 0.3$), consistent with independent lottery draws. The chi-square test confirms independence ($\chi^2 = 1.41$, $p = 0.23$; Table~\ref{tab:chi_sq_raj}). Subsequent transitions show strong rotation ($\hat{\beta} = -0.40$ to $-0.29$, $p < 0.01$), indicating a policy shift after 2010. In UP, even the first transition shows modest but significant rotation ($\hat{\beta} = -0.02$, $p < 0.01$), with stronger rotation in later periods ($\hat{\beta} = -0.11$ to $-0.28$). The chi-square test rejects independence for all transitions except 2005--2021 (Table~\ref{tab:chi_sq_up}). The 4-way balanced panel yields nearly identical rotation coefficients (Appendix Table~\ref{tab:long_term_treat_rotation}).
 
 Rotation has two mechanical consequences for estimation. First, it determines the composition of the estimation sample. Because we observe outcomes only for GPs that are open in $t+1$, rotation means that previously-reserved GPs are over-represented among open seats in $t+1$ relative to what pure random assignment would produce. This is a feature of the estimand---we define the effect conditional on the seat being open---not a threat to internal validity. Second, conditioning on $\text{Open}_{g,t+1}$ is conditioning on a variable that is causally downstream of $\text{Quota}_{g,t}$ (since rotation links the two). If the rotation rule operated through GP characteristics---for instance, if larger or more developed GPs were systematically rotated out of reservation earlier---then conditioning on open status could induce collider bias, creating a spurious association between $\text{Quota}_{g,t}$ and the outcome among the estimation sample.
 
@@ -339,19 +339,28 @@ The UP effects, while statistically significant, are small in absolute terms. Th
 \end{table}
 
 \subsection{Long-run Effects}
-
-Gender quota policies aim to create a self-sustaining cycle of women's representation. If such dynamics exist, they should emerge with cumulative exposure to reservation over multiple election cycles. We test this using the full interaction model, regressing whether a woman wins an open seat in the final election (2020 in Rajasthan, 2021 in UP) on quota status in each prior election and all two- and three-way interactions.
-
-Table~\vref{tab:long_run_interaction} reports the results. In Rajasthan, the individual treatment indicators for 2005 and 2015 are not significant. The 2010 quota indicator is positive and significant (6 percentage points without FE, $p < 0.05$; 8 percentage points with FE, $p < 0.01$). Among the interactions, only $\text{Quota}_{2005} \times \text{Quota}_{2015}$ is significant (8 percentage points, $p < 0.05$). The three-way interaction ($\text{Quota}_{2005} \times \text{Quota}_{2010} \times \text{Quota}_{2015}$) is $-5$ to $-6$ percentage points and not significant. The cumulative effect for GPs reserved in all three prior elections---the sum of all seven coefficients---is approximately 8 percentage points without FE and 9 percentage points with FE, but the linear combination is not statistically significant.
-
-In UP, the most recent quota (2015) has the largest individual effect (4--5 percentage points, $p < 0.01$), consistent with the short-run finding that the 2015$\rightarrow$2021 panel has the largest effect. The three-way interaction is positive and significant (8--9 percentage points, $p < 0.01$), suggesting that cumulative exposure to reservation does compound. The total cumulative effect for always-reserved GPs is approximately 12 percentage points with FE. Even this significant UP effect is smaller than the effects reported in urban settings by \citet{bhavnani2009electoral} and \citet{beaman2009powerful}. We find no evidence of backlash: no individual coefficient or linear combination is significantly negative.
-
+ 
+Gender quota policies aim to create a self-sustaining cycle of women's representation. If such dynamics exist, they should emerge with cumulative exposure to reservation over multiple election cycles. The dose-response prediction is specific: GPs reserved in two prior cycles should show larger effects than those reserved in one, and three larger than two. We test this using the full interaction model, regressing whether a woman wins an open seat in the final election (2020 in Rajasthan, 2021 in UP) on quota status in each prior election and all two- and three-way interactions.
+ 
+Table~\vref{tab:long_run_interaction} reports the results. We discuss each state in turn, focusing on what the coefficient structure implies for the dose-response prediction.
+ 
+\paragraph{Rajasthan.} The individual treatment indicators for 2005 and 2015 are not significant. The 2010 quota indicator is positive and significant (6 percentage points without FE, $p < 0.05$; 8 percentage points with FE, $p < 0.01$). Among the interactions, $\text{Quota}_{2005} \times \text{Quota}_{2015}$ is positive and significant (8 pp, $p < 0.05$), but $\text{Quota}_{2005} \times \text{Quota}_{2010}$ is small and insignificant (+4 pp), and $\text{Quota}_{2010} \times \text{Quota}_{2015}$ is negative and insignificant ($-3$ to $-6$ pp). The three-way interaction is $-5$ to $-6$ percentage points and not significant. The sum of all seven coefficients---the cumulative effect for GPs reserved in all three prior elections---is approximately 9 percentage points with fixed effects, but the linear combination is not statistically significant. There is no evidence that repeated reservation in Rajasthan builds toward a self-sustaining increase in female representation.
+ 
+\paragraph{Uttar Pradesh.} The coefficient structure undermines a simple dose-response interpretation. Only the most recent quota (2015) has a meaningful individual effect (5 pp with FE, $p < 0.01$). The 2005 indicator contributes 2 percentage points ($p < 0.10$), and the 2010 indicator is zero. More importantly, all three two-way interactions are negative or zero: $\text{Quota}_{2005} \times \text{Quota}_{2010}$ is $-0.02$, $\text{Quota}_{2005} \times \text{Quota}_{2015}$ is $-0.02$, and $\text{Quota}_{2010} \times \text{Quota}_{2015}$ is $-0.00$. This means that a GP reserved in any two prior periods does no better than one reserved only in the most recent period. Being reserved in both 2005 and 2010 but not 2015 yields a cumulative effect of approximately zero ($0.02 + 0.00 - 0.02$). Being reserved in 2005 and 2015 but not 2010 yields approximately 5 percentage points ($0.02 + 0.05 - 0.02$), which is simply the 2015 effect. Double exposure adds nothing over single-period exposure.
+ 
+The three-way interaction is large and significant (9 pp with FE, $p < 0.01$), and the total cumulative effect for always-reserved GPs sums to approximately 12 percentage points with FE. But this result is driven entirely by the three-way term overcoming the negative two-way interactions. The pattern is not one of gradual compounding---two cycles of exposure have no marginal value over one---but rather a discontinuous jump that appears only for the small group of GPs reserved in all three prior elections. This is difficult to interpret as a general dose-response effect and may instead reflect unobserved characteristics of always-reserved GPs.
+ 
+Consistent with this concern, when we restrict to districts where quota assignment passes within-district independence tests for both the 2005$\rightarrow$2010 and 2010$\rightarrow$2015 transitions, the cumulative exposure estimates collapse entirely (Appendix Table~\ref{tab:long_term_random_rotation}). $\text{Quota}_{2005}$, $\text{Quota}_{2010}$, and their interaction are all zero to two decimal places in both Rajasthan ($N = 592$) and UP ($N = 1{,}772$). These restricted samples are small, but the complete absence of any signal---not even a directionally positive point estimate---is notable.
+ 
+In sum, the long-run evidence does not support the prediction that sustained quota exposure generates compounding gains in women's representation. In Rajasthan, the cumulative effect is not significant. In UP, the full-sample result depends on a single three-way interaction that rescues otherwise null or negative two-way interactions, and the result disappears in the cleaner restricted sample. Even the largest point estimate (12 pp for always-reserved UP GPs) is smaller than the effects reported in urban settings by \citet{bhavnani2009electoral} and \citet{beaman2009powerful}. We find no evidence of backlash: no individual coefficient or linear combination is significantly negative.
+ 
 \begin{table}[!htbp]
     \centering
     \caption{Long-run Effects}
     \label{tab:long_run_interaction}
     \input{../tabs/long_term_combined.tex}
 \end{table}
+
 
 \subsection{Candidacy Effects}
 
@@ -386,7 +395,7 @@ To measure who exercises day-to-day political authority, we conducted a phone au
 
 Two cases illustrate the pattern. In one, the elected representative initially answered but transferred the call to her spouse when we began asking about panchayat governance. In another, a father-in-law answered and insisted that he was the ``Pratinidhi'' (representative).
 
-\paragraph{Comparison with open seats.} To benchmark these patterns, we contacted 487 randomly sampled representatives from open seats using the same protocol.\footnote{Our initial sample contained 507 numbers; 20 were invalid, leaving an effective sample of 487.} The response rate was 83\% (400 of 487). In open seats, 76.2\% of answered calls reached the elected representative directly (Panel B of Table~\vref{tab:full_survey}). The contrast is stark: a citizen calling a quota-seat representative speaks with the actual officeholder less than one in ten times; a citizen calling an open-seat representative does so three quarters of the time.
+\paragraph{Comparison with open seats.} To benchmark these patterns, we contacted 487 randomly sampled representatives from open seats using the same protocol.\footnote{Our initial sample contained 507 numbers; 20 were invalid, leaving an effective sample of 487.} The response rate was 82\% (400 of 487). In open seats, 76.2\% of answered calls reached the elected representative directly (Panel B of Table~\vref{tab:full_survey}). The contrast is stark: a citizen calling a quota-seat representative speaks with the actual officeholder less than one in ten times; a citizen calling an open-seat representative does so three quarters of the time.
 
 Among the 42 women in our open-seat sample who won without a gender quota, the pattern resembles quota seats rather than open seats overall: of 32 who answered, only 5 (16\%) were the elected representatives; male relatives intercepted the remaining 26 calls. In three cases, male family members explicitly claimed to manage panchayat affairs on behalf of the female member. Male proxy governance thus appears to be a feature of female-held seats generally, not of quota seats specifically, though quotas massively increase the number of seats in which it operates.
 
@@ -446,19 +455,11 @@ Among the 35 quota-elected representatives who answered our phone calls (out of 
 
 These patterns align with the 2008 Panchayati Raj Ministry report \citep[pp.~26, 63]{ministry2008} and earlier studies \citep[Table~VII]{duflo2004, ban2008tokenism, raabe2009effects}. \citet[Tables~5--6]{gajwani2015gender} find comparable education levels but document knowledge disparities and less contact with higher-level officials among quota-elected women. The candidate characteristics we observe may also reflect the broader pool of women willing to contest under quotas, potentially leading to lower average qualifications as the pool expands \citep{bhavnani2024does}.
 
-\subsection{Does Cumulative Exposure Help?}\label{sec:cumulative}
-
-If proxy governance and weaker candidate profiles are features of early-stage quota implementation, they might erode with repeated exposure. A GP reserved for women across multiple consecutive elections has more time to develop a female political network, accustom voters to female leadership, and weaken incumbent male proxies. The prediction is a dose-response relationship: GPs reserved in two or three prior cycles should show larger effects than those reserved in only one.
-
-The long-run interaction model (Table~\ref{tab:long_run_interaction}) provides a direct test. In Rajasthan, the individual quota indicators for 2005 and 2015 are not significant. The 2010 indicator is positive (6--8 pp, $p < 0.05$), and the $\text{Quota}_{2005} \times \text{Quota}_{2015}$ interaction is positive (8 pp, $p < 0.05$). But the three-way interaction ($\text{Quota}_{2005} \times \text{Quota}_{2010} \times \text{Quota}_{2015}$) is $-5$ to $-6$ percentage points and not significant. The sum of all seven coefficients---the cumulative effect for GPs reserved in all three prior elections---is approximately 9 percentage points with fixed effects, but the linear combination is not statistically significant. There is no evidence that repeated reservation in Rajasthan builds toward a self-sustaining increase in female representation.
-
-In UP, the coefficient structure undermines a simple dose-response interpretation. Only the most recent quota (2015) has a meaningful individual effect (5 pp with FE, $p < 0.01$). The 2005 indicator contributes 2 percentage points ($p < 0.10$), and the 2010 indicator is zero. More importantly, all three two-way interactions are negative or zero: $\text{Quota}_{2005} \times \text{Quota}_{2010}$ is $-0.02$, $\text{Quota}_{2005} \times \text{Quota}_{2015}$ is $-0.02$, and $\text{Quota}_{2010} \times \text{Quota}_{2015}$ is $-0.00$. This means that a GP reserved in any two prior periods does no better than one reserved only in the most recent period. Being reserved in both 2005 and 2010 but not 2015 yields a cumulative effect of zero ($0.02 + 0.00 - 0.02$). Being reserved in 2005 and 2015 but not 2010 yields approximately 5 percentage points ($0.02 + 0.05 - 0.02$), which is simply the 2015 effect. Double exposure adds nothing.
-
-The three-way interaction is large and significant (9 pp, $p < 0.01$), and the total cumulative effect for always-reserved GPs sums to approximately 12 percentage points with FE. But this result is driven entirely by the three-way term overcoming the negative two-way interactions. The pattern is not one of gradual compounding---two cycles of exposure have no marginal value over one---but rather a discontinuous jump that appears only for the small group of GPs reserved in all three prior elections. This is difficult to interpret as a general dose-response effect and may instead reflect unobserved characteristics of always-reserved GPs in the full sample.
-
-Consistent with this concern, when we restrict to districts where quota assignment passes within-district independence tests for both the 2005$\rightarrow$2010 and 2010$\rightarrow$2015 transitions, the cumulative exposure estimates collapse entirely (Table~\ref{tab:long_term_random_rotation}). $\text{Quota}_{2005}$, $\text{Quota}_{2010}$, and their interaction are all zero to two decimal places in both Rajasthan ($N = 592$) and UP ($N = 1{,}772$). These restricted samples are small, but the complete absence of any signal---not even a directionally positive point estimate---is notable.
-
-The cumulative exposure channel thus provides no reliable evidence that sustained reservation overcomes the barriers to women's post-quota representation. In Rajasthan, the cumulative effect is not significant. In UP, the full-sample result depends on a single three-way interaction term that rescues otherwise null or negative two-way interactions, and the result disappears in the cleaner restricted sample.
+\subsection{Cumulative Exposure}\label{sec:cumulative}
+ 
+If proxy governance and weaker candidate profiles are features of early-stage quota implementation, they might erode with repeated exposure. A GP reserved for women across multiple consecutive elections has more time to develop a female political network, accustom voters to female leadership, and weaken incumbent male proxies. The dose-response prediction---that two cycles of reservation should produce larger effects than one, and three larger than two---is tested directly in the long-run interaction model (Section~\ref{sec:results}, Table~\ref{tab:long_run_interaction}).
+ 
+As reported there, the prediction fails. In both states, double exposure adds nothing over single-period exposure: all two-way interactions in UP are zero or negative, and the Rajasthan cumulative effect is not significant. The one significant three-way interaction in UP does not survive restriction to districts with cleaner identification. The barriers documented in this section---proxy governance and candidate professionalization gaps---persist even after three cycles of reservation spanning fifteen years. This is consistent with a setting in which the preconditions for quota-induced attitude change (visible female governance, professionalized female candidates) are not met regardless of how many cycles the mandate has been in place.
 
 \subsection{Does Development Moderate the Quota Effect?}\label{sec:het_effects}
 
@@ -530,6 +531,8 @@ Bodies''}
 \clearpage
 \section{Identification}\label{sec:app_identification}
 
+Our identification strategy relies on the rotation mandate: once a GP is reserved for women, it cannot be reserved again in the subsequent election. We present four types of evidence on identification: treatment rotation regressions, chi-squared tests of independence, balance tests on prior electoral characteristics, and balance tests on pre-treatment census covariates.
+
 \begin{table}[!htbp]
     \centering
     \caption{Treatment Rotation: Quota Assignment Correlation Across Election Cycles (2-Way Panel)}
@@ -545,13 +548,17 @@ Bodies''}
 \end{table}
 \FloatBarrier
 
-Tables~\ref{tab:treat_corr} and \ref{tab:long_term_treat_rotation} validate that the rotation mandate operates as expected. We present two versions: Table~\ref{tab:treat_corr} uses 2-way panels that maximize sample size for each consecutive election pair (sample varies by transition), while Table~\ref{tab:long_term_treat_rotation} restricts to GPs present in all four election years (constant sample of 5,203 in Rajasthan and 21,536 in UP). The 4-way panel matches the sample used in our long-term analyses. Negative coefficients indicate rotation away from previously reserved GPs. In Rajasthan, the 2005--2010 transition shows no rotation ($\hat{\beta} \approx 0.01$), consistent with the rotation mandate taking effect only after 2010. Subsequent transitions show strong negative correlations ($\hat{\beta} \approx -0.30$ to $-0.44$), confirming rotation. In UP, all transitions show rotation, with coefficients ranging from $-0.02$ to $-0.29$. Results are consistent across both panel constructions.
+Tables~\ref{tab:treat_corr} and \ref{tab:long_term_treat_rotation} show autocorrelation in treatment assignment across consecutive elections. Table~\ref{tab:treat_corr} uses 2-way panels (sample varies by transition); Table~\ref{tab:long_term_treat_rotation} restricts to GPs present in all four election years (5,203 in Rajasthan; 21,536 in UP). In Rajasthan, the 2005-2010 coefficient is near zero ($\hat{\beta} = 0.01$), while 2010-2015 and 2015-2020 show strong negative coefficients ($\hat{\beta} = -0.40$ and $-0.29$, respectively). In UP, all transitions show negative coefficients ranging from $-0.02$ to $-0.28$. Negative coefficients indicate that GPs reserved in one election are less likely to be reserved in the next.
+
+Tables~\ref{tab:chi_sq_raj} and \ref{tab:chi_sq_up} test independence of quota assignment across election pairs. In Rajasthan, adjacent elections show strong dependence (2005-2010: $\chi^2 = 570.13$, $p < 0.01$; 2015-2020: $\chi^2 = 522.13$, $p < 0.01$), but non-adjacent elections are independent (2005-2015: $\chi^2 = 0.45$, $p = 0.50$; 2005-2020: $\chi^2 = 0.00$, $p = 1.00$). In UP, adjacent elections show similar patterns, with 2005-2021 approaching independence ($\chi^2 = 2.51$, $p = 0.11$).
 
 \input{../tabs/reserved_or_not_chi_sq_raj}
 \FloatBarrier
 
 \input{../tabs/up_chi_squared_results}
 \FloatBarrier
+
+Table~\ref{tab:balance_electoral} tests whether 2010 quota assignment is balanced on 2005 electoral characteristics. In Rajasthan, data on prior female winners are not available. In UP, GPs reserved in 2010 had slightly fewer prior female winners (51\% vs 53\%, $p < 0.001$) and differed on OBC and SC/ST reservation status. We control for these variables in our main specifications.
 
 \begin{table}[!htbp]
     \centering
@@ -560,6 +567,8 @@ Tables~\ref{tab:treat_corr} and \ref{tab:long_term_treat_rotation} validate that
     \input{../tabs/balance_electoral}
 \end{table}
 \FloatBarrier
+
+Tables~\ref{tab:balance_raj_2005_2010} and \ref{tab:balance_up_2005_2010} test balance on pre-treatment covariates from the 2001 Census. In Rajasthan, joint tests fail to reject balance (joint $p$-values: 0.12, 0.52, 0.57 across transitions). In UP, joint tests reject balance ($p < 0.01$), driven by population-related variables---reserved GPs tend to be smaller. We address this by including district-samiti fixed effects.
 
 \input{../tabs/balance_raj}
 \input{../tabs/balance_up}
@@ -740,6 +749,8 @@ If the actual representative answers: We obtained your phone number from the Raj
 
 \clearpage
 \section{Additional Electoral Outcomes}\label{sec:app_outcomes}
+
+Table~\ref{tab:candidacy_combined} examines whether past quota exposure affects women's candidacy in open seats. We restrict to GPs where the sarpanch seat was not reserved for women in 2020 and test whether prior quota assignments (2005, 2010, 2015) predict female candidacy. We find no evidence that past quotas increase the proportion of women candidates, the number of women running, or women's vote share. Most coefficients are statistically indistinguishable from zero.
 
 \input{../tabs/raj_candidacy_combined.tex}
 \FloatBarrier

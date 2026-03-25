@@ -89,7 +89,8 @@ cat("Unmatched election samitis:", nrow(unmatched_elex), "\n")
 
 # Check all unmatched are in manual crosswalk
 unmatched_not_in_manual <- unmatched_elex %>%
-    anti_join(manual_samiti_xwalk, by = c("dist_name_new_2010" = "elex_district",
+    mutate(dist_name_lower = tolower(dist_name_new_2010)) %>%
+    anti_join(manual_samiti_xwalk, by = c("dist_name_lower" = "elex_district",
                                            "samiti_name_new_2010" = "elex_samiti"))
 
 if (nrow(unmatched_not_in_manual) > 0) {

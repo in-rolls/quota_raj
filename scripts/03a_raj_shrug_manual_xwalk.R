@@ -7,6 +7,7 @@
 
 library(arrow)
 library(dplyr)
+library(tidyr)
 library(stringi)
 library(stringdist)
 library(readr)
@@ -16,7 +17,8 @@ source(here("scripts/00_config.R"))
 source(here("scripts/00_utils.R"))
 
 # Load district crosswalk
-dist_xwalk <- read_csv("data/crosswalks/raj_district_xwalk.csv", show_col_types = FALSE)
+dist_xwalk <- read_csv("data/crosswalks/raj_district_xwalk.csv", show_col_types = FALSE) %>%
+    mutate(elex_district = tolower(elex_district_raw))
 
 # Load election data
 elex <- read_parquet("data/raj/elex_raj_05_10.parquet")

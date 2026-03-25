@@ -1,0 +1,23 @@
+[2026-03-25 15:38:13] INFO: Pipeline started 
+[2026-03-25 15:38:13] INFO: Log file: /Users/soodoku/Documents/GitHub/quota_raj/logs/pipeline_20260325_153813.log 
+[2026-03-25 15:38:13] INFO: === PHASE 1: DATA EXTRACTION === 
+[2026-03-25 15:38:13] INFO: Starting: 01_extract_up_lgd.R 
+[2026-03-25 15:38:44] INFO: SUCCESS: 01_extract_up_lgd.R ( 30.9 s) 
+[2026-03-25 15:38:44] INFO: Starting: 01a_raj_standardize_source.R 
+[2026-03-25 15:38:50] INFO: SUCCESS: 01a_raj_standardize_source.R ( 6 s) 
+[2026-03-25 15:38:50] INFO: Starting: 01d_raj_standardize_samiti_names.R 
+[2026-03-25 15:38:50] INFO: SUCCESS: 01d_raj_standardize_samiti_names.R ( 0.4 s) 
+[2026-03-25 15:38:50] INFO: Starting: 01e_raj_create_samiti_crosswalk.R 
+[2026-03-25 15:38:50] INFO: SUCCESS: 01e_raj_create_samiti_crosswalk.R ( 0.2 s) 
+[2026-03-25 15:38:50] INFO: === PHASE 2: CREATE PANELS === 
+[2026-03-25 15:38:50] INFO: Starting: 02b_raj_recode.R 
+[2026-03-25 15:38:51] INFO: SUCCESS: 02b_raj_recode.R ( 1 s) 
+[2026-03-25 15:38:51] INFO: Starting: 02c_up_recode.R 
+[2026-03-25 15:38:55] INFO: SUCCESS: 02c_up_recode.R ( 3.2 s) 
+[2026-03-25 15:38:55] INFO: === PHASE 3: LINK TO SHRUG === 
+[2026-03-25 15:38:55] INFO: Starting: 03a_raj_shrug_lgd_block.R 
+[2026-03-25 15:38:59] INFO: SUCCESS: 03a_raj_shrug_lgd_block.R ( 5 s) 
+[2026-03-25 15:38:59] INFO: Starting: 03a_up_shrug_lgd_block.R 
+[2026-03-25 15:39:20] ERROR: ERROR in 03a_up_shrug_lgd_block.R : ignoring SIGPIPE signal 
+[2026-03-25 15:39:20] INFO: === PHASE 4: BALANCE TESTS === 
+[2026-03-25 15:39:20] INFO: Starting: 04_balance.R 

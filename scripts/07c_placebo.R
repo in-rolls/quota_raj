@@ -66,7 +66,7 @@ raj_05_10_placebo <- filter(raj_05_10, female_res_2005 == 0)
 cat("Open seats in 2005:", nrow(raj_05_10_placebo), "\n")
 
 m_raj_0510_nofe <- feols(female_winner_2005 ~ treat_2010, data = raj_05_10_placebo)
-m_raj_0510_fe <- feols(female_winner_2005 ~ treat_2010 | dist_samiti_2010, data = raj_05_10_placebo)
+m_raj_0510_fe <- feols(female_winner_2005 ~ treat_2010 | dist_samiti_2010, data = raj_05_10_placebo, fixef.rm = "singleton")
 
 cat("No FE coef:", round(coef(m_raj_0510_nofe)["treat_2010"], 4),
     "p =", round(pvalue(m_raj_0510_nofe)["treat_2010"], 4), "\n")
@@ -82,7 +82,7 @@ raj_10_15_placebo <- filter(raj_10_15, female_res_2010 == 0)
 cat("Open seats in 2010:", nrow(raj_10_15_placebo), "\n")
 
 m_raj_1015_nofe <- feols(female_winner_2010 ~ treat_2015, data = raj_10_15_placebo)
-m_raj_1015_fe <- feols(female_winner_2010 ~ treat_2015 | dist_samiti_2015, data = raj_10_15_placebo)
+m_raj_1015_fe <- feols(female_winner_2010 ~ treat_2015 | dist_samiti_2015, data = raj_10_15_placebo, fixef.rm = "singleton")
 
 cat("No FE coef:", round(coef(m_raj_1015_nofe)["treat_2015"], 4),
     "p =", round(pvalue(m_raj_1015_nofe)["treat_2015"], 4), "\n")
@@ -96,7 +96,7 @@ raj_15_20_placebo <- filter(raj_15_20, female_res_2015 == 0)
 cat("Open seats in 2015:", nrow(raj_15_20_placebo), "\n")
 
 m_raj_1520_nofe <- feols(female_winner_2015 ~ treat_2020, data = raj_15_20_placebo)
-m_raj_1520_fe <- feols(female_winner_2015 ~ treat_2020 | dist_samiti_2020, data = raj_15_20_placebo)
+m_raj_1520_fe <- feols(female_winner_2015 ~ treat_2020 | dist_samiti_2020, data = raj_15_20_placebo, fixef.rm = "singleton")
 
 cat("No FE coef:", round(coef(m_raj_1520_nofe)["treat_2020"], 4),
     "p =", round(pvalue(m_raj_1520_nofe)["treat_2020"], 4), "\n")
@@ -110,7 +110,7 @@ up_05_10_placebo <- filter(up_05_10, treat_2005 == 0)
 cat("Open seats in 2005:", nrow(up_05_10_placebo), "\n")
 
 m_up_0510_nofe <- feols(female_winner_2005 ~ treat_2010, data = up_05_10_placebo)
-m_up_0510_fe <- feols(female_winner_2005 ~ treat_2010 | dist_block_2010, data = up_05_10_placebo)
+m_up_0510_fe <- feols(female_winner_2005 ~ treat_2010 | dist_block_2010, data = up_05_10_placebo, fixef.rm = "singleton")
 
 cat("No FE coef:", round(coef(m_up_0510_nofe)["treat_2010"], 4),
     "p =", round(pvalue(m_up_0510_nofe)["treat_2010"], 4), "\n")
@@ -124,7 +124,7 @@ up_10_15_placebo <- filter(up_10_15, treat_2010 == 0)
 cat("Open seats in 2010:", nrow(up_10_15_placebo), "\n")
 
 m_up_1015_nofe <- feols(female_winner_2010 ~ treat_2015, data = up_10_15_placebo)
-m_up_1015_fe <- feols(female_winner_2010 ~ treat_2015 | dist_block_2015, data = up_10_15_placebo)
+m_up_1015_fe <- feols(female_winner_2010 ~ treat_2015 | dist_block_2015, data = up_10_15_placebo, fixef.rm = "singleton")
 
 cat("No FE coef:", round(coef(m_up_1015_nofe)["treat_2015"], 4),
     "p =", round(pvalue(m_up_1015_nofe)["treat_2015"], 4), "\n")
@@ -138,7 +138,7 @@ up_15_21_placebo <- filter(up_15_21, treat_2015 == 0)
 cat("Open seats in 2015:", nrow(up_15_21_placebo), "\n")
 
 m_up_1521_nofe <- feols(female_winner_2015 ~ treat_2021, data = up_15_21_placebo)
-m_up_1521_fe <- feols(female_winner_2015 ~ treat_2021 | dist_block_2021, data = up_15_21_placebo)
+m_up_1521_fe <- feols(female_winner_2015 ~ treat_2021 | dist_block_2021, data = up_15_21_placebo, fixef.rm = "singleton")
 
 cat("No FE coef:", round(coef(m_up_1521_nofe)["treat_2021"], 4),
     "p =", round(pvalue(m_up_1521_nofe)["treat_2021"], 4), "\n")
@@ -185,7 +185,7 @@ aer_etable(all_models,
     ),
     cmidrules = list(after = 1, rules = c("2-7", "8-13")),
     colsep = list(after = 6, space = "1em"),
-    keep = c("%treat_"),
+    keep = c("(Intercept)", "%treat_"),
     notes = "$^{***}$p$<$0.01; $^{**}$p$<$0.05; $^{*}$p$<$0.1. Placebo test: FUTURE quota status predicting PAST outcomes. Outcome: woman elected in open seat at $t-1$. Treatment: quota status at $t$. Sample restricted to GPs where seat was open in the outcome election. Null effects support random assignment of quota. Heteroskedasticity-robust standard errors.",
     dict = dict_placebo)
 
