@@ -1,6 +1,7 @@
 # 04a_balance_electoral.R
 # Balance tests on electoral variables (full sample, no SHRUG filtering)
-# Tests whether 2010 treatment is balanced on 2005 characteristics
+# Tests whether treatment assignment is balanced on prior electoral characteristics
+# Output: tabs/balance_electoral.tex (Table B.5)
 
 library(dplyr)
 library(arrow)
@@ -11,93 +12,274 @@ source(here("scripts/00_utils.R"))
 
 cat("=== Electoral Balance Tests ===\n")
 
-# Load panels
-raj_05_10 <- read_parquet(here("data/raj/raj_05_10.parquet"))
-up_05_10 <- read_parquet(here("data/up/up_05_10.parquet"))
+# =============================================================================
+# Helper Functions
+# =============================================================================
 
-cat("Rajasthan N:", nrow(raj_05_10), "\n")
-cat("UP N:", nrow(up_05_10), "\n")
-
-# ===========================================================================
-# Rajasthan Balance Tests
-# ===========================================================================
-cat("\n--- Rajasthan ---\n")
-
-# Prior female winner
-raj_fem_winner_test <- t.test(female_winner_2005 ~ treat_2010, data = raj_05_10)
-cat("Prior female winner p-value:", round(raj_fem_winner_test$p.value, 4), "\n")
-
-# Caste category (chi-squared)
-raj_caste_tab <- table(raj_05_10$caste_category_2005, raj_05_10$treat_2010)
-raj_caste_test <- chisq.test(raj_caste_tab)
-cat("Caste category chi-sq p-value:", round(raj_caste_test$p.value, 4), "\n")
-
-# ===========================================================================
-# UP Balance Tests
-# ===========================================================================
-cat("\n--- Uttar Pradesh ---\n")
-
-# Create female winner indicator
-up_05_10 <- up_05_10 %>%
-    mutate(female_winner_2005 = as.integer(cand_sex_fin_2005 == "\u092e\u0939\u093f\u0932\u093e"))
-
-# Prior female winner
-up_fem_winner_test <- t.test(female_winner_2005 ~ treat_2010, data = up_05_10)
-cat("Prior female winner p-value:", round(up_fem_winner_test$p.value, 4), "\n")
-
-# OBC status
-up_obc_test <- t.test(obc_2005 ~ treat_2010, data = up_05_10)
-cat("OBC status p-value:", round(up_obc_test$p.value, 4), "\n")
-
-# Dalit status
-up_dalit_test <- t.test(dalit_2005 ~ treat_2010, data = up_05_10)
-cat("Dalit status p-value:", round(up_dalit_test$p.value, 4), "\n")
-
-# ===========================================================================
-# Generate LaTeX Table
-# ===========================================================================
-cat("\n--- Creating table ---\n")
-
-fmt <- function(x, digits = 2) sprintf(paste0("%.", digits, "f"), x)
-fmt_int <- function(x) format(as.integer(x), big.mark = ",")
-
-# Helper to get means by treatment
-get_means <- function(data, var, treat_var = "treat_2010") {
-    means <- tapply(data[[var]], data[[treat_var]], mean, na.rm = TRUE)
-    c(open = unname(means["0"]), quota = unname(means["1"]))
+fmt <- function(x, digits = 2) {
+    ifelse(is.na(x), "--", sprintf(paste0("%.", digits, "f"), x))
 }
 
-# Rajasthan results
-raj_fem <- get_means(raj_05_10, "female_winner_2005")
-raj_caste_props <- prop.table(raj_caste_tab, 2)
+fmt_int <- function(x) format(as.integer(x), big.mark = ",")
 
-# UP results
-up_fem <- get_means(up_05_10, "female_winner_2005")
-up_obc <- get_means(up_05_10, "obc_2005")
-up_dalit <- get_means(up_05_10, "dalit_2005")
+compute_balance_row <- function(data, var, treat_var) {
+    if (!var %in% names(data)) {
+        return(list(quota = NA, open = NA, p = NA, n = 0))
+    }
 
-# Build table
-tex_lines <- c(
+    data_clean <- data %>% filter(!is.na(!!sym(var)) & !is.na(!!sym(treat_var)))
+
+    if (nrow(data_clean) < 10) {
+        return(list(quota = NA, open = NA, p = NA, n = 0))
+    }
+
+    means <- tapply(data_clean[[var]], data_clean[[treat_var]], mean, na.rm = TRUE)
+    t_result <- tryCatch({
+        t.test(data_clean[[var]] ~ data_clean[[treat_var]])
+    }, error = function(e) list(p.value = NA))
+
+    list(
+        quota = unname(means["1"]),
+        open = unname(means["0"]),
+        p = t_result$p.value,
+        n = nrow(data_clean)
+    )
+}
+
+# =============================================================================
+# Load Rajasthan Panels
+# =============================================================================
+cat("\n--- Loading Rajasthan Panels ---\n")
+
+raj_05_10 <- read_parquet(here("data/raj/raj_05_10.parquet"))
+raj_10_15 <- read_parquet(here("data/raj/raj_10_15.parquet"))
+raj_15_20 <- read_parquet(here("data/raj/raj_15_20.parquet"))
+
+cat("Raj 05-10 N:", nrow(raj_05_10), "\n")
+cat("Raj 10-15 N:", nrow(raj_10_15), "\n")
+cat("Raj 15-20 N:", nrow(raj_15_20), "\n")
+
+# =============================================================================
+# Load UP Panels
+# =============================================================================
+cat("\n--- Loading UP Panels ---\n")
+
+up_05_10 <- read_parquet(here("data/up/up_05_10.parquet"))
+up_10_15 <- read_parquet(here("data/up/up_10_15.parquet"))
+up_15_21 <- read_parquet(here("data/up/up_15_21.parquet"))
+
+up_05_10 <- up_05_10 %>%
+    mutate(female_winner_2005 = as.integer(cand_sex_fin_2005 == "महिला"))
+up_10_15 <- up_10_15 %>%
+    mutate(female_winner_2010 = as.integer(cand_sex_fin_2010 == "महिला"))
+up_15_21 <- up_15_21 %>%
+    mutate(female_winner_2015 = as.integer(sex_2015 == "महिला"))
+
+cat("UP 05-10 N:", nrow(up_05_10), "\n")
+cat("UP 10-15 N:", nrow(up_10_15), "\n")
+cat("UP 15-21 N:", nrow(up_15_21), "\n")
+
+# =============================================================================
+# Compute Rajasthan Balance
+# =============================================================================
+cat("\n--- Computing Rajasthan Balance ---\n")
+
+raj_bal <- list()
+
+raj_bal[["05_10"]] <- list(
+    female_winner = compute_balance_row(raj_05_10, "female_winner_2005", "treat_2010"),
+    obc = compute_balance_row(raj_05_10, "obc_2005", "treat_2010"),
+    sc_st = compute_balance_row(raj_05_10 %>% mutate(sc_st_2005 = sc_2005 | st_2005), "sc_st_2005", "treat_2010")
+)
+
+raj_bal[["10_15"]] <- list(
+    female_winner = compute_balance_row(raj_10_15, "female_winner_2010", "treat_2015"),
+    obc = compute_balance_row(raj_10_15, "obc_2010", "treat_2015"),
+    sc_st = compute_balance_row(raj_10_15 %>% mutate(sc_st_2010 = sc_2010 | st_2010), "sc_st_2010", "treat_2015")
+)
+
+raj_bal[["15_20"]] <- list(
+    female_winner = compute_balance_row(raj_15_20, "female_winner_2015", "treat_2020"),
+    obc = compute_balance_row(raj_15_20, "obc_2015", "treat_2020"),
+    sc_st = compute_balance_row(raj_15_20 %>% mutate(sc_st_2015 = sc_2015 | st_2015), "sc_st_2015", "treat_2020")
+)
+
+# =============================================================================
+# Compute UP Balance
+# =============================================================================
+cat("\n--- Computing UP Balance ---\n")
+
+up_bal <- list()
+
+up_bal[["05_10"]] <- list(
+    female_winner = compute_balance_row(up_05_10, "female_winner_2005", "treat_2010"),
+    obc = compute_balance_row(up_05_10, "obc_2005", "treat_2010"),
+    sc_st = compute_balance_row(up_05_10, "dalit_2005", "treat_2010")
+)
+
+up_bal[["10_15"]] <- list(
+    female_winner = compute_balance_row(up_10_15, "female_winner_2010", "treat_2015"),
+    obc = compute_balance_row(up_10_15, "obc_2010", "treat_2015"),
+    sc_st = compute_balance_row(up_10_15, "dalit_2010", "treat_2015")
+)
+
+up_bal[["15_21"]] <- list(
+    female_winner = compute_balance_row(up_15_21, "female_winner_2015", "treat_2021"),
+    obc = compute_balance_row(up_15_21, "obc_2015", "treat_2021"),
+    sc_st = compute_balance_row(up_15_21, "dalit_2015", "treat_2021")
+)
+
+# =============================================================================
+# Generate LaTeX Table - Rajasthan
+# =============================================================================
+cat("\n--- Creating Rajasthan Electoral Balance Table ---\n")
+
+make_row <- function(label, bal_list, periods) {
+    parts <- sapply(periods, function(p) {
+        b <- bal_list[[p]]
+        paste0(fmt(b$quota), " & ", fmt(b$open), " & ", fmt(b$p, 3))
+    })
+    paste0(label, " & ", paste(parts, collapse = " & "), " \\\\")
+}
+
+raj_tex <- c(
+    "\\begin{table}[htbp]",
+    "\\caption{Rajasthan: Electoral Balance Tests for Quota Assignment}",
+    "\\label{tab:balance_electoral_raj}",
+    "{\\centering\\scriptsize",
+    "\\begin{tabular}{@{}lrrr rrr rrr@{}}",
+    "\\toprule",
+    "& \\multicolumn{3}{c}{2005$\\rightarrow$2010} & \\multicolumn{3}{c}{2010$\\rightarrow$2015} & \\multicolumn{3}{c}{2015$\\rightarrow$2020} \\\\",
+    "\\cmidrule(lr){2-4} \\cmidrule(lr){5-7} \\cmidrule(lr){8-10}",
+    "Variable & Quota & Open & p & Quota & Open & p & Quota & Open & p \\\\",
+    "\\midrule"
+)
+
+periods_raj <- c("05_10", "10_15", "15_20")
+
+raj_tex <- c(raj_tex,
+    make_row("Prior female winner", lapply(periods_raj, function(p) raj_bal[[p]]$female_winner), seq_along(periods_raj)),
+    make_row("OBC reservation", lapply(periods_raj, function(p) raj_bal[[p]]$obc), seq_along(periods_raj)),
+    make_row("SC/ST reservation", lapply(periods_raj, function(p) raj_bal[[p]]$sc_st), seq_along(periods_raj))
+)
+
+row_female <- paste0("Prior female winner & ",
+    fmt(raj_bal[["05_10"]]$female_winner$quota), " & ", fmt(raj_bal[["05_10"]]$female_winner$open), " & ", fmt(raj_bal[["05_10"]]$female_winner$p, 3), " & ",
+    fmt(raj_bal[["10_15"]]$female_winner$quota), " & ", fmt(raj_bal[["10_15"]]$female_winner$open), " & ", fmt(raj_bal[["10_15"]]$female_winner$p, 3), " & ",
+    fmt(raj_bal[["15_20"]]$female_winner$quota), " & ", fmt(raj_bal[["15_20"]]$female_winner$open), " & ", fmt(raj_bal[["15_20"]]$female_winner$p, 3), " \\\\")
+
+row_obc <- paste0("OBC reservation & ",
+    fmt(raj_bal[["05_10"]]$obc$quota), " & ", fmt(raj_bal[["05_10"]]$obc$open), " & ", fmt(raj_bal[["05_10"]]$obc$p, 3), " & ",
+    fmt(raj_bal[["10_15"]]$obc$quota), " & ", fmt(raj_bal[["10_15"]]$obc$open), " & ", fmt(raj_bal[["10_15"]]$obc$p, 3), " & ",
+    fmt(raj_bal[["15_20"]]$obc$quota), " & ", fmt(raj_bal[["15_20"]]$obc$open), " & ", fmt(raj_bal[["15_20"]]$obc$p, 3), " \\\\")
+
+row_sc_st <- paste0("SC/ST reservation & ",
+    fmt(raj_bal[["05_10"]]$sc_st$quota), " & ", fmt(raj_bal[["05_10"]]$sc_st$open), " & ", fmt(raj_bal[["05_10"]]$sc_st$p, 3), " & ",
+    fmt(raj_bal[["10_15"]]$sc_st$quota), " & ", fmt(raj_bal[["10_15"]]$sc_st$open), " & ", fmt(raj_bal[["10_15"]]$sc_st$p, 3), " & ",
+    fmt(raj_bal[["15_20"]]$sc_st$quota), " & ", fmt(raj_bal[["15_20"]]$sc_st$open), " & ", fmt(raj_bal[["15_20"]]$sc_st$p, 3), " \\\\")
+
+raj_tex <- c(
+    "\\begin{table}[htbp]",
+    "\\caption{Rajasthan: Electoral Balance Tests for Quota Assignment}",
+    "\\label{tab:balance_electoral_raj}",
+    "{\\centering\\scriptsize",
+    "\\begin{tabular}{@{}lrrr rrr rrr@{}}",
+    "\\toprule",
+    "& \\multicolumn{3}{c}{2005$\\rightarrow$2010} & \\multicolumn{3}{c}{2010$\\rightarrow$2015} & \\multicolumn{3}{c}{2015$\\rightarrow$2020} \\\\",
+    "\\cmidrule(lr){2-4} \\cmidrule(lr){5-7} \\cmidrule(lr){8-10}",
+    "Variable & Quota & Open & p & Quota & Open & p & Quota & Open & p \\\\",
+    "\\midrule",
+    row_female,
+    row_obc,
+    row_sc_st,
+    "\\midrule",
+    paste0("N & \\multicolumn{3}{c}{", fmt_int(nrow(raj_05_10)), "} & ",
+           "\\multicolumn{3}{c}{", fmt_int(nrow(raj_10_15)), "} & ",
+           "\\multicolumn{3}{c}{", fmt_int(nrow(raj_15_20)), "} \\\\"),
+    "\\bottomrule",
+    "\\end{tabular}",
+    "\\par}",
+    "",
+    "\\vspace{0.5ex}",
+    "\\parbox{\\linewidth}{\\scriptsize \\emph{Notes:} Balance tests for quota assignment on prior electoral characteristics in Rajasthan. ``Quota'' = GPs reserved for women in the later year; ``Open'' = GPs not reserved. Prior female winner = proportion of GPs with a female sarpanch in the prior election. OBC/SC/ST reservation = proportion of GPs with caste-based reservations. p-values from t-tests. This table uses the full electoral panel (not SHRUG-filtered).}",
+    "\\end{table}"
+)
+
+writeLines(raj_tex, here("tabs/balance_electoral_raj.tex"))
+cat("Created: tabs/balance_electoral_raj.tex\n")
+
+# =============================================================================
+# Generate LaTeX Table - UP
+# =============================================================================
+cat("\n--- Creating UP Electoral Balance Table ---\n")
+
+row_female_up <- paste0("Prior female winner & ",
+    fmt(up_bal[["05_10"]]$female_winner$quota), " & ", fmt(up_bal[["05_10"]]$female_winner$open), " & ", fmt(up_bal[["05_10"]]$female_winner$p, 3), " & ",
+    fmt(up_bal[["10_15"]]$female_winner$quota), " & ", fmt(up_bal[["10_15"]]$female_winner$open), " & ", fmt(up_bal[["10_15"]]$female_winner$p, 3), " & ",
+    fmt(up_bal[["15_21"]]$female_winner$quota), " & ", fmt(up_bal[["15_21"]]$female_winner$open), " & ", fmt(up_bal[["15_21"]]$female_winner$p, 3), " \\\\")
+
+row_obc_up <- paste0("OBC reservation & ",
+    fmt(up_bal[["05_10"]]$obc$quota), " & ", fmt(up_bal[["05_10"]]$obc$open), " & ", fmt(up_bal[["05_10"]]$obc$p, 3), " & ",
+    fmt(up_bal[["10_15"]]$obc$quota), " & ", fmt(up_bal[["10_15"]]$obc$open), " & ", fmt(up_bal[["10_15"]]$obc$p, 3), " & ",
+    fmt(up_bal[["15_21"]]$obc$quota), " & ", fmt(up_bal[["15_21"]]$obc$open), " & ", fmt(up_bal[["15_21"]]$obc$p, 3), " \\\\")
+
+row_sc_st_up <- paste0("SC/ST reservation & ",
+    fmt(up_bal[["05_10"]]$sc_st$quota), " & ", fmt(up_bal[["05_10"]]$sc_st$open), " & ", fmt(up_bal[["05_10"]]$sc_st$p, 3), " & ",
+    fmt(up_bal[["10_15"]]$sc_st$quota), " & ", fmt(up_bal[["10_15"]]$sc_st$open), " & ", fmt(up_bal[["10_15"]]$sc_st$p, 3), " & ",
+    fmt(up_bal[["15_21"]]$sc_st$quota), " & ", fmt(up_bal[["15_21"]]$sc_st$open), " & ", fmt(up_bal[["15_21"]]$sc_st$p, 3), " \\\\")
+
+up_tex <- c(
+    "\\begin{table}[htbp]",
+    "\\caption{Uttar Pradesh: Electoral Balance Tests for Quota Assignment}",
+    "\\label{tab:balance_electoral_up}",
+    "{\\centering\\scriptsize",
+    "\\begin{tabular}{@{}lrrr rrr rrr@{}}",
+    "\\toprule",
+    "& \\multicolumn{3}{c}{2005$\\rightarrow$2010} & \\multicolumn{3}{c}{2010$\\rightarrow$2015} & \\multicolumn{3}{c}{2015$\\rightarrow$2021} \\\\",
+    "\\cmidrule(lr){2-4} \\cmidrule(lr){5-7} \\cmidrule(lr){8-10}",
+    "Variable & Quota & Open & p & Quota & Open & p & Quota & Open & p \\\\",
+    "\\midrule",
+    row_female_up,
+    row_obc_up,
+    row_sc_st_up,
+    "\\midrule",
+    paste0("N & \\multicolumn{3}{c}{", fmt_int(nrow(up_05_10)), "} & ",
+           "\\multicolumn{3}{c}{", fmt_int(nrow(up_10_15)), "} & ",
+           "\\multicolumn{3}{c}{", fmt_int(nrow(up_15_21)), "} \\\\"),
+    "\\bottomrule",
+    "\\end{tabular}",
+    "\\par}",
+    "",
+    "\\vspace{0.5ex}",
+    "\\parbox{\\linewidth}{\\scriptsize \\emph{Notes:} Balance tests for quota assignment on prior electoral characteristics in Uttar Pradesh. ``Quota'' = GPs reserved for women in the later year; ``Open'' = GPs not reserved. Prior female winner = proportion of GPs with a female pradhan in the prior election. OBC/SC/ST reservation = proportion of GPs with caste-based reservations. p-values from t-tests. This table uses the full electoral panel (not SHRUG-filtered).}",
+    "\\end{table}"
+)
+
+writeLines(up_tex, here("tabs/balance_electoral_up.tex"))
+cat("Created: tabs/balance_electoral_up.tex\n")
+
+# =============================================================================
+# Generate Combined Table (for backwards compatibility)
+# =============================================================================
+cat("\n--- Creating Combined Electoral Balance Table ---\n")
+
+combined_tex <- c(
     "{\\centering\\scriptsize",
     "\\begin{tabular}{@{}lrrrcrrrr@{}}",
     "\\toprule",
-    "& \\multicolumn{3}{c}{Rajasthan} & & \\multicolumn{3}{c}{Uttar Pradesh} \\\\",
+    "& \\multicolumn{3}{c}{Rajasthan 2005$\\rightarrow$2010} & & \\multicolumn{3}{c}{Uttar Pradesh 2005$\\rightarrow$2010} \\\\",
     "\\cmidrule(lr){2-4} \\cmidrule(lr){6-8}",
-    "Variable & Open & Quota & p-value & & Open & Quota & p-value \\\\",
+    "Variable & Quota & Open & p & & Quota & Open & p \\\\",
     "\\midrule",
-    paste0("Prior female winner & ", fmt(raj_fem["open"]), " & ", fmt(raj_fem["quota"]), " & ",
-           fmt(raj_fem_winner_test$p.value, 3), " & & ",
-           fmt(up_fem["open"]), " & ", fmt(up_fem["quota"]), " & ",
-           fmt(up_fem_winner_test$p.value, 3), " \\\\"),
-    paste0("OBC reservation (2005) & -- & -- & -- & & ",
-           fmt(up_obc["open"]), " & ", fmt(up_obc["quota"]), " & ",
-           fmt(up_obc_test$p.value, 3), " \\\\"),
-    paste0("SC/ST reservation (2005) & -- & -- & -- & & ",
-           fmt(up_dalit["open"]), " & ", fmt(up_dalit["quota"]), " & ",
-           fmt(up_dalit_test$p.value, 3), " \\\\"),
-    "\\addlinespace",
-    paste0("Caste category ($\\chi^2$) & \\multicolumn{2}{c}{(4 categories)} & ",
-           fmt(raj_caste_test$p.value, 3), " & & -- & -- & -- \\\\"),
+    paste0("Prior female winner & ",
+           fmt(raj_bal[["05_10"]]$female_winner$quota), " & ", fmt(raj_bal[["05_10"]]$female_winner$open), " & ", fmt(raj_bal[["05_10"]]$female_winner$p, 3), " & & ",
+           fmt(up_bal[["05_10"]]$female_winner$quota), " & ", fmt(up_bal[["05_10"]]$female_winner$open), " & ", fmt(up_bal[["05_10"]]$female_winner$p, 3), " \\\\"),
+    paste0("OBC reservation & ",
+           fmt(raj_bal[["05_10"]]$obc$quota), " & ", fmt(raj_bal[["05_10"]]$obc$open), " & ", fmt(raj_bal[["05_10"]]$obc$p, 3), " & & ",
+           fmt(up_bal[["05_10"]]$obc$quota), " & ", fmt(up_bal[["05_10"]]$obc$open), " & ", fmt(up_bal[["05_10"]]$obc$p, 3), " \\\\"),
+    paste0("SC/ST reservation & ",
+           fmt(raj_bal[["05_10"]]$sc_st$quota), " & ", fmt(raj_bal[["05_10"]]$sc_st$open), " & ", fmt(raj_bal[["05_10"]]$sc_st$p, 3), " & & ",
+           fmt(up_bal[["05_10"]]$sc_st$quota), " & ", fmt(up_bal[["05_10"]]$sc_st$open), " & ", fmt(up_bal[["05_10"]]$sc_st$p, 3), " \\\\"),
     "\\midrule",
     paste0("N & \\multicolumn{3}{c}{", fmt_int(nrow(raj_05_10)), "} & & ",
            "\\multicolumn{3}{c}{", fmt_int(nrow(up_05_10)), "} \\\\"),
@@ -107,12 +289,12 @@ tex_lines <- c(
     "",
     "\\vspace{0.5ex}",
     paste0("\\parbox{\\linewidth}{\\scriptsize \\emph{Notes:} Balance tests for 2010 quota assignment ",
-           "on 2005 electoral characteristics. ``Open'' = GPs not reserved for women in 2010; ",
-           "``Quota'' = GPs reserved for women in 2010. This table uses the full electoral panel ",
-           "(not SHRUG-filtered). p-values from t-tests except caste category ($\\chi^2$ test).}")
+           "on 2005 electoral characteristics. ``Quota'' = GPs reserved for women in 2010; ",
+           "``Open'' = GPs not reserved. p-values from t-tests. ",
+           "This table uses the full electoral panel (not SHRUG-filtered).}")
 )
 
-writeLines(tex_lines, here("tabs/balance_electoral.tex"))
+writeLines(combined_tex, here("tabs/balance_electoral.tex"))
 cat("Created: tabs/balance_electoral.tex\n")
 
 cat("\n=== Electoral Balance Tests Complete ===\n")

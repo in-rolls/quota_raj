@@ -231,7 +231,7 @@ aer_etable(models,
     ),
     cmidrules = list(after = 1, rules = c("2-7", "8-13")),
     colsep = list(after = 6, space = "1em"),
-    keep = c("%treat_", "%near_town", "%high_infra", "%has_power"),
+    keep = c("(Intercept)", "%treat_", "%near_town", "%high_infra", "%has_power"),
     notes = "$^{***}$p$<$0.01; $^{**}$p$<$0.05; $^{*}$p$<$0.1. Outcome: woman elected in open seat. Near Town = 1 if distance to nearest town $\\leq$ median. High Infrastructure = 1 if sum of (education facility, medical facility, power supply, bank facility) $>$ median. Has Power = 1 if village has power supply. All variables from Census 2001 Village Directory via SHRUG (LGD Block Panchayat matching). Heteroskedasticity-robust standard errors.",
     dict = dict_combined)
 

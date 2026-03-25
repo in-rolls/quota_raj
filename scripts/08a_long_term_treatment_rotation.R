@@ -143,7 +143,7 @@ aer_etable(all_models,
     ),
     cmidrules = list(after = 1, rules = c("2-7", "8-13")),
     colsep = list(after = 6, space = "1em"),
-    keep = c("%treat_"),
+    keep = c("(Intercept)", "%treat_"),
     notes = notes_text,
     dict = dict_rotation)
 

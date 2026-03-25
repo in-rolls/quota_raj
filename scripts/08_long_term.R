@@ -77,7 +77,7 @@ aer_etable(all_lt_models,
     ),
     cmidrules = list(after = 1, rules = c("2-3", "4-5")),
     colsep = list(after = 2, space = "1em"),
-    keep = c("%treat_"),
+    keep = c("(Intercept)", "%treat_"),
     notes = "$^{***}$p$<$0.01; $^{**}$p$<$0.05; $^{*}$p$<$0.1. The dependent variable is whether a woman was elected in an open seat (2020 for Rajasthan, 2021 for UP). Sample restricted to GPs where seat was not reserved for women in outcome year. Treatment variables indicate quota status in each prior election year. Heteroskedasticity-robust standard errors.",
     dict = dict_lt)
 

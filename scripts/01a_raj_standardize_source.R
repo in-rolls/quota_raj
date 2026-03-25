@@ -19,7 +19,7 @@ cat("=== Standardizing Rajasthan Source Files ===\n")
 standardize_reservation <- function(res) {
     res_upper <- toupper(trimws(res))
 
-    female_reserved <- as.integer(grepl("W|WOMAN", res_upper))
+    female_reserved <- as.integer(grepl("\\bW\\b|WOMAN|W$", res_upper))
 
     caste_category <- case_when(
         grepl("^GEN|GENERAL", res_upper) ~ "GEN",

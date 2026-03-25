@@ -12,7 +12,8 @@ source(here("scripts/00_config.R"))
 source(here("scripts/00_utils.R"))
 
 # Load district crosswalk
-dist_xwalk <- read_csv("data/crosswalks/raj_district_xwalk.csv", show_col_types = FALSE)
+dist_xwalk <- read_csv("data/crosswalks/raj_district_xwalk.csv", show_col_types = FALSE) %>%
+    mutate(elex_district = tolower(elex_district_raw))
 
 # Load election data
 elex <- read_parquet("data/raj/elex_raj_05_10.parquet")
@@ -57,7 +58,7 @@ xwalk <- elex_samitis %>%
     mutate(
         # Get candidate SHRUG subdistricts in same district
         candidates = list(shrug_subdists %>%
-            filter(shrug_district == shrug_district) %>%
+            filter(.data$shrug_district == !!shrug_district) %>%
             pull(shrug_subdistrict)),
         # Normalize samiti name for matching
         samiti_norm = normalize_string(elex_samiti),

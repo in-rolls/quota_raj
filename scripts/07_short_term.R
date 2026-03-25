@@ -64,7 +64,7 @@ raj_05_10_open <- filter(raj_05_10, female_res_2010 == 0)
 cat("Open seats:", nrow(raj_05_10_open), "\n")
 
 m_raj_0510_nofe <- feols(female_winner_2010 ~ treat_2005, data = raj_05_10_open)
-m_raj_0510_fe <- feols(female_winner_2010 ~ treat_2005 | dist_samiti_2010, data = raj_05_10_open)
+m_raj_0510_fe <- feols(female_winner_2010 ~ treat_2005 | dist_samiti_2010, data = raj_05_10_open, fixef.rm = "singleton")
 
 # =============================================================================
 # Rajasthan 2010 → 2015 (Open seats in 2015)
@@ -77,7 +77,7 @@ raj_10_15_open <- raj_10_15 %>%
 cat("Open seats with winner data:", nrow(raj_10_15_open), "\n")
 
 m_raj_1015_nofe <- feols(female_winner_2015 ~ treat_2010, data = raj_10_15_open)
-m_raj_1015_fe <- feols(female_winner_2015 ~ treat_2010 | dist_samiti_2015, data = raj_10_15_open)
+m_raj_1015_fe <- feols(female_winner_2015 ~ treat_2010 | dist_samiti_2015, data = raj_10_15_open, fixef.rm = "singleton")
 
 # =============================================================================
 # Rajasthan 2015 → 2020 (Open seats in 2020)
@@ -88,7 +88,7 @@ raj_15_20_open <- filter(raj_15_20, female_res_2020 == 0 & !is.na(female_winner_
 cat("Open seats with winner data:", nrow(raj_15_20_open), "\n")
 
 m_raj_1520_nofe <- feols(female_winner_2020 ~ treat_2015, data = raj_15_20_open)
-m_raj_1520_fe <- feols(female_winner_2020 ~ treat_2015 | dist_samiti_2020, data = raj_15_20_open)
+m_raj_1520_fe <- feols(female_winner_2020 ~ treat_2015 | dist_samiti_2020, data = raj_15_20_open, fixef.rm = "singleton")
 
 # =============================================================================
 # UP 2005 → 2010 (Open seats in 2010)
@@ -99,7 +99,7 @@ up_05_10_open <- filter(up_05_10, treat_2010 == 0)
 cat("Open seats:", nrow(up_05_10_open), "\n")
 
 m_up_0510_nofe <- feols(female_winner_2010 ~ treat_2005, data = up_05_10_open)
-m_up_0510_fe <- feols(female_winner_2010 ~ treat_2005 | dist_block_2010, data = up_05_10_open)
+m_up_0510_fe <- feols(female_winner_2010 ~ treat_2005 | dist_block_2010, data = up_05_10_open, fixef.rm = "singleton")
 
 # =============================================================================
 # UP 2010 → 2015 (Open seats in 2015)
@@ -110,7 +110,7 @@ up_10_15_open <- filter(up_10_15, treat_2015 == 0)
 cat("Open seats:", nrow(up_10_15_open), "\n")
 
 m_up_1015_nofe <- feols(female_winner_2015 ~ treat_2010, data = up_10_15_open)
-m_up_1015_fe <- feols(female_winner_2015 ~ treat_2010 | dist_block_2015, data = up_10_15_open)
+m_up_1015_fe <- feols(female_winner_2015 ~ treat_2010 | dist_block_2015, data = up_10_15_open, fixef.rm = "singleton")
 
 # =============================================================================
 # UP 2015 → 2021 (Open seats in 2021)
@@ -121,7 +121,7 @@ up_15_21_open <- filter(up_15_21, treat_2021 == 0)
 cat("Open seats:", nrow(up_15_21_open), "\n")
 
 m_up_1521_nofe <- feols(female_winner_2021 ~ treat_2015, data = up_15_21_open)
-m_up_1521_fe <- feols(female_winner_2021 ~ treat_2015 | dist_block_2021, data = up_15_21_open)
+m_up_1521_fe <- feols(female_winner_2021 ~ treat_2015 | dist_block_2021, data = up_15_21_open, fixef.rm = "singleton")
 
 # =============================================================================
 # Combined Output Table: All panels, NO FE and FE
@@ -165,7 +165,7 @@ aer_etable(all_models,
     ),
     cmidrules = list(after = 1, rules = c("2-7", "8-13")),
     colsep = list(after = 6, space = "1em"),
-    keep = c("%treat_"),
+    keep = c("(Intercept)", "%treat_"),
     notes = "$^{***}$p$<$0.01; $^{**}$p$<$0.05; $^{*}$p$<$0.1. Outcome: woman elected in open seat. Sample restricted to GPs where seat was not reserved for women in outcome year. Heteroskedasticity-robust standard errors.",
     dict = dict_combined)
 

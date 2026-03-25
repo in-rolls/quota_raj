@@ -162,7 +162,13 @@ raj_05_10 <- raj_05_10_raw %>%
         case = paste0(treat_2005, treat_2010),
         female_winner_2005 = winner_female_2005,
         female_winner_2010 = winner_female_2010,
-        dist_samiti_2010 = paste0(tolower(district_std_2010), "_", tolower(samiti_std_2010))
+        dist_samiti_2010 = paste0(tolower(district_std_2010), "_", tolower(samiti_std_2010)),
+        obc_2005 = as.integer(caste_category_2005 == "OBC"),
+        sc_2005 = as.integer(caste_category_2005 == "SC"),
+        st_2005 = as.integer(caste_category_2005 == "ST"),
+        obc_2010 = as.integer(caste_category_2010 == "OBC"),
+        sc_2010 = as.integer(caste_category_2010 == "SC"),
+        st_2010 = as.integer(caste_category_2010 == "ST")
     )
 
 n_duplicates <- n_after_join - nrow(raj_05_10)
@@ -192,7 +198,13 @@ raj_10_15 <- raj_10_15_raw %>%
         case = paste0(treat_2010, treat_2015),
         female_winner_2010 = winner_female_2010,
         female_winner_2015 = winner_female_2015,
-        dist_samiti_2015 = paste0(tolower(district_std_2015), "_", tolower(samiti_std_2015))
+        dist_samiti_2015 = paste0(tolower(district_std_2015), "_", tolower(samiti_std_2015)),
+        obc_2010 = as.integer(caste_category_2010 == "OBC"),
+        sc_2010 = as.integer(caste_category_2010 == "SC"),
+        st_2010 = as.integer(caste_category_2010 == "ST"),
+        obc_2015 = as.integer(caste_category_2015 == "OBC"),
+        sc_2015 = as.integer(caste_category_2015 == "SC"),
+        st_2015 = as.integer(caste_category_2015 == "ST")
     )
 
 n_duplicates <- n_after_join - nrow(raj_10_15)
@@ -224,7 +236,13 @@ raj_15_20 <- raj_15_20_raw %>%
         case = paste0(treat_2015, treat_2020),
         female_winner_2015 = winner_female_2015,
         female_winner_2020 = coalesce(winner_sex_from_cand, NA_integer_),
-        dist_samiti_2020 = paste0(tolower(district_std_2020), "_", tolower(samiti_std_2020))
+        dist_samiti_2020 = paste0(tolower(district_std_2020), "_", tolower(samiti_std_2020)),
+        obc_2015 = as.integer(caste_category_2015 == "OBC"),
+        sc_2015 = as.integer(caste_category_2015 == "SC"),
+        st_2015 = as.integer(caste_category_2015 == "ST"),
+        obc_2020 = as.integer(caste_category_2020 == "OBC"),
+        sc_2020 = as.integer(caste_category_2020 == "SC"),
+        st_2020 = as.integer(caste_category_2020 == "ST")
     )
 
 n_duplicates <- n_after_join - nrow(raj_15_20)
@@ -275,7 +293,19 @@ raj_05_20 <- raj_05_20_step3 %>%
         count_treated = treat_2005 + treat_2010 + treat_2015,
         dist_samiti_2020 = paste0(tolower(district_std_2020), "_", tolower(samiti_std_2020)),
         dist_samiti_2015 = paste0(tolower(district_std_2015), "_", tolower(samiti_std_2015)),
-        dist_samiti_2010 = paste0(tolower(district_std_2010), "_", tolower(samiti_std_2010))
+        dist_samiti_2010 = paste0(tolower(district_std_2010), "_", tolower(samiti_std_2010)),
+        obc_2005 = as.integer(caste_category_2005 == "OBC"),
+        sc_2005 = as.integer(caste_category_2005 == "SC"),
+        st_2005 = as.integer(caste_category_2005 == "ST"),
+        obc_2010 = as.integer(caste_category_2010 == "OBC"),
+        sc_2010 = as.integer(caste_category_2010 == "SC"),
+        st_2010 = as.integer(caste_category_2010 == "ST"),
+        obc_2015 = as.integer(caste_category_2015 == "OBC"),
+        sc_2015 = as.integer(caste_category_2015 == "SC"),
+        st_2015 = as.integer(caste_category_2015 == "ST"),
+        obc_2020 = as.integer(caste_category_2020 == "OBC"),
+        sc_2020 = as.integer(caste_category_2020 == "SC"),
+        st_2020 = as.integer(caste_category_2020 == "ST")
     )
 
 n_duplicates <- nrow(raj_05_20_step3) - nrow(raj_05_20)

@@ -38,20 +38,24 @@ raj_chi_results <- purrr::imap_dfr(raj_trans_matrices, function(mat, name) {
     broom::tidy(test) %>%
         mutate(Comparison = name)
 }) %>%
-    select(Comparison, statistic, parameter, p.value)
+    select(Comparison, statistic, p.value)
 
 cat("Rajasthan Chi-Squared Results:\n")
 print(raj_chi_results)
 
 raj_chi_results %>%
+    mutate(
+        statistic = round(statistic, 2),
+        p.value = round(p.value, 2)
+    ) %>%
     knitr::kable(
         format = "latex",
         booktabs = TRUE,
-        col.names = c("Comparison", "Chi-Squared", "DF", "P-Value"),
-        caption = "Are Reservations Predictable Over Time (Rajasthan)",
-        label = "chi_square_reserved_over_time"
+        col.names = c("Comparison", "Chi-Squared", "P-Value"),
+        caption = "Chi-Squared Tests for Treatment Rotation (Rajasthan)",
+        label = "chi_sq_raj"
     ) %>%
-    kableExtra::kable_styling(latex_options = c("hold_position")) %>%
+    kableExtra::kable_styling(latex_options = c("hold_position"), font_size = 8) %>%
     save_kable(here("tabs", "reserved_or_not_chi_sq_raj.tex"))
 
 cat("Saved: tabs/reserved_or_not_chi_sq_raj.tex\n")
@@ -93,20 +97,24 @@ up_chi_results <- purrr::imap_dfr(up_trans_matrices, function(mat, name) {
     broom::tidy(test) %>%
         mutate(Comparison = name)
 }) %>%
-    select(Comparison, statistic, parameter, p.value)
+    select(Comparison, statistic, p.value)
 
 cat("UP Chi-Squared Results:\n")
 print(up_chi_results)
 
 up_chi_results %>%
+    mutate(
+        statistic = round(statistic, 2),
+        p.value = round(p.value, 2)
+    ) %>%
     knitr::kable(
         format = "latex",
         booktabs = TRUE,
-        col.names = c("Comparison", "Chi-Squared Statistic", "Degrees of Freedom", "P-Value"),
-        caption = "Chi-Squared Tests for Treatment Rotation in UP",
-        label = "tab:up_chi_squared_results"
+        col.names = c("Comparison", "Chi-Squared", "P-Value"),
+        caption = "Chi-Squared Tests for Treatment Rotation (UP)",
+        label = "chi_sq_up"
     ) %>%
-    kableExtra::kable_styling(latex_options = c("striped", "hold_position"), font_size = 8) %>%
+    kableExtra::kable_styling(latex_options = c("hold_position"), font_size = 8) %>%
     save_kable(here("tabs", "up_chi_squared_results.tex"))
 
 cat("Saved: tabs/up_chi_squared_results.tex\n")

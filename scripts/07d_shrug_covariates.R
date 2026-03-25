@@ -210,7 +210,7 @@ aer_etable(all_models,
     ),
     cmidrules = list(after = 1, rules = c("2-7", "8-13")),
     colsep = list(after = 6, space = "1em"),
-    keep = c("%treat_", "%log_pop", "%sc_share", "%lit_share"),
+    keep = c("(Intercept)", "%treat_", "%log_pop", "%sc_share", "%lit_share"),
     notes = "$^{***}$p$<$0.01; $^{**}$p$<$0.05; $^{*}$p$<$0.1. Outcome: woman elected in open seat. Census covariates from 2001 Census via SHRUG (LGD Block Panchayat matching). Population, SC share, and literacy computed at GP level. Sample restricted to GPs with SHRUG match and non-missing covariates. Heteroskedasticity-robust standard errors.",
     dict = dict_shrug)
 
