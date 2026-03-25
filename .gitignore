@@ -36,3 +36,8 @@ scripts/archive_approach_a/02a_raj_lgd_shrug.R
 scripts/archive_approach_a/02a_raj_shrug_gp_module.R
 scripts/archive_approach_a/02b_up_lgd_shrug_join.R
 scripts/archive_approach_a/02c_shrug_all_panels.R
+ms/.latexmkrc
+/data/raj/source
+/data/shrug_gp_xwalk
+/data/lgd/raj_lgd
+/data/lgd/up_lgd

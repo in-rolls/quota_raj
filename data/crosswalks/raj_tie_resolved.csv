@@ -1,0 +1,121 @@
+district,samiti,elex_gp,lgd_gp,lgd_gp_code,match_distance,tie_count,match_quality
+ajmer,BHINAY,sobari,Sobdi,33650,0.17777777777777778,2,strict
+ajmer,MASUDA,badi,Bari,33751,0.1666666666666667,2,strict
+alwar,BEHROR,khoher,Khohar,33916,0.11111111111111106,2,strict
+bharatpur,BAYANA,navli,Naroli,35283,0.17777777777777778,2,strict
+bharatpur,DEEG,sanwai,Samai,35327,0.17777777777777778,2,strict
+bharatpur,KUMHER,uwar,Ubar,35411,0.1666666666666667,2,strict
+bikaner,DUNGARGARH,punrasar,Poonrasar,36202,0.11574074074074082,2,strict
+bikaner,NOKHA,mansuri,Mainsar,36160,0.19047619047619044,2,strict
+dholpur,DHOLPUR,dubra,Doobra,37330,0.17777777777777778,2,strict
+dungarpur,SAGWARA,mandawa,Mandav,37565,0.1507936507936509,2,strict
+ganganagar,ANUPGARH,12 gb,12 A-B,295075,0.13333333333333336,3,strict
+ganganagar,ANUPGARH,15 bld,15 Ab,37660,0.17777777777777778,2,strict
+ganganagar,ANUPGARH,17 gb,61 Gb,37708,0.13333333333333336,4,strict
+ganganagar,ANUPGARH,24 gb,54 Gb,37700,0.13333333333333336,3,strict
+ganganagar,ANUPGARH,28 gb,72 Gb,37715,0.13333333333333336,2,strict
+ganganagar,ANUPGARH,41 gb,54 Gb,37700,0.13333333333333336,3,strict
+ganganagar,ANUPGARH,42 gb,54 Gb,37700,0.13333333333333336,3,strict
+ganganagar,ANUPGARH,50 gb,54 Gb,37700,0.13333333333333336,4,strict
+ganganagar,ANUPGARH,7 gb,72 Gb,37715,0.06666666666666678,3,strict
+jaisalmer,SAM,rama,Raimala,38777,0.142857142857143,2,strict
+jaisalmer,SANKRA,bhaniyana,Bhadriya,294266,0.19444444444444453,2,strict
+jalore,AHORE,norva,Norwa,38858,0.13333333333333336,2,strict
+jalore,JASWANTPURA,gejapura,Gajapura,38943,0.130952380952381,2,strict
+jalore,SAYLA,asana,Posana,39051,0.17777777777777778,3,strict
+karauli,SAPOTRA,batda,Bagida,40084,0.17777777777777778,2,strict
+nagaur,KUCHAMANCITY,ruppura,Prempura,40525,0.18650793650793648,2,strict
+rajsamand,RAJSAMAND,farara,Bararda,41295,0.1507936507936509,2,strict
+sawaimadhopur,GANGAPUR,hirapur,Heerapur,41407,0.130952380952381,2,strict
+sawaimadhopur,SAWAI MADHOPUR,bhedola,Badolas,41475,0.19047619047619044,2,strict
+sirohi,REODAR,mandar,Anadra,41907,0.17777777777777778,2,strict
+udaipur,SARADA,kharbar,Kharbar A,262751,0.07407407407407415,2,strict
+ajmer,BHINAY,sarana,Karanti,33634,0.253968253968254,2,loose
+ajmer,BHINAY,tantoti,Dhantol,33628,0.28571428571428575,2,loose
+ajmer,KEKRI,bajta,Bharai,33690,0.3,2,loose
+ajmer,KEKRI,para,Bharai,33690,0.25000000000000006,2,loose
+ajmer,KEKRI,sadara,Salari,33714,0.22222222222222238,2,loose
+ajmer,SRINAGAR,aradka,Jharwasa,33801,0.27777777777777785,3,loose
+alwar,THANAGAZI,bhangdoli,Angari,34233,0.29629629629629634,2,loose
+alwar,UMREN,dhakpuri,Hajipur,262473,0.22023809523809523,2,loose
+banswara,GARHI,keserpura,Karanpur,34476,0.27314814814814825,2,loose
+banswara,KUSHALGARH,patan,Ghata,262219,0.26666666666666666,2,loose
+barmer,BALOTRA,khanoda,Kanana,34895,0.253968253968254,2,loose
+barmer,CHOHTAN,itada,Bijrad,35032,0.3,2,loose
+barmer,SHEO,aasadi,Balasar,35124,0.253968253968254,2,loose
+barmer,SHEO,harsani,Harwa,262398,0.20952380952380956,2,loose
+barmer,SINDHARI,sanjta,Bhata,262566,0.3,2,loose
+barmer,SIWANA,lalana,Arjiyana,295535,0.27777777777777785,2,loose
+bharatpur,KAMAN,levda,Lewara,35356,0.3,2,loose
+bharatpur,NAGAR,maliki,Palka,35483,0.3,2,loose
+bharatpur,RUPBAS,kurka,Burana,294134,0.3,2,loose
+bharatpur,WEIR,kamalpur,Jahanpur,35601,0.25000000000000006,2,loose
+bhilwara,MANDAL,laduwas,Bawalas,35788,0.28571428571428575,2,loose
+bikaner,LUNKARANSAR,kharbara,Kapurisar,36107,0.27314814814814825,2,loose
+chittorgarh,BARISADRI,mahunda,Mahoora,36438,0.28571428571428575,2,loose
+chittorgarh,NIMBAHERA,falva,Gadola,36691,0.3,3,loose
+churu,RAJGARH,niman,Nawan,36855,0.26666666666666666,2,loose
+dausa,DAUSA,alooda,Boroda,37084,0.22222222222222238,2,loose
+dausa,LALSOT,nijampura,Nirjharna,37158,0.22222222222222238,2,loose
+dausa,LALSOT,salempura,Ladpura,294745,0.2142857142857143,2,loose
+dausa,MAHWA,kesra,Kherla Bujurg,37192,0.29743589743589743,2,loose
+dholpur,BARI,lekhepura,Ajeetpur,262373,0.27314814814814825,2,loose
+dholpur,BASERI,angai,Barai,262428,0.26666666666666666,2,loose
+dholpur,DHOLPUR,sakhwara,Nainokhar,262594,0.27314814814814825,2,loose
+dholpur,DHOLPUR,tehri,Dayeri,262563,0.3,2,loose
+dungarpur,DUNGARPUR,bhinda,Bildi,37510,0.3,2,loose
+dungarpur,DUNGARPUR,hirata,Bhatwada,262585,0.27777777777777785,2,loose
+dungarpur,SAGWARA,ambada,Karada,37561,0.22222222222222238,2,loose
+dungarpur,SIMALWARA,bedsa,Medla,294842,0.26666666666666666,2,loose
+dungarpur,SIMALWARA,jhosava,Jhalai,37615,0.253968253968254,2,loose
+dungarpur,SIMALWARA,mevada,Medla,294842,0.2611111111111111,2,loose
+ganganagar,ANUPGARH,10 as,1 Lsm,37645,0.26666666666666666,3,loose
+jaipur,CHAKSU,thikariya gujran,Tigariya,294007,0.2291666666666667,2,loose
+jaipur,CHAKSU,thikariya minan,Tigariya,294007,0.21944444444444444,2,loose
+jaipur,DUDU,jharna,Marwa,38373,0.3,2,loose
+jaipur,JAMWA RAMGARH,mathasula,Manota,38459,0.29629629629629634,3,loose
+jaisalmer,SAM,rasla,Salkha,295386,0.2611111111111111,2,loose
+jaisalmer,SANKRA,dantal,Didaniya,38803,0.27777777777777785,2,loose
+jalore,RANIWARA,jodvas,Jorwas,38978,0.22222222222222238,2,loose
+jhalawar,KHANPUR,gadervada noorji,Gadarwara Doondi,39207,0.20192307692307698,2,loose
+jhalawar,MANOHAR THANA,manoherthana,Anwal Hera,39235,0.3,2,loose
+jhalawar,MANOHAR THANA,mishroli,Samrol,39263,0.24722222222222212,2,loose
+jhunjhunu,BUHANA,buhana,Jhanjha,39369,0.253968253968254,2,loose
+jhunjhunu,SURAJGARH,jherli,Jeeni,39550,0.3,2,loose
+jodhpur,LUNI,janadesar,Boranada,39754,0.27314814814814825,2,loose
+jodhpur,LUNI,jhanwar,Dhigana,294722,0.28571428571428575,2,loose
+jodhpur,PHALODI,aamla,Kalra,294976,0.26666666666666666,2,loose
+jodhpur,PHALODI,kushalava,Kalra,294976,0.2518518518518519,2,loose
+jodhpur,PHALODI,palina,Kalra,294976,0.3,2,loose
+karauli,HINDAUN,alipura,Milkipura,294219,0.2142857142857143,2,loose
+karauli,KARAULI,jamura,Lauhra,40032,0.22222222222222238,2,loose
+karauli,KARAULI,masalpur,Rampur,40042,0.24722222222222212,2,loose
+karauli,KARAULI,rundhpura,Kashipura,40025,0.29629629629629634,3,loose
+karauli,SAPOTRA,langra,Bajna,40086,0.3,2,loose
+kota,SULTANPUR,toran,Bhora,40308,0.26666666666666666,2,loose
+nagaur,JAYAL,aavaliyasar,Anwliyasar,40437,0.2825757575757576,2,loose
+nagaur,NAGAUR,tatwas,Balwa,40679,0.3,2,loose
+pali,BALI,saina,Sena,40832,0.21666666666666667,2,loose
+pratapgarh,PRATAPGARH,jolar,Jhasri,36732,0.3,2,loose
+pratapgarh,PRATAPGARH,thara,Kulthana,36740,0.23333333333333345,2,loose
+rajsamand,KHAMNOR,karoli,Bagol,41187,0.3,2,loose
+sawaimadhopur,SAWAI MADHOPUR,balaria,Badolas,41475,0.28571428571428575,2,loose
+sawaimadhopur,SAWAI MADHOPUR,dahakava,Bhadlav,41477,0.28690476190476194,2,loose
+sikar,DANTA RAMGARH,ladpur,Chainpura,41527,0.29629629629629634,2,loose
+sikar,NEEMKATHANA,bega ki nangal,Dayal Ki Nangal,41734,0.29668109668109677,2,loose
+sikar,NEEMKATHANA,makdi,Mandoli,41755,0.20952380952380956,2,loose
+sikar,PIPRALI,dolatpura,Rajpura,41805,0.24338624338624346,2,loose
+tonk,MALPURA,soda bavdi,Soda,42071,0.20000000000000007,2,loose
+tonk,TONK,bagdi,Baroni,42153,0.3,2,loose
+tonk,TONK,pasrotiya,Palara,42186,0.29629629629629634,3,loose
+udaipur,BHINDAR,menar,Heenta,42276,0.3,2,loose
+udaipur,GIRWA,javar,Jabla,262781,0.26666666666666666,2,loose
+udaipur,GOGUNDA,karda,Mada,262405,0.21666666666666667,2,loose
+udaipur,JHADOL,madala,Adol,294184,0.25000000000000006,2,loose
+udaipur,KHERWARA,balicha,Badala,42490,0.253968253968254,2,loose
+udaipur,KHERWARA,bhudar,Bhakhra,294206,0.253968253968254,2,loose
+udaipur,KHERWARA,kojawara,Katar,262536,0.23333333333333345,2,loose
+udaipur,MAVLI,khemli,Khempur,42609,0.253968253968254,2,loose
+udaipur,SALUMBAR,bhabrana,Baroda,42638,0.27777777777777785,3,loose
+udaipur,SALUMBAR,matasula,Makadseema,42667,0.2916666666666667,2,loose
+udaipur,SARADA,javad,Parsad,42711,0.3,2,loose
