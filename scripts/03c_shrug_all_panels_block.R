@@ -28,7 +28,7 @@ source(here("scripts/00_utils.R"))
 cat("=== Creating SHRUG-Linked Panels from Block Matching ===\n")
 
 # =============================================================================
-# Load base data and SHRUG census data
+# Load base data, crosswalks, and SHRUG census data
 # =============================================================================
 
 cat("\nLoading SHRUG Census data...\n")
@@ -36,6 +36,11 @@ shrug_pca <- read_csv(here("data/shrug/shrug-pca01-csv/pc01_pca_clean_shrid.csv.
                        show_col_types = FALSE)
 shrug_vd <- read_csv(here("data/shrug/shrug-vd01-csv/pc01_vd_clean_shrid.csv.zip"),
                       show_col_types = FALSE)
+
+# Load crosswalks to standardize names
+cat("Loading crosswalks...\n")
+crosswalk_district <- read_csv(here("data/raj/crosswalk_district.csv"), show_col_types = FALSE)
+crosswalk_samiti <- read_csv(here("data/raj/crosswalk_samiti.csv"), show_col_types = FALSE)
 
 # Load block-matched 05-10 data
 cat("Loading block-matched 05-10 data...\n")
@@ -48,15 +53,30 @@ cat("Block-matched 05-10 rows:", nrow(raj_block_05_10), "\n")
 
 cat("\n--- Creating SHRUG Mapping ---\n")
 
-# Create match_key for joining to other panels
-# The block-matched data has gp_new_2010, dist_name_new_2010, samiti_name_new_2010
+# Apply crosswalks to standardize district/samiti names in block-matched data
+# This ensures the mapping key matches how panels create their match_key
+raj_block_05_10 <- raj_block_05_10 %>%
+    left_join(crosswalk_district, by = c("dist_name_new_2010" = "district_raw")) %>%
+    mutate(district_std_2010 = ifelse(is.na(district_std), dist_name_new_2010, district_std)) %>%
+    select(-district_std) %>%
+    left_join(
+        crosswalk_samiti %>% select(district_std, samiti_raw, samiti_std),
+        by = c("district_std_2010" = "district_std", "samiti_name_new_2010" = "samiti_raw")
+    ) %>%
+    mutate(
+        samiti_std_2010 = ifelse(is.na(samiti_std), samiti_name_new_2010, samiti_std),
+        gp_std_2010 = normalize_string(gp_new_2010)
+    ) %>%
+    select(-samiti_std)
+
+# Create match_key using standardized columns to match panel keys
 raj_shrug_mapping <- raj_block_05_10 %>%
     filter(!is.na(shrid2)) %>%
     mutate(
         match_key_2010 = paste(
-            tolower(trimws(dist_name_new_2010)),
-            tolower(trimws(samiti_name_new_2010)),
-            tolower(trimws(gp_new_2010)),
+            tolower(trimws(district_std_2010)),
+            tolower(trimws(samiti_std_2010)),
+            tolower(trimws(gp_std_2010)),
             sep = "_"
         )
     ) %>%
@@ -257,8 +277,9 @@ up_shrug_mapping <- up_block_05_10 %>%
         shrid2,
         lgd_gp_code, lgd_gp_name,
         lgd_block_code, lgd_block_name,
-        match_type
+        gp_match_type
     ) %>%
+    rename(match_type = gp_match_type) %>%
     distinct(key_2010, .keep_all = TRUE)
 
 cat("UP SHRUG mapping rows (unique key_2010):", nrow(up_shrug_mapping), "\n")

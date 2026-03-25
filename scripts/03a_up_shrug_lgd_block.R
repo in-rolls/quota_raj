@@ -351,6 +351,9 @@ print(table(up_matched$block_match_type, useNA = "ifany"))
 # STEP 9: Link to SHRUG via LGD code
 # ============================================================================
 
+# NOTE: Multiple SHRUG villages may map to one LGD GP code. We keep the first match.
+# SHRUG covariates reflect one village per GP, not GP-level aggregates.
+# For robustness, consider: group_by(LGD_code) %>% summarize(across(starts_with("pc01"), mean))
 shrug_lgd <- read_csv(here("data/shrug_gp_xwalk/data/shrug_LGD_matched.csv"),
                       show_col_types = FALSE) %>%
     filter(tolower(state_name) == "uttar pradesh") %>%

@@ -34,24 +34,26 @@ cat("UP 10-15:", nrow(up_10_15), "GPs\n")
 cat("UP 15-21:", nrow(up_15_21), "GPs\n")
 
 # =============================================================================
-# Create female_winner variables for UP
+# Create female_winner variables for UP panels where not already defined
+# 02c_up_recode.R creates these from English columns when available;
+# we only create from Hindi here for panels where it's missing
 # Hindi: महिला = Female, पुरुष = Male
 # =============================================================================
 
-up_05_10 <- up_05_10 %>%
-    mutate(
-        female_winner_2010 = as.integer(cand_sex_fin_2010 == "महिला")
-    )
+if (!"female_winner_2010" %in% names(up_05_10) || all(is.na(up_05_10$female_winner_2010))) {
+    up_05_10 <- up_05_10 %>%
+        mutate(female_winner_2010 = as.integer(cand_sex_fin_2010 == "महिला"))
+}
 
-up_10_15 <- up_10_15 %>%
-    mutate(
-        female_winner_2015 = as.integer(sex_2015 == "महिला")
-    )
+if (!"female_winner_2015" %in% names(up_10_15) || all(is.na(up_10_15$female_winner_2015))) {
+    up_10_15 <- up_10_15 %>%
+        mutate(female_winner_2015 = as.integer(sex_2015 == "महिला"))
+}
 
-up_15_21 <- up_15_21 %>%
-    mutate(
-        female_winner_2021 = as.integer(sex_2021 == "महिला")
-    )
+if (!"female_winner_2021" %in% names(up_15_21) || all(is.na(up_15_21$female_winner_2021))) {
+    up_15_21 <- up_15_21 %>%
+        mutate(female_winner_2021 = as.integer(sex_2021 == "महिला"))
+}
 
 # =============================================================================
 # Rajasthan 2005 → 2010 (Open seats in 2010)

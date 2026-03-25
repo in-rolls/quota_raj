@@ -86,18 +86,27 @@ generate_open_table <- function(data, output_file) {
         na.rm = TRUE
     )
 
+    # Other non-members (relationship = other, did_not_reveal, self, or NA)
+    other_nonmember <- sum(ans_data$respondent == "non_member", na.rm = TRUE) - spouse_rel
+
+    # NA respondent values
+    na_respondent <- sum(is.na(ans_data$respondent))
+
     cat("  Total:", total, "\n")
     cat("  Answered:", answered, "(", round(100 * answered / total, 1), "%)\n")
-    cat("  Member:", member, "Spouse/Relative:", spouse_rel, "Unknown:", unknown, "\n")
+    cat("  Member:", member, "Spouse/Relative:", spouse_rel,
+        "Other non-member:", other_nonmember, "Unknown:", unknown,
+        "NA respondent:", na_respondent, "\n")
 
     df <- data.frame(
         Category = c(
             "Answered", "No Answer",
-            "Elected Representative", "Spouse/Relative", "Unknown"
+            "Elected Representative", "Spouse/Relative", "Other Non-Member", "Unknown"
         ),
         Value = c(
             fmt_n_pct(answered, total), fmt_n_pct(no_answer, total),
             fmt_n_pct(member, answered), fmt_n_pct(spouse_rel, answered),
+            fmt_n_pct(other_nonmember + na_respondent, answered),
             fmt_n_pct(unknown, answered)
         )
     )
@@ -106,7 +115,7 @@ generate_open_table <- function(data, output_file) {
         col.names = c("Response Category", "N (\\%)"),
         align = c("l", "r")) %>%
         pack_rows(paste0("Initial Contact (N = ", total, ")"), 1, 2, italic = TRUE) %>%
-        pack_rows(paste0("Among Answered (N = ", answered, ")"), 3, 5, italic = TRUE) %>%
+        pack_rows(paste0("Among Answered (N = ", answered, ")"), 3, 6, italic = TRUE) %>%
         save_kable(output_file)
 
     cat("  Saved:", output_file, "\n")
