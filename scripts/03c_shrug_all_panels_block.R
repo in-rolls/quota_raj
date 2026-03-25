@@ -312,21 +312,33 @@ cat("\n--- UP 10-15 SHRUG Panel ---\n")
 
 up_10_15 <- read_parquet(here("data/up/up_10_15.parquet"))
 
-# Create mapping from 2015 key to 2010 key
+# Create mapping from 2015 key to 2010 key with normalized English names
+# Use distinct on normalized names to avoid many-to-many joins
 up_05_10_key_map <- up_05_10 %>%
     filter(!is.na(key_2010)) %>%
-    select(key_2010, district_name_eng_2010, block_name_eng_2010, gp_name_eng_2010) %>%
-    distinct()
+    mutate(
+        district_eng_std_2010 = normalize_string(district_name_eng_2010),
+        block_eng_std_2010 = normalize_string(block_name_eng_2010),
+        gp_eng_std_2010 = normalize_string(gp_name_eng_2010)
+    ) %>%
+    select(key_2010, district_eng_std_2010, block_eng_std_2010, gp_eng_std_2010) %>%
+    distinct(district_eng_std_2010, block_eng_std_2010, gp_eng_std_2010, .keep_all = TRUE)
 
-# Join via eng_key pattern matching
+# Join via normalized eng_key pattern matching
 up_10_15_shrug <- up_10_15 %>%
+    mutate(
+        district_eng_std_2010 = normalize_string(district_name_eng_2010),
+        block_eng_std_2010 = normalize_string(block_name_eng_2010),
+        gp_eng_std_2010 = normalize_string(gp_name_eng_2010)
+    ) %>%
     left_join(
         up_shrug_mapping %>%
             left_join(up_05_10_key_map, by = "key_2010") %>%
             select(key_2010, shrid2, lgd_gp_code, lgd_gp_name, lgd_block_code, lgd_block_name,
-                   district_name_eng_2010, block_name_eng_2010, gp_name_eng_2010),
-        by = c("district_name_eng_2010", "block_name_eng_2010", "gp_name_eng_2010")
+                   district_eng_std_2010, block_eng_std_2010, gp_eng_std_2010),
+        by = c("district_eng_std_2010", "block_eng_std_2010", "gp_eng_std_2010")
     ) %>%
+    select(-district_eng_std_2010, -block_eng_std_2010, -gp_eng_std_2010) %>%
     left_join(shrug_pca, by = "shrid2") %>%
     left_join(shrug_vd, by = "shrid2")
 
@@ -346,13 +358,26 @@ cat("\n--- UP 15-21 SHRUG Panel ---\n")
 up_15_21 <- read_parquet(here("data/up/up_15_21.parquet"))
 
 # Chain via 10-15 panel: 15-21 -> 10-15 (2015 names) -> SHRUG mapping
+# Use normalized English names for robust matching
+# Use distinct on normalized names to avoid many-to-many joins
 up_10_15_mapping <- up_10_15 %>%
     filter(!is.na(key_2010)) %>%
-    select(district_name_eng_2015, block_name_eng_2015, gp_name_eng_2015, key_2010) %>%
-    distinct()
+    mutate(
+        district_eng_std_2015 = normalize_string(district_name_eng_2015),
+        block_eng_std_2015 = normalize_string(block_name_eng_2015),
+        gp_eng_std_2015 = normalize_string(gp_name_eng_2015)
+    ) %>%
+    select(district_eng_std_2015, block_eng_std_2015, gp_eng_std_2015, key_2010) %>%
+    distinct(district_eng_std_2015, block_eng_std_2015, gp_eng_std_2015, .keep_all = TRUE)
 
 up_15_21_shrug <- up_15_21 %>%
-    left_join(up_10_15_mapping, by = c("district_name_eng_2015", "block_name_eng_2015", "gp_name_eng_2015")) %>%
+    mutate(
+        district_eng_std_2015 = normalize_string(district_name_eng_2015),
+        block_eng_std_2015 = normalize_string(block_name_eng_2015),
+        gp_eng_std_2015 = normalize_string(gp_name_eng_2015)
+    ) %>%
+    left_join(up_10_15_mapping, by = c("district_eng_std_2015", "block_eng_std_2015", "gp_eng_std_2015")) %>%
+    select(-district_eng_std_2015, -block_eng_std_2015, -gp_eng_std_2015) %>%
     left_join(up_shrug_mapping, by = "key_2010") %>%
     left_join(shrug_pca, by = "shrid2") %>%
     left_join(shrug_vd, by = "shrid2")
