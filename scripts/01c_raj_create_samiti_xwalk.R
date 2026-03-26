@@ -1,4 +1,4 @@
-# 01d_raj_create_samiti_xwalk.R
+# 01c_raj_create_samiti_xwalk.R
 # Comprehensive District + Samiti Crosswalk for Rajasthan
 #
 # Maps ALL election district+samiti combinations (2005, 2010, 2015, 2020)
@@ -56,6 +56,8 @@ samiti_xwalk <- tribble(
     "ajmer", "SAWAR", "Ajmer", "Sawar", 295478, "exact",
     "ajmer", "AJMER RURAL", "Ajmer", "Ajmer Rural", 295190, "new_block",
     "ajmer", "AJMERRURAL", "Ajmer", "Ajmer Rural", 295190, "new_block",
+    "ajmer", "KISHANGARH (SILORA)", "Ajmer", "Kishangarh (Silora)", 1153, "lgd_style",
+    "ajmer", "MASOODA", "Ajmer", "Masooda", 1154, "lgd_style",
 
     # =========================================================================
     # ALWAR (78)
@@ -123,6 +125,7 @@ samiti_xwalk <- tribble(
     "baran", "MANGROL", "Baran", "Mangrol", 295475, "new_block",
     "baran", "SHAHABAD", "Baran", "Shahbad", 1185, "spelling",
     "baran", "SHAHBAD", "Baran", "Shahbad", 1185, "exact",
+    "baran", "BARAN (FULL)", "Baran", "Baran (Full)", 1181, "lgd_style",
 
     # =========================================================================
     # BARMER (81)
@@ -180,6 +183,7 @@ samiti_xwalk <- tribble(
     "bharatpur", "UCHHAIN", "Bharatpur", "Uchain", 295303, "spelling",
     "bharatpur", "VAIR", "Bharatpur", "Weir", 1202, "spelling",
     "bharatpur", "WEIR", "Bharatpur", "Weir", 1202, "exact",
+    "bharatpur", "NAGAR PAHARI", "Bharatpur", "Nagar Pahari", 1199, "lgd_style",
 
     # =========================================================================
     # BHILWARA (83)
@@ -218,6 +222,7 @@ samiti_xwalk <- tribble(
     "bikaner", "P ANCHU", "Bikaner", "Panchoo", 262410, "ocr_space",
     "bikaner", "PANCHU", "Bikaner", "Panchoo", 262410, "new_block",
     "bikaner", "PUGAL", "Bikaner", "Poogal", 295168, "spelling",
+    "bikaner", "SRI DUNGARGARH", "Bikaner", "Sri Dungargarh", 1218, "lgd_style",
 
     # =========================================================================
     # BUNDI (85)
@@ -261,6 +266,7 @@ samiti_xwalk <- tribble(
     "chittorgarh", "NIMBAHERA", "Chittorgarh", "Nimbahera", 1234, "exact",
     "chittorgarh", "PRATAPGARH", "Chittorgarh", "Pratapgarh", 1235, "exact",
     "chittorgarh", "RASHMI", "Chittorgarh", "Rashmi", 1236, "exact",
+    "chittorgarh", "BARI SADRI", "Chittorgarh", "Bari Sadri", 1224, "lgd_style",
 
     # CHITTAURGARH variant spelling (from raj_05_20 data)
     "chittaurgarh", "ARNOD", "Chittorgarh", "Arnod", 1223, "dist_variant",
@@ -288,6 +294,7 @@ samiti_xwalk <- tribble(
     "chittaurgarh", "NIMBAHERA", "Chittorgarh", "Nimbahera", 1234, "dist_variant",
     "chittaurgarh", "PRATAPGARH", "Chittorgarh", "Pratapgarh", 1235, "dist_variant",
     "chittaurgarh", "RASHMI", "Chittorgarh", "Rashmi", 1236, "dist_variant",
+    "chittaurgarh", "BARI SADRI", "Chittorgarh", "Bari Sadri", 1224, "lgd_style",
 
     # =========================================================================
     # CHURU (87)
@@ -505,6 +512,7 @@ samiti_xwalk <- tribble(
     "jhalawar", "MANOHARTHANA", "Jhalawar", "Manoharthana", 1294, "exact",
     "jhalawar", "PIDAWA", "Jhalawar", "Pirawa (Sunel)", 1295, "spelling",
     "jhalawar", "PIRAWA", "Jhalawar", "Pirawa (Sunel)", 1295, "exact",
+    "jhalawar", "PIRAWA (SUNEL)", "Jhalawar", "Pirawa (Sunel)", 1295, "lgd_style",
 
     # =========================================================================
     # JHUNJHUNU (97)
@@ -580,6 +588,7 @@ samiti_xwalk <- tribble(
     "karauli", "SAPOTRA", "Karauli", "Sapotra", 1316, "exact",
     "karauli", "SHRIMHAVEERJI", "Karauli", "Shri Mahaveer Ji", 295250, "new_block",
     "karauli", "TODABHIM", "Karauli", "Todabhim", 1317, "exact",
+    "karauli", "NADAUTI", "Karauli", "Nadauti", 1315, "lgd_style",
 
     # =========================================================================
     # KOTA (100)
@@ -617,6 +626,8 @@ samiti_xwalk <- tribble(
     "nagaur", "NAVAN", "Nagaur", "Nawa", 262096, "spelling",
     "nagaur", "PARBATSAR", "Nagaur", "Parbatsar", 1332, "exact",
     "nagaur", "RIYAN", "Nagaur", "Riyan Badi", 1333, "spelling",
+    "nagaur", "KUCHAMAN CITY", "Nagaur", "Kuchaman City", 1326, "lgd_style",
+    "nagaur", "RIYAN BADI", "Nagaur", "Riyan Badi", 1333, "lgd_style",
 
     # =========================================================================
     # PALI (102)
@@ -639,6 +650,7 @@ samiti_xwalk <- tribble(
     "pali", "SOJAT", "Pali", "Sojat", 1342, "exact",
     "pali", "SOJAT CITY", "Pali", "Sojat", 1342, "spelling",
     "pali", "SUMERPUR", "Pali", "Sumerpur", 1343, "exact",
+    "pali", "KHARCHI(MAR.JUN)", "Pali", "Kharchi(Mar.Jun)", 1337, "lgd_style",
 
     # =========================================================================
     # PRATAPGARH (573)
@@ -689,6 +701,7 @@ samiti_xwalk <- tribble(
     "sawaimadhopur", "S.MADHOPUR", "Sawai Madhopur", "Sawai Madhopur", 1355, "spelling",
     "sawaimadhopur", "SAWAI MADHOPUR", "Sawai Madhopur", "Sawai Madhopur", 1355, "exact",
     "sawaimadhopur", "SAWAIMADHOPUR", "Sawai Madhopur", "Sawai Madhopur", 1355, "spelling",
+    "sawaimadhopur", "GANGAPUR CITY", "Sawai Madhopur", "Gangapur City", 1353, "lgd_style",
 
     # SAWAI MADHOPUR variant spelling with space (from raj_05_20 data)
     "sawai madhopur", "BAMANW AS", "Sawai Madhopur", "Bamanwas", 1351, "dist_variant",
@@ -705,6 +718,7 @@ samiti_xwalk <- tribble(
     "sawai madhopur", "S.MADHOPUR", "Sawai Madhopur", "Sawai Madhopur", 1355, "dist_variant",
     "sawai madhopur", "SAWAI MADHOPUR", "Sawai Madhopur", "Sawai Madhopur", 1355, "dist_variant",
     "sawai madhopur", "SAWAIMADHOPUR", "Sawai Madhopur", "Sawai Madhopur", 1355, "dist_variant",
+    "sawai madhopur", "GANGAPUR CITY", "Sawai Madhopur", "Gangapur City", 1353, "lgd_style",
 
     # =========================================================================
     # SIKAR (105)
@@ -727,6 +741,7 @@ samiti_xwalk <- tribble(
     "sikar", "PATAN", "Sikar", "Patan", 262226, "new_block",
     "sikar", "PIPRALI", "Sikar", "Piprali", 1362, "exact",
     "sikar", "SRIMADHOPUR", "Sikar", "Sri Madhopur", 1363, "spelling",
+    "sikar", "SRI MADHOPUR", "Sikar", "Sri Madhopur", 1363, "lgd_style",
 
     # =========================================================================
     # SIROHI (106)

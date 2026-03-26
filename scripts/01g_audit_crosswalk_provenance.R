@@ -1,8 +1,8 @@
-# 01h_audit_crosswalk_provenance.R
+# 01g_audit_crosswalk_provenance.R
 # Audit crosswalk provenance, key integrity, and LGD validity.
 # Output:
-#   - data/crosswalks/audit/crosswalk_provenance_audit.csv
-#   - tabs/crosswalk_provenance_audit.md
+#   - data/crosswalks/audit/01g_crosswalk_provenance_audit.csv
+#   - data/crosswalks/audit/01g_crosswalk_provenance_audit.md
 
 library(readr)
 library(dplyr)
@@ -39,14 +39,14 @@ if (length(missing_required) > 0) {
 
 crosswalk_catalog <- tibble::tribble(
     ~file, ~producer_script, ~consumer_scripts, ~key_cols,
-    "data/lgd/processed/lgd_up_blocks.csv", "01e_up_extract_lgd.R", "01f_up_create_district_xwalk.R;01g_up_create_block_xwalk.R;03b_up_shrug_match.R", "block_code",
-    "data/lgd/processed/lgd_up_block_gp.csv", "01e_up_extract_lgd.R", "03b_up_shrug_match.R", "gp_code",
-    "data/crosswalks/active/up_district_xwalk.csv", "01f_up_create_district_xwalk.R", "01g_up_create_block_xwalk.R", "elex_district",
-    "data/crosswalks/active/up_block_xwalk.csv", "01g_up_create_block_xwalk.R", "03b_up_shrug_match.R", "elex_district,elex_block",
-    "data/crosswalks/active/raj_district_xwalk.csv", "01b_raj_create_district_xwalk.R", "01d_raj_create_samiti_xwalk.R;02a_raj_recode.R;03c_shrug_all_panels.R", "elex_district_raw",
-    "data/crosswalks/active/raj_samiti_std.csv", "01d_raj_create_samiti_xwalk.R", "02a_raj_recode.R;03c_shrug_all_panels.R", "district_std,samiti_raw",
-    "data/crosswalks/active/raj_samiti_xwalk.csv", "01d_raj_create_samiti_xwalk.R", "03a_raj_shrug_match.R", "elex_district,elex_samiti",
-    "data/lgd/processed/lgd_raj_block_gp.csv", "LGD extraction/manual import", "01d_raj_create_samiti_xwalk.R;03a_raj_shrug_match.R", "gp_code"
+    "data/lgd/processed/lgd_up_blocks.csv", "01d_up_extract_lgd.R", "01e_up_create_district_xwalk.R;01f_up_create_block_xwalk.R;03b_up_shrug_match.R", "block_code",
+    "data/lgd/processed/lgd_up_block_gp.csv", "01d_up_extract_lgd.R", "03b_up_shrug_match.R", "gp_code",
+    "data/crosswalks/active/up_district_xwalk.csv", "01e_up_create_district_xwalk.R", "01f_up_create_block_xwalk.R", "elex_district",
+    "data/crosswalks/active/up_block_xwalk.csv", "01f_up_create_block_xwalk.R", "03b_up_shrug_match.R", "elex_district,elex_block",
+    "data/crosswalks/active/raj_district_xwalk.csv", "01b_raj_create_district_xwalk.R", "01c_raj_create_samiti_xwalk.R;02a_raj_recode.R;03c_shrug_all_panels.R", "elex_district_raw",
+    "data/crosswalks/active/raj_samiti_std.csv", "01c_raj_create_samiti_xwalk.R", "02a_raj_recode.R;03c_shrug_all_panels.R", "district_std,samiti_raw",
+    "data/crosswalks/active/raj_samiti_xwalk.csv", "01c_raj_create_samiti_xwalk.R", "03a_raj_shrug_match.R", "elex_district,elex_samiti",
+    "data/lgd/processed/lgd_raj_block_gp.csv", "LGD extraction/manual import", "01c_raj_create_samiti_xwalk.R;03a_raj_shrug_match.R", "gp_code"
 )
 
 read_any_csv <- function(path) {
@@ -116,8 +116,8 @@ audit <- file_stats %>%
     ) %>%
     mutate(invalid_rows = coalesce(invalid_rows, 0L))
 
-write_csv(audit, here("data/crosswalks/audit/crosswalk_provenance_audit.csv"))
-message("Saved: data/crosswalks/audit/crosswalk_provenance_audit.csv")
+write_csv(audit, here("data/crosswalks/audit/01g_crosswalk_provenance_audit.csv"))
+message("Saved: data/crosswalks/audit/01g_crosswalk_provenance_audit.csv")
 
 # Markdown summary
 summary_lines <- c(
@@ -155,7 +155,7 @@ summary_lines <- c(
     "- LGD hierarchy reference files are read from `data/lgd/processed/`."
 )
 
-writeLines(summary_lines, here("tabs/crosswalk_provenance_audit.md"))
-message("Saved: tabs/crosswalk_provenance_audit.md")
+writeLines(summary_lines, here("data/crosswalks/audit/01g_crosswalk_provenance_audit.md"))
+message("Saved: data/crosswalks/audit/01g_crosswalk_provenance_audit.md")
 
 message("=== Crosswalk Provenance Audit Complete ===")
