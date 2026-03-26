@@ -1,6 +1,6 @@
 # SHRUG-LGD Aggregation Audit
 
-Generated: 2026-03-26 14:28:10
+Generated: 2026-03-26 14:34:46
 
 | State | LGD Codes | Villages | Multi-village LGD | % Multi-village | Median villages | Max villages |
 |---|---:|---:|---:|---:|---:|---:|

@@ -17,6 +17,8 @@ ajmer,SARW AD,Ajmer,Sawar,295478,ocr_space
 ajmer,SAWAR,Ajmer,Sawar,295478,exact
 ajmer,AJMER RURAL,Ajmer,Ajmer Rural,295190,new_block
 ajmer,AJMERRURAL,Ajmer,Ajmer Rural,295190,new_block
+ajmer,KISHANGARH (SILORA),Ajmer,Kishangarh (Silora),1153,lgd_style
+ajmer,MASOODA,Ajmer,Masooda,1154,lgd_style
 alwar,BANSUR,Alwar,Bansur,1157,exact
 alwar,BEHROR,Alwar,Behror,1158,exact
 alwar,KA THUMAR,Alwar,Kathumar,1159,ocr_space
@@ -72,6 +74,7 @@ baran,KISHANGANJ,Baran,Kishanganj,1184,exact
 baran,MANGROL,Baran,Mangrol,295475,new_block
 baran,SHAHABAD,Baran,Shahbad,1185,spelling
 baran,SHAHBAD,Baran,Shahbad,1185,exact
+baran,BARAN (FULL),Baran,Baran (Full),1181,lgd_style
 barmer,AADEL,Barmer,Aadel,295254,new_block
 barmer,BALOTRA,Barmer,Balotra,1186,exact
 barmer,BARMER,Barmer,Barmer,1187,exact
@@ -121,6 +124,7 @@ bharatpur,SEWAR,Bharatpur,Sewar,1201,exact
 bharatpur,UCHHAIN,Bharatpur,Uchain,295303,spelling
 bharatpur,VAIR,Bharatpur,Weir,1202,spelling
 bharatpur,WEIR,Bharatpur,Weir,1202,exact
+bharatpur,NAGAR PAHARI,Bharatpur,Nagar Pahari,1199,lgd_style
 bhilwara,ASIND,Bhilwara,Asind,1203,exact
 bhilwara,BADNOR,Bhilwara,Badnor,295444,new_block
 bhilwara,BANERA,Bhilwara,Banera,1204,exact
@@ -151,6 +155,7 @@ bikaner,NOKHA,Bikaner,Nokha,1217,exact
 bikaner,P ANCHU,Bikaner,Panchoo,262410,ocr_space
 bikaner,PANCHU,Bikaner,Panchoo,262410,new_block
 bikaner,PUGAL,Bikaner,Poogal,295168,spelling
+bikaner,SRI DUNGARGARH,Bikaner,Sri Dungargarh,1218,lgd_style
 bundi,BUNDI,Bundi,Bundi,257862,exact
 bundi,HINDOLI,Bundi,Hindoli,1219,exact
 bundi,K. PATAN,Bundi,Keshoraipatan,1220,spelling
@@ -186,6 +191,7 @@ chittorgarh,KAPASAN,Chittorgarh,Kapasan,1233,exact
 chittorgarh,NIMBAHERA,Chittorgarh,Nimbahera,1234,exact
 chittorgarh,PRATAPGARH,Chittorgarh,Pratapgarh,1235,exact
 chittorgarh,RASHMI,Chittorgarh,Rashmi,1236,exact
+chittorgarh,BARI SADRI,Chittorgarh,Bari Sadri,1224,lgd_style
 chittaurgarh,ARNOD,Chittorgarh,Arnod,1223,dist_variant
 chittaurgarh,BADI SADRI,Chittorgarh,Bari Sadri,1224,dist_variant
 chittaurgarh,BARISADRI,Chittorgarh,Bari Sadri,1224,dist_variant
@@ -211,6 +217,7 @@ chittaurgarh,KAPASAN,Chittorgarh,Kapasan,1233,dist_variant
 chittaurgarh,NIMBAHERA,Chittorgarh,Nimbahera,1234,dist_variant
 chittaurgarh,PRATAPGARH,Chittorgarh,Pratapgarh,1235,dist_variant
 chittaurgarh,RASHMI,Chittorgarh,Rashmi,1236,dist_variant
+chittaurgarh,BARI SADRI,Chittorgarh,Bari Sadri,1224,lgd_style
 churu,BIDASAR,Churu,Bidasar,262145,new_block
 churu,CHURU,Churu,Churu,1237,exact
 churu,RAJGARH,Churu,Rajgarh,1238,exact
@@ -384,6 +391,7 @@ jhalawar,MANOHAR THANA,Jhalawar,Manoharthana,1294,spelling
 jhalawar,MANOHARTHANA,Jhalawar,Manoharthana,1294,exact
 jhalawar,PIDAWA,Jhalawar,Pirawa (Sunel),1295,spelling
 jhalawar,PIRAWA,Jhalawar,Pirawa (Sunel),1295,exact
+jhalawar,PIRAWA (SUNEL),Jhalawar,Pirawa (Sunel),1295,lgd_style
 jhunjhunu,ALSISAR,Jhunjhunu,Alsisar,1296,exact
 jhunjhunu,BUHANA,Jhunjhunu,Buhana,1297,exact
 jhunjhunu,CHIRAWA,Jhunjhunu,Chirawa,1298,exact
@@ -445,6 +453,7 @@ karauli,NADOTI,Karauli,Nadauti,1315,spelling
 karauli,SAPOTRA,Karauli,Sapotra,1316,exact
 karauli,SHRIMHAVEERJI,Karauli,Shri Mahaveer Ji,295250,new_block
 karauli,TODABHIM,Karauli,Todabhim,1317,exact
+karauli,NADAUTI,Karauli,Nadauti,1315,lgd_style
 kota,ITAWA,Kota,Itawa,1318,exact
 kota,KHERABAD,Kota,Khairabad,1319,spelling
 kota,KHAIRABAD,Kota,Khairabad,1319,exact
@@ -474,6 +483,8 @@ nagaur,NAGAUR,Nagaur,Nagaur,1331,exact
 nagaur,NAVAN,Nagaur,Nawa,262096,spelling
 nagaur,PARBATSAR,Nagaur,Parbatsar,1332,exact
 nagaur,RIYAN,Nagaur,Riyan Badi,1333,spelling
+nagaur,KUCHAMAN CITY,Nagaur,Kuchaman City,1326,lgd_style
+nagaur,RIYAN BADI,Nagaur,Riyan Badi,1333,lgd_style
 pali,BALI,Pali,Bali,1334,exact
 pali,DESURI,Pali,Desuri,1335,exact
 pali,JAIT ARAN,Pali,Jaitaran,1336,ocr_space
@@ -492,6 +503,7 @@ pali,ROHAT,Pali,Rohat,1341,exact
 pali,SOJAT,Pali,Sojat,1342,exact
 pali,SOJAT CITY,Pali,Sojat,1342,spelling
 pali,SUMERPUR,Pali,Sumerpur,1343,exact
+pali,KHARCHI(MAR.JUN),Pali,Kharchi(Mar.Jun),1337,lgd_style
 pratapgarh,ARNOD,Pratapgarh,Arnod,1223,exact
 pratapgarh,CHHOTISADRI,Pratapgarh,Chhoti Sadri,1229,spelling
 pratapgarh,CHOTI SADRI,Pratapgarh,Chhoti Sadri,1229,spelling
@@ -530,6 +542,7 @@ sawaimadhopur,S. MADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,spelling
 sawaimadhopur,S.MADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,spelling
 sawaimadhopur,SAWAI MADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,exact
 sawaimadhopur,SAWAIMADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,spelling
+sawaimadhopur,GANGAPUR CITY,Sawai Madhopur,Gangapur City,1353,lgd_style
 sawai madhopur,BAMANW AS,Sawai Madhopur,Bamanwas,1351,dist_variant
 sawai madhopur,BAMANWAS,Sawai Madhopur,Bamanwas,1351,dist_variant
 sawai madhopur,BONLI,Sawai Madhopur,Bonli,1352,dist_variant
@@ -544,6 +557,7 @@ sawai madhopur,S. MADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,dist_variant
 sawai madhopur,S.MADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,dist_variant
 sawai madhopur,SAWAI MADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,dist_variant
 sawai madhopur,SAWAIMADHOPUR,Sawai Madhopur,Sawai Madhopur,1355,dist_variant
+sawai madhopur,GANGAPUR CITY,Sawai Madhopur,Gangapur City,1353,lgd_style
 sikar,AJITGARH,Sikar,Ajeetgarh,295265,spelling
 sikar,DANT ARAMGARH,Sikar,Danta Ramgarh,1356,ocr_space
 sikar,DANTA RAMGARH,Sikar,Danta Ramgarh,1356,exact
@@ -562,6 +576,7 @@ sikar,PALSANA,Sikar,Palsana,295269,new_block
 sikar,PATAN,Sikar,Patan,262226,new_block
 sikar,PIPRALI,Sikar,Piprali,1362,exact
 sikar,SRIMADHOPUR,Sikar,Sri Madhopur,1363,spelling
+sikar,SRI MADHOPUR,Sikar,Sri Madhopur,1363,lgd_style
 sirohi,ABU ROAD,Sirohi,Abu Road,1364,exact
 sirohi,ABUROAD,Sirohi,Abu Road,1364,spelling
 sirohi,PINDW ARA,Sirohi,Pindwara,1365,ocr_space
