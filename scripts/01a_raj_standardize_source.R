@@ -10,7 +10,7 @@ library(here)
 
 source(here("scripts/00_config.R"))
 
-cat("=== Standardizing Rajasthan Source Files ===\n")
+message("=== Standardizing Rajasthan Source Files ===")
 
 # =============================================================================
 # HELPER FUNCTIONS
@@ -55,13 +55,13 @@ normalize_gp_name <- function(x) {
 # =============================================================================
 # 2005 SOURCE
 # =============================================================================
-cat("\n--- Processing 2005 source ---\n")
+message("\n--- Processing 2005 source ---")
 
 raw_2005 <- read_csv(
     here("data/raj/source/sarpanch_election_data/sarpanch_2005.csv"),
     show_col_types = FALSE
 )
-cat("Read", nrow(raw_2005), "rows from 2005 source\n")
+message("Read", nrow(raw_2005), "rows from 2005 source")
 
 res_2005 <- mapply(function(r) standardize_reservation(r), raw_2005$reservation, SIMPLIFY = FALSE)
 
@@ -83,23 +83,23 @@ std_2005 <- raw_2005 %>%
         winner_name, winner_female, female_reserved, caste_category, reservation_raw
     )
 
-cat("  District raw values:", n_distinct(std_2005$district_raw), "\n")
-cat("  Samiti raw values:", n_distinct(std_2005$samiti_raw), "\n")
-cat("  Female reserved:", sum(std_2005$female_reserved, na.rm = TRUE), "/", nrow(std_2005), "\n")
+message("  District raw values: ", n_distinct(std_2005$district_raw))
+message("  Samiti raw values: ", n_distinct(std_2005$samiti_raw))
+message("  Female reserved: ", sum(std_2005$female_reserved, na.rm = TRUE), "/", nrow(std_2005))
 
 write_parquet(std_2005, here("data/raj/source_2005_std.parquet"))
-cat("  Saved: data/raj/source_2005_std.parquet\n")
+message("  Saved: data/raj/source_2005_std.parquet")
 
 # =============================================================================
 # 2010 SOURCE
 # =============================================================================
-cat("\n--- Processing 2010 source ---\n")
+message("\n--- Processing 2010 source ---")
 
 raw_2010 <- read_csv(
     here("data/raj/source/sarpanch_election_data/sarpanch_2010.csv"),
     show_col_types = FALSE
 )
-cat("Read", nrow(raw_2010), "rows from 2010 source\n")
+message("Read", nrow(raw_2010), "rows from 2010 source")
 
 res_2010 <- mapply(function(r) standardize_reservation(r), raw_2010$reservation, SIMPLIFY = FALSE)
 
@@ -121,23 +121,23 @@ std_2010 <- raw_2010 %>%
         winner_name, winner_female, female_reserved, caste_category, reservation_raw
     )
 
-cat("  District raw values:", n_distinct(std_2010$district_raw), "\n")
-cat("  Samiti raw values:", n_distinct(std_2010$samiti_raw), "\n")
-cat("  Female reserved:", sum(std_2010$female_reserved, na.rm = TRUE), "/", nrow(std_2010), "\n")
+message("  District raw values: ", n_distinct(std_2010$district_raw))
+message("  Samiti raw values: ", n_distinct(std_2010$samiti_raw))
+message("  Female reserved: ", sum(std_2010$female_reserved, na.rm = TRUE), "/", nrow(std_2010))
 
 write_parquet(std_2010, here("data/raj/source_2010_std.parquet"))
-cat("  Saved: data/raj/source_2010_std.parquet\n")
+message("  Saved: data/raj/source_2010_std.parquet")
 
 # =============================================================================
 # 2015 SOURCE
 # =============================================================================
-cat("\n--- Processing 2015 source ---\n")
+message("\n--- Processing 2015 source ---")
 
 raw_2015 <- read_csv(
     here("data/raj/source/sarpanch_election_data/sarpanch_2015_manual_sex.csv"),
     show_col_types = FALSE
 )
-cat("Read", nrow(raw_2015), "rows from 2015 source\n")
+message("Read", nrow(raw_2015), "rows from 2015 source")
 
 res_2015 <- mapply(function(r) standardize_reservation(r), raw_2015$reservation, SIMPLIFY = FALSE)
 
@@ -159,60 +159,60 @@ std_2015 <- raw_2015 %>%
         winner_name, winner_female, female_reserved, caste_category, reservation_raw
     )
 
-cat("  District raw values:", n_distinct(std_2015$district_raw), "\n")
-cat("  Samiti raw values:", n_distinct(std_2015$samiti_raw), "\n")
-cat("  Female reserved:", sum(std_2015$female_reserved, na.rm = TRUE), "/", nrow(std_2015), "\n")
-cat("  Winner female inferred:", sum(std_2015$winner_female == 1, na.rm = TRUE), "\n")
-cat("  Winner male inferred:", sum(std_2015$winner_female == 0, na.rm = TRUE), "\n")
-cat("  Winner sex unknown:", sum(is.na(std_2015$winner_female)), "\n")
+message("  District raw values: ", n_distinct(std_2015$district_raw))
+message("  Samiti raw values: ", n_distinct(std_2015$samiti_raw))
+message("  Female reserved: ", sum(std_2015$female_reserved, na.rm = TRUE), "/", nrow(std_2015))
+message("  Winner female inferred: ", sum(std_2015$winner_female == 1, na.rm = TRUE))
+message("  Winner male inferred: ", sum(std_2015$winner_female == 0, na.rm = TRUE))
+message("  Winner sex unknown: ", sum(is.na(std_2015$winner_female)))
 
 write_parquet(std_2015, here("data/raj/source_2015_std.parquet"))
-cat("  Saved: data/raj/source_2015_std.parquet\n")
+message("  Saved: data/raj/source_2015_std.parquet")
 
 # =============================================================================
 # 2020 SOURCE
 # =============================================================================
-cat("\n--- Processing 2020 source ---\n")
+message("\n--- Processing 2020 source ---")
 
 raw_2020 <- read_csv(
-    here("data/raj/source/sarpanch_election_data/sarpanch_2020.csv"),
+    here("data/raj/source/sarpanch_election_data/sarpanch_2020_clean.csv"),
     show_col_types = FALSE
 )
-cat("Read", nrow(raw_2020), "rows from 2020 source\n")
+message("Read", nrow(raw_2020), "rows from 2020 source")
 
-res_2020 <- mapply(function(r) standardize_reservation(r), raw_2020$reservation_2020, SIMPLIFY = FALSE)
+res_2020 <- mapply(function(r) standardize_reservation(r), raw_2020$CategoryOfGramPanchyat, SIMPLIFY = FALSE)
 
 std_2020 <- raw_2020 %>%
     mutate(
         year = 2020L,
-        district_raw = toupper(trimws(district_2020)),
-        samiti_raw = toupper(trimws(ps_2020)),
-        gp_raw = toupper(trimws(gp_2020)),
-        gp_std = normalize_gp_name(gp_2020),
+        district_raw = toupper(trimws(District)),
+        samiti_raw = toupper(trimws(PanchayatSamiti)),
+        gp_raw = toupper(trimws(NameOfGramPanchyat)),
+        gp_std = normalize_gp_name(NameOfGramPanchyat),
         winner_name = NA_character_,
         winner_female = NA_integer_,
         female_reserved = sapply(res_2020, function(x) x$female_reserved),
         caste_category = sapply(res_2020, function(x) x$caste_category),
-        reservation_raw = reservation_2020
+        reservation_raw = CategoryOfGramPanchyat
     ) %>%
     select(
         year, district_raw, samiti_raw, gp_raw, gp_std,
         winner_name, winner_female, female_reserved, caste_category, reservation_raw
     )
 
-cat("  District raw values:", n_distinct(std_2020$district_raw), "\n")
-cat("  Samiti raw values:", n_distinct(std_2020$samiti_raw), "\n")
-cat("  Female reserved:", sum(std_2020$female_reserved, na.rm = TRUE), "/", nrow(std_2020), "\n")
+message("  District raw values: ", n_distinct(std_2020$district_raw))
+message("  Samiti raw values: ", n_distinct(std_2020$samiti_raw))
+message("  Female reserved: ", sum(std_2020$female_reserved, na.rm = TRUE), "/", nrow(std_2020))
 
 write_parquet(std_2020, here("data/raj/source_2020_std.parquet"))
-cat("  Saved: data/raj/source_2020_std.parquet\n")
+message("  Saved: data/raj/source_2020_std.parquet")
 
 # =============================================================================
 # SUMMARY
 # =============================================================================
-cat("\n=== Summary ===\n")
-cat("source_2005_std.parquet:", nrow(std_2005), "rows\n")
-cat("source_2010_std.parquet:", nrow(std_2010), "rows\n")
-cat("source_2015_std.parquet:", nrow(std_2015), "rows\n")
-cat("source_2020_std.parquet:", nrow(std_2020), "rows\n")
-cat("=== Standardization Complete ===\n")
+message("\n=== Summary ===")
+message("source_2005_std.parquet: ", nrow(std_2005), "rows")
+message("source_2010_std.parquet: ", nrow(std_2010), "rows")
+message("source_2015_std.parquet: ", nrow(std_2015), "rows")
+message("source_2020_std.parquet: ", nrow(std_2020), "rows")
+message("=== Standardization Complete ===")

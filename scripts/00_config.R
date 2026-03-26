@@ -15,11 +15,7 @@ DICT_RAJ_TREAT <- c(
     "treat_2005" = "$\\text{Quota}_{2005}$",
     "treat_2010" = "$\\text{Quota}_{2010}$",
     "treat_2015" = "$\\text{Quota}_{2015}$",
-    "treat_2020" = "$\\text{Quota}_{2020}$",
-    "female_res_2005" = "$\\text{Quota}_{2005}$",
-    "female_res_2010" = "$\\text{Quota}_{2010}$",
-    "female_res_2015" = "$\\text{Quota}_{2015}$",
-    "female_res_2020" = "$\\text{Quota}_{2020}$"
+    "treat_2020" = "$\\text{Quota}_{2020}$"
 )
 
 DICT_UP_TREAT <- c(
