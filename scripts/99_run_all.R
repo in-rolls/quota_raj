@@ -75,9 +75,9 @@ run_script <- function(script_name) {
 message("\n### PHASE 1: DATA EXTRACTION ###")
 log_msg("=== PHASE 1: DATA EXTRACTION ===")
 
-run_script("01e_up_extract_lgd.R")
+run_script("01d_up_extract_lgd.R")
 run_script("01a_raj_standardize_source.R")
-run_script("01d_raj_create_samiti_xwalk.R")
+run_script("01c_raj_create_samiti_xwalk.R")
 
 # =============================================================================
 # Phase 2: Create Panels + UP Crosswalks (depends on refreshed UP panels)
@@ -87,9 +87,9 @@ log_msg("=== PHASE 2: CREATE PANELS ===")
 
 run_script("02a_raj_recode.R")
 run_script("02b_up_recode.R")
-run_script("01f_up_create_district_xwalk.R")
-run_script("01g_up_create_block_xwalk.R")
-run_script("01h_audit_crosswalk_provenance.R")
+run_script("01e_up_create_district_xwalk.R")
+run_script("01f_up_create_block_xwalk.R")
+run_script("01g_audit_crosswalk_provenance.R")
 
 # =============================================================================
 # Phase 3: Link to SHRUG
