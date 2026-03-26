@@ -259,39 +259,62 @@ writeLines(up_tex, here("tabs/balance_electoral_up.tex"))
 cat("Created: tabs/balance_electoral_up.tex\n")
 
 # =============================================================================
-# Generate Combined Table (for backwards compatibility)
+# Generate Combined Table with All Years (Table B.5)
 # =============================================================================
-cat("\n--- Creating Combined Electoral Balance Table ---\n")
+cat("\n--- Creating Combined Electoral Balance Table (All Years) ---\n")
+
+make_cell <- function(bal) {
+    paste0(fmt(bal$quota), " & ", fmt(bal$open), " & ", fmt(bal$p, 2))
+}
 
 combined_tex <- c(
-    "{\\centering\\scriptsize",
-    "\\begin{tabular}{@{}lrrrcrrrr@{}}",
+    "{\\centering\\tiny",
+    "\\begin{tabular}{@{}l rrr rrr rrr c rrr rrr rrr@{}}",
     "\\toprule",
-    "& \\multicolumn{3}{c}{Rajasthan 2005$\\rightarrow$2010} & & \\multicolumn{3}{c}{Uttar Pradesh 2005$\\rightarrow$2010} \\\\",
-    "\\cmidrule(lr){2-4} \\cmidrule(lr){6-8}",
-    "Variable & Quota & Open & p & & Quota & Open & p \\\\",
+    "& \\multicolumn{9}{c}{Rajasthan} & & \\multicolumn{9}{c}{Uttar Pradesh} \\\\",
+    "\\cmidrule(lr){2-10} \\cmidrule(lr){12-20}",
+    "& \\multicolumn{3}{c}{05$\\rightarrow$10} & \\multicolumn{3}{c}{10$\\rightarrow$15} & \\multicolumn{3}{c}{15$\\rightarrow$20} & & \\multicolumn{3}{c}{05$\\rightarrow$10} & \\multicolumn{3}{c}{10$\\rightarrow$15} & \\multicolumn{3}{c}{15$\\rightarrow$21} \\\\",
+    "\\cmidrule(lr){2-4} \\cmidrule(lr){5-7} \\cmidrule(lr){8-10} \\cmidrule(lr){12-14} \\cmidrule(lr){15-17} \\cmidrule(lr){18-20}",
+    "Variable & Q & O & p & Q & O & p & Q & O & p & & Q & O & p & Q & O & p & Q & O & p \\\\",
     "\\midrule",
     paste0("Prior female winner & ",
-           fmt(raj_bal[["05_10"]]$female_winner$quota), " & ", fmt(raj_bal[["05_10"]]$female_winner$open), " & ", fmt(raj_bal[["05_10"]]$female_winner$p, 3), " & & ",
-           fmt(up_bal[["05_10"]]$female_winner$quota), " & ", fmt(up_bal[["05_10"]]$female_winner$open), " & ", fmt(up_bal[["05_10"]]$female_winner$p, 3), " \\\\"),
+           make_cell(raj_bal[["05_10"]]$female_winner), " & ",
+           make_cell(raj_bal[["10_15"]]$female_winner), " & ",
+           make_cell(raj_bal[["15_20"]]$female_winner), " & & ",
+           make_cell(up_bal[["05_10"]]$female_winner), " & ",
+           make_cell(up_bal[["10_15"]]$female_winner), " & ",
+           make_cell(up_bal[["15_21"]]$female_winner), " \\\\"),
     paste0("OBC reservation & ",
-           fmt(raj_bal[["05_10"]]$obc$quota), " & ", fmt(raj_bal[["05_10"]]$obc$open), " & ", fmt(raj_bal[["05_10"]]$obc$p, 3), " & & ",
-           fmt(up_bal[["05_10"]]$obc$quota), " & ", fmt(up_bal[["05_10"]]$obc$open), " & ", fmt(up_bal[["05_10"]]$obc$p, 3), " \\\\"),
+           make_cell(raj_bal[["05_10"]]$obc), " & ",
+           make_cell(raj_bal[["10_15"]]$obc), " & ",
+           make_cell(raj_bal[["15_20"]]$obc), " & & ",
+           make_cell(up_bal[["05_10"]]$obc), " & ",
+           make_cell(up_bal[["10_15"]]$obc), " & ",
+           make_cell(up_bal[["15_21"]]$obc), " \\\\"),
     paste0("SC/ST reservation & ",
-           fmt(raj_bal[["05_10"]]$sc_st$quota), " & ", fmt(raj_bal[["05_10"]]$sc_st$open), " & ", fmt(raj_bal[["05_10"]]$sc_st$p, 3), " & & ",
-           fmt(up_bal[["05_10"]]$sc_st$quota), " & ", fmt(up_bal[["05_10"]]$sc_st$open), " & ", fmt(up_bal[["05_10"]]$sc_st$p, 3), " \\\\"),
+           make_cell(raj_bal[["05_10"]]$sc_st), " & ",
+           make_cell(raj_bal[["10_15"]]$sc_st), " & ",
+           make_cell(raj_bal[["15_20"]]$sc_st), " & & ",
+           make_cell(up_bal[["05_10"]]$sc_st), " & ",
+           make_cell(up_bal[["10_15"]]$sc_st), " & ",
+           make_cell(up_bal[["15_21"]]$sc_st), " \\\\"),
     "\\midrule",
-    paste0("N & \\multicolumn{3}{c}{", fmt_int(nrow(raj_05_10)), "} & & ",
-           "\\multicolumn{3}{c}{", fmt_int(nrow(up_05_10)), "} \\\\"),
+    paste0("N & \\multicolumn{3}{c}{", fmt_int(nrow(raj_05_10)), "} & ",
+           "\\multicolumn{3}{c}{", fmt_int(nrow(raj_10_15)), "} & ",
+           "\\multicolumn{3}{c}{", fmt_int(nrow(raj_15_20)), "} & & ",
+           "\\multicolumn{3}{c}{", fmt_int(nrow(up_05_10)), "} & ",
+           "\\multicolumn{3}{c}{", fmt_int(nrow(up_10_15)), "} & ",
+           "\\multicolumn{3}{c}{", fmt_int(nrow(up_15_21)), "} \\\\"),
     "\\bottomrule",
     "\\end{tabular}",
     "\\par}",
     "",
     "\\vspace{0.5ex}",
-    paste0("\\parbox{\\linewidth}{\\scriptsize \\emph{Notes:} Balance tests for 2010 quota assignment ",
-           "on 2005 electoral characteristics. ``Quota'' = GPs reserved for women in 2010; ",
-           "``Open'' = GPs not reserved. p-values from t-tests. ",
-           "This table uses the full electoral panel (not SHRUG-filtered).}")
+    paste0("\\parbox{\\linewidth}{\\scriptsize \\emph{Notes:} Balance tests for quota assignment ",
+           "on prior electoral characteristics across all election transitions. ",
+           "Q = Quota (GPs reserved for women in the later year); O = Open (GPs not reserved). ",
+           "Prior female winner = proportion with female sarpanch/pradhan in prior election. ",
+           "p-values from t-tests. Full electoral panel (not SHRUG-filtered).}")
 )
 
 writeLines(combined_tex, here("tabs/balance_electoral.tex"))
