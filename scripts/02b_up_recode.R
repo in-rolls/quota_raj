@@ -267,8 +267,8 @@ write_parquet(up_05_21, here("data/up/up_05_21.parquet"))
 
 dir.create(here("data/crosswalks/audit"), showWarnings = FALSE, recursive = TRUE)
 diag_df <- bind_rows(diag_rows)
-write_csv(diag_df, here("data/crosswalks/audit/up_panel_join_diagnostics.csv"))
-message("Saved: data/crosswalks/audit/up_panel_join_diagnostics.csv")
+write_csv(diag_df, here("data/crosswalks/audit/02b_up_panel_join_diagnostics.csv"))
+message("Saved: data/crosswalks/audit/02b_up_panel_join_diagnostics.csv")
 
 # ============================================================================
 # Summary

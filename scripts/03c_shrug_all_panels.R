@@ -15,9 +15,9 @@
 #   - data/up/shrug_gp_up_10_15_block.parquet
 #   - data/up/shrug_gp_up_15_21_block.parquet
 #   - data/up/shrug_gp_up_05_21_block.parquet
-#   - data/crosswalks/audit/shrug_lgd_aggregation_summary.csv
-#   - data/crosswalks/audit/cross_year_mapping_audit.csv
-#   - data/crosswalks/audit/shrug_lgd_aggregation_audit.md
+#   - data/crosswalks/audit/03c_shrug_lgd_aggregation_summary.csv
+#   - data/crosswalks/audit/03c_cross_year_mapping_audit.csv
+#   - data/crosswalks/audit/03c_shrug_lgd_aggregation_audit.md
 
 library(tidyverse)
 library(arrow)
@@ -168,8 +168,8 @@ aggregation_summary <- shrug_lgd_covars %>%
     ) %>%
     arrange(state_name)
 
-write_csv(aggregation_summary, here("data/crosswalks/audit/shrug_lgd_aggregation_summary.csv"))
-message("Saved: data/crosswalks/audit/shrug_lgd_aggregation_summary.csv")
+write_csv(aggregation_summary, here("data/crosswalks/audit/03c_shrug_lgd_aggregation_summary.csv"))
+message("Saved: data/crosswalks/audit/03c_shrug_lgd_aggregation_summary.csv")
 
 summary_lines <- c(
     "# SHRUG-LGD Aggregation Audit",
@@ -205,8 +205,8 @@ summary_lines <- c(
     "- Share/rate variables (name pattern contains share/ratio/rate/pct/prop): weighted mean using `pc01_pca_tot_p`, fallback to unweighted mean."
 )
 
-writeLines(summary_lines, here("data/crosswalks/audit/shrug_lgd_aggregation_audit.md"))
-message("Saved: data/crosswalks/audit/shrug_lgd_aggregation_audit.md")
+writeLines(summary_lines, here("data/crosswalks/audit/03c_shrug_lgd_aggregation_audit.md"))
+message("Saved: data/crosswalks/audit/03c_shrug_lgd_aggregation_audit.md")
 
 raj_covars <- shrug_lgd_covars %>%
     filter(state_name == "rajasthan")
@@ -261,7 +261,7 @@ assert_single_target(
     from_cols = c("match_key_2010"),
     to_col = "lgd_gp_code",
     label = "Rajasthan 2010 key -> LGD code",
-    outfile = here("data/crosswalks/audit/raj_key_mapping_collisions.csv")
+    outfile = here("data/crosswalks/audit/03c_raj_key_mapping_collisions.csv")
 )
 
 raj_shrug_mapping <- raj_shrug_mapping %>%
@@ -301,7 +301,7 @@ assert_single_target(
     from_cols = c("match_key_2015"),
     to_col = "match_key_2010",
     label = "Rajasthan 2015 key -> 2010 key",
-    outfile = here("data/crosswalks/audit/raj_2015_to_2010_key_collisions.csv")
+    outfile = here("data/crosswalks/audit/03c_raj_2015_to_2010_key_collisions.csv")
 )
 
 raj_10_15_key_map <- raj_10_15_key_map %>%
@@ -368,7 +368,7 @@ assert_single_target(
     from_cols = c("key_2010"),
     to_col = "lgd_gp_code",
     label = "UP 2010 key -> LGD code",
-    outfile = here("data/crosswalks/audit/up_key_mapping_collisions.csv")
+    outfile = here("data/crosswalks/audit/03c_up_key_mapping_collisions.csv")
 )
 
 up_shrug_mapping <- up_shrug_mapping %>%
@@ -401,7 +401,7 @@ conflicts_up_triplet_2010 <- assert_single_target(
     from_cols = c("district_eng_std_2010", "block_eng_std_2010", "gp_eng_std_2010"),
     to_col = "key_2010_map",
     label = "UP normalized 2010 name triplet -> key_2010",
-    outfile = here("data/crosswalks/audit/up_2010_triplet_key_collisions.csv"),
+    outfile = here("data/crosswalks/audit/03c_up_2010_triplet_key_collisions.csv"),
     strict = FALSE
 )
 
@@ -448,7 +448,7 @@ conflicts_up_triplet_2015 <- assert_single_target(
     from_cols = c("district_eng_std_2015", "block_eng_std_2015", "gp_eng_std_2015"),
     to_col = "key_2010_map",
     label = "UP normalized 2015 name triplet -> key_2010",
-    outfile = here("data/crosswalks/audit/up_2015_triplet_key_collisions.csv"),
+    outfile = here("data/crosswalks/audit/03c_up_2015_triplet_key_collisions.csv"),
     strict = FALSE
 )
 
@@ -490,8 +490,8 @@ message("Saved: data/up/shrug_gp_up_05_21_block.parquet")
 # =============================================================================
 
 mapping_audit_df <- bind_rows(mapping_audit)
-write_csv(mapping_audit_df, here("data/crosswalks/audit/cross_year_mapping_audit.csv"))
-message("Saved: data/crosswalks/audit/cross_year_mapping_audit.csv")
+write_csv(mapping_audit_df, here("data/crosswalks/audit/03c_cross_year_mapping_audit.csv"))
+message("Saved: data/crosswalks/audit/03c_cross_year_mapping_audit.csv")
 
 message("\n=== Summary ===")
 message("Created SHRUG-matched panel files using LGD-level aggregated covariates.")

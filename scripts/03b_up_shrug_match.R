@@ -10,8 +10,8 @@
 # 5. Link matched GPs to SHRUG via LGD code
 #
 # Uses comprehensive crosswalks from:
-# - scripts/01f_up_create_district_xwalk.R
-# - scripts/01g_up_create_block_xwalk.R
+# - scripts/01e_up_create_district_xwalk.R
+# - scripts/01f_up_create_block_xwalk.R
 
 library(tidyverse)
 library(arrow)
@@ -71,8 +71,8 @@ urban_excluded <- up_05_10 %>%
     distinct()
 
 message("Urban/municipality entries excluded: ", nrow(urban_excluded))
-write_csv(urban_excluded, here("data/crosswalks/audit/up_urban_excluded.csv"))
-message("Exported: data/crosswalks/audit/up_urban_excluded.csv")
+write_csv(urban_excluded, here("data/crosswalks/audit/03b_up_urban_excluded.csv"))
+message("Exported: data/crosswalks/audit/03b_up_urban_excluded.csv")
 
 up_05_10 <- up_05_10 %>%
     filter(!is_urban) %>%
@@ -204,8 +204,8 @@ tie_resolved <- fuzzy_df %>%
 
 message("\nTie-resolved matches: ", nrow(tie_resolved))
 if (nrow(tie_resolved) > 0) {
-    write_csv(tie_resolved, here("data/crosswalks/audit/up_tie_resolved.csv"))
-    message("Exported: data/crosswalks/audit/up_tie_resolved.csv")
+    write_csv(tie_resolved, here("data/crosswalks/audit/03b_up_tie_resolved.csv"))
+    message("Exported: data/crosswalks/audit/03b_up_tie_resolved.csv")
 }
 
 # ============================================================================
@@ -276,8 +276,8 @@ if (nrow(one_to_many) > 0) {
         ) %>%
         arrange(district, block, elex_gp, match_distance)
 
-    write_csv(one_to_many_export, here("data/crosswalks/audit/up_one_to_many_errors.csv"))
-    message("Exported: data/crosswalks/audit/up_one_to_many_errors.csv")
+    write_csv(one_to_many_export, here("data/crosswalks/audit/03b_up_one_to_many_errors.csv"))
+    message("Exported: data/crosswalks/audit/03b_up_one_to_many_errors.csv")
 
     all_matches <- all_matches %>%
         group_by(key_2010, gp_name_eng_2010) %>%
@@ -313,8 +313,8 @@ if (nrow(many_to_one) > 0) {
         ) %>%
         arrange(lgd_gp_code, match_distance)
 
-    write_csv(many_to_one_export, here("data/crosswalks/audit/up_many_to_one_audit.csv"))
-    message("Exported: data/crosswalks/audit/up_many_to_one_audit.csv")
+    write_csv(many_to_one_export, here("data/crosswalks/audit/03b_up_many_to_one_audit.csv"))
+    message("Exported: data/crosswalks/audit/03b_up_many_to_one_audit.csv")
     message("NOTE: Many-to-one may be valid (same GP in multiple election rounds). Review manually.")
 }
 
@@ -411,8 +411,8 @@ no_lgd_match <- up_shrug %>%
 
 message("GPs not matched to LGD: ", nrow(no_lgd_match))
 
-write_csv(lgd_but_no_shrug, here("data/crosswalks/audit/up_gp_lgd_no_shrug.csv"))
-write_csv(no_lgd_match, here("data/crosswalks/audit/up_gp_unmatched.csv"))
+write_csv(lgd_but_no_shrug, here("data/crosswalks/audit/03b_up_gp_lgd_no_shrug.csv"))
+write_csv(no_lgd_match, here("data/crosswalks/audit/03b_up_gp_unmatched.csv"))
 message("Exported unmatched GPs for review.")
 
 # ============================================================================
@@ -463,6 +463,6 @@ message("Election GPs with SHRUG match: ", sum(!is.na(up_shrug$shrid2)),
     "/", nrow(up_05_10), "\n")
 
 message("\nNote: SHRUG match rate is limited by SHRUG-LGD crosswalk coverage.")
-message("See tabs/up_shrug_coverage_audit.md for full analysis.")
+message("See data/crosswalks/audit/03d_up_shrug_coverage_audit.md for full analysis.")
 
 message("\n=== Done ===")
