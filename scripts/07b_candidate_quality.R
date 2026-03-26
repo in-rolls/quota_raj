@@ -117,6 +117,7 @@ make_balance_table(
     group_names = c("2010", "2015", "2020"),
     notes = paste0(
         "$^{***}$p$<$0.01; $^{**}$p$<$0.05; $^{*}$p$<$0.1. ",
+        "Data from \\citet{weaver_data}. ",
         "T-tests comparing winner characteristics in open vs quota seats. ",
         "Education is ordinal (1=Primary to 9=Doctorate). ",
         "Assets (asinh transformation) available only for 2020."
