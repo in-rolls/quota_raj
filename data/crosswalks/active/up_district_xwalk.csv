@@ -1,0 +1,64 @@
+elex_district,lgd_district,lgd_zp_code,match_type
+Agra,Agra,109,exact
+Ambedkar Nagar,Ambedkar Nagar,112,exact
+Auraiya,Auraiya,113,exact
+Bahraich,Bahraich,116,exact
+Balrampur,Balrampur,118,exact
+Banda,Banda,119,exact
+Barabanki,Barabanki,120,exact
+Bareilly,Bareilly,121,exact
+Basti,Basti,122,exact
+Budaun,Budaun,124,exact
+Bulandshahr,Bulandshahr,125,exact
+Chandauli,Chandauli,126,exact
+Chitrakoot,Chitrakoot,127,exact
+Fatehpur,Fatehpur,133,exact
+Firozabad,Firozabad,134,exact
+Gautam Buddha Nagar,Gautam Buddha Nagar,135,exact
+Ghaziabad,Ghaziabad,136,exact
+Ghazipur,Ghazipur,137,exact
+Gonda,Gonda,138,exact
+Gorakhpur,Gorakhpur,139,exact
+Hamirpur,Hamirpur,140,exact
+Hardoi,Hardoi,141,exact
+Hathras,Hathras,154,exact
+Jalaun,Jalaun,142,exact
+Jaunpur,Jaunpur,143,exact
+Kannauj,Kannauj,146,exact
+Kanpur Nagar,Kanpur Nagar,148,exact
+Kaushambi,Kaushambi,149,exact
+Lalitpur,Lalitpur,152,exact
+Lucknow,Lucknow,153,exact
+Maharajganj,Maharajganj,155,exact
+Mahoba,Mahoba,156,exact
+Mainpuri,Mainpuri,157,exact
+Mau,Mau,159,exact
+Meerut,Meerut,160,exact
+Mirzapur,Mirzapur,161,exact
+Pilibhit,Pilibhit,164,exact
+Pratapgarh,Pratapgarh,165,exact
+Rampur,Rampur,167,exact
+Saharanpur,Saharanpur,168,exact
+Sant Kabeer Nagar,Sant Kabeer Nagar,169,exact
+Sant Ravidas Nagar,Sant Ravidas Nagar,170,exact
+Shravasti,Shravasti,172,exact
+Siddharth Nagar,Siddharth Nagar,173,exact
+Sitapur,Sitapur,174,exact
+Sonbhadra,Sonbhadra,175,exact
+Sultanpur,Sultanpur,176,exact
+Unnao,Unnao,177,exact
+Varanasi,Varanasi,178,exact
+Bagpat,Baghpat,115,spelling
+Baliya,Ballia,117,spelling
+Bijnaur,Bijnor,123,spelling
+Itawah,Etawah,130,spelling
+Jhanshi,Jhansi,144,spelling
+Muradabad,Moradabad,162,spelling
+Muzzafarnagar,Muzaffarnagar,163,spelling
+Rae bareli,Rae Bareli,166,spelling
+Shahjahnapur,Shahjahanpur,171,spelling
+Allahabad,Prayagraj,111,renamed
+Faizabad,Ayodhya,131,renamed
+Jyotiba Phule Nagar,Amroha,145,renamed
+Kushinagar,Kushi Nagar,151,spelling
+Lakhimpur Khiri,Kheri,150,renamed

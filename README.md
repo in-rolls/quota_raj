@@ -23,6 +23,29 @@ Rscript scripts/99_run_all.R
 cd ms && latexmk -xelatex main.tex
 ```
 
+## Pipeline and Crosswalk Architecture
+
+Because administrative boundaries change frequently and spelling is highly irregular, the pipeline uses the **Local Government Directory (LGD)** as a "universal translator" to link election records to Census covariates at the lowest possible level: the Gram Panchayat (GP).
+
+1. **Election to LGD Block:** Election `samiti` or `block` names are mapped to official LGD Block codes via manual active crosswalks (`data/crosswalks/active/`).
+2. **Election GP to LGD GP:** Within each LGD Block, the Election GP name is fuzzy-matched against the official LGD hierarchy (`data/lgd/processed/lgd_*_block_gp.csv`) to yield an LGD GP Code.
+3. **LGD to SHRUG:** The LGD GP code is then linked to the SHRUG Village ID (`shrid2`) using a pre-built crosswalk (`data/shrug_gp_xwalk/`).
+4. **SHRUG to Census Data:** Finally, covariates are merged directly using the `shrid2` key.
+
+### Directory Organization
+
+```text
+data/
+├── crosswalks/
+│   ├── active/             # Active election-to-LGD mappings (Essential)
+│   └── audit/              # Tie-resolution, unmatched, and diagnostic reports
+├── lgd/
+│   ├── raw/                # Original .xls and .csv from LGD portal
+│   ├── processed/          # Cleaned LGD hierarchies
+│   └── manual/             # SHRUG manual matches
+└── shrug/                  # Raw Development Data Lab datasets
+```
+
 ## Data Dependencies
 
 ### Included Data
@@ -51,7 +74,7 @@ Download "SHRUG GP to shrids" by Pratik Mahajan, extract to `data/shrug_gp_xwalk
 #### 3. LGD (Local Government Directory)
 Source: https://lgdirectory.gov.in/
 
-Download for Rajasthan and UP, place in `data/lgd/`:
+Download for Rajasthan and UP, place in `data/lgd/raw/`:
 - Village-GP mapping files
 - Block/Panchayat Samiti files
 
@@ -60,26 +83,25 @@ Source: [in-rolls/local_elections_up](https://github.com/in-rolls/local_election
 
 ## Code Organization
 
-```
+Scripts are numbered sequentially by processing stage to guarantee the exact execution sequence.
+
+```text
 scripts/
-├── 00_*.R          # Configuration and utilities
-├── 01_*.R          # Data extraction, standardization, crosswalks
-├── 02_*.R          # Panel creation and recoding
-├── 03_*.R          # SHRUG linkage at block level
-├── 04_*.R          # Balance tests
-├── 05_*.R          # Transition matrices
-├── 07_*.R          # Short-term effects
-├── 08_*.R          # Long-term effects
-├── 10-11_*.R       # Candidate analysis
-├── 12_*.R          # Phone survey tables
-├── 13_*.R          # Weaver replication
-├── 14_*.R          # Power analysis
-└── 99_run_all.R    # Master pipeline
+├── 00_*.R          # Stage 0: Configuration and utilities
+├── 01_*.R          # Stage 1: Data extraction, standardization, crosswalks
+├── 02_*.R          # Stage 2: Panel creation and recoding
+├── 03_*.R          # Stage 3: SHRUG integration and audits
+├── 04_*.R          # Stage 4: Descriptives, Balance & Validation
+├── 05_*.R          # Stage 5: Main Analysis - Short Term
+├── 06_*.R          # Stage 6: Main Analysis - Long Term
+├── 07_*.R          # Stage 7: Extensions (Candidates, Replications)
+├── 08_*.R          # Stage 8: Phone Surveys
+└── 99_run_all.R    # Stage 99: Master pipeline orchestration
 ```
 
 ## Notes on Analysis
 
-### Random Rotation Subsample (08b)
+### Random Rotation Subsample (06c)
 
 The random rotation analysis restricts to districts where chi-square tests fail to reject independence of quota assignment across transitions (p > 0.05).
 
