@@ -3,6 +3,11 @@
 library(stringi)
 library(stringdist)
 
+# Create match key from district, block/samiti, and GP components
+make_match_key <- function(district, block, gp) {
+    paste(tolower(trimws(district)), tolower(trimws(block)), tolower(trimws(gp)), sep = "_")
+}
+
 # Remove diacritics, convert to lowercase, convert to single ws, trim extra ws, remove punct
 normalize_string <- function(input_string) {
      normalized_string <- stri_trans_general(input_string, "Latin-ASCII")
@@ -292,11 +297,26 @@ normalize_string_strict <- function(input_string) {
 #' @param vars Character vector of variable names to test
 #' @param labels Character vector of display labels for variables
 #' @param treat_var Name of the treatment indicator variable (default "treat")
+#' @param na_string String to return when test cannot be run (default "--")
+#' @param digits Number of decimal places (default 2)
 #' @return tibble with Variable, Open (mean), Quota (mean), Diff. (with stars)
-run_t_tests <- function(data, vars, labels, treat_var = "treat") {
+run_t_tests <- function(data, vars, labels, treat_var = "treat",
+                        na_string = "--", digits = 2) {
+    fmt <- paste0("%.", digits, "f")
     purrr::map2_dfr(vars, labels, function(var, label) {
+        d <- data %>% dplyr::filter(!is.na(.data[[var]]))
+
+        if (nrow(d) == 0 || length(unique(d[[treat_var]])) < 2) {
+            return(tibble::tibble(
+                Variable = label,
+                Open = na_string,
+                Quota = na_string,
+                `Diff.` = na_string
+            ))
+        }
+
         fml <- stats::reformulate(treat_var, var)
-        test <- stats::t.test(fml, data = data)
+        test <- stats::t.test(fml, data = d)
         stars <- dplyr::case_when(
             test$p.value < 0.01 ~ "$^{***}$",
             test$p.value < 0.05 ~ "$^{**}$",
@@ -305,11 +325,25 @@ run_t_tests <- function(data, vars, labels, treat_var = "treat") {
         )
         tibble::tibble(
             Variable = label,
-            Open = round(test$estimate[1], 2),
-            Quota = round(test$estimate[2], 2),
-            `Diff.` = paste0(round(test$estimate[1] - test$estimate[2], 2), stars)
+            Open = sprintf(fmt, test$estimate[1]),
+            Quota = sprintf(fmt, test$estimate[2]),
+            `Diff.` = paste0(sprintf(fmt, test$estimate[1] - test$estimate[2]), stars)
         )
     })
+}
+
+#' Create a simple mean table for summary statistics (no comparison)
+#' @param data Data frame
+#' @param vars Character vector of variable names
+#' @param labels Character vector of display labels
+#' @param digits Number of decimal places (default 2)
+#' @return tibble with Variable and Mean columns
+make_mean_table <- function(data, vars, labels, digits = 2) {
+    fmt <- paste0("%.", digits, "f")
+    tibble::tibble(
+        Variable = labels,
+        Mean = sapply(vars, function(v) sprintf(fmt, mean(data[[v]], na.rm = TRUE)))
+    )
 }
 
 # =============================================================================
@@ -339,6 +373,36 @@ make_transition_matrix <- function(data, from, to) {
 
 ## AER-Style etable wrapper for fixest
 library(fixest)
+
+# =============================================================================
+# TABLE FORMATTING HELPERS (for manual LaTeX table construction)
+# =============================================================================
+
+format_coef_stars <- function(coef, pval, digits = 2) {
+    if (is.null(coef) || is.na(coef)) return("---")
+    stars <- ""
+    if (!is.na(pval)) {
+        if (pval < 0.01) stars <- "$^{***}$"
+        else if (pval < 0.05) stars <- "$^{**}$"
+        else if (pval < 0.1) stars <- "$^{*}$"
+    }
+    paste0(sprintf(paste0("%.", digits, "f"), coef), stars)
+}
+
+format_se_parens <- function(se, digits = 2) {
+    if (is.null(se) || is.na(se)) return("")
+    paste0("(", sprintf(paste0("%.", digits, "f"), se), ")")
+}
+
+format_r2_val <- function(r2, digits = 2) {
+    if (is.null(r2) || is.na(r2)) return("---")
+    sprintf(paste0("%.", digits, "f"), r2)
+}
+
+format_n_comma <- function(n) {
+    if (is.null(n) || is.na(n)) return("---")
+    format(n, big.mark = ",")
+}
 
 aer_etable <- function(models, file, dict = NULL, digits = 2, notes = NULL,
                        title = NULL, label = NULL, placement = "htbp",
