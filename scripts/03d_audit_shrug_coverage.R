@@ -226,17 +226,17 @@ findings <- c(findings,
     ""
 )
 
-writeLines(findings, here("tabs/up_shrug_coverage_audit.md"))
-message("\n=== Report saved to tabs/up_shrug_coverage_audit.md ===")
+writeLines(findings, here("data/crosswalks/audit/03d_up_shrug_coverage_audit.md"))
+message("\n=== Report saved to data/crosswalks/audit/03d_up_shrug_coverage_audit.md ===")
 
 # ============================================================================
 # STEP 9: Export unmatched GPs for reference
 # ============================================================================
 
-write_csv(lgd_missing, here("data/crosswalks/audit/up_lgd_gp_no_shrug.csv"))
-message("Exported unmatched GPs to: data/crosswalks/audit/up_lgd_gp_no_shrug.csv")
+write_csv(lgd_missing, here("data/crosswalks/audit/03d_up_coverage_lgd_missing_shrug.csv"))
+message("Exported unmatched GPs to: data/crosswalks/audit/03d_up_coverage_lgd_missing_shrug.csv")
 
-write_csv(coverage_by_district, here("data/crosswalks/audit/up_shrug_coverage_by_district.csv"))
-message("Exported district coverage to: data/crosswalks/audit/up_shrug_coverage_by_district.csv")
+write_csv(coverage_by_district, here("data/crosswalks/audit/03d_up_shrug_coverage_by_district.csv"))
+message("Exported district coverage to: data/crosswalks/audit/03d_up_shrug_coverage_by_district.csv")
 
 message("\n=== Done ===")
