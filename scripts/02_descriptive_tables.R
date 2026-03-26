@@ -36,7 +36,8 @@ raj_stats <- list(
     max_gp = max(nrow(raj_2005), nrow(raj_2010), nrow(raj_2015), nrow(raj_2020)),
     women_res_2005 = round(100 * mean(raj_2005$female_reserved, na.rm = TRUE), 1),
     women_res_2010 = round(100 * mean(raj_2010$female_reserved, na.rm = TRUE), 1),
-    women_res_2015 = round(100 * mean(raj_2015$female_reserved, na.rm = TRUE), 1)
+    women_res_2015 = round(100 * mean(raj_2015$female_reserved, na.rm = TRUE), 1),
+    women_res_2020 = round(100 * mean(raj_2020$female_reserved, na.rm = TRUE), 1)
 )
 
 # UP year files
@@ -44,6 +45,8 @@ up_2005 <- read_parquet(here("data/up/up_gp_sarpanch_2005_fixed_with_translitera
 up_2010 <- read_parquet(here("data/up/up_gp_sarpanch_2010_fixed_with_transliteration.parquet"))
 up_2015 <- read_parquet(here("data/up/up_gp_sarpanch_2015_fixed_with_transliteration.parquet"))
 up_2021 <- read_parquet(here("data/up/up_gp_sarpanch_2021_fixed_with_transliteration.parquet"))
+
+up_2021_winners <- up_2021[up_2021$result == "विजेता", ]
 
 up_stats <- list(
     gp_2005 = n_distinct(paste(up_2005$district_name, up_2005$block_name, up_2005$gp_name)),
@@ -63,7 +66,11 @@ up_stats <- list(
         n_distinct(paste(up_2010$district_name, up_2010$block_name, up_2010$gp_name)),
         n_distinct(paste(up_2015$district_name, up_2015$block_name, up_2015$gp_name)),
         n_distinct(paste(up_2021$district_name, up_2021$block_name, up_2021$gp))
-    )
+    ),
+    women_res_2005 = round(100 * mean(grepl("Female", up_2005$gp_res_status_fin_eng, ignore.case = TRUE), na.rm = TRUE), 1),
+    women_res_2010 = round(100 * mean(grepl("Female", up_2010$gp_res_status_fin_eng, ignore.case = TRUE), na.rm = TRUE), 1),
+    women_res_2015 = round(100 * mean(grepl("Female", up_2015$gp_reservation_status_eng, ignore.case = TRUE), na.rm = TRUE), 1),
+    women_res_2021 = round(100 * mean(grepl("Female", up_2021_winners$gp_reservation_status_eng, ignore.case = TRUE), na.rm = TRUE), 1)
 )
 
 # Phone survey: Sheet1 contains the full sampling frame with phone_answered column
@@ -144,19 +151,19 @@ gp_summary_df <- data.frame(
     Y2005 = c(format(raj_stats$gp_2005, big.mark = ","), raj_stats$samiti_2005,
               raj_stats$dist_2005, raj_stats$women_res_2005,
               format(up_stats$gp_2005, big.mark = ","), up_stats$block_2005,
-              up_stats$dist_2005, "50.0"),
+              up_stats$dist_2005, up_stats$women_res_2005),
     Y2010 = c(format(raj_stats$gp_2010, big.mark = ","), raj_stats$samiti_2010,
               raj_stats$dist_2010, raj_stats$women_res_2010,
               format(up_stats$gp_2010, big.mark = ","), up_stats$block_2010,
-              up_stats$dist_2010, "50.0"),
+              up_stats$dist_2010, up_stats$women_res_2010),
     Y2015 = c(format(raj_stats$gp_2015, big.mark = ","), raj_stats$samiti_2015,
               raj_stats$dist_2015, raj_stats$women_res_2015,
               format(up_stats$gp_2015, big.mark = ","), up_stats$block_2015,
-              up_stats$dist_2015, "50.0"),
+              up_stats$dist_2015, up_stats$women_res_2015),
     Y2020 = c(format(raj_stats$gp_2020, big.mark = ","), raj_stats$samiti_2020,
-              raj_stats$dist_2020, "50.0",
+              raj_stats$dist_2020, raj_stats$women_res_2020,
               format(up_stats$gp_2021, big.mark = ","), up_stats$block_2021,
-              up_stats$dist_2021, "50.0")
+              up_stats$dist_2021, up_stats$women_res_2021)
 )
 
 gp_summary_table <- kbl(gp_summary_df, format = "latex", booktabs = TRUE,
@@ -211,17 +218,26 @@ library(ggplot2)
 
 if (!dir.exists(here("figs"))) dir.create(here("figs"))
 
+india_shapefile <- here("data/shapefiles/india_soi/India_State_Boundary.shp")
+
 india_states <- tryCatch({
-    if (requireNamespace("rnaturalearth", quietly = TRUE)) {
-        library(rnaturalearth)
-        india <- ne_states(country = "india", returnclass = "sf")
+    if (file.exists(india_shapefile)) {
+        india <- st_read(india_shapefile, quiet = TRUE)
+        india$name <- india$State_Name
         india
-    } else if (requireNamespace("geodata", quietly = TRUE)) {
-        library(geodata)
-        india <- geodata::gadm(country = "IND", level = 1, path = tempdir())
-        st_as_sf(india)
     } else {
-        NULL
+        warning("SOI shapefile not found, falling back to Natural Earth (may not show full India boundaries)")
+        if (requireNamespace("rnaturalearth", quietly = TRUE)) {
+            library(rnaturalearth)
+            india <- ne_states(country = "india", returnclass = "sf")
+            india
+        } else if (requireNamespace("geodata", quietly = TRUE)) {
+            library(geodata)
+            india <- geodata::gadm(country = "IND", level = 1, path = tempdir())
+            st_as_sf(india)
+        } else {
+            NULL
+        }
     }
 }, error = function(e) {
     cat("Could not load India shapefile data. Error:", e$message, "\n")
@@ -244,15 +260,15 @@ if (!is.null(india_states)) {
         geom_sf(aes(fill = highlight), color = "white", linewidth = 0.3) +
         scale_fill_manual(
             values = c(
-                "Rajasthan" = COLORS_PUB["highlight"],
-                "Uttar Pradesh" = COLORS_PUB["accent"],
+                "Rajasthan" = "#4A4A4A",
+                "Uttar Pradesh" = "#808080",
                 "Other" = "#E8E8E8"
             ),
             name = NULL
         ) +
         theme_pub() +
         theme(
-            legend.position = "bottom",
+            legend.position = "none",
             axis.text = element_blank(),
             axis.ticks = element_blank(),
             panel.border = element_blank()

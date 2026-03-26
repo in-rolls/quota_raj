@@ -263,13 +263,13 @@ Rajasthan and Uttar Pradesh together account for roughly 20\% of India's populat
     \label{fig:india_map}
     \vspace{\medskipamount}
     \parbox{0.9\textwidth}{\scriptsize
-        \emph{Notes:} Green: Rajasthan (largest state by area, population $>$70 million, $>$70\% rural). Red: Uttar Pradesh (most populous state, population $>$200 million, $>$75\% rural).\footnote{Rajasthan: Urban Development and Housing Ministry, \url{https://urban.rajasthan.gov.in}. Uttar Pradesh: Ministry of Jal Shakti, Department of Drinking Water and Sanitation, \url{https://ejalshakti.gov.in}.}
+        \emph{Notes:} Highlighted states are the study sites. Rajasthan (darker grey, west): India's largest state by area (342,239 km\textsuperscript{2}), population 68.5 million (Census 2011), approximately 75\% rural, with 11,500 Gram Panchayats. Uttar Pradesh (lighter grey, east): India's most populous state, population 199.8 million (Census 2011), approximately 77\% rural, with 58,000 Gram Panchayats.
     }
 \end{figure}
 
 \subsection{Data}
 
-We assemble four data sources for this study (Table~\vref{tab:data_sources}).
+We assemble four data sources for this study.
 
 \paragraph{Electoral data.} We scraped GP-level election records from the Rajasthan and Uttar Pradesh State Election Commissions for four cycles each: 2005, 2010, 2015, and 2020 in Rajasthan, and 2005, 2010, 2015, and 2021 in UP. For each GP-election, we observe the reservation status of the Sarpanch seat (reserved for women, or open) and the sex of the elected Sarpanch. In Rajasthan 2015, the winner's sex was missing from official records and was manually coded from names. For Rajasthan 2020, we additionally collected candidate-level affidavit data (age, education, assets) from the SEC. Table~\vref{tab:gp_summary_combined} summarizes the electoral data. Between 2005 and 2020, the number of GPs in Rajasthan grew from roughly 9,200 to 11,500 ($\uparrow 25\%$), reflecting delimitation driven by population growth and urbanization. The number of Panchayat Samitis increased from 237 to 352 ($\uparrow 49\%$), while the number of districts remained stable with only Pratapgarh added in 2008. In UP, the number of GPs, blocks, and districts remained approximately constant across cycles. As a validation check, we replicate the UP short-run results using independently collected data from \citet{weaver_data}.
 
@@ -520,7 +520,6 @@ Bodies''}
 
 \section{Data and Research Design}\label{sec:app_data}
 
-\input{../tabs/data_sources}\FloatBarrier
 \input{../tabs/gp_summary}\FloatBarrier
 \input{../tabs/state_local_totals}\FloatBarrier
 
@@ -558,11 +557,11 @@ Tables~\ref{tab:chi_sq_raj} and \ref{tab:chi_sq_up} test independence of quota a
 \input{../tabs/up_chi_squared_results}
 \FloatBarrier
 
-Table~\ref{tab:balance_electoral} tests whether 2010 quota assignment is balanced on 2005 electoral characteristics. In Rajasthan, data on prior female winners are not available. In UP, GPs reserved in 2010 had slightly fewer prior female winners (51\% vs 53\%, $p < 0.001$) and differed on OBC and SC/ST reservation status. We control for these variables in our main specifications.
+Table~\ref{tab:balance_electoral} tests whether quota assignment is balanced on prior electoral characteristics across all election transitions. In Rajasthan, the 2005$\rightarrow$2010 transition shows balance on prior female winners (37\% vs 36\%, $p = 0.51$), but later transitions show imbalance consistent with rotation---reserved GPs were less likely to have had prior female winners. In UP, reserved GPs had slightly fewer prior female winners and differed on caste reservation status across all transitions. We control for these variables in our main specifications.
 
 \begin{table}[!htbp]
     \centering
-    \caption{Electoral Balance: 2010 Quota Assignment on 2005 Electoral Characteristics}
+    \caption{Electoral Balance Tests for Quota Assignment Across Election Cycles}
     \label{tab:balance_electoral}
     \input{../tabs/balance_electoral}
 \end{table}
