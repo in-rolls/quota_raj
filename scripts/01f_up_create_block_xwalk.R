@@ -1,10 +1,10 @@
-# 01g_up_create_block_xwalk.R
+# 01f_up_create_block_xwalk.R
 # Comprehensive District + Block Crosswalk for UP
 #
 # Maps ALL election district+block combinations (2005, 2010)
 # to LGD block codes, enabling GP-level matching.
 #
-# Following Rajasthan's 01d_raj_create_samiti_xwalk.R pattern
+# Following Rajasthan's 01c_raj_create_samiti_xwalk.R pattern
 
 library(tidyverse)
 library(arrow)
@@ -1117,7 +1117,7 @@ print(block_xwalk %>%
 write_csv(block_xwalk, here("data/crosswalks/active/up_block_xwalk.csv"))
 message("\nSaved: data/crosswalks/active/up_block_xwalk.csv")
 
-write_csv(urban_wards, here("data/crosswalks/audit/up_urban_wards_excluded.csv"))
-message("Saved: data/crosswalks/audit/up_urban_wards_excluded.csv")
+write_csv(urban_wards, here("data/crosswalks/audit/01g_up_urban_wards_excluded.csv"))
+message("Saved: data/crosswalks/audit/01g_up_urban_wards_excluded.csv")
 
 message("\n=== Done ===")
