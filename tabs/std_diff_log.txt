@@ -1,0 +1,133 @@
+Standardized Differences for Balance Covariates
+================================================
+Generated: 2026-03-26 19:29:09.347199
+
+Formula: |mean_quota - mean_open| / sqrt((sd_quota^2 + sd_open^2) / 2)
+Threshold for concern: 0.20 (Austin 2009)
+
+=== RAJASTHAN ===
+
+Panel 2005->2010:
+  Max standardized diff: 0.0568
+  By covariate:
+    Population: 0.0146
+    Female Share: 0.0398
+    SC Share: 0.0138
+    ST Share: 0.0088
+    Medical fac./1k: 0.002
+    Mat. homes/1k: 0.0269
+    FW Centres/1k: 0.0568
+    Prim. sch./1k: 0.0144
+    Mid. sch./1k: 0.0566
+    Handpumps/1k: 0.0362
+    Tap water/1k: 0.0144
+    Wells/1k: 0.031
+    Banking/1k: 0.0089
+    Power/1k: 0.0075
+    Mud road/1k: 0.012
+
+Panel 2010->2015:
+  Max standardized diff: 0.0786
+  By covariate:
+    Population: 0.0418
+    Female Share: 0.0134
+    SC Share: 0.0786
+    ST Share: 0.0189
+    Medical fac./1k: 0.0337
+    Mat. homes/1k: 0.0125
+    FW Centres/1k: 0.0234
+    Prim. sch./1k: 0.0502
+    Mid. sch./1k: 0.0097
+    Handpumps/1k: 0.0331
+    Tap water/1k: 0.0539
+    Wells/1k: 0.0279
+    Banking/1k: 0.0241
+    Power/1k: 0.0094
+    Mud road/1k: 0.0082
+
+Panel 2015->2020:
+  Max standardized diff: 0.0606
+  By covariate:
+    Population: 0.0068
+    Female Share: 0.0376
+    SC Share: 0.0186
+    ST Share: 0.0048
+    Medical fac./1k: 0.0387
+    Mat. homes/1k: 0.0026
+    FW Centres/1k: 0.0277
+    Prim. sch./1k: 0.051
+    Mid. sch./1k: 0.0053
+    Handpumps/1k: 0.0606
+    Tap water/1k: 0.0352
+    Wells/1k: 0.0366
+    Banking/1k: 0.0339
+    Power/1k: 0.0271
+    Mud road/1k: 0.0023
+
+RAJASTHAN MAX (all panels): 0.0786
+
+=== UTTAR PRADESH ===
+
+Panel 2005->2010:
+  Max standardized diff: 0.1299
+  By covariate:
+    Population: 0.0869
+    Female Share: 0.0819
+    SC Share: 0.1299
+    ST Share: 0.0103
+    Medical fac./1k: 0.0279
+    Mat. homes/1k: 0.005
+    FW Centres/1k: 0.0295
+    Prim. sch./1k: 0.0131
+    Mid. sch./1k: 0.0043
+    Handpumps/1k: 0.0323
+    Tap water/1k: 7e-04
+    Wells/1k: 0.0051
+    Banking/1k: 0.0264
+    Power/1k: 0.0273
+    Mud road/1k: 0.0345
+
+Panel 2010->2015:
+  Max standardized diff: 0.131
+  By covariate:
+    Population: 0.0166
+    Female Share: 0.0239
+    SC Share: 0.131
+    ST Share: 0.0334
+    Medical fac./1k: 0.0046
+    Mat. homes/1k: 0.0135
+    FW Centres/1k: 0.0087
+    Prim. sch./1k: 0.0019
+    Mid. sch./1k: 0.0127
+    Handpumps/1k: 0.0098
+    Tap water/1k: 0.0265
+    Wells/1k: 0.0091
+    Banking/1k: 0.0422
+    Power/1k: 0.0101
+    Mud road/1k: 0.0093
+
+Panel 2015->2021:
+  Max standardized diff: 0.4143
+  By covariate:
+    Population: 0.4143
+    Female Share: 0.0211
+    SC Share: 0.0589
+    ST Share: 0.0019
+    Medical fac./1k: 0.0624
+    Mat. homes/1k: 0.0482
+    FW Centres/1k: 0.0149
+    Prim. sch./1k: 0.1517
+    Mid. sch./1k: 0.0243
+    Handpumps/1k: 0.2182
+    Tap water/1k: 0.0586
+    Wells/1k: 0.1449
+    Banking/1k: 0.0604
+    Power/1k: 0.1561
+    Mud road/1k: 0.1858
+
+UP MAX (all panels): 0.4143
+
+=== OVERALL SUMMARY ===
+Maximum standardized difference (all states, all panels): 0.4143
+Claim in manuscript: 'fall below 0.12'
+Claim valid: NO - UPDATE MANUSCRIPT
