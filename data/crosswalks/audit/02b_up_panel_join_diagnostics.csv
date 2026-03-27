@@ -1,0 +1,14 @@
+panel,metric,value
+up_05_10,duplicate_key_2010_rows,0
+up_10_15,duplicate_key_2010_rows,0
+up_15_21,raw_rows_2015,59019
+up_15_21,raw_rows_2021_winners,49773
+up_15_21,duplicate_match_key_rows_2015_raw,49
+up_15_21,duplicate_match_key_rows_2021_raw,46
+up_15_21,rows_2015_after_dedupe_filter,58970
+up_15_21,rows_2021_after_dedupe_filter,49727
+up_15_21,dropped_rows_2015,49
+up_15_21,dropped_rows_2021,46
+up_15_21,inner_join_rows,41924
+up_15_21,unmatched_2015_after_dedupe,17046
+up_15_21,unmatched_2021_after_dedupe,7803

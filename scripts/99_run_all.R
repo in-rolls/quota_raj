@@ -99,7 +99,6 @@ log_msg("=== PHASE 3: LINK TO SHRUG ===")
 
 run_script("03a_raj_shrug_match.R")
 run_script("03b_up_shrug_match.R")
-run_script("03c_shrug_all_panels.R")
 
 # =============================================================================
 # Phase 4: Balance Tests
@@ -169,7 +168,7 @@ run_script("08b_raj_phone_survey.R")
 message("\n### PHASE 12: WEAVER REPLICATION ###")
 log_msg("=== PHASE 12: WEAVER REPLICATION ===")
 
-run_script("09a_weaver_replication.R")
+run_script("09_weaver_replication.R")
 
 # =============================================================================
 # Phase 13: Power Analysis

@@ -1089,6 +1089,9 @@ missing <- elex_blocks %>%
 if (nrow(missing) > 0) {
     message("\nWARNING: Missing blocks in crosswalk (", nrow(missing), "):")
     print(missing %>% arrange(district_name_eng_2010, block_name_eng_2010))
+    dir.create(here("data/crosswalks/audit"), showWarnings = FALSE, recursive = TRUE)
+    write_csv(missing, here("data/crosswalks/audit/01f_up_missing_blocks.csv"))
+    message("Saved: data/crosswalks/audit/01f_up_missing_blocks.csv")
 } else {
     message("\nCoverage check: 100% of election blocks mapped (excluding urban wards)")
 }

@@ -904,6 +904,9 @@ missing <- all_samitis %>%
 if (nrow(missing) > 0) {
     message("\nWARNING: Missing samitis in crosswalk (", nrow(missing), "):")
     print(missing %>% arrange(dist, samiti))
+    dir.create(here("data/crosswalks/audit"), showWarnings = FALSE, recursive = TRUE)
+    write_csv(missing, here("data/crosswalks/audit/01c_raj_missing_samitis.csv"))
+    message("Saved: data/crosswalks/audit/01c_raj_missing_samitis.csv")
 } else {
     message("\nCoverage check: 100% of election samitis mapped")
 }

@@ -14,7 +14,48 @@ source(here("scripts/00_utils.R"))
 
 message("=== Creating UP Panels ===")
 
+dir.create(here("data/crosswalks/audit"), showWarnings = FALSE, recursive = TRUE)
 diag_rows <- list()
+
+# =============================================================================
+# Helper: detect and filter key collisions where normalized triplets map to multiple keys
+# =============================================================================
+filter_key_collisions <- function(df, year_label) {
+    if (!"key_2010" %in% names(df)) return(df)
+
+    df <- df %>%
+        mutate(
+            .triplet_norm = paste(
+                normalize_string(district_name_eng_2010),
+                normalize_string(block_name_eng_2010),
+                normalize_string(gp_name_eng_2010),
+                sep = "_"
+            )
+        )
+
+    collision_triplets <- df %>%
+        filter(!is.na(key_2010)) %>%
+        distinct(.triplet_norm, key_2010) %>%
+        group_by(.triplet_norm) %>%
+        filter(n() > 1) %>%
+        summarize(
+            n_targets = n(),
+            keys = paste(unique(key_2010), collapse = "; "),
+            .groups = "drop"
+        )
+
+    if (nrow(collision_triplets) > 0) {
+        outfile <- here("data/crosswalks/audit", paste0("02b_up_", year_label, "_triplet_key_collisions.csv"))
+        write_csv(collision_triplets, outfile)
+
+        n_collisions <- df %>% filter(.triplet_norm %in% collision_triplets$.triplet_norm) %>% nrow()
+        message("  Key collisions: ", nrow(collision_triplets), " triplets, dropping ", n_collisions, " records")
+
+        df <- df %>% filter(!.triplet_norm %in% collision_triplets$.triplet_norm)
+    }
+
+    df %>% select(-.triplet_norm)
+}
 
 # ============================================================================
 # Helper function to recode UP panels
@@ -91,8 +132,8 @@ if ("key_2010" %in% names(up_05_10)) {
 }
 
 up_05_10 <- recode_up_panel(up_05_10, 2005, 2010)
+up_05_10 <- filter_key_collisions(up_05_10, "2005_2010")
 
-message("  After recode: ", nrow(up_05_10))
 message("  Final panel N: ", nrow(up_05_10))
 write_parquet(up_05_10, here("data/up/up_05_10.parquet"))
 
@@ -117,8 +158,8 @@ if ("key_2010" %in% names(up_10_15)) {
 }
 
 up_10_15 <- recode_up_panel(up_10_15, 2010, 2015)
+up_10_15 <- filter_key_collisions(up_10_15, "2010_2015")
 
-message("  After recode: ", nrow(up_10_15))
 message("  Final panel N: ", nrow(up_10_15))
 write_parquet(up_10_15, here("data/up/up_10_15.parquet"))
 
@@ -130,6 +171,22 @@ message("\n--- Creating 2015-2021 panel ---")
 up_2015 <- read_parquet(here("data/up/up_gp_sarpanch_2015_fixed_with_transliteration.parquet"))
 up_2021 <- read_parquet(here("data/up/up_gp_sarpanch_2021_fixed_with_transliteration.parquet"))
 message("  Input: 2015 raw =", nrow(up_2015), ", 2021 raw =", nrow(up_2021))
+
+# Audit: records with missing GP name
+missing_gp_2015 <- up_2015 %>% filter(is.na(gp_name) | gp_name == "")
+missing_gp_2021 <- up_2021 %>% filter(is.na(gp_name) | gp_name == "")
+if (nrow(missing_gp_2015) > 0 || nrow(missing_gp_2021) > 0) {
+    missing_gp_audit <- bind_rows(
+        missing_gp_2015 %>% mutate(year = 2015) %>% select(year, district_name, block_name, gp_name),
+        missing_gp_2021 %>% mutate(year = 2021) %>% select(year, district_name, block_name, gp_name)
+    )
+    write_csv(missing_gp_audit, here("data/crosswalks/audit/02b_up_missing_gp_name.csv"))
+    message("  Missing GP name: 2015=", nrow(missing_gp_2015), ", 2021=", nrow(missing_gp_2021))
+}
+
+up_2015 <- up_2015 %>% filter(!is.na(gp_name) & gp_name != "")
+up_2021 <- up_2021 %>% filter(!is.na(gp_name) & gp_name != "")
+message("  After filtering missing GP: 2015=", nrow(up_2015), ", 2021=", nrow(up_2021))
 
 up_2021 <- up_2021 %>% filter(result == 'विजेता')
 message("  2021 after winner filter: ", nrow(up_2021))
@@ -201,6 +258,9 @@ diag_rows[[length(diag_rows) + 1]] <- tibble(
 )
 
 up_15_21 <- recode_up_panel(up_15_21, 2015, 2021)
+
+up_15_21 <- up_15_21 %>%
+    mutate(match_key = make_match_key(district_name_eng_2015, block_name_eng_2015, gp_name_eng_2015))
 
 message("  Final panel N: ", nrow(up_15_21))
 write_parquet(up_15_21, here("data/up/up_15_21.parquet"))

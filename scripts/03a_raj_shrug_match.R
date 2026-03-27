@@ -236,6 +236,28 @@ if (nrow(tie_resolved) > 0) {
     message("Exported: data/crosswalks/audit/03a_raj_tie_resolved.csv")
 }
 
+numeric_mismatch <- fuzzy_df %>%
+    filter(match_confidence == "numeric_mismatch") %>%
+    left_join(
+        elex_gps %>% select(sl_no_2010, dist_name_new_2010, samiti_name_new_2010) %>% distinct(),
+        by = "sl_no_2010"
+    ) %>%
+    select(
+        district = dist_name_new_2010,
+        samiti = samiti_name_new_2010,
+        elex_gp = gp_new_2010,
+        lgd_gp = lgd_gp_name,
+        lgd_gp_code,
+        match_distance,
+        match_quality
+    )
+
+message("Numeric mismatch matches: ", nrow(numeric_mismatch))
+if (nrow(numeric_mismatch) > 0) {
+    write_csv(numeric_mismatch, here("data/crosswalks/audit/03a_raj_numeric_mismatch.csv"))
+    message("Exported: data/crosswalks/audit/03a_raj_numeric_mismatch.csv")
+}
+
 # ============================================================================
 # STEP 6: Combine matches
 # ============================================================================
@@ -256,6 +278,7 @@ all_matches <- bind_rows(
             match_confidence = "unique"
         ),
     fuzzy_df %>%
+        filter(!match_confidence %in% c("tie_resolved", "numeric_mismatch")) %>%
         left_join(
             elex_gps %>% select(sl_no_2010, lgd_block_code, lgd_block_name),
             by = "sl_no_2010"
@@ -440,19 +463,122 @@ if (nrow(unmatched_final) > 0) {
 message("Exported unmatched GPs for review.")
 
 # ============================================================================
-# STEP 11: Save output
+# STEP 11: Load SHRUG covariates and aggregate to LGD GP level
 # ============================================================================
 
-write_parquet(elex_shrug, here("data/raj/shrug_lgd_raj_elex_05_10_block.parquet"))
-message("\nSaved: data/raj/shrug_lgd_raj_elex_05_10_block.parquet")
+message("\n=== LOADING SHRUG COVARIATES ===")
+
+shrug_pca <- read_csv(here("data/shrug/shrug-pca01-csv/pc01_pca_clean_shrid.csv.zip"), show_col_types = FALSE)
+shrug_vd <- read_csv(here("data/shrug/shrug-vd01-csv/pc01_vd_clean_shrid.csv.zip"), show_col_types = FALSE)
+
+message("SHRUG PCA rows: ", nrow(shrug_pca))
+message("SHRUG VD rows: ", nrow(shrug_vd))
+
+shrug_lgd_full <- read_csv(here("data/shrug_gp_xwalk/data/shrug_LGD_matched.csv"), show_col_types = FALSE) %>%
+    filter(state_name == "rajasthan")
+
+sum_or_na <- function(x) {
+    if (all(is.na(x))) return(NA_real_)
+    sum(x, na.rm = TRUE)
+}
+
+shrug_covars <- shrug_lgd_full %>%
+    left_join(shrug_pca, by = "shrid2") %>%
+    left_join(shrug_vd, by = "shrid2") %>%
+    filter(!is.na(LGD_code)) %>%
+    group_by(LGD_code) %>%
+    summarize(
+        shrid2 = first(shrid2),
+        n_villages = n(),
+        across(starts_with("pc01_pca_"), sum_or_na),
+        across(starts_with("pc01_vd_"), sum_or_na),
+        .groups = "drop"
+    )
+
+message("SHRUG covariates aggregated to ", n_distinct(shrug_covars$LGD_code), " LGD GPs")
 
 # ============================================================================
-# STEP 12: Report by district
+# STEP 12: Build LGD mapping from 05-10 panel for propagation to other panels
 # ============================================================================
 
-message("\n=== MATCH RATE BY DISTRICT ===")
-by_dist <- elex_shrug %>%
-    group_by(dist_name_new_2010) %>%
+message("\n=== BUILDING LGD MAPPING FOR PANEL PROPAGATION ===")
+
+raj_mapping <- elex_shrug %>%
+    filter(!is.na(lgd_gp_code)) %>%
+    distinct(match_key = sl_no_2010, .keep_all = TRUE) %>%
+    select(
+        match_key,
+        lgd_gp_code,
+        lgd_gp_name,
+        lgd_block_code,
+        lgd_block_name,
+        lgd_district,
+        match_type,
+        match_quality,
+        match_distance,
+        match_confidence
+    )
+
+message("Unique GPs with LGD match: ", nrow(raj_mapping))
+
+# ============================================================================
+# STEP 13: Process ALL panels and add SHRUG covariates
+# ============================================================================
+
+message("\n=== PROCESSING ALL PANELS ===")
+
+process_panel <- function(panel_path, output_path) {
+    panel_name <- basename(panel_path)
+    message("\nProcessing: ", panel_name)
+
+    panel <- read_parquet(panel_path)
+    message("  Input rows: ", nrow(panel))
+
+    panel_with_lgd <- panel %>%
+        left_join(raj_mapping, by = "match_key")
+
+    panel_final <- panel_with_lgd %>%
+        left_join(
+            shrug_covars,
+            by = c("lgd_gp_code" = "LGD_code")
+        )
+
+    write_parquet(panel_final, output_path)
+
+    message("  Rows with LGD match: ", sum(!is.na(panel_final$lgd_gp_code)))
+    message("  Rows with SHRUG data: ", sum(!is.na(panel_final$shrid2)))
+    message("  Saved: ", output_path)
+
+    return(panel_final)
+}
+
+raj_05_10_final <- process_panel(
+    here("data/raj/raj_05_10.parquet"),
+    here("data/raj/shrug_gp_raj_05_10_block.parquet")
+)
+
+raj_10_15_final <- process_panel(
+    here("data/raj/raj_10_15.parquet"),
+    here("data/raj/shrug_gp_raj_10_15_block.parquet")
+)
+
+raj_15_20_final <- process_panel(
+    here("data/raj/raj_15_20.parquet"),
+    here("data/raj/shrug_gp_raj_15_20_block.parquet")
+)
+
+raj_05_20_final <- process_panel(
+    here("data/raj/raj_05_20.parquet"),
+    here("data/raj/shrug_gp_raj_05_20_block.parquet")
+)
+
+# ============================================================================
+# STEP 14: Report by district (using 05-10 panel)
+# ============================================================================
+
+message("\n=== MATCH RATE BY DISTRICT (05-10 panel) ===")
+by_dist <- raj_05_10_final %>%
+    group_by(district_std_2010) %>%
     summarize(
         total = n(),
         lgd_matched = sum(!is.na(lgd_gp_code)),
@@ -465,15 +591,34 @@ by_dist <- elex_shrug %>%
 print(by_dist)
 
 # ============================================================================
-# STEP 13: Verification summary
+# STEP 15: Verification summary
 # ============================================================================
 
 message("\n=== VERIFICATION SUMMARY ===")
 message("Urban entries excluded: ", nrow(urban_excluded))
-message("Total GPs: ", nrow(elex_shrug))
-message("Matched to LGD: ", sum(!is.na(elex_shrug$lgd_gp_code)))
-message("Match rate: ", round(100 * sum(!is.na(elex_shrug$lgd_gp_code)) / nrow(elex_shrug), 1), "%")
-message("Matched to SHRUG: ", sum(!is.na(elex_shrug$shrid2)))
-message("SHRUG match rate: ", round(100 * sum(!is.na(elex_shrug$shrid2)) / nrow(elex_shrug), 1), "%")
+
+message("\n05-10 Panel:")
+message("  Total GPs: ", nrow(raj_05_10_final))
+message("  Matched to LGD: ", sum(!is.na(raj_05_10_final$lgd_gp_code)))
+message("  Match rate: ", round(100 * sum(!is.na(raj_05_10_final$lgd_gp_code)) / nrow(raj_05_10_final), 1), "%")
+message("  Matched to SHRUG: ", sum(!is.na(raj_05_10_final$shrid2)))
+message("  SHRUG match rate: ", round(100 * sum(!is.na(raj_05_10_final$shrid2)) / nrow(raj_05_10_final), 1), "%")
+
+message("\n10-15 Panel:")
+message("  Total GPs: ", nrow(raj_10_15_final))
+message("  Matched to LGD: ", sum(!is.na(raj_10_15_final$lgd_gp_code)))
+message("  SHRUG match rate: ", round(100 * sum(!is.na(raj_10_15_final$shrid2)) / nrow(raj_10_15_final), 1), "%")
+
+message("\n15-20 Panel:")
+message("  Total GPs: ", nrow(raj_15_20_final))
+message("  Matched to LGD: ", sum(!is.na(raj_15_20_final$lgd_gp_code)))
+message("  SHRUG match rate: ", round(100 * sum(!is.na(raj_15_20_final$shrid2)) / nrow(raj_15_20_final), 1), "%")
+
+message("\n05-20 Panel:")
+message("  Total GPs: ", nrow(raj_05_20_final))
+message("  Matched to LGD: ", sum(!is.na(raj_05_20_final$lgd_gp_code)))
+message("  SHRUG match rate: ", round(100 * sum(!is.na(raj_05_20_final$shrid2)) / nrow(raj_05_20_final), 1), "%")
+
+message("\nSHRUG covariates included: ", sum(grepl("^pc01_", names(raj_05_10_final))), " variables")
 
 message("\n=== Done ===")

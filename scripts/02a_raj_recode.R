@@ -14,8 +14,48 @@ source(here("scripts/00_utils.R"))
 
 message("=== Creating Rajasthan Panels ===")
 
+dir.create(here("data/crosswalks/audit"), showWarnings = FALSE, recursive = TRUE)
 join_diag <- list()
 ambiguous_exports <- list()
+
+# =============================================================================
+# Helper: detect and filter key collisions where normalized triplets map to multiple keys
+# =============================================================================
+filter_key_collisions <- function(df, year_label, district_col, samiti_col, gp_col) {
+    df <- df %>%
+        mutate(
+            .triplet_norm = paste(
+                normalize_string(!!sym(district_col)),
+                normalize_string(!!sym(samiti_col)),
+                normalize_string(!!sym(gp_col)),
+                sep = "_"
+            )
+        )
+
+    collision_triplets <- df %>%
+        filter(!is.na(match_key)) %>%
+        distinct(.triplet_norm, match_key) %>%
+        group_by(.triplet_norm) %>%
+        filter(n() > 1) %>%
+        summarize(
+            n_targets = n(),
+            keys = paste(unique(match_key), collapse = "; "),
+            .groups = "drop"
+        )
+
+    n_collisions <- 0
+    if (nrow(collision_triplets) > 0) {
+        outfile <- here("data/crosswalks/audit", paste0("02a_raj_", year_label, "_triplet_key_collisions.csv"))
+        write_csv(collision_triplets, outfile)
+
+        n_collisions <- df %>% filter(.triplet_norm %in% collision_triplets$.triplet_norm) %>% nrow()
+        message("  Key collisions: ", nrow(collision_triplets), " triplets, dropping ", n_collisions, " records")
+
+        df <- df %>% filter(!.triplet_norm %in% collision_triplets$.triplet_norm)
+    }
+
+    df %>% select(-.triplet_norm)
+}
 
 # =============================================================================
 # Load Crosswalks
@@ -45,6 +85,25 @@ message("2005: ", nrow(src_2005), "rows")
 message("2010: ", nrow(src_2010), "rows")
 message("2015: ", nrow(src_2015), "rows")
 message("2020: ", nrow(src_2020), "rows")
+
+# Audit: records with missing GP name
+missing_gp_all <- bind_rows(
+    src_2005 %>% filter(is.na(gp_std) | gp_std == "") %>% mutate(year = 2005) %>% select(year, district_raw, samiti_raw, gp_std),
+    src_2010 %>% filter(is.na(gp_std) | gp_std == "") %>% mutate(year = 2010) %>% select(year, district_raw, samiti_raw, gp_std),
+    src_2015 %>% filter(is.na(gp_std) | gp_std == "") %>% mutate(year = 2015) %>% select(year, district_raw, samiti_raw, gp_std),
+    src_2020 %>% filter(is.na(gp_std) | gp_std == "") %>% mutate(year = 2020) %>% select(year, district_raw, samiti_raw, gp_std)
+)
+if (nrow(missing_gp_all) > 0) {
+    write_csv(missing_gp_all, here("data/crosswalks/audit/02a_raj_missing_gp_name.csv"))
+    message("Missing GP name: ", nrow(missing_gp_all), " records. See data/crosswalks/audit/02a_raj_missing_gp_name.csv")
+}
+
+src_2005 <- src_2005 %>% filter(!is.na(gp_std) & gp_std != "")
+src_2010 <- src_2010 %>% filter(!is.na(gp_std) & gp_std != "")
+src_2015 <- src_2015 %>% filter(!is.na(gp_std) & gp_std != "")
+src_2020 <- src_2020 %>% filter(!is.na(gp_std) & gp_std != "")
+message("After filtering missing GP: 2005=", nrow(src_2005), ", 2010=", nrow(src_2010),
+        ", 2015=", nrow(src_2015), ", 2020=", nrow(src_2020))
 
 # =============================================================================
 # Apply Crosswalks
@@ -182,7 +241,10 @@ raj_05_10 <- raj_05_10_raw %>%
 
 n_duplicates <- n_after_join - nrow(raj_05_10)
 message("  Duplicates dropped: ", n_duplicates)
+
+raj_05_10 <- filter_key_collisions(raj_05_10, "05_10", "district_std_2010", "samiti_std_2010", "gp_std_2010")
 message("  Final panel N: ", nrow(raj_05_10))
+
 write_parquet(raj_05_10, here("data/raj/raj_05_10.parquet"))
 
 join_diag[[length(join_diag) + 1]] <- tibble(
@@ -231,7 +293,10 @@ raj_10_15 <- raj_10_15_raw %>%
 
 n_duplicates <- n_after_join - nrow(raj_10_15)
 message("  Duplicates dropped: ", n_duplicates)
+
+raj_10_15 <- filter_key_collisions(raj_10_15, "10_15", "district_std_2015", "samiti_std_2015", "gp_std_2015")
 message("  Final panel N: ", nrow(raj_10_15))
+
 write_parquet(raj_10_15, here("data/raj/raj_10_15.parquet"))
 
 join_diag[[length(join_diag) + 1]] <- tibble(
@@ -282,10 +347,13 @@ raj_15_20 <- raj_15_20_raw %>%
 
 n_duplicates <- n_after_join - nrow(raj_15_20)
 message("  Duplicates dropped: ", n_duplicates)
+
+raj_15_20 <- filter_key_collisions(raj_15_20, "15_20", "district_std_2020", "samiti_std_2020", "gp_std_2020")
 message("  Final panel N: ", nrow(raj_15_20))
 n_winner_sex_matched <- sum(!is.na(raj_15_20$female_winner_2020))
 message("  Winner sex 2020 matched: ", n_winner_sex_matched, "/", nrow(raj_15_20),
     "(", round(100 * n_winner_sex_matched / nrow(raj_15_20), 1), "%)\n")
+
 write_parquet(raj_15_20, here("data/raj/raj_15_20.parquet"))
 
 join_diag[[length(join_diag) + 1]] <- tibble(
@@ -372,7 +440,6 @@ join_diag[[length(join_diag) + 1]] <- tibble(
 ambiguous_exports[[length(ambiguous_exports) + 1]] <- ambiguous_05_20 %>%
     mutate(panel = "raj_05_20")
 
-dir.create(here("data/crosswalks/audit"), showWarnings = FALSE, recursive = TRUE)
 join_diag_df <- bind_rows(join_diag)
 ambiguous_df <- bind_rows(ambiguous_exports)
 
