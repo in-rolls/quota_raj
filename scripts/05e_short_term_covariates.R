@@ -1,10 +1,11 @@
 # 05e_short_term_covariates.R
 # Short-term effects with SHRUG census covariates for ALL panels
-# Adds controls: log(population), SC share, literacy share
+# Adds controls: log(population), SC share, literacy share, female share, infrastructure index
 # Uses new SHRUG-matched data from block matching (02c_shrug_all_panels_block.R)
 # Output: tabs/short_term_shrug_covariates.tex
 
 library(dplyr)
+library(tidyr)
 library(arrow)
 library(fixest)
 library(here)
@@ -23,7 +24,11 @@ add_shrug_covariates <- function(df) {
         mutate(
             log_pop = log(pc01_pca_tot_p + 1),
             sc_share = ifelse(pc01_pca_tot_p > 0, pc01_pca_p_sc / pc01_pca_tot_p, NA),
-            lit_share = ifelse(pc01_pca_tot_p > 0, pc01_pca_p_lit / pc01_pca_tot_p, NA)
+            lit_share = ifelse(pc01_pca_tot_p > 0, pc01_pca_p_lit / pc01_pca_tot_p, NA),
+            female_share = ifelse(pc01_pca_tot_p > 0, pc01_pca_tot_f / pc01_pca_tot_p, NA),
+            infra_index = rowSums(across(c(pc01_vd_edu_fac, pc01_vd_medi_fac,
+                                           pc01_vd_power_supl, pc01_vd_bank_fac),
+                                         ~ replace_na(., 0)), na.rm = TRUE)
         )
 }
 
@@ -72,13 +77,13 @@ message("\n--- Rajasthan 2005 → 2010 ---")
 
 raj_05_10_open <- raj_shrug_05_10 %>%
     filter(treat_2010 == 0) %>%
-    filter(!is.na(log_pop) & !is.na(sc_share) & !is.na(lit_share))
+    filter(!is.na(log_pop) & !is.na(sc_share) & !is.na(lit_share) & !is.na(female_share))
 
 message("Open seats with covariates: ", nrow(raj_05_10_open))
 
-m_raj_0510_nofe <- feols(female_winner_2010 ~ treat_2005 + log_pop + sc_share + lit_share,
+m_raj_0510_nofe <- feols(female_winner_2010 ~ treat_2005 + log_pop + sc_share + lit_share + female_share + infra_index,
                          data = raj_05_10_open)
-m_raj_0510_fe <- feols(female_winner_2010 ~ treat_2005 + log_pop + sc_share + lit_share | dist_samiti_2010,
+m_raj_0510_fe <- feols(female_winner_2010 ~ treat_2005 + log_pop + sc_share + lit_share + female_share + infra_index | dist_samiti_2010,
                        data = raj_05_10_open)
 
 # =============================================================================
@@ -88,13 +93,13 @@ message("\n--- Rajasthan 2010 → 2015 ---")
 
 raj_10_15_open <- raj_shrug_10_15 %>%
     filter(treat_2015 == 0) %>%
-    filter(!is.na(log_pop) & !is.na(sc_share) & !is.na(lit_share))
+    filter(!is.na(log_pop) & !is.na(sc_share) & !is.na(lit_share) & !is.na(female_share))
 
 message("Open seats with covariates: ", nrow(raj_10_15_open))
 
-m_raj_1015_nofe <- feols(female_winner_2015 ~ treat_2010 + log_pop + sc_share + lit_share,
+m_raj_1015_nofe <- feols(female_winner_2015 ~ treat_2010 + log_pop + sc_share + lit_share + female_share + infra_index,
                          data = raj_10_15_open)
-m_raj_1015_fe <- feols(female_winner_2015 ~ treat_2010 + log_pop + sc_share + lit_share | dist_samiti_2015,
+m_raj_1015_fe <- feols(female_winner_2015 ~ treat_2010 + log_pop + sc_share + lit_share + female_share + infra_index | dist_samiti_2015,
                        data = raj_10_15_open)
 
 # =============================================================================
@@ -104,13 +109,13 @@ message("\n--- Rajasthan 2015 → 2020 ---")
 
 raj_15_20_open <- raj_shrug_15_20 %>%
     filter(treat_2020 == 0 & !is.na(female_winner_2020)) %>%
-    filter(!is.na(log_pop) & !is.na(sc_share) & !is.na(lit_share))
+    filter(!is.na(log_pop) & !is.na(sc_share) & !is.na(lit_share) & !is.na(female_share))
 
 message("Open seats with covariates: ", nrow(raj_15_20_open))
 
-m_raj_1520_nofe <- feols(female_winner_2020 ~ treat_2015 + log_pop + sc_share + lit_share,
+m_raj_1520_nofe <- feols(female_winner_2020 ~ treat_2015 + log_pop + sc_share + lit_share + female_share + infra_index,
                          data = raj_15_20_open)
-m_raj_1520_fe <- feols(female_winner_2020 ~ treat_2015 + log_pop + sc_share + lit_share | dist_samiti_2020,
+m_raj_1520_fe <- feols(female_winner_2020 ~ treat_2015 + log_pop + sc_share + lit_share + female_share + infra_index | dist_samiti_2020,
                        data = raj_15_20_open)
 
 # =============================================================================
@@ -120,13 +125,13 @@ message("\n--- UP 2005 → 2010 ---")
 
 up_05_10_open <- up_shrug_05_10 %>%
     filter(treat_2010 == 0) %>%
-    filter(!is.na(log_pop) & !is.na(sc_share) & !is.na(lit_share))
+    filter(!is.na(log_pop) & !is.na(sc_share) & !is.na(lit_share) & !is.na(female_share))
 
 message("Open seats with covariates: ", nrow(up_05_10_open))
 
-m_up_0510_nofe <- feols(female_winner_2010 ~ treat_2005 + log_pop + sc_share + lit_share,
+m_up_0510_nofe <- feols(female_winner_2010 ~ treat_2005 + log_pop + sc_share + lit_share + female_share + infra_index,
                         data = up_05_10_open)
-m_up_0510_fe <- feols(female_winner_2010 ~ treat_2005 + log_pop + sc_share + lit_share | dist_block_2010,
+m_up_0510_fe <- feols(female_winner_2010 ~ treat_2005 + log_pop + sc_share + lit_share + female_share + infra_index | dist_block_2010,
                       data = up_05_10_open)
 
 # =============================================================================
@@ -136,13 +141,13 @@ message("\n--- UP 2010 → 2015 ---")
 
 up_10_15_open <- up_shrug_10_15 %>%
     filter(treat_2015 == 0) %>%
-    filter(!is.na(log_pop) & !is.na(sc_share) & !is.na(lit_share))
+    filter(!is.na(log_pop) & !is.na(sc_share) & !is.na(lit_share) & !is.na(female_share))
 
 message("Open seats with covariates: ", nrow(up_10_15_open))
 
-m_up_1015_nofe <- feols(female_winner_2015 ~ treat_2010 + log_pop + sc_share + lit_share,
+m_up_1015_nofe <- feols(female_winner_2015 ~ treat_2010 + log_pop + sc_share + lit_share + female_share + infra_index,
                         data = up_10_15_open)
-m_up_1015_fe <- feols(female_winner_2015 ~ treat_2010 + log_pop + sc_share + lit_share | dist_block_2015,
+m_up_1015_fe <- feols(female_winner_2015 ~ treat_2010 + log_pop + sc_share + lit_share + female_share + infra_index | dist_block_2015,
                       data = up_10_15_open)
 
 # =============================================================================
@@ -152,13 +157,13 @@ message("\n--- UP 2015 → 2021 ---")
 
 up_15_21_open <- up_shrug_15_21 %>%
     filter(treat_2021 == 0) %>%
-    filter(!is.na(log_pop) & !is.na(sc_share) & !is.na(lit_share))
+    filter(!is.na(log_pop) & !is.na(sc_share) & !is.na(lit_share) & !is.na(female_share))
 
 message("Open seats with covariates: ", nrow(up_15_21_open))
 
-m_up_1521_nofe <- feols(female_winner_2021 ~ treat_2015 + log_pop + sc_share + lit_share,
+m_up_1521_nofe <- feols(female_winner_2021 ~ treat_2015 + log_pop + sc_share + lit_share + female_share + infra_index,
                         data = up_15_21_open)
-m_up_1521_fe <- feols(female_winner_2021 ~ treat_2015 + log_pop + sc_share + lit_share | dist_block_2021,
+m_up_1521_fe <- feols(female_winner_2021 ~ treat_2015 + log_pop + sc_share + lit_share + female_share + infra_index | dist_block_2021,
                       data = up_15_21_open)
 
 # =============================================================================
@@ -186,6 +191,8 @@ dict_shrug <- c(
     "log_pop" = "Log(Population)",
     "sc_share" = "SC Share",
     "lit_share" = "Literacy Share",
+    "female_share" = "Female Share",
+    "infra_index" = "Infrastructure Index",
     "(Intercept)" = "Intercept",
     "dist_samiti_2010" = "(District, Samiti)",
     "dist_samiti_2015" = "(District, Samiti)",
@@ -206,8 +213,8 @@ aer_etable(all_models,
     ),
     cmidrules = list(after = 1, rules = c("2-7", "8-13")),
     colsep = list(after = 6, space = "1em"),
-    keep = c("(Intercept)", "%treat_", "%log_pop", "%sc_share", "%lit_share"),
-    notes = "$^{***}$p$<$0.01; $^{**}$p$<$0.05; $^{*}$p$<$0.1. Outcome: woman elected in open seat. Census covariates from 2001 Census via SHRUG (LGD Block Panchayat matching). Population, SC share, and literacy computed at GP level. Sample restricted to GPs with SHRUG match and non-missing covariates. Heteroskedasticity-robust standard errors.",
+    keep = c("(Intercept)", "%treat_", "%log_pop", "%sc_share", "%lit_share", "%female_share", "%infra_index"),
+    notes = "$^{***}$p$<$0.01; $^{**}$p$<$0.05; $^{*}$p$<$0.1. Outcome: woman elected in open seat. Census covariates from 2001 Census via SHRUG (LGD Block Panchayat matching). Population, SC share, literacy, and female share computed at GP level. Infrastructure index is the sum of education, medical, power, and banking facilities. Sample restricted to GPs with SHRUG match and non-missing covariates. Heteroskedasticity-robust standard errors.",
     dict = dict_shrug)
 
 message("Created: tabs/short_term_shrug_covariates.tex")

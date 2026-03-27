@@ -20,23 +20,47 @@ source(here("scripts/00_utils.R"))
 message("=== Balance Tables with F-stats and Randomization Inference ===")
 
 # Balance variables (from Census 2001 Village Directory)
+# All variables normalized: shares for demographics, per-1000 for infrastructure
 balance_vars <- list(
     "pc01_vd_t_p" = "Population",
-    "pc01_vd_t_f" = "Female Pop.",
-    "pc01_vd_sc_f" = "SC (Female)",
-    "pc01_vd_st_f" = "ST (Female)",
-    "pc01_vd_medi_fac" = "Medical fac.",
-    "pc01_vd_m_home" = "Maternity homes",
-    "pc01_vd_mcw_cntr" = "FW Centres",
-    "pc01_vd_p_sch" = "Primary sch.",
-    "pc01_vd_m_sch" = "Middle sch.",
-    "pc01_vd_handpump" = "Handpumps",
-    "pc01_vd_tap" = "Tap water",
-    "pc01_vd_well" = "Wells",
-    "pc01_vd_bank_fac" = "Banking",
-    "pc01_vd_power_supl" = "Power supply",
-    "pc01_vd_app_mr" = "Mud road"
+    "female_share" = "Female Share",
+    "sc_share" = "SC Share",
+    "st_share" = "ST Share",
+    "medi_per1k" = "Medical fac./1k",
+    "m_home_per1k" = "Mat. homes/1k",
+    "mcw_per1k" = "FW Centres/1k",
+    "p_sch_per1k" = "Prim. sch./1k",
+    "m_sch_per1k" = "Mid. sch./1k",
+    "handpump_per1k" = "Handpumps/1k",
+    "tap_per1k" = "Tap water/1k",
+    "well_per1k" = "Wells/1k",
+    "bank_per1k" = "Banking/1k",
+    "power_per1k" = "Power/1k",
+    "road_per1k" = "Mud road/1k"
 )
+
+# =============================================================================
+# Helper: Normalize balance variables
+# =============================================================================
+
+normalize_balance_vars <- function(df) {
+    df %>% mutate(
+        female_share = pc01_vd_t_f / pc01_vd_t_p,
+        sc_share = pc01_vd_sc_f / pc01_vd_t_p,
+        st_share = pc01_vd_st_f / pc01_vd_t_p,
+        medi_per1k = pc01_vd_medi_fac / pc01_vd_t_p * 1000,
+        m_home_per1k = pc01_vd_m_home / pc01_vd_t_p * 1000,
+        mcw_per1k = pc01_vd_mcw_cntr / pc01_vd_t_p * 1000,
+        p_sch_per1k = pc01_vd_p_sch / pc01_vd_t_p * 1000,
+        m_sch_per1k = pc01_vd_m_sch / pc01_vd_t_p * 1000,
+        handpump_per1k = pc01_vd_handpump / pc01_vd_t_p * 1000,
+        tap_per1k = pc01_vd_tap / pc01_vd_t_p * 1000,
+        well_per1k = pc01_vd_well / pc01_vd_t_p * 1000,
+        bank_per1k = pc01_vd_bank_fac / pc01_vd_t_p * 1000,
+        power_per1k = pc01_vd_power_supl / pc01_vd_t_p * 1000,
+        road_per1k = pc01_vd_app_mr / pc01_vd_t_p * 1000
+    )
+}
 
 # =============================================================================
 # Helper: Compute F-statistic for joint significance
@@ -220,17 +244,20 @@ compute_balance_stats <- function(data, treat_y1, treat_y2, panel_name) {
 
 # Rajasthan 05-10
 message("\n=== Rajasthan 05-10 ===")
-raj_05_10 <- read_parquet(here("data/raj/shrug_gp_raj_05_10_block.parquet"))
+raj_05_10 <- read_parquet(here("data/raj/shrug_gp_raj_05_10_block.parquet")) %>%
+    normalize_balance_vars()
 raj_stats_0510 <- compute_balance_stats(raj_05_10, "treat_2005", "treat_2010", "Raj 05-10")
 
 # Rajasthan 10-15
 message("\n=== Rajasthan 10-15 ===")
-raj_10_15 <- read_parquet(here("data/raj/shrug_gp_raj_10_15_block.parquet"))
+raj_10_15 <- read_parquet(here("data/raj/shrug_gp_raj_10_15_block.parquet")) %>%
+    normalize_balance_vars()
 raj_stats_1015 <- compute_balance_stats(raj_10_15, "treat_2010", "treat_2015", "Raj 10-15")
 
 # Rajasthan 15-20
 message("\n=== Rajasthan 15-20 ===")
-raj_15_20 <- read_parquet(here("data/raj/shrug_gp_raj_15_20_block.parquet"))
+raj_15_20 <- read_parquet(here("data/raj/shrug_gp_raj_15_20_block.parquet")) %>%
+    normalize_balance_vars()
 raj_stats_1520 <- compute_balance_stats(raj_15_20, "treat_2015", "treat_2020", "Raj 15-20")
 
 # =============================================================================
@@ -301,15 +328,18 @@ if (!is.null(raj_stats_0510) && !is.null(raj_stats_1015) && !is.null(raj_stats_1
 # =============================================================================
 
 message("\n=== Uttar Pradesh 05-10 ===")
-up_05_10 <- read_parquet(here("data/up/shrug_gp_up_05_10_block.parquet"))
+up_05_10 <- read_parquet(here("data/up/shrug_gp_up_05_10_block.parquet")) %>%
+    normalize_balance_vars()
 up_stats_0510 <- compute_balance_stats(up_05_10, "treat_2005", "treat_2010", "UP 05-10")
 
 message("\n=== Uttar Pradesh 10-15 ===")
-up_10_15 <- read_parquet(here("data/up/shrug_gp_up_10_15_block.parquet"))
+up_10_15 <- read_parquet(here("data/up/shrug_gp_up_10_15_block.parquet")) %>%
+    normalize_balance_vars()
 up_stats_1015 <- compute_balance_stats(up_10_15, "treat_2010", "treat_2015", "UP 10-15")
 
 message("\n=== Uttar Pradesh 15-21 ===")
-up_15_21 <- read_parquet(here("data/up/shrug_gp_up_15_21_block.parquet"))
+up_15_21 <- read_parquet(here("data/up/shrug_gp_up_15_21_block.parquet")) %>%
+    normalize_balance_vars()
 up_stats_1521 <- compute_balance_stats(up_15_21, "treat_2015", "treat_2021", "UP 15-21")
 
 # Combined UP Balance Table
