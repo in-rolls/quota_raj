@@ -1,1656 +1,355 @@
-district,samiti,elex_gp,lgd_gp,lgd_gp_code,match_distance,match_quality,sl_no_2010
-AJMER,ARAIN,arai,Arain,33589,0.06666666666666678,strict,ajmer_arain_arai
-AJMER,ARAIN,lallai,Arain,33589,0.3,loose,ajmer_arain_lallai
-AJMER,ARAIN,kaseer,Kasheer,33604,0.04761904761904765,strict,ajmer_arain_kaseer
-AJMER,ARAIN,kheeriya,Kasheer,33604,0.22023809523809523,loose,ajmer_arain_kheeriya
-AJMER,ARAIN,manoharpura,Manoharpura,33610,0,exact,ajmer_arain_manoharpura
-AJMER,ARAIN,harpura,Manoharpura,33610,0.28787878787878796,loose,ajmer_arain_harpura
-AJMER,ARAIN,sandoliya,Sandoliya,33612,0,exact,ajmer_arain_sandoliya
-AJMER,ARAIN,sanpla,Sandoliya,33612,0.20370370370370378,loose,ajmer_arain_sanpla
-AJMER,ARAIN,hingoniya,Sandoliya,33612,0.29629629629629634,loose,ajmer_arain_hingoniya
-AJMER,ARAIN,sironj,Siroonj,33614,0.04761904761904765,strict,ajmer_arain_sironj
-AJMER,ARAIN,soonpa,Siroonj,33614,0.253968253968254,loose,ajmer_arain_soonpa
-AJMER,BHINAY,badgaon,Bargaon (Surkhand),33618,0.255952380952381,loose,ajmer_bhinay_badgaon
-AJMER,BHINAY,bhagwantpura,Bargaon (Surkhand),33618,0.27777777777777785,loose,ajmer_bhinay_bhagwantpura
-AJMER,BHINAY,barol,Barli,33619,0.13333333333333336,strict,ajmer_bhinay_barol
-AJMER,BHINAY,dabrela,Barli,33619,0.29285714285714287,loose,ajmer_bhinay_dabrela
-AJMER,BHINAY,bhinay,Bhinay,33622,0,exact,ajmer_bhinay_bhinay
-AJMER,BHINAY,kebaniya,Bhinay,33622,0.24722222222222212,loose,ajmer_bhinay_kebaniya
-AJMER,BHINAY,nagola,Nagola,33639,0,exact,ajmer_bhinay_nagola
-AJMER,BHINAY,goyala,Nagola,33639,0.21111111111111114,loose,ajmer_bhinay_goyala
-AJMER,BHINAY,satolav,Nagola,33639,0.253968253968254,loose,ajmer_bhinay_satolav
-AJMER,BHINAY,padliya,Padaliya,33641,0.13690476190476192,strict,ajmer_bhinay_padliya
-AJMER,BHINAY,shokaliya,Padaliya,33641,0.27314814814814825,loose,ajmer_bhinay_shokaliya
+district,samiti,elex_gp,lgd_gp,lgd_gp_code,match_distance,match_type,sl_no_2010
 AJMER,JAWAJA,dewata,Dewata,33662,0,exact,ajmer_jawaja_dewata
-AJMER,JAWAJA,delwara,Dewata,33662,0.1507936507936509,strict,ajmer_jawaja_delwara
-AJMER,JAWAJA,naikalan,Nai Kalan,33673,0.037037037037037104,strict,ajmer_jawaja_naikalan
-AJMER,JAWAJA,khedakalan,Nai Kalan,33673,0.3,loose,ajmer_jawaja_khedakalan
-AJMER,JAWAJA,nundri maldev,Noondri Maldeo,33675,0.12271062271062277,strict,ajmer_jawaja_nundri maldev
-AJMER,JAWAJA,nundrimedratan,Noondri Maldeo,33675,0.27513227513227506,loose,ajmer_jawaja_nundrimedratan
-AJMER,KEKRI,devgaon,Deogaon,33694,0.09523809523809525,strict,ajmer_kekri_devgaon
-AJMER,KEKRI,gulgaon,Deogaon,33694,0.28571428571428575,loose,ajmer_kekri_gulgaon
-AJMER,KEKRI,kalera krishna gopal,Kalera Krishna Gopal,33702,0,exact,ajmer_kekri_kalera krishna gopal
-AJMER,KEKRI,kalera kanwarji,Kalera Krishna Gopal,33702,0.22521367521367536,loose,ajmer_kekri_kalera kanwarji
-AJMER,KEKRI,khawas,Khawas,33704,0,exact,ajmer_kekri_khawas
-AJMER,KEKRI,chitiwas,Khawas,33704,0.27777777777777785,loose,ajmer_kekri_chitiwas
-AJMER,KEKRI,mewdakalan,Meoda Kalan,33708,0.09393939393939396,strict,ajmer_kekri_mewdakalan
-AJMER,KEKRI,mehroonkalan,Meoda Kalan,33708,0.2436868686868687,loose,ajmer_kekri_mehroonkalan
+AJMER,JAWAJA,delwara,Dewata,33662,0.1507936507936509,fuzzy,ajmer_jawaja_delwara
 AJMER,KEKRI,salari,Salari,33714,0,exact,ajmer_kekri_salari
-AJMER,KEKRI,sawar,Salari,33714,0.17777777777777778,strict,ajmer_kekri_sawar
-AJMER,PISANGAN,bhagwanpura,Bhagwanpura,33782,0,exact,ajmer_pisangan_bhagwanpura
-AJMER,PISANGAN,bhawanikhera,Bhagwanpura,33782,0.20202020202020204,loose,ajmer_pisangan_bhawanikhera
-AJMER,PISANGAN,ganahera,Bhagwanpura,33782,0.23430735930735944,loose,ajmer_pisangan_ganahera
-AJMER,PISANGAN,bhatsuri,Bhatsoori,33785,0.11574074074074082,strict,ajmer_pisangan_bhatsuri
-AJMER,PISANGAN,baghsuri,Bhatsoori,33785,0.25000000000000006,loose,ajmer_pisangan_baghsuri
-AJMER,PISANGAN,bhatiyani,Bhatsoori,33785,0.29629629629629634,loose,ajmer_pisangan_bhatiyani
-AJMER,PISANGAN,dantada,Dantra,33790,0.1507936507936509,strict,ajmer_pisangan_dantada
-AJMER,PISANGAN,dumara,Dantra,33790,0.22222222222222238,loose,ajmer_pisangan_dumara
-AJMER,PISANGAN,bhanwta,Dantra,33790,0.253968253968254,loose,ajmer_pisangan_bhanwta
-AJMER,PISANGAN,nyara,Dantra,33790,0.2611111111111111,loose,ajmer_pisangan_nyara
-AJMER,PISANGAN,nagelav,Nagelao,33812,0.09523809523809525,strict,ajmer_pisangan_nagelav
-AJMER,PISANGAN,nandla,Nagelao,33812,0.253968253968254,loose,ajmer_pisangan_nandla
-AJMER,SRINAGAR,narwar,Nyara,33815,0.17777777777777778,strict,ajmer_srinagar_narwar
-AJMER,SRINAGAR,untada,Nyara,33815,0.3,loose,ajmer_srinagar_untada
-AJMER,PISANGAN,pagara,Pagara,33816,0,exact,ajmer_pisangan_pagara
-AJMER,PISANGAN,rajgarh,Pagara,33816,0.253968253968254,loose,ajmer_pisangan_rajgarh
-AJMER,PISANGAN,devnagar,Pagara,33816,0.27777777777777785,loose,ajmer_pisangan_devnagar
-AJMER,SRINAGAR,kanpura,Kanpura,33843,0,exact,ajmer_srinagar_kanpura
-AJMER,SRINAGAR,kayampura,Kanpura,33843,0.26984126984126994,loose,ajmer_srinagar_kayampura
-AJMER,SRINAGAR,tilana,Tilana,33862,0,exact,ajmer_srinagar_tilana
-AJMER,SRINAGAR,danta,Tilana,33862,0.3,loose,ajmer_srinagar_danta
+AJMER,KEKRI,sawar,Salari,33714,0.17777777777777778,fuzzy,ajmer_kekri_sawar
 ALWAR,BANSUR,shyampura,Shyampura,33898,0,exact,alwar_bansur_shyampura
-ALWAR,BANSUR,gyanpura,Shyampura,33898,0.19444444444444453,strict,alwar_bansur_gyanpura
-ALWAR,BEHROR,budhwal,Boorhwal,33903,0.22023809523809523,loose,alwar_behror_budhwal
-ALWAR,BEHROR,riwali,Boorhwal,33903,0.27777777777777785,loose,alwar_behror_riwali
-ALWAR,BEHROR,gandala,Gandala,33906,0,exact,alwar_behror_gandala
-ALWAR,BEHROR,manchal,Gandala,33906,0.28571428571428575,loose,alwar_behror_manchal
+ALWAR,BANSUR,gyanpura,Shyampura,33898,0.19444444444444453,fuzzy,alwar_bansur_gyanpura
 ALWAR,BEHROR,karoda,Karoda,33915,0,exact,alwar_behror_karoda
-ALWAR,BEHROR,barod,Karoda,33915,0.17777777777777778,strict,alwar_behror_barod
-ALWAR,BEHROR,kakardopa,Karoda,33915,0.19444444444444453,strict,alwar_behror_kakardopa
-ALWAR,BEHROR,mohammedpur,Mohammadpur,33921,0.06060606060606061,strict,alwar_behror_mohammedpur
-ALWAR,BEHROR,hamidpur,Mohammadpur,33921,0.23430735930735944,loose,alwar_behror_hamidpur
-ALWAR,KATHUMAR,sahari,Sahari,33958,0,exact,alwar_kathumar_sahari
-ALWAR,KATHUMAR,kathumar,Sahari,33958,0.27777777777777785,loose,alwar_kathumar_kathumar
+ALWAR,BEHROR,barod,Karoda,33915,0.17777777777777778,fuzzy,alwar_behror_barod
+ALWAR,BEHROR,kakardopa,Karoda,33915,0.19444444444444453,fuzzy,alwar_behror_kakardopa
 ALWAR,KATHUMAR,sonkh,Sonkh,33961,0,exact,alwar_kathumar_sonkh
-ALWAR,KATHUMAR,sonkher,Sonkh,33961,0.09523809523809525,strict,alwar_kathumar_sonkher
-ALWAR,KISHANGARH BAS,bagherikalan,Bagheri Kalan,33969,0.025641025641025605,strict,alwar_kishangarh bas_bagherikalan
-ALWAR,KISHANGARH BAS,raibka,Bagheri Kalan,33969,0.26282051282051283,loose,alwar_kishangarh bas_raibka
-ALWAR,KISHANGARH BAS,khanpurmewan,Khanpur Mewan,33982,0.025641025641025605,strict,alwar_kishangarh bas_khanpurmewan
-ALWAR,KISHANGARH BAS,patanmewan,Khanpur Mewan,33982,0.2573717948717948,loose,alwar_kishangarh bas_patanmewan
-ALWAR,KISHANGARH BAS,langadbas,Langarwas,33986,0.14814814814814825,strict,alwar_kishangarh bas_langadbas
-ALWAR,KISHANGARH BAS,kishangarhbas,Langarwas,33986,0.22792022792022804,loose,alwar_kishangarh bas_kishangarhbas
-ALWAR,KISHANGARH BAS,mehermpur,Mahrampur,33989,0.14814814814814825,strict,alwar_kishangarh bas_mehermpur
-ALWAR,KISHANGARH BAS,bahaderpur,Mahrampur,33989,0.2216931216931217,loose,alwar_kishangarh bas_bahaderpur
-ALWAR,LAXMANGARH,badka,Badka,34022,0,exact,alwar_laxmangarh_badka
-ALWAR,LAXMANGARH,badodamew,Badka,34022,0.2518518518518519,loose,alwar_laxmangarh_badodamew
-ALWAR,LAXMANGARH,bhesadawat,Badka,34022,0.26666666666666666,loose,alwar_laxmangarh_bhesadawat
-ALWAR,LAXMANGARH,harsana,Harsana,34039,0,exact,alwar_laxmangarh_harsana
-ALWAR,LAXMANGARH,nayana,Harsana,34039,0.253968253968254,loose,alwar_laxmangarh_nayana
-ALWAR,LAXMANGARH,hasanpur,Hasanpur,34040,0,exact,alwar_laxmangarh_hasanpur
-ALWAR,LAXMANGARH,indpur,Hasanpur,34040,0.27777777777777785,loose,alwar_laxmangarh_indpur
-ALWAR,LAXMANGARH,javali,Jawli,34042,0.17777777777777778,strict,alwar_laxmangarh_javali
-ALWAR,LAXMANGARH,divali,Jawli,34042,0.3,loose,alwar_laxmangarh_divali
-ALWAR,LAXMANGARH,khedamangalsingh,Khera Mangal Singh,34045,0.0763888888888889,strict,alwar_laxmangarh_khedamangalsingh
-ALWAR,LAXMANGARH,rambas,Khera Mangal Singh,34045,0.29629629629629634,loose,alwar_laxmangarh_rambas
+ALWAR,KATHUMAR,sonkher,Sonkh,33961,0.09523809523809525,fuzzy,alwar_kathumar_sonkher
 ALWAR,LAXMANGARH,khudiyana,Khudiyana,34047,0,exact,alwar_laxmangarh_khudiyana
-ALWAR,LAXMANGARH,butiyana,Khudiyana,34047,0.19444444444444453,strict,alwar_laxmangarh_butiyana
-ALWAR,LAXMANGARH,todanagar,Todanagar,34063,0,exact,alwar_laxmangarh_todanagar
-ALWAR,LAXMANGARH,laxmangarh,Todanagar,34063,0.3,loose,alwar_laxmangarh_laxmangarh
-ALWAR,LAXMANGARH,nijamnagar,Todanagar,34063,0.3,loose,alwar_laxmangarh_nijamnagar
-ALWAR,MANDAWAR,behroj,Behroj,34069,0,exact,alwar_mandawar_behroj
-ALWAR,MANDAWAR,jatbehrod,Behroj,34069,0.20370370370370378,loose,alwar_mandawar_jatbehrod
-ALWAR,MANDAWAR,mundanbadakalan,Mundanwara Kalan,34087,0.10694444444444448,strict,alwar_mandawar_mundanbadakalan
-ALWAR,MANDAWAR,mundawar,Mundanwara Kalan,34087,0.1666666666666667,strict,alwar_mandawar_mundawar
-ALWAR,NEEMRANA,aklimpur,Akleempura,34104,0.14166666666666666,strict,alwar_neemrana_aklimpur
-ALWAR,NEEMRANA,neemrana,Akleempura,34104,0.2916666666666667,loose,alwar_neemrana_neemrana
-ALWAR,NEEMRANA,phlodpur,Fauladpur,34110,0.27314814814814825,loose,alwar_neemrana_phlodpur
-ALWAR,NEEMRANA,daulatsinghpura,Fauladpur,34110,0.29675925925925933,loose,alwar_neemrana_daulatsinghpura
+ALWAR,LAXMANGARH,butiyana,Khudiyana,34047,0.19444444444444453,fuzzy,alwar_laxmangarh_butiyana
+ALWAR,MANDAWAR,mundanbadakalan,Mundanwara Kalan,34087,0.10694444444444448,fuzzy,alwar_mandawar_mundanbadakalan
+ALWAR,MANDAWAR,mundawar,Mundanwara Kalan,34087,0.1666666666666667,fuzzy,alwar_mandawar_mundawar
 ALWAR,NEEMRANA,partapur,Partapur,34129,0,exact,alwar_neemrana_partapur
-ALWAR,NEEMRANA,pratapsinghpura,Partapur,34129,0.1972222222222223,strict,alwar_neemrana_pratapsinghpura
-ALWAR,RAMGARH,chouma,Chauma,34174,0.11111111111111106,strict,alwar_ramgarh_chouma
-ALWAR,RAMGARH,chidawa,Chauma,34174,0.253968253968254,loose,alwar_ramgarh_chidawa
-ALWAR,RAMGARH,hajipur,Hajipur,34181,0,exact,alwar_ramgarh_hajipur
-ALWAR,RAMGARH,bhajit,Hajipur,34181,0.253968253968254,loose,alwar_ramgarh_bhajit
-ALWAR,RAMGARH,rasgan,Rasgan,34200,0,exact,alwar_ramgarh_rasgan
-ALWAR,RAMGARH,ramgarh,Rasgan,34200,0.253968253968254,loose,alwar_ramgarh_ramgarh
-ALWAR,RENI,bhuda,Bhooda,34209,0.17777777777777778,strict,alwar_reni_bhuda
-ALWAR,RENI,behadkokla,Bhooda,34209,0.2888888888888888,loose,alwar_reni_behadkokla
+ALWAR,NEEMRANA,pratapsinghpura,Partapur,34129,0.1972222222222223,fuzzy,alwar_neemrana_pratapsinghpura
 ALWAR,THANAGAZI,ajabgarh,Ajabgarh,34231,0,exact,alwar_thanagazi_ajabgarh
-ALWAR,THANAGAZI,aagar,Ajabgarh,34231,0.12500000000000006,strict,alwar_thanagazi_aagar
-ALWAR,THANAGAZI,angari,Angari,34233,0,exact,alwar_thanagazi_angari
-ALWAR,THANAGAZI,thanagaji,Angari,34233,0.2703703703703703,loose,alwar_thanagazi_thanagaji
-ALWAR,THANAGAZI,dwarapur,Dwarapur,34240,0,exact,alwar_thanagazi_dwarapur
-ALWAR,THANAGAZI,narayanpur,Dwarapur,34240,0.21666666666666667,loose,alwar_thanagazi_narayanpur
-ALWAR,UMREN,aklarpur,Akbarpur,34298,0.08333333333333338,strict,alwar_umren_aklarpur
-ALWAR,UMREN,mohabbatpur,Akbarpur,34298,0.23484848484848492,loose,alwar_umren_mohabbatpur
-ALWAR,UMREN,bakthpura,Bakhtpura,34300,0.037037037037037104,strict,alwar_umren_bakthpura
-ALWAR,UMREN,prathvipura,Bakhtpura,34300,0.242905242905243,loose,alwar_umren_prathvipura
-ALWAR,UMREN,berkhera,Bakhtpura,34300,0.27314814814814825,loose,alwar_umren_berkhera
-ALWAR,UMREN,madhogarh,Bhoogar,34306,0.24338624338624346,loose,alwar_umren_madhogarh
-ALWAR,UMREN,bhugour,Bhoogar,34306,0.2571428571428572,loose,alwar_umren_bhugour
+ALWAR,THANAGAZI,aagar,Ajabgarh,34231,0.12500000000000006,fuzzy,alwar_thanagazi_aagar
 ALWAR,UMREN,chandoli,Chandoli,34307,0,exact,alwar_umren_chandoli
-ALWAR,UMREN,bhandodi,Chandoli,34307,0.1666666666666667,strict,alwar_umren_bhandodi
-ALWAR,UMREN,pala,Palkhari,34326,0.1666666666666667,strict,alwar_umren_pala
-ALWAR,UMREN,palkhedi,Palkhari,34326,0.1666666666666667,strict,alwar_umren_palkhedi
-ALWAR,UMREN,diwakari,Palkhari,34326,0.25000000000000006,loose,alwar_umren_diwakari
+ALWAR,UMREN,bhandodi,Chandoli,34307,0.1666666666666667,fuzzy,alwar_umren_bhandodi
+ALWAR,UMREN,pala,Palkhari,34326,0.1666666666666667,fuzzy,alwar_umren_pala
+ALWAR,UMREN,palkhedi,Palkhari,34326,0.1666666666666667,fuzzy,alwar_umren_palkhedi
 ALWAR,UMREN,shahpur,Shahpur,34331,0,exact,alwar_umren_shahpur
-ALWAR,UMREN,salpur,Shahpur,34331,0.1507936507936509,strict,alwar_umren_salpur
-BANSWARA,ANANDPURI,badliya,Barliya,34338,0.09523809523809525,strict,banswara_anandpuri_badliya
-BANSWARA,ANANDPURI,berjdiya,Barliya,34338,0.22023809523809523,loose,banswara_anandpuri_berjdiya
-BANSWARA,ANANDPURI,pat navadhra,Mena Padhar,34349,0.23653198653198648,loose,banswara_anandpuri_pat navadhra
-BANSWARA,ANANDPURI,maina padar,Mena Padhar,34349,0.2508417508417509,loose,banswara_anandpuri_maina padar
-BANSWARA,BAGIDORA,klinjra,Kalinjara,34375,0.12169312169312176,strict,banswara_bagidora_klinjra
-BANSWARA,BAGIDORA,lankai,Kalinjara,34375,0.25000000000000006,loose,banswara_bagidora_lankai
-BANSWARA,BAGIDORA,kuta machhar,Khoonta Machar,34379,0.1507936507936509,strict,banswara_bagidora_kuta machhar
-BANSWARA,BAGIDORA,khunta galiya,Khoonta Machar,34379,0.27106227106227104,loose,banswara_bagidora_khunta galiya
-BANSWARA,BAGIDORA,nagavada,Nagawara,34384,0.1666666666666667,strict,banswara_bagidora_nagavada
-BANSWARA,BAGIDORA,gaminya hamira,Nagawara,34384,0.255952380952381,loose,banswara_bagidora_gaminya hamira
-BANSWARA,BAGIDORA,suvala,Suwala,34398,0.11111111111111106,strict,banswara_bagidora_suvala
-BANSWARA,BAGIDORA,saliya,Suwala,34398,0.22222222222222238,loose,banswara_bagidora_saliya
-BANSWARA,BAGIDORA,sallopat,Suwala,34398,0.27777777777777785,loose,banswara_bagidora_sallopat
-BANSWARA,GARHI,bhimpur,Bhimpur,34465,0,exact,banswara_garhi_bhimpur
-BANSWARA,GARHI,timurva,Bhimpur,34465,0.28571428571428575,loose,banswara_garhi_timurva
-BANSWARA,GARHI,choupasang,Chupasag,34469,0.06666666666666678,strict,banswara_garhi_choupasang
-BANSWARA,GARHI,jhadsa,Chupasag,34469,0.27777777777777785,loose,banswara_garhi_jhadsa
-BANSWARA,GARHI,daduka,Dadooka,34470,0.1507936507936509,strict,banswara_garhi_daduka
-BANSWARA,GARHI,odvada,Dadooka,34470,0.253968253968254,loose,banswara_garhi_odvada
+ALWAR,UMREN,salpur,Shahpur,34331,0.1507936507936509,fuzzy,alwar_umren_salpur
 BANSWARA,GARHI,karanpur,Karanpur,34476,0,exact,banswara_garhi_karanpur
-BANSWARA,GARHI,saranpur,Karanpur,34476,0.08333333333333338,strict,banswara_garhi_saranpur
-BANSWARA,GARHI,partapur,Karanpur,34476,0.1666666666666667,strict,banswara_garhi_partapur
-BANSWARA,GARHI,madelva,Madalda,34485,0.19047619047619044,strict,banswara_garhi_madelva
-BANSWARA,GARHI,malana,Madalda,34485,0.21746031746031746,loose,banswara_garhi_malana
-BANSWARA,GARHI,paloda,Paloda,34493,0,exact,banswara_garhi_paloda
-BANSWARA,GARHI,biloda,Paloda,34493,0.22222222222222238,loose,banswara_garhi_biloda
-BANSWARA,GARHI,paraheda,Parheda,34495,0.13690476190476192,strict,banswara_garhi_paraheda
-BANSWARA,GARHI,padedi,Parheda,34495,0.253968253968254,loose,banswara_garhi_padedi
-BANSWARA,GARHI,arthuna,Parheda,34495,0.28571428571428575,loose,banswara_garhi_arthuna
-BANSWARA,GARHI,rohida,Rohida,34498,0,exact,banswara_garhi_rohida
-BANSWARA,GARHI,garhi,Rohida,34498,0.3,loose,banswara_garhi_garhi
+BANSWARA,GARHI,saranpur,Karanpur,34476,0.08333333333333338,fuzzy,banswara_garhi_saranpur
+BANSWARA,GARHI,partapur,Karanpur,34476,0.1666666666666667,fuzzy,banswara_garhi_partapur
 BANSWARA,GARHI,vajvana,Vajvana,34508,0,exact,banswara_garhi_vajvana
-BANSWARA,GARHI,anjana,Vajvana,34508,0.1507936507936509,strict,banswara_garhi_anjana
-BANSWARA,GHATOL,badana,Badana,34512,0,exact,banswara_ghatol_badana
-BANSWARA,GHATOL,badi padal,Badana,34512,0.2222222222222222,loose,banswara_ghatol_badi padal
-BANSWARA,GHATOL,baman pada,Badana,34512,0.2222222222222222,loose,banswara_ghatol_baman pada
-BANSWARA,GHATOL,bansdi kheda,Bansli Kheda,34515,0.055555555555555705,strict,banswara_ghatol_bansdi kheda
-BANSWARA,GHATOL,bassi ada,Bansli Kheda,34515,0.2605820105820106,loose,banswara_ghatol_bassi ada
-BANSWARA,GHATOL,borpi khanta,Borpikhanta,34524,0.02777777777777788,strict,banswara_ghatol_borpi khanta
-BANSWARA,GHATOL,borda,Borpikhanta,34524,0.27878787878787886,loose,banswara_ghatol_borda
+BANSWARA,GARHI,anjana,Vajvana,34508,0.1507936507936509,fuzzy,banswara_garhi_anjana
 BANSWARA,GHATOL,devda,Devda,34530,0,exact,banswara_ghatol_devda
-BANSWARA,GHATOL,delvada,Devda,34530,0.16190476190476197,strict,banswara_ghatol_delvada
-BANSWARA,GHATOL,duduka,Devda,34530,0.3,loose,banswara_ghatol_duduka
-BANSWARA,GHATOL,dungriya,Dungariya,34533,0.12037037037037043,strict,banswara_ghatol_dungriya
-BANSWARA,GHATOL,mungana,Dungariya,34533,0.24338624338624346,loose,banswara_ghatol_mungana
-BANSWARA,GHATOL,padala,Padla,34554,0.12222222222222213,strict,banswara_ghatol_padala
-BANSWARA,GHATOL,badliya,Padla,34554,0.20952380952380956,loose,banswara_ghatol_badliya
-BANSWARA,GHATOL,sanrodiya,Sarondiya,34559,0.05555555555555556,strict,banswara_ghatol_sanrodiya
-BANSWARA,GHATOL,ganoda,Sarondiya,34559,0.2703703703703703,loose,banswara_ghatol_ganoda
-BANSWARA,KUSHALGARH,bhagatpura,Bhagatpura,34568,0,exact,banswara_kushalgarh_bhagatpura
-BANSWARA,KUSHALGARH,mohakampura,Bhagatpura,34568,0.22121212121212125,loose,banswara_kushalgarh_mohakampura
-BANSWARA,KUSHALGARH,mundri,Mundari,34582,0.04761904761904765,strict,banswara_kushalgarh_mundri
-BANSWARA,KUSHALGARH,mahuda,Mundari,34582,0.253968253968254,loose,banswara_kushalgarh_mahuda
-BARAN,ANTA,baldara,Baldara,34660,0,exact,baran_anta_baldara
-BARAN,ANTA,bhatwara,Baldara,34660,0.22023809523809523,loose,baran_anta_bhatwara
-BARAN,ANTA,jalodatejaji,Baldara,34660,0.2896825396825397,loose,baran_anta_jalodatejaji
-BARAN,ANTA,bamuliya kalan,Bamoolya Kalan,34668,0.09523809523809525,strict,baran_anta_bamuliya kalan
-BARAN,ANTA,bamori kalan,Bamoolya Kalan,34668,0.21746031746031746,loose,baran_anta_bamori kalan
-BARAN,ANTA,mirjapura,Mirzapur,34682,0.11574074074074082,strict,baran_anta_mirjapura
-BARAN,ANTA,mahalpur,Mirzapur,34682,0.25000000000000006,loose,baran_anta_mahalpur
-BARAN,ANTA,ishrpura,Mirzapur,34682,0.27777777777777785,loose,baran_anta_ishrpura
-BARAN,ANTA,kishanpura,Mirzapur,34682,0.2916666666666667,loose,baran_anta_kishanpura
-BARAN,ATRU,sakatpura,Sakatpur,34728,0.037037037037037104,strict,baran_atru_sakatpura
-BARAN,ATRU,atru,Sakatpur,34728,0.2916666666666667,loose,baran_atru_atru
-BARAN,BARAN (FULL),barana,Barana,34732,0,exact,baran_baran (full)_barana
-BARAN,BARAN (FULL),baingna,Barana,34732,0.253968253968254,loose,baran_baran (full)_baingna
-BARAN,CHHABRA,mudkaya,Moondakya,34775,0.2142857142857143,loose,baran_chhabra_mudkaya
-BARAN,CHHABRA,mundala,Moondakya,34775,0.24338624338624346,loose,baran_chhabra_mundala
-BARAN,KISHANGANJ,bajarang garh,Bajrang Garh,34815,0.12286324786324793,strict,baran_kishanganj_bajarang garh
-BARAN,KISHANGANJ,brajnagar,Bajrang Garh,34815,0.17592592592592593,strict,baran_kishanganj_brajnagar
-BARAN,KISHANGANJ,bakanpura,Bakanpura,34816,0,exact,baran_kishanganj_bakanpura
-BARAN,KISHANGANJ,ganeshpura,Bakanpura,34816,0.24444444444444452,loose,baran_kishanganj_ganeshpura
-BARMER,BALOTRA,asada,Asada,34874,0,exact,barmer_balotra_asada
-BARMER,BALOTRA,gwalnada,Asada,34874,0.23333333333333345,loose,barmer_balotra_gwalnada
-BARMER,BALOTRA,jagsa,Jagsa,34890,0,exact,barmer_balotra_jagsa
-BARMER,BALOTRA,jasol,Jagsa,34890,0.26666666666666666,loose,barmer_balotra_jasol
-BARMER,BALOTRA,kanana,Kanana,34895,0,exact,barmer_balotra_kanana
-BARMER,BALOTRA,kankrla,Kanana,34895,0.253968253968254,loose,barmer_balotra_kankrla
-BARMER,BALOTRA,dhani sankhala,Kanana,34895,0.2698412698412698,loose,barmer_balotra_dhani sankhala
-BARMER,BALOTRA,pachpadra,Pachpadra,34910,0,exact,barmer_balotra_pachpadra
-BARMER,BALOTRA,sambhara,Pachpadra,34910,0.27314814814814825,loose,barmer_balotra_sambhara
-BARMER,BALOTRA,sarana,Sarana,34917,0,exact,barmer_balotra_sarana
-BARMER,BALOTRA,sarwadi,Sarana,34917,0.253968253968254,loose,barmer_balotra_sarwadi
-BARMER,BALOTRA,umarlai,Umarlai,34925,0,exact,barmer_balotra_umarlai
-BARMER,BALOTRA,thumbali,Umarlai,34925,0.22023809523809523,loose,barmer_balotra_thumbali
-BARMER,BALOTRA,mandli,Umarlai,34925,0.253968253968254,loose,barmer_balotra_mandli
-BARMER,BARMER,balera,Balera,34930,0,exact,barmer_barmer_balera
-BARMER,BARMER,babuguleriya,Balera,34930,0.25000000000000006,loose,barmer_barmer_babuguleriya
-BARMER,BARMER,chuli,Chooli,34940,0.17777777777777778,strict,barmer_barmer_chuli
-BARMER,BARMER,chadi,Chooli,34940,0.3,loose,barmer_barmer_chadi
-BARMER,CHOHTAN,chichadasar,Dharasar,34942,0.23484848484848492,loose,barmer_chohtan_chichadasar
-BARMER,CHOHTAN,shriramwala,Dharasar,34942,0.2904040404040404,loose,barmer_chohtan_shriramwala
-BARMER,BARMER,garal,Garal,34946,0,exact,barmer_barmer_garal
-BARMER,BARMER,gangala,Garal,34946,0.20952380952380956,loose,barmer_barmer_gangala
+BANSWARA,GHATOL,delvada,Devda,34530,0.16190476190476197,fuzzy,banswara_ghatol_delvada
+BARAN,KISHANGANJ,bajarang garh,Bajrang Garh,34815,0.12286324786324793,fuzzy,baran_kishanganj_bajarang garh
+BARAN,KISHANGANJ,brajnagar,Bajrang Garh,34815,0.17592592592592593,fuzzy,baran_kishanganj_brajnagar
 BARMER,BARMER,hathitala,Hathitala,34948,0,exact,barmer_barmer_hathitala
-BARMER,BARMER,hathama,Hathitala,34948,0.1587301587301588,strict,barmer_barmer_hathama
-BARMER,BARMER,jasai,Jasai,34954,0,exact,barmer_barmer_jasai
-BARMER,BARMER,jalipa,Jasai,34954,0.2611111111111111,loose,barmer_barmer_jalipa
-BARMER,BARMER,mahabar,Mahabar,34958,0,exact,barmer_barmer_mahabar
-BARMER,BARMER,ratasar,Mahabar,34958,0.28571428571428575,loose,barmer_barmer_ratasar
-BARMER,BARMER,padhi ka par,Mahabar,34958,0.2896825396825397,loose,barmer_barmer_padhi ka par
-BARMER,BARMER,meethda,Meethra,34960,0.09523809523809525,strict,barmer_barmer_meethda
-BARMER,BARMER,setrau,Meethra,34960,0.253968253968254,loose,barmer_barmer_setrau
-BARMER,CHOHTAN,santa,Sanau,34966,0.13333333333333336,strict,barmer_chohtan_santa
-BARMER,CHOHTAN,dhanau,Sanau,34966,0.17777777777777778,strict,barmer_chohtan_dhanau
-BARMER,CHOHTAN,sanwai,Sanau,34966,0.17777777777777778,strict,barmer_chohtan_sanwai
-BARMER,BARMER,sanawara,Sanawara,34967,0,exact,barmer_barmer_sanawara
-BARMER,BARMER,sanau,Sanawara,34967,0.23333333333333345,loose,barmer_barmer_sanau
-BARMER,BARMER,taratara,Sanawara,34967,0.25000000000000006,loose,barmer_barmer_taratara
-BARMER,BARMER,bisala,Vishala,34974,0.1507936507936509,strict,barmer_barmer_bisala
-BARMER,BARMER,ishrol,Vishala,34974,0.253968253968254,loose,barmer_barmer_ishrol
-BARMER,BAYTOO,jakhda,Akdara,34976,0.22222222222222238,loose,barmer_baytoo_jakhda
-BARMER,BAYTOO,santara,Akdara,34976,0.253968253968254,loose,barmer_baytoo_santara
-BARMER,BAYTOO,batadu,Batadu,34981,0,exact,barmer_baytoo_batadu
-BARMER,BAYTOO,rateu,Batadu,34981,0.3,loose,barmer_baytoo_rateu
-BARMER,BAYTOO,chhitar ka par,Chhitar Ka Par,34988,0,exact,barmer_baytoo_chhitar ka par
-BARMER,BAYTOO,kharapar,Chhitar Ka Par,34988,0.20833333333333337,loose,barmer_baytoo_kharapar
-BARMER,BAYTOO,jhak,Jhak,34994,0,exact,barmer_baytoo_jhak
-BARMER,BAYTOO,bhadkha,Jhak,34994,0.2738095238095238,loose,barmer_baytoo_bhadkha
-BARMER,BAYTOO,kheepsar,Khipsar,35001,0.130952380952381,strict,barmer_baytoo_kheepsar
-BARMER,BAYTOO,khokhsar,Khipsar,35001,0.22023809523809523,loose,barmer_baytoo_khokhsar
-BARMER,BAYTOO,kosriya,Kosariya,35005,0.13690476190476192,strict,barmer_baytoo_kosriya
-BARMER,BAYTOO,khokhsar paschim,Kosariya,35005,0.2916666666666667,loose,barmer_baytoo_khokhsar paschim
-BARMER,BAYTOO,madhasar,Madhasar,35009,0,exact,barmer_baytoo_madhasar
-BARMER,BAYTOO,sahar,Madhasar,35009,0.23333333333333345,loose,barmer_baytoo_sahar
+BARMER,BARMER,hathama,Hathitala,34948,0.1587301587301588,fuzzy,barmer_barmer_hathama
+BARMER,CHOHTAN,santa,Sanau,34966,0.13333333333333336,fuzzy,barmer_chohtan_santa
+BARMER,CHOHTAN,dhanau,Sanau,34966,0.17777777777777778,fuzzy,barmer_chohtan_dhanau
+BARMER,CHOHTAN,sanwai,Sanau,34966,0.17777777777777778,fuzzy,barmer_chohtan_sanwai
 BARMER,CHOHTAN,gumane ka tala,Gumane Ka Tala,35044,0,exact,barmer_chohtan_gumane ka tala
-BARMER,CHOHTAN,burhan ka tala,Gumane Ka Tala,35044,0.142857142857143,strict,barmer_chohtan_burhan ka tala
+BARMER,CHOHTAN,burhan ka tala,Gumane Ka Tala,35044,0.142857142857143,fuzzy,barmer_chohtan_burhan ka tala
 BARMER,CHOHTAN,pokrasar,Pokrasar,35060,0,exact,barmer_chohtan_pokrasar
-BARMER,CHOHTAN,rabsar,Pokrasar,35060,0.18055555555555555,strict,barmer_chohtan_rabsar
+BARMER,CHOHTAN,rabsar,Pokrasar,35060,0.18055555555555555,fuzzy,barmer_chohtan_rabsar
 BARMER,CHOHTAN,uparla,Uparla,35073,0,exact,barmer_chohtan_uparla
-BARMER,CHOHTAN,sarla,Uparla,35073,0.17777777777777778,strict,barmer_chohtan_sarla
-BARMER,CHOHTAN,tarla,Uparla,35073,0.17777777777777778,strict,barmer_chohtan_tarla
-BARMER,DHORIMANNA,arniyali,Arniyali,35075,0,exact,barmer_dhorimanna_arniyali
-BARMER,DHORIMANNA,piprali,Arniyali,35075,0.28690476190476194,loose,barmer_dhorimanna_piprali
-BARMER,DHORIMANNA,chainpura,Chainpura,35089,0,exact,barmer_dhorimanna_chainpura
-BARMER,DHORIMANNA,ratanpura,Chainpura,35089,0.22222222222222238,loose,barmer_dhorimanna_ratanpura
-BARMER,DHORIMANNA,alapura,Chainpura,35089,0.24338624338624346,loose,barmer_dhorimanna_alapura
-BARMER,DHORIMANNA,khari,Khari,35098,0,exact,barmer_dhorimanna_khari
-BARMER,DHORIMANNA,kartiya,Khari,35098,0.20952380952380956,loose,barmer_dhorimanna_kartiya
+BARMER,CHOHTAN,sarla,Uparla,35073,0.17777777777777778,fuzzy,barmer_chohtan_sarla
+BARMER,CHOHTAN,tarla,Uparla,35073,0.17777777777777778,fuzzy,barmer_chohtan_tarla
 BARMER,DHORIMANNA,mangta,Mangta,35105,0,exact,barmer_dhorimanna_mangta
-BARMER,DHORIMANNA,banta,Mangta,35105,0.17777777777777778,strict,barmer_dhorimanna_banta
-BARMER,DHORIMANNA,nagar,Mangta,35105,0.2611111111111111,loose,barmer_dhorimanna_nagar
-BARMER,DHORIMANNA,meethada khurd,Meethra Khurd,35106,0.15659340659340668,strict,barmer_dhorimanna_meethada khurd
-BARMER,DHORIMANNA,mokhav khurd,Meethra Khurd,35106,0.297008547008547,loose,barmer_dhorimanna_mokhav khurd
-BARMER,DHORIMANNA,nedinadi,Nehdi Nadi,35111,0.06666666666666678,strict,barmer_dhorimanna_nedinadi
-BARMER,DHORIMANNA,nehro ki nadi,Nehdi Nadi,35111,0.17293447293447295,strict,barmer_dhorimanna_nehro ki nadi
-BARMER,SHEO,akali,Aakli,35121,0.06666666666666678,strict,barmer_sheo_akali
-BARMER,SHEO,jhankali,Aakli,35121,0.23333333333333345,loose,barmer_sheo_jhankali
+BARMER,DHORIMANNA,banta,Mangta,35105,0.17777777777777778,fuzzy,barmer_dhorimanna_banta
+BARMER,DHORIMANNA,nedinadi,Nehdi Nadi,35111,0.06666666666666678,fuzzy,barmer_dhorimanna_nedinadi
+BARMER,DHORIMANNA,nehro ki nadi,Nehdi Nadi,35111,0.17293447293447295,fuzzy,barmer_dhorimanna_nehro ki nadi
 BARMER,SHEO,kanasar,Kanasar,35142,0,exact,barmer_sheo_kanasar
-BARMER,SHEO,ranasar,Kanasar,35142,0.09523809523809525,strict,barmer_sheo_ranasar
-BARMER,SHEO,mokhab,Mokhab Kallan,35149,0.1794871794871795,strict,barmer_sheo_mokhab
-BARMER,SHEO,khabdala,Mokhab Kallan,35149,0.1955128205128206,strict,barmer_sheo_khabdala
-BARMER,SHEO,nagarda,Nagarda,35151,0,exact,barmer_sheo_nagarda
-BARMER,SHEO,gadraroad,Nagarda,35151,0.26984126984126994,loose,barmer_sheo_gadraroad
-BARMER,SINDHARI,dankha,Dakhan,35175,0.11111111111111106,strict,barmer_sindhari_dankha
-BARMER,SINDHARI,kadanadi,Dakhan,35175,0.24722222222222212,loose,barmer_sindhari_kadanadi
-BARMER,SINDHARI,dhanva,Dhanwa,35176,0.11111111111111106,strict,barmer_sindhari_dhanva
-BARMER,SINDHARI,chawa,Dhanwa,35176,0.17777777777777778,strict,barmer_sindhari_chawa
-BARMER,SINDHARI,dholanada,Dhanwa,35176,0.20370370370370378,loose,barmer_sindhari_dholanada
-BARMER,SINDHARI,karna,Karna,35185,0,exact,barmer_sindhari_karna
-BARMER,SINDHARI,kagau,Karna,35185,0.26666666666666666,loose,barmer_sindhari_kagau
-BARMER,SINDHARI,sarnu,Karna,35185,0.26666666666666666,loose,barmer_sindhari_sarnu
-BARMER,SINDHARI,kundla,Karna,35185,0.3,loose,barmer_sindhari_kundla
-BARMER,SIWANA,dharna,Dharna,35216,0,exact,barmer_siwana_dharna
-BARMER,SIWANA,dhindas,Dharna,35216,0.253968253968254,loose,barmer_siwana_dhindas
-BARMER,SIWANA,khandap,Dharna,35216,0.253968253968254,loose,barmer_siwana_khandap
-BARMER,SIWANA,khankhi,Kankhi,35223,0.04761904761904765,strict,barmer_siwana_khankhi
-BARMER,SIWANA,rakhi,Kankhi,35223,0.2611111111111111,loose,barmer_siwana_rakhi
-BARMER,SIWANA,samdari,Mawari,35232,0.21746031746031746,loose,barmer_siwana_samdari
-BARMER,SIWANA,sarwadi,Mawari,35232,0.25079365079365085,loose,barmer_siwana_sarwadi
-BARMER,SIWANA,majal,Mawari,35232,0.3,loose,barmer_siwana_majal
-BARMER,SIWANA,mahilawas,Mahilawas,35233,0,exact,barmer_siwana_mahilawas
-BARMER,SIWANA,karmawas,Mahilawas,35233,0.25000000000000006,loose,barmer_siwana_karmawas
-BARMER,SIWANA,sewali,Sela,35246,0.19444444444444453,strict,barmer_siwana_sewali
-BARMER,SIWANA,saila,Sela,35246,0.21666666666666667,loose,barmer_siwana_saila
-BARMER,SIWANA,siner,Siner,35249,0,exact,barmer_siwana_siner
-BARMER,SIWANA,silor,Siner,35249,0.26666666666666666,loose,barmer_siwana_silor
+BARMER,SHEO,ranasar,Kanasar,35142,0.09523809523809525,fuzzy,barmer_sheo_ranasar
+BARMER,SHEO,mokhab,Mokhab Kallan,35149,0.1794871794871795,fuzzy,barmer_sheo_mokhab
+BARMER,SHEO,khabdala,Mokhab Kallan,35149,0.1955128205128206,fuzzy,barmer_sheo_khabdala
+BARMER,SINDHARI,dhanva,Dhanwa,35176,0.11111111111111106,fuzzy,barmer_sindhari_dhanva
+BARMER,SINDHARI,chawa,Dhanwa,35176,0.17777777777777778,fuzzy,barmer_sindhari_chawa
 BHARATPUR,KAMAN,bhandara,Bhandara,35337,0,exact,bharatpur_kaman_bhandara
-BHARATPUR,KAMAN,bhaisnda,Bhandara,35337,0.1666666666666667,strict,bharatpur_kaman_bhaisnda
-BHARATPUR,KAMAN,olanda,Olanda,35362,0,exact,bharatpur_kaman_olanda
-BHARATPUR,KAMAN,ladlaka,Olanda,35362,0.253968253968254,loose,bharatpur_kaman_ladlaka
-BHARATPUR,KAMAN,palla,Palla,35364,0,exact,bharatpur_kaman_palla
-BHARATPUR,KAMAN,papda,Palla,35364,0.26666666666666666,loose,bharatpur_kaman_papda
-BHARATPUR,KAMAN,sahoeda,Saheda,35367,0.04761904761904765,strict,bharatpur_kaman_sahoeda
-BHARATPUR,KAMAN,sahsan,Saheda,35367,0.22222222222222238,loose,bharatpur_kaman_sahsan
-BHARATPUR,KAMAN,ucheda,Saheda,35367,0.22222222222222238,loose,bharatpur_kaman_ucheda
+BHARATPUR,KAMAN,bhaisnda,Bhandara,35337,0.1666666666666667,fuzzy,bharatpur_kaman_bhaisnda
 BHARATPUR,KAMAN,satwas,Satwas,35371,0,exact,bharatpur_kaman_satwas
-BHARATPUR,KAMAN,satwadi,Satwas,35371,0.1507936507936509,strict,bharatpur_kaman_satwadi
-BHARATPUR,KAMAN,sonokhar,Sonokhar,35373,0,exact,bharatpur_kaman_sonokhar
-BHARATPUR,KAMAN,somka,Sonokhar,35373,0.23333333333333345,loose,bharatpur_kaman_somka
+BHARATPUR,KAMAN,satwadi,Satwas,35371,0.1507936507936509,fuzzy,bharatpur_kaman_satwadi
 BHARATPUR,KUMHER,sabora,Sabora,35402,0,exact,bharatpur_kumher_sabora
-BHARATPUR,KUMHER,abhora,Sabora,35402,0.11111111111111106,strict,bharatpur_kumher_abhora
+BHARATPUR,KUMHER,abhora,Sabora,35402,0.11111111111111106,fuzzy,bharatpur_kumher_abhora
 BHARATPUR,KUMHER,therawar,Therawar,35410,0,exact,bharatpur_kumher_therawar
-BHARATPUR,KUMHER,mehrawar,Therawar,35410,0.130952380952381,strict,bharatpur_kumher_mehrawar
-BHARATPUR,NADBAI,bhadira,Bhadeera,35419,0.130952380952381,strict,bharatpur_nadbai_bhadira
-BHARATPUR,NADBAI,behramda,Bhadeera,35419,0.20238095238095244,loose,bharatpur_nadbai_behramda
-BHARATPUR,NADBAI,piprau,Piprau,35445,0,exact,bharatpur_nadbai_piprau
-BHARATPUR,NADBAI,pigora,Piprau,35445,0.22222222222222238,loose,bharatpur_nadbai_pigora
-BHARATPUR,NADBAI,talchera,Talchhera,35448,0.037037037037037104,strict,bharatpur_nadbai_talchera
-BHARATPUR,NADBAI,aichera,Talchhera,35448,0.1587301587301588,strict,bharatpur_nadbai_aichera
-BHARATPUR,NAGAR PAHARI,gangawak,Gangawak,35460,0,exact,bharatpur_nagar pahari_gangawak
-BHARATPUR,NAGAR PAHARI,gangora,Gangawak,35460,0.22023809523809523,loose,bharatpur_nagar pahari_gangora
-BHARATPUR,NAGAR PAHARI,jaluki,Jaluki,35466,0,exact,bharatpur_nagar pahari_jaluki
-BHARATPUR,NAGAR PAHARI,matuki,Jaluki,35466,0.22222222222222238,loose,bharatpur_nagar pahari_matuki
-BHARATPUR,NAGAR PAHARI,kakrala,Kakrala,35469,0,exact,bharatpur_nagar pahari_kakrala
-BHARATPUR,NAGAR PAHARI,khandewala,Kakrala,35469,0.2619047619047619,loose,bharatpur_nagar pahari_khandewala
-BHARATPUR,NAGAR PAHARI,khohri,Khohri Dayanabas,35473,0.20833333333333337,loose,bharatpur_nagar pahari_khohri
-BHARATPUR,NAGAR PAHARI,kaithawada,Khohri Dayanabas,35473,0.29583333333333345,loose,bharatpur_nagar pahari_kaithawada
-BHARATPUR,NAGAR PAHARI,palka,Palka,35483,0,exact,bharatpur_nagar pahari_palka
-BHARATPUR,NAGAR PAHARI,padlwas,Palka,35483,0.20952380952380956,loose,bharatpur_nagar pahari_padlwas
-BHARATPUR,NAGAR PAHARI,gopalgarh,Palka,35483,0.2518518518518519,loose,bharatpur_nagar pahari_gopalgarh
-BHARATPUR,NAGAR PAHARI,ladmka,Palka,35483,0.2611111111111111,loose,bharatpur_nagar pahari_ladmka
-BHARATPUR,NAGAR PAHARI,pipalkheda,Palka,35483,0.26666666666666666,loose,bharatpur_nagar pahari_pipalkheda
-BHARATPUR,NAGAR PAHARI,pahadi,Paindaka,35485,0.24722222222222212,loose,bharatpur_nagar pahari_pahadi
-BHARATPUR,NAGAR PAHARI,saimlakala,Paindaka,35485,0.2916666666666667,loose,bharatpur_nagar pahari_saimlakala
-BHARATPUR,NAGAR PAHARI,teski,Teski,35497,0,exact,bharatpur_nagar pahari_teski
-BHARATPUR,NAGAR PAHARI,sikiri,Teski,35497,0.3,loose,bharatpur_nagar pahari_sikiri
-BHARATPUR,RUPBAS,dhana,Dhana,35510,0,exact,bharatpur_rupbas_dhana
-BHARATPUR,RUPBAS,bhainsa,Dhana,35510,0.20952380952380956,loose,bharatpur_rupbas_bhainsa
-BHARATPUR,RUPBAS,sahna,Dhana,35510,0.21666666666666667,loose,bharatpur_rupbas_sahna
-BHARATPUR,RUPBAS,andhiyari,Dhana,35510,0.28148148148148155,loose,bharatpur_rupbas_andhiyari
-BHARATPUR,RUPBAS,ibrahimpur,Ibrahimpur,35514,0,exact,bharatpur_rupbas_ibrahimpur
-BHARATPUR,RUPBAS,fatehpur,Ibrahimpur,35514,0.2916666666666667,loose,bharatpur_rupbas_fatehpur
-BHARATPUR,RUPBAS,khanua,Khanua,35518,0,exact,bharatpur_rupbas_khanua
-BHARATPUR,RUPBAS,khudasa,Khanua,35518,0.21746031746031746,loose,bharatpur_rupbas_khudasa
-BHARATPUR,RUPBAS,kharera,Khanua,35518,0.253968253968254,loose,bharatpur_rupbas_kharera
-BHARATPUR,RUPBAS,khedathakur,Khera Thakur,35520,0.08585858585858598,strict,bharatpur_rupbas_khedathakur
-BHARATPUR,RUPBAS,bahra rekhpura,Khera Thakur,35520,0.25079365079365085,loose,bharatpur_rupbas_bahra rekhpura
-BHARATPUR,RUPBAS,pahadpur,Paharpur,35535,0.15476190476190485,strict,bharatpur_rupbas_pahadpur
-BHARATPUR,RUPBAS,gahlau,Paharpur,35535,0.27777777777777785,loose,bharatpur_rupbas_gahlau
-BHARATPUR,SEWAR,bahnera,Behnera,35548,0.09523809523809525,strict,bharatpur_sewar_bahnera
-BHARATPUR,SEWAR,khandera,Behnera,35548,0.22023809523809523,loose,bharatpur_sewar_khandera
-BHARATPUR,SEWAR,chiksana,Chicksana,35551,0.037037037037037104,strict,bharatpur_sewar_chiksana
-BHARATPUR,SEWAR,chichana,Chicksana,35551,0.11574074074074082,strict,bharatpur_sewar_chichana
-BHARATPUR,SEWAR,phulwara,Fulwara,35553,0.130952380952381,strict,bharatpur_sewar_phulwara
-BHARATPUR,SEWAR,murwara,Fulwara,35553,0.19047619047619044,strict,bharatpur_sewar_murwara
-BHARATPUR,SEWAR,ghusiyari,Ghusyari,35555,0.12037037037037043,strict,bharatpur_sewar_ghusiyari
-BHARATPUR,SEWAR,aghapur,Ghusyari,35555,0.28690476190476194,loose,bharatpur_sewar_aghapur
-BHARATPUR,SEWAR,malah,Malah,35568,0,exact,bharatpur_sewar_malah
-BHARATPUR,SEWAR,pipala,Malah,35568,0.3,loose,bharatpur_sewar_pipala
-BHARATPUR,WEIR,aamoli,Amoli,35579,0.05555555555555556,strict,bharatpur_weir_aamoli
-BHARATPUR,WEIR,baroli,Amoli,35579,0.17777777777777778,strict,bharatpur_weir_baroli
-BHARATPUR,WEIR,bajherakalan,Bajherakalan,35582,0,exact,bharatpur_weir_bajherakalan
-BHARATPUR,WEIR,bachren,Bajherakalan,35582,0.2698412698412698,loose,bharatpur_weir_bachren
-BHARATPUR,WEIR,dharsoni,Dharsoni,35591,0,exact,bharatpur_weir_dharsoni
-BHARATPUR,WEIR,jharoti,Dharsoni,35591,0.22023809523809523,loose,bharatpur_weir_jharoti
-BHARATPUR,WEIR,naroli,Gangroli,35592,0.1388888888888889,strict,bharatpur_weir_naroli
-BHARATPUR,WEIR,chaintoli,Gangroli,35592,0.27314814814814825,loose,bharatpur_weir_chaintoli
-BHARATPUR,WEIR,govindpura,Govindpura,35595,0,exact,bharatpur_weir_govindpura
-BHARATPUR,WEIR,gongera,Govindpura,35595,0.2619047619047619,loose,bharatpur_weir_gongera
-BHARATPUR,WEIR,halena,Halena,35596,0,exact,bharatpur_weir_halena
-BHARATPUR,WEIR,bhaisna,Halena,35596,0.253968253968254,loose,bharatpur_weir_bhaisna
-BHARATPUR,WEIR,paithena,Halena,35596,0.27777777777777785,loose,bharatpur_weir_paithena
-BHARATPUR,WEIR,ghatari,Hatauri,35597,0.09523809523809525,strict,bharatpur_weir_ghatari
-BHARATPUR,WEIR,hathodi,Hatauri,35597,0.28571428571428575,loose,bharatpur_weir_hathodi
-BHARATPUR,WEIR,jeevad,Jeewad,35602,0.11111111111111106,strict,bharatpur_weir_jeevad
-BHARATPUR,WEIR,deewali,Jeewad,35602,0.253968253968254,loose,bharatpur_weir_deewali
-BHARATPUR,WEIR,samraya,Samraya,35617,0,exact,bharatpur_weir_samraya
-BHARATPUR,WEIR,salempur kalan,Samraya,35617,0.2380952380952382,loose,bharatpur_weir_salempur kalan
-BHARATPUR,WEIR,itamada,Samraya,35617,0.28571428571428575,loose,bharatpur_weir_itamada
-BHARATPUR,WEIR,suhas,Suhans,35621,0.05555555555555556,strict,bharatpur_weir_suhas
-BHARATPUR,WEIR,suhari,Suhans,35621,0.22222222222222238,loose,bharatpur_weir_suhari
-BHILWARA,ASIND,barana,Barana,35629,0,exact,bhilwara_asind_barana
-BHILWARA,ASIND,bajunda,Barana,35629,0.253968253968254,loose,bhilwara_asind_bajunda
-BHILWARA,ASIND,barsni,Barsani,35630,0.04761904761904765,strict,bhilwara_asind_barsni
-BHILWARA,ASIND,bhadasi,Barsani,35630,0.2571428571428572,loose,bhilwara_asind_bhadasi
-BHILWARA,ASIND,dantra,Dantra,35636,0,exact,bhilwara_asind_dantra
-BHILWARA,ASIND,antali,Dantra,35636,0.22222222222222238,loose,bhilwara_asind_antali
-BHILWARA,ASIND,iras,Iras,35640,0,exact,bhilwara_asind_iras
-BHILWARA,ASIND,motras,Iras,35640,0.25000000000000006,loose,bhilwara_asind_motras
-BHILWARA,ASIND,jhalriya,Jalriya,35642,0.04166666666666672,strict,bhilwara_asind_jhalriya
-BHILWARA,ASIND,jagpura,Jalriya,35642,0.28571428571428575,loose,bhilwara_asind_jagpura
-BHILWARA,ASIND,katar,Katar,35647,0,exact,bhilwara_asind_katar
-BHILWARA,ASIND,patan,Katar,35647,0.26666666666666666,loose,bhilwara_asind_patan
+BHARATPUR,KUMHER,mehrawar,Therawar,35410,0.130952380952381,fuzzy,bharatpur_kumher_mehrawar
+BHARATPUR,NADBAI,talchera,Talchhera,35448,0.037037037037037104,fuzzy,bharatpur_nadbai_talchera
+BHARATPUR,NADBAI,aichera,Talchhera,35448,0.1587301587301588,fuzzy,bharatpur_nadbai_aichera
+BHARATPUR,SEWAR,chiksana,Chicksana,35551,0.037037037037037104,fuzzy,bharatpur_sewar_chiksana
+BHARATPUR,SEWAR,chichana,Chicksana,35551,0.11574074074074082,fuzzy,bharatpur_sewar_chichana
+BHARATPUR,SEWAR,phulwara,Fulwara,35553,0.130952380952381,fuzzy,bharatpur_sewar_phulwara
+BHARATPUR,SEWAR,murwara,Fulwara,35553,0.19047619047619044,fuzzy,bharatpur_sewar_murwara
+BHARATPUR,WEIR,aamoli,Amoli,35579,0.05555555555555556,fuzzy,bharatpur_weir_aamoli
+BHARATPUR,WEIR,baroli,Amoli,35579,0.17777777777777778,fuzzy,bharatpur_weir_baroli
 BHILWARA,ASIND,parasoli,Parasoli,35655,0,exact,bhilwara_asind_parasoli
-BHILWARA,ASIND,para,Parasoli,35655,0.1666666666666667,strict,bhilwara_asind_para
-BHILWARA,ASIND,raghunathpura,Raghunathpura,35659,0,exact,bhilwara_asind_raghunathpura
-BHILWARA,ASIND,chatarpura,Raghunathpura,35659,0.24700854700854707,loose,bhilwara_asind_chatarpura
-BHILWARA,BANERA,bamniya,Bamniya,35670,0,exact,bhilwara_banera_bamniya
-BHILWARA,BANERA,baneda,Bamniya,35670,0.253968253968254,loose,bhilwara_banera_baneda
-BHILWARA,JAHAZPUR,sarsiya,Sarsiya,35743,0,exact,bhilwara_jahazpur_sarsiya
-BHILWARA,JAHAZPUR,phlasiya,Sarsiya,35743,0.22023809523809523,loose,bhilwara_jahazpur_phlasiya
-BHILWARA,MANDAL,bavdi,Bawadi,35787,0.17777777777777778,strict,bhilwara_mandal_bavdi
-BHILWARA,MANDAL,chawandiya,Bawadi,35787,0.2222222222222222,loose,bhilwara_mandal_chawandiya
-BHILWARA,MANDAL,kabradiya,Bawadi,35787,0.2703703703703703,loose,bhilwara_mandal_kabradiya
-BHILWARA,MANDAL,bavalas,Bawalas,35788,0.09523809523809525,strict,bhilwara_mandal_bavalas
-BHILWARA,MANDAL,aalmas,Bawalas,35788,0.1507936507936509,strict,bhilwara_mandal_aalmas
-BHILWARA,MANDAL,bhagwanpura,Bhagwanpura,35792,0,exact,bhilwara_mandal_bhagwanpura
-BHILWARA,MANDAL,gordhanpura,Bhagwanpura,35792,0.24431818181818185,loose,bhilwara_mandal_gordhanpura
-BHILWARA,MANDAL,bhemdiyas,Bheemdiyas,35793,0.033333333333333416,strict,bhilwara_mandal_bhemdiyas
-BHILWARA,MANDAL,seediyas,Bheemdiyas,35793,0.14166666666666666,strict,bhilwara_mandal_seediyas
-BHILWARA,MANDAL,chankher,Chankhed,35795,0.08333333333333338,strict,bhilwara_mandal_chankher
-BHILWARA,MANDAL,chandras,Chankhed,35795,0.25000000000000006,loose,bhilwara_mandal_chandras
-BHILWARA,MANDAL,dhunwala ma,Dhuwala(Mandal),35801,0.16317016317016325,strict,bhilwara_mandal_dhunwala ma
-BHILWARA,MANDAL,dhuwala kareda,Dhuwala(Mandal),35801,0.1721611721611722,strict,bhilwara_mandal_dhuwala kareda
-BHILWARA,MANDAL,keriya,Keriya,35808,0,exact,bhilwara_mandal_keriya
-BHILWARA,MANDAL,gorkhiya,Keriya,35808,0.24722222222222212,loose,bhilwara_mandal_gorkhiya
+BHILWARA,ASIND,para,Parasoli,35655,0.1666666666666667,fuzzy,bhilwara_asind_para
+BHILWARA,MANDAL,bavalas,Bawalas,35788,0.09523809523809525,fuzzy,bhilwara_mandal_bavalas
+BHILWARA,MANDAL,aalmas,Bawalas,35788,0.1507936507936509,fuzzy,bhilwara_mandal_aalmas
+BHILWARA,MANDAL,bhemdiyas,Bheemdiyas,35793,0.033333333333333416,fuzzy,bhilwara_mandal_bhemdiyas
+BHILWARA,MANDAL,seediyas,Bheemdiyas,35793,0.14166666666666666,fuzzy,bhilwara_mandal_seediyas
+BHILWARA,MANDAL,dhunwala ma,Dhuwala(Mandal),35801,0.16317016317016325,fuzzy,bhilwara_mandal_dhunwala ma
+BHILWARA,MANDAL,dhuwala kareda,Dhuwala(Mandal),35801,0.1721611721611722,fuzzy,bhilwara_mandal_dhuwala kareda
 BHILWARA,MANDAL,leswa,Leswa,35810,0,exact,bhilwara_mandal_leswa
-BHILWARA,MANDAL,chileswar,Leswa,35810,0.14814814814814825,strict,bhilwara_mandal_chileswar
-BHILWARA,MANDAL,mandal,Mandal,35811,0,exact,bhilwara_mandal_mandal
-BHILWARA,MANDAL,aamdkala,Mandal,35811,0.2805555555555556,loose,bhilwara_mandal_aamdkala
-BHILWARA,MANDAL,santokpura,Santokpura,35817,0,exact,bhilwara_mandal_santokpura
-BHILWARA,MANDAL,shivpura,Santokpura,35817,0.2916666666666667,loose,bhilwara_mandal_shivpura
-BHILWARA,MANDAL,tahunka,Tahuka,35822,0.04761904761904765,strict,bhilwara_mandal_tahunka
-BHILWARA,MANDAL,thana,Tahuka,35822,0.2611111111111111,loose,bhilwara_mandal_thana
-BHILWARA,MANDALGARH,dhakarkhedi,Dhakar Kheri,35832,0.08585858585858598,strict,bhilwara_mandalgarh_dhakarkhedi
-BHILWARA,MANDALGARH,malka kheda,Dhakar Kheri,35832,0.2601010101010101,loose,bhilwara_mandalgarh_malka kheda
-BHILWARA,MANDALGARH,sardarm ji ka kheda,Dhakar Kheri,35832,0.28934077618288156,loose,bhilwara_mandalgarh_sardarm ji ka kheda
-BHILWARA,MANDALGARH,dhamania,Dhamniya,35833,0.15476190476190485,strict,bhilwara_mandalgarh_dhamania
-BHILWARA,MANDALGARH,kansya,Dhamniya,35833,0.27777777777777785,loose,bhilwara_mandalgarh_kansya
-BHILWARA,MANDALGARH,jaliya,Jaliya,35837,0,exact,bhilwara_mandalgarh_jaliya
-BHILWARA,MANDALGARH,jalidri,Jaliya,35837,0.253968253968254,loose,bhilwara_mandalgarh_jalidri
-BHILWARA,MANDALGARH,jassuji ka kheda,Jassu Ji Ka Khera,35838,0.12671568627450977,strict,bhilwara_mandalgarh_jassuji ka kheda
-BHILWARA,MANDALGARH,umaji ka kheda,Jassu Ji Ka Khera,35838,0.24288048552754443,loose,bhilwara_mandalgarh_umaji ka kheda
-BHILWARA,MANDALGARH,kalyanpura,Kalyanpura,35842,0,exact,bhilwara_mandalgarh_kalyanpura
-BHILWARA,MANDALGARH,vikrampura,Kalyanpura,35842,0.26666666666666666,loose,bhilwara_mandalgarh_vikrampura
-BHILWARA,MANDALGARH,khachrol,Khachrol,35844,0,exact,bhilwara_mandalgarh_khachrol
-BHILWARA,MANDALGARH,aaroli,Khachrol,35844,0.27777777777777785,loose,bhilwara_mandalgarh_aaroli
-BHILWARA,MANDALGARH,mohanpura,Mohanpura,35852,0,exact,bhilwara_mandalgarh_mohanpura
-BHILWARA,MANDALGARH,bhopatpura,Mohanpura,35852,0.2693121693121693,loose,bhilwara_mandalgarh_bhopatpura
-BHILWARA,MANDALGARH,sukhpura,Mohanpura,35852,0.27314814814814825,loose,bhilwara_mandalgarh_sukhpura
-BHILWARA,MANDALGARH,gopalpura,Mohanpura,35852,0.27777777777777785,loose,bhilwara_mandalgarh_gopalpura
-BHILWARA,MANDALGARH,ralayata,Ralayata,35857,0,exact,bhilwara_mandalgarh_ralayata
-BHILWARA,MANDALGARH,salavtiya,Ralayata,35857,0.27777777777777785,loose,bhilwara_mandalgarh_salavtiya
-BHILWARA,MANDALGARH,sarana,Sarana,35860,0,exact,bhilwara_mandalgarh_sarana
-BHILWARA,MANDALGARH,gudha rana ji ka,Sarana,35860,0.2847222222222222,loose,bhilwara_mandalgarh_gudha rana ji ka
-BHILWARA,MANDALGARH,sarthala,Sarthala,35861,0,exact,bhilwara_mandalgarh_sarthala
-BHILWARA,MANDALGARH,mangtala,Sarthala,35861,0.25000000000000006,loose,bhilwara_mandalgarh_mangtala
+BHILWARA,MANDAL,chileswar,Leswa,35810,0.14814814814814825,fuzzy,bhilwara_mandal_chileswar
 BHILWARA,MANDALGARH,shyamgarh,Shyamgarh,35862,0,exact,bhilwara_mandalgarh_shyamgarh
-BHILWARA,MANDALGARH,shyampura,Shyamgarh,35862,0.19576719576719587,strict,bhilwara_mandalgarh_shyampura
-BHILWARA,MANDALGARH,thalkalan,Thalkalan,35868,0,exact,bhilwara_mandalgarh_thalkalan
-BHILWARA,MANDALGARH,bijolia kalan,Thalkalan,35868,0.27553927553927565,loose,bhilwara_mandalgarh_bijolia kalan
+BHILWARA,MANDALGARH,shyampura,Shyamgarh,35862,0.19576719576719587,fuzzy,bhilwara_mandalgarh_shyampura
 BIKANER,BIKANER,kanasar,Kanasar,36023,0,exact,bikaner_bikaner_kanasar
-BIKANER,BIKANER,napasar,Kanasar,36023,0.1507936507936509,strict,bikaner_bikaner_napasar
+BIKANER,BIKANER,napasar,Kanasar,36023,0.1507936507936509,fuzzy,bikaner_bikaner_napasar
 BIKANER,BIKANER,malasar,Malasar,36036,0,exact,bikaner_bikaner_malasar
-BIKANER,BIKANER,ridmalsar,Malasar,36036,0.1587301587301588,strict,bikaner_bikaner_ridmalsar
-BIKANER,KOLAYAT,akkasar,Akasar,36058,0.04761904761904765,strict,bikaner_kolayat_akkasar
-BIKANER,KOLAYAT,khindasar,Akasar,36058,0.20370370370370378,loose,bikaner_kolayat_khindasar
-BIKANER,KOLAYAT,chani,Chani,36069,0,exact,bikaner_kolayat_chani
-BIKANER,KOLAYAT,charanwala,Chani,36069,0.26666666666666666,loose,bikaner_kolayat_charanwala
-BIKANER,KOLAYAT,gariyala,Gadiyala,36073,0.08333333333333338,strict,bikaner_kolayat_gariyala
-BIKANER,KOLAYAT,gogdiya vala,Gadiyala,36073,0.19444444444444453,strict,bikaner_kolayat_gogdiya vala
-BIKANER,KOLAYAT,jhajhu,Jhajhu,36082,0,exact,bikaner_kolayat_jhajhu
-BIKANER,KOLAYAT,bajju,Jhajhu,36082,0.2611111111111111,loose,bikaner_kolayat_bajju
-BIKANER,LUNKARANSAR,garabdesar,Garabdesar,36102,0,exact,bikaner_lunkaransar_garabdesar
-BIKANER,LUNKARANSAR,sansardesar,Garabdesar,36102,0.24090909090909093,loose,bikaner_lunkaransar_sansardesar
-BIKANER,LUNKARANSAR,lunkaransar,Garabdesar,36102,0.28484848484848485,loose,bikaner_lunkaransar_lunkaransar
-BIKANER,LUNKARANSAR,kapurisar,Kapurisar,36107,0,exact,bikaner_lunkaransar_kapurisar
-BIKANER,LUNKARANSAR,takhtpura,Kapurisar,36107,0.27777777777777785,loose,bikaner_lunkaransar_takhtpura
-BIKANER,NOKHA,badnu,Badhanoo,36131,0.23333333333333345,loose,bikaner_nokha_badnu
-BIKANER,NOKHA,bandhda,Badhanoo,36131,0.24206349206349215,loose,bikaner_nokha_bandhda
-BIKANER,NOKHA,bhadla,Badhanoo,36131,0.2805555555555556,loose,bikaner_nokha_bhadla
-BIKANER,NOKHA,kakda,Kakra,36154,0.13333333333333336,strict,bikaner_nokha_kakda
-BIKANER,NOKHA,kahira,Kakra,36154,0.17777777777777778,strict,bikaner_nokha_kahira
-BIKANER,NOKHA,kakku,Kakra,36154,0.26666666666666666,loose,bikaner_nokha_kakku
-BIKANER,NOKHA,mainsar,Mainsar,36160,0,exact,bikaner_nokha_mainsar
-BIKANER,NOKHA,kisnasar,Mainsar,36160,0.2142857142857143,loose,bikaner_nokha_kisnasar
-BIKANER,NOKHA,dhingsari,Mainsar,36160,0.24338624338624346,loose,bikaner_nokha_dhingsari
+BIKANER,BIKANER,ridmalsar,Malasar,36036,0.1587301587301588,fuzzy,bikaner_bikaner_ridmalsar
+BIKANER,KOLAYAT,gariyala,Gadiyala,36073,0.08333333333333338,fuzzy,bikaner_kolayat_gariyala
+BIKANER,KOLAYAT,gogdiya vala,Gadiyala,36073,0.19444444444444453,fuzzy,bikaner_kolayat_gogdiya vala
+BIKANER,NOKHA,kakda,Kakra,36154,0.13333333333333336,fuzzy,bikaner_nokha_kakda
+BIKANER,NOKHA,kahira,Kakra,36154,0.17777777777777778,fuzzy,bikaner_nokha_kahira
 BIKANER,NOKHA,raisar,Raisar,36168,0,exact,bikaner_nokha_raisar
-BIKANER,NOKHA,rasisar,Raisar,36168,0.10317460317460315,strict,bikaner_nokha_rasisar
+BIKANER,NOKHA,rasisar,Raisar,36168,0.10317460317460315,fuzzy,bikaner_nokha_rasisar
 BIKANER,NOKHA,sadhasar,Sadhasar,36171,0,exact,bikaner_nokha_sadhasar
-BIKANER,NOKHA,hansasar,Sadhasar,36171,0.130952380952381,strict,bikaner_nokha_hansasar
-BIKANER,NOKHA,sadhuna,Sadhasar,36171,0.22023809523809523,loose,bikaner_nokha_sadhuna
+BIKANER,NOKHA,hansasar,Sadhasar,36171,0.130952380952381,fuzzy,bikaner_nokha_hansasar
 BIKANER,NOKHA,salundiya,Salundiya,36173,0,exact,bikaner_nokha_salundiya
-BIKANER,NOKHA,sarunda,Salundiya,36173,0.1587301587301588,strict,bikaner_nokha_sarunda
+BIKANER,NOKHA,sarunda,Salundiya,36173,0.1587301587301588,fuzzy,bikaner_nokha_sarunda
 BIKANER,NOKHA,somalsar,Somalsar,36177,0,exact,bikaner_nokha_somalsar
-BIKANER,NOKHA,desalsar,Somalsar,36177,0.1666666666666667,strict,bikaner_nokha_desalsar
-BIKANER,NOKHA,surpura,Surpura,36178,0,exact,bikaner_nokha_surpura
-BIKANER,NOKHA,swarupsar,Surpura,36178,0.26984126984126994,loose,bikaner_nokha_swarupsar
-BIKANER,SRI DUNGARGARH,surajansar,Surjansar,36208,0.12592592592592597,strict,bikaner_sri dungargarh_surajansar
-BIKANER,SRI DUNGARGARH,berjangsar,Surjansar,36208,0.1740740740740741,strict,bikaner_sri dungargarh_berjangsar
-BUNDI,HINDOLI,chhabadiyon ka nayawaon,Chhabariyon Ka Naya Gaon,36223,0.07065217391304351,strict,bundi_hindoli_chhabadiyon ka nayawaon
-BUNDI,HINDOLI,dhabayon ka nayagaon,Chhabariyon Ka Naya Gaon,36223,0.08611111111111115,strict,bundi_hindoli_dhabayon ka nayagaon
-BUNDI,NAINWA,dodi,Dodi,36307,0,exact,bundi_nainwa_dodi
-BUNDI,NAINWA,dei,Dodi,36307,0.27777777777777785,loose,bundi_nainwa_dei
-CHITTAURGARH,BARI SADRI,khardewala,Khardeola,36435,0.14537037037037034,strict,chittaurgarh_bari sadri_khardewala
-CHITTAURGARH,BARI SADRI,khermaliya,Khardeola,36435,0.2216931216931217,loose,chittaurgarh_bari sadri_khermaliya
+BIKANER,NOKHA,desalsar,Somalsar,36177,0.1666666666666667,fuzzy,bikaner_nokha_desalsar
+BIKANER,SRI DUNGARGARH,surajansar,Surjansar,36208,0.12592592592592597,fuzzy,bikaner_sri dungargarh_surajansar
+BIKANER,SRI DUNGARGARH,berjangsar,Surjansar,36208,0.1740740740740741,fuzzy,bikaner_sri dungargarh_berjangsar
+BUNDI,HINDOLI,chhabadiyon ka nayawaon,Chhabariyon Ka Naya Gaon,36223,0.07065217391304351,fuzzy,bundi_hindoli_chhabadiyon ka nayawaon
+BUNDI,HINDOLI,dhabayon ka nayagaon,Chhabariyon Ka Naya Gaon,36223,0.08611111111111115,fuzzy,bundi_hindoli_dhabayon ka nayagaon
 CHITTAURGARH,BEGUN,motipura,Motipura,36467,0,exact,chittaurgarh_begun_motipura
-CHITTAURGARH,BEGUN,dolatpura,Motipura,36467,0.19444444444444453,strict,chittaurgarh_begun_dolatpura
+CHITTAURGARH,BEGUN,dolatpura,Motipura,36467,0.19444444444444453,fuzzy,chittaurgarh_begun_dolatpura
 CHITTAURGARH,BHAINSRORGARH,badodiya,Badodiya,36503,0,exact,chittaurgarh_bhainsrorgarh_badodiya
-CHITTAURGARH,BHAINSRORGARH,badoliya,Badodiya,36503,0.08333333333333338,strict,chittaurgarh_bhainsrorgarh_badoliya
-CHITTAURGARH,DUNGLA,bhatoli bagariyan,Bhatoli Bagriyan,36612,0.06127450980392155,strict,chittaurgarh_dungla_bhatoli bagariyan
-CHITTAURGARH,DUNGLA,bhatoli gujaran,Bhatoli Bagriyan,36612,0.13258547008547017,strict,chittaurgarh_dungla_bhatoli gujaran
-CHITTAURGARH,KAPASAN,nimbaheda,Nimbahera,36669,0.07407407407407415,strict,chittaurgarh_kapasan_nimbaheda
-CHITTAURGARH,KAPASAN,bamniya,Nimbahera,36669,0.26984126984126994,loose,chittaurgarh_kapasan_bamniya
-CHITTAURGARH,NIMBAHERA,unkhaliya,Ukhaliya,36712,0.037037037037037104,strict,chittaurgarh_nimbahera_unkhaliya
-CHITTAURGARH,NIMBAHERA,bhavliya,Ukhaliya,36712,0.1666666666666667,strict,chittaurgarh_nimbahera_bhavliya
-CHURU,CHURU,kedvasar,Kheenwasar,36805,0.21666666666666667,loose,churu_churu_kedvasar
-CHURU,CHURU,khinvsar,Kheenwasar,36805,0.2722222222222222,loose,churu_churu_khinvsar
+CHITTAURGARH,BHAINSRORGARH,badoliya,Badodiya,36503,0.08333333333333338,fuzzy,chittaurgarh_bhainsrorgarh_badoliya
+CHITTAURGARH,DUNGLA,bhatoli bagariyan,Bhatoli Bagriyan,36612,0.06127450980392155,fuzzy,chittaurgarh_dungla_bhatoli bagariyan
+CHITTAURGARH,DUNGLA,bhatoli gujaran,Bhatoli Bagriyan,36612,0.13258547008547017,fuzzy,chittaurgarh_dungla_bhatoli gujaran
+CHITTAURGARH,NIMBAHERA,unkhaliya,Ukhaliya,36712,0.037037037037037104,fuzzy,chittaurgarh_nimbahera_unkhaliya
+CHITTAURGARH,NIMBAHERA,bhavliya,Ukhaliya,36712,0.1666666666666667,fuzzy,chittaurgarh_nimbahera_bhavliya
 CHURU,SARDARSHAHAR,jaitsisar,Jaitsisar,36927,0,exact,churu_sardarshahar_jaitsisar
-CHURU,SARDARSHAHAR,ajitsar,Jaitsisar,36927,0.12169312169312176,strict,churu_sardarshahar_ajitsar
+CHURU,SARDARSHAHAR,ajitsar,Jaitsisar,36927,0.12169312169312176,fuzzy,churu_sardarshahar_ajitsar
 CHURU,SARDARSHAHAR,jaitasar,Jaitasar,36928,0,exact,churu_sardarshahar_jaitasar
-CHURU,SARDARSHAHAR,baijasar,Jaitasar,36928,0.15476190476190485,strict,churu_sardarshahar_baijasar
-CHURU,SUJANGARH,badaber,Barabar,36957,0.19047619047619044,strict,churu_sujangarh_badaber
-CHURU,SUJANGARH,balera,Barabar,36957,0.253968253968254,loose,churu_sujangarh_balera
-CHURU,SUJANGARH,bhasina,Bhaseena,36963,0.130952380952381,strict,churu_sujangarh_bhasina
-CHURU,SUJANGARH,tehandesar,Bhaseena,36963,0.26071428571428573,loose,churu_sujangarh_tehandesar
-CHURU,SUJANGARH,cherla,Charla,36967,0.11111111111111106,strict,churu_sujangarh_cherla
-CHURU,SUJANGARH,luhara,Charla,36967,0.22222222222222238,loose,churu_sujangarh_luhara
-CHURU,SUJANGARH,chadwas,Charla,36967,0.253968253968254,loose,churu_sujangarh_chadwas
-CHURU,SUJANGARH,iyara,Charla,36967,0.3,loose,churu_sujangarh_iyara
-CHURU,SUJANGARH,amarsar,Harasar,36976,0.1507936507936509,strict,churu_sujangarh_amarsar
-CHURU,SUJANGARH,herasar,Harasar,36976,0.2063492063492064,loose,churu_sujangarh_herasar
+CHURU,SARDARSHAHAR,baijasar,Jaitasar,36928,0.15476190476190485,fuzzy,churu_sardarshahar_baijasar
 CHURU,SUJANGARH,randhisar,Randhisar,36997,0,exact,churu_sujangarh_randhisar
-CHURU,SUJANGARH,badhsar,Randhisar,36997,0.1587301587301588,strict,churu_sujangarh_badhsar
+CHURU,SUJANGARH,badhsar,Randhisar,36997,0.1587301587301588,fuzzy,churu_sujangarh_badhsar
 CHURU,SUJANGARH,salasar,Salasar,36999,0,exact,churu_sujangarh_salasar
-CHURU,SUJANGARH,kalyansar,Salasar,36999,0.1587301587301588,strict,churu_sujangarh_kalyansar
-CHURU,SUJANGARH,sandawa,Salasar,36999,0.28571428571428575,loose,churu_sujangarh_sandawa
-CHURU,TARANAGAR,srayan,Sarayan,37031,0.1587301587301588,strict,churu_taranagar_srayan
-CHURU,TARANAGAR,sahawa,Sarayan,37031,0.253968253968254,loose,churu_taranagar_sahawa
+CHURU,SUJANGARH,kalyansar,Salasar,36999,0.1587301587301588,fuzzy,churu_sujangarh_kalyansar
 DAUSA,BANDIKUI,bhandeda,Bhandeda,37042,0,exact,dausa_bandikui_bhandeda
-DAUSA,BANDIKUI,chandera,Bhandeda,37042,0.1666666666666667,strict,dausa_bandikui_chandera
-DAUSA,BANDIKUI,balaheda,Bhandeda,37042,0.27777777777777785,loose,dausa_bandikui_balaheda
-DAUSA,BANDIKUI,bhanvata bhanvti,Bhanwata,37043,0.2291666666666667,loose,dausa_bandikui_bhanvata bhanvti
-DAUSA,BANDIKUI,baswa,Bhanwata,37043,0.23333333333333345,loose,dausa_bandikui_baswa
-DAUSA,BANDIKUI,dhanavad,Dhanawar,37047,0.1666666666666667,strict,dausa_bandikui_dhanavad
-DAUSA,BANDIKUI,karnavar,Dhanawar,37047,0.25000000000000006,loose,dausa_bandikui_karnavar
-DAUSA,BANDIKUI,kolana,Kolwa,37060,0.17777777777777778,strict,dausa_bandikui_kolana
-DAUSA,BANDIKUI,lotwada,Kolwa,37060,0.29285714285714287,loose,dausa_bandikui_lotwada
-DAUSA,BANDIKUI,mudghisiya,Mundghisya,37063,0.06666666666666678,strict,dausa_bandikui_mudghisiya
-DAUSA,BANDIKUI,muhi,Mundghisya,37063,0.20000000000000007,loose,dausa_bandikui_muhi
-DAUSA,BANDIKUI,gudliya,Mundghisya,37063,0.2642857142857143,loose,dausa_bandikui_gudliya
-DAUSA,BANDIKUI,peechupada kalan,Peechupara Kalan,37069,0.04166666666666672,strict,dausa_bandikui_peechupada kalan
-DAUSA,BANDIKUI,badliya kalan,Peechupara Kalan,37069,0.2948717948717949,loose,dausa_bandikui_badliya kalan
-DAUSA,BANDIKUI,pratappura,Pratappura,37071,0,exact,dausa_bandikui_pratappura
-DAUSA,BANDIKUI,panditpura,Pratappura,37071,0.20000000000000007,loose,dausa_bandikui_panditpura
-DAUSA,DAUSA,bapi,Bapi,37080,0,exact,dausa_dausa_bapi
-DAUSA,DAUSA,baniyana,Bapi,37080,0.2916666666666667,loose,dausa_dausa_baniyana
-DAUSA,DAUSA,bhankari,Bhankri,37082,0.04166666666666672,strict,dausa_dausa_bhankari
-DAUSA,DAUSA,bhandarej,Bhankri,37082,0.24338624338624346,loose,dausa_dausa_bhandarej
+DAUSA,BANDIKUI,chandera,Bhandeda,37042,0.1666666666666667,fuzzy,dausa_bandikui_chandera
 DAUSA,DAUSA,bishanpura,Bishanpura,37083,0,exact,dausa_dausa_bishanpura
-DAUSA,DAUSA,khanpura,Bishanpura,37083,0.14166666666666666,strict,dausa_dausa_khanpura
-DAUSA,DAUSA,chawandeda,Chawandhera,37086,0.09393939393939396,strict,dausa_dausa_chawandeda
-DAUSA,DAUSA,lawan,Chawandhera,37086,0.27878787878787886,loose,dausa_dausa_lawan
-DAUSA,DAUSA,khawaraoji,Chawandhera,37086,0.28484848484848485,loose,dausa_dausa_khawaraoji
-DAUSA,DAUSA,jopada,Jopara,37097,0.11111111111111106,strict,dausa_dausa_jopada
-DAUSA,DAUSA,piyariwas,Jopara,37097,0.29629629629629634,loose,dausa_dausa_piyariwas
-DAUSA,DAUSA,kherwal,Khairwal,37105,0.2142857142857143,loose,dausa_dausa_kherwal
-DAUSA,DAUSA,khanwas,Khairwal,37105,0.22023809523809523,loose,dausa_dausa_khanwas
-DAUSA,DAUSA,dharnwas,Khairwal,37105,0.25000000000000006,loose,dausa_dausa_dharnwas
-DAUSA,DAUSA,dungarawata,Ralawata,37120,0.23484848484848492,loose,dausa_dausa_dungarawata
-DAUSA,DAUSA,nagal rajawatan,Ralawata,37120,0.2597222222222223,loose,dausa_dausa_nagal rajawatan
-DAUSA,LALSOT,chondiwas,Chonriyawas,37135,0.16961279461279474,strict,dausa_lalsot_chondiwas
-DAUSA,LALSOT,gangliyawas,Chonriyawas,37135,0.24242424242424254,loose,dausa_lalsot_gangliyawas
-DAUSA,LALSOT,nayabas,Chonriyawas,37135,0.27705627705627717,loose,dausa_lalsot_nayabas
-DAUSA,LALSOT,mahariya,Mahariya,37154,0,exact,dausa_lalsot_mahariya
-DAUSA,LALSOT,mandawari,Mahariya,37154,0.27777777777777785,loose,dausa_lalsot_mandawari
-DAUSA,LALSOT,sanwasa,Sanwasa,37166,0,exact,dausa_lalsot_sanwasa
-DAUSA,LALSOT,rahuwas,Sanwasa,37166,0.28571428571428575,loose,dausa_lalsot_rahuwas
-DAUSA,LALSOT,suratpura,Suratpuar,37171,0.037037037037037104,strict,dausa_lalsot_suratpura
-DAUSA,LALSOT,dungarpur,Suratpuar,37171,0.27777777777777785,loose,dausa_lalsot_dungarpur
-DAUSA,LALSOT,jhanpda,Jhanpda,37174,0,exact,dausa_lalsot_jhanpda
-DAUSA,LALSOT,palunda,Jhanpda,37174,0.28571428571428575,loose,dausa_lalsot_palunda
-DAUSA,MAHWA,dhand,Dhand,37181,0,exact,dausa_mahwa_dhand
-DAUSA,MAHWA,dholakheda,Dhand,37181,0.26666666666666666,loose,dausa_mahwa_dholakheda
-DAUSA,MAHWA,mandawar,Gagwana,37182,0.28690476190476194,loose,dausa_mahwa_mandawar
-DAUSA,MAHWA,norangwada,Gagwana,37182,0.2920634920634921,loose,dausa_mahwa_norangwada
-DAUSA,MAHWA,gajipur,Gazipur,37185,0.09523809523809525,strict,dausa_mahwa_gajipur
-DAUSA,MAHWA,raipur,Gazipur,37185,0.1507936507936509,strict,dausa_mahwa_raipur
-DAUSA,MAHWA,hadiya,Handiya,37187,0.04761904761904765,strict,dausa_mahwa_hadiya
-DAUSA,MAHWA,haldena,Handiya,37187,0.28571428571428575,loose,dausa_mahwa_haldena
-DAUSA,MAHWA,palanaheda,Palanhera,37199,0.1662037037037037,strict,dausa_mahwa_palanaheda
-DAUSA,MAHWA,pakhar,Palanhera,37199,0.2703703703703703,loose,dausa_mahwa_pakhar
-DAUSA,SIKRAI,chokarwada,Bairwanda,37215,0.24444444444444452,loose,dausa_sikrai_chokarwada
-DAUSA,SIKRAI,mariyada,Bairwanda,37215,0.25000000000000006,loose,dausa_sikrai_mariyada
-DAUSA,SIKRAI,bavanpada,Bairwanda,37215,0.27777777777777785,loose,dausa_sikrai_bavanpada
-DAUSA,SIKRAI,farashpura,Frashpura,37223,0.07037037037037047,strict,dausa_sikrai_farashpura
-DAUSA,SIKRAI,achalpura,Frashpura,37223,0.22222222222222238,loose,dausa_sikrai_achalpura
-DAUSA,SIKRAI,shekhpura,Frashpura,37223,0.22222222222222238,loose,dausa_sikrai_shekhpura
-DAUSA,SIKRAI,jaisinghpura,Jaisinghpura,37230,0,exact,dausa_sikrai_jaisinghpura
-DAUSA,SIKRAI,nihalpura,Jaisinghpura,37230,0.21064814814814825,loose,dausa_sikrai_nihalpura
-DAUSA,SIKRAI,kalwan,Kalwan,37233,0,exact,dausa_sikrai_kalwan
-DAUSA,SIKRAI,kailai,Kalwan,37233,0.22222222222222238,loose,dausa_sikrai_kailai
-DAUSA,SIKRAI,nandari,Nandri,37243,0.04761904761904765,strict,dausa_sikrai_nandari
-DAUSA,SIKRAI,sikandara,Nandri,37243,0.29629629629629634,loose,dausa_sikrai_sikandara
+DAUSA,DAUSA,khanpura,Bishanpura,37083,0.14166666666666666,fuzzy,dausa_dausa_khanpura
+DAUSA,MAHWA,gajipur,Gazipur,37185,0.09523809523809525,fuzzy,dausa_mahwa_gajipur
+DAUSA,MAHWA,raipur,Gazipur,37185,0.1507936507936509,fuzzy,dausa_mahwa_raipur
 DAUSA,SIKRAI,pancholi,Pancholi,37245,0,exact,dausa_sikrai_pancholi
-DAUSA,SIKRAI,ranoli,Pancholi,37245,0.18055555555555555,strict,dausa_sikrai_ranoli
-DAUSA,SIKRAI,udaipura,Udaipura,37254,0,exact,dausa_sikrai_udaipura
-DAUSA,SIKRAI,mohachingpura,Udaipura,37254,0.26282051282051283,loose,dausa_sikrai_mohachingpura
+DAUSA,SIKRAI,ranoli,Pancholi,37245,0.18055555555555555,fuzzy,dausa_sikrai_ranoli
 DHAULPUR,BARI,dhanora,Dhanora,37259,0,exact,dhaulpur_bari_dhanora
-DHAULPUR,BARI,nidhara,Dhanora,37259,0.19047619047619044,strict,dhaulpur_bari_nidhara
-DHAULPUR,BASERI,baroli,Bharli,37293,0.11111111111111106,strict,dhaulpur_baseri_baroli
-DHAULPUR,BASERI,khroli,Bharli,37293,0.22222222222222238,loose,dhaulpur_baseri_khroli
-DHAULPUR,BASERI,bijholi,Bharli,37293,0.253968253968254,loose,dhaulpur_baseri_bijholi
+DHAULPUR,BARI,nidhara,Dhanora,37259,0.19047619047619044,fuzzy,dhaulpur_bari_nidhara
 DHAULPUR,BASERI,ratanpur,Ratanpur,37316,0,exact,dhaulpur_baseri_ratanpur
-DHAULPUR,BASERI,madanpur,Ratanpur,37316,0.1666666666666667,strict,dhaulpur_baseri_madanpur
-DHAULPUR,BASERI,nadanpur,Ratanpur,37316,0.1666666666666667,strict,dhaulpur_baseri_nadanpur
-DHAULPUR,BASERI,sermathura,Ratanpur,37316,0.2916666666666667,loose,dhaulpur_baseri_sermathura
-DHAULPUR,DHAULPUR,basai samanta,Basai Samanta,37324,0,exact,dhaulpur_dhaulpur_basai samanta
-DHAULPUR,DHAULPUR,basainawab,Basai Samanta,37324,0.23653846153846148,loose,dhaulpur_dhaulpur_basainawab
-DHAULPUR,DHAULPUR,kotra,Kotra,37339,0,exact,dhaulpur_dhaulpur_kotra
-DHAULPUR,DHAULPUR,kolwa,Kotra,37339,0.26666666666666666,loose,dhaulpur_dhaulpur_kolwa
-DHAULPUR,DHAULPUR,moroli,Moroli,37347,0,exact,dhaulpur_dhaulpur_moroli
-DHAULPUR,DHAULPUR,sehroli,Moroli,37347,0.253968253968254,loose,dhaulpur_dhaulpur_sehroli
-DHAULPUR,DHAULPUR,purani chhawni,Purani Chhawanee,37355,0.08630952380952378,strict,dhaulpur_dhaulpur_purani chhawni
-DHAULPUR,DHAULPUR,purani,Purani Chhawanee,37355,0.20833333333333337,loose,dhaulpur_dhaulpur_purani
-DHAULPUR,DHAULPUR,tanda,Tanda,37364,0,exact,dhaulpur_dhaulpur_tanda
-DHAULPUR,DHAULPUR,kurandia,Tanda,37364,0.23333333333333345,loose,dhaulpur_dhaulpur_kurandia
-DHAULPUR,DHAULPUR,mandhakakoli,Tanda,37364,0.2888888888888889,loose,dhaulpur_dhaulpur_mandhakakoli
-DHAULPUR,RAJAKHERA,devkheda,Deokhera,37375,0.1666666666666667,strict,dhaulpur_rajakhera_devkheda
-DHAULPUR,RAJAKHERA,dulhra,Deokhera,37375,0.27777777777777785,loose,dhaulpur_rajakhera_dulhra
-DHAULPUR,RAJAKHERA,hathvari,Hathwari,37379,0.08333333333333338,strict,dhaulpur_rajakhera_hathvari
-DHAULPUR,RAJAKHERA,luhari,Hathwari,37379,0.27777777777777785,loose,dhaulpur_rajakhera_luhari
-DHAULPUR,RAJAKHERA,jasupura,Jasoopura,37381,0.16335978835978843,strict,dhaulpur_rajakhera_jasupura
-DHAULPUR,RAJAKHERA,kasimpur,Jasoopura,37381,0.27314814814814825,loose,dhaulpur_rajakhera_kasimpur
-DHAULPUR,DHAULPUR,karimpur,Kasimpur,37383,0.08333333333333338,strict,dhaulpur_dhaulpur_karimpur
-DHAULPUR,DHAULPUR,tasima,Kasimpur,37383,0.27777777777777785,loose,dhaulpur_dhaulpur_tasima
-DHAULPUR,RAJAKHERA,nagar,Nagar,37395,0,exact,dhaulpur_rajakhera_nagar
-DHAULPUR,RAJAKHERA,mangrol,Nagar,37395,0.29285714285714287,loose,dhaulpur_rajakhera_mangrol
+DHAULPUR,BASERI,madanpur,Ratanpur,37316,0.1666666666666667,fuzzy,dhaulpur_baseri_madanpur
+DHAULPUR,BASERI,nadanpur,Ratanpur,37316,0.1666666666666667,fuzzy,dhaulpur_baseri_nadanpur
 DHAULPUR,RAJAKHERA,sadapur,Sadapur,37398,0,exact,dhaulpur_rajakhera_sadapur
-DHAULPUR,RAJAKHERA,sadikpur,Sadapur,37398,0.130952380952381,strict,dhaulpur_rajakhera_sadikpur
+DHAULPUR,RAJAKHERA,sadikpur,Sadapur,37398,0.130952380952381,fuzzy,dhaulpur_rajakhera_sadikpur
 DHAULPUR,RAJAKHERA,samor,Samor,37402,0,exact,dhaulpur_rajakhera_samor
-DHAULPUR,RAJAKHERA,samona,Samor,37402,0.17777777777777778,strict,dhaulpur_rajakhera_samona
-DUNGARPUR,ASPUR,bhewadi,Bhevdi,37413,0.1507936507936509,strict,dungarpur_aspur_bhewadi
-DUNGARPUR,ASPUR,bhekhred,Bhevdi,37413,0.27777777777777785,loose,dungarpur_aspur_bhekhred
-DUNGARPUR,ASPUR,indoda,Indoda,37422,0,exact,dungarpur_aspur_indoda
-DUNGARPUR,ASPUR,pindawal,Indoda,37422,0.27777777777777785,loose,dungarpur_aspur_pindawal
-DUNGARPUR,ASPUR,lilawasa,Lilwasa,37431,0.13690476190476192,strict,dungarpur_aspur_lilawasa
-DUNGARPUR,ASPUR,limbata,Lilwasa,37431,0.28571428571428575,loose,dungarpur_aspur_limbata
-DUNGARPUR,ASPUR,mowai,Movai,37435,0.13333333333333336,strict,dungarpur_aspur_mowai
-DUNGARPUR,ASPUR,miyali,Movai,37435,0.3,loose,dungarpur_aspur_miyali
-DUNGARPUR,ASPUR,nandli sagoda,Nandali Sagora,37438,0.1843711843711845,strict,dungarpur_aspur_nandli sagoda
-DUNGARPUR,ASPUR,nandli ahada,Nandali Sagora,37438,0.21746031746031746,loose,dungarpur_aspur_nandli ahada
-DUNGARPUR,ASPUR,paradietawar,Parada Itiwar,37443,0.12451437451437454,strict,dungarpur_aspur_paradietawar
-DUNGARPUR,ASPUR,pal nithauawa,Parada Itiwar,37443,0.29772079772079774,loose,dungarpur_aspur_pal nithauawa
-DUNGARPUR,BICHIWARA,aamjhara,Amajara,37457,0.08928571428571432,strict,dungarpur_bichiwara_aamjhara
-DUNGARPUR,BICHIWARA,gamdi aahada,Amajara,37457,0.2896825396825397,loose,dungarpur_bichiwara_gamdi aahada
-DUNGARPUR,BICHIWARA,bichhiwara,Bichhiwara,37461,0,exact,dungarpur_bichiwara_bichhiwara
-DUNGARPUR,BICHIWARA,bhehana,Bichhiwara,37461,0.2619047619047619,loose,dungarpur_bichiwara_bhehana
-DUNGARPUR,BICHIWARA,ghughara,Bichhiwara,37461,0.2916666666666667,loose,dungarpur_bichiwara_ghughara
-DUNGARPUR,BICHIWARA,chundawada,Chundawara,37465,0.06666666666666678,strict,dungarpur_bichiwara_chundawada
-DUNGARPUR,BICHIWARA,charwada,Chundawara,37465,0.236904761904762,loose,dungarpur_bichiwara_charwada
-DUNGARPUR,BICHIWARA,gandhava,Chundawara,37465,0.2722222222222222,loose,dungarpur_bichiwara_gandhava
-DUNGARPUR,BICHIWARA,kanba,Kanba,37476,0,exact,dungarpur_bichiwara_kanba
-DUNGARPUR,BICHIWARA,kankradra,Kanba,37476,0.2518518518518519,loose,dungarpur_bichiwara_kankradra
-DUNGARPUR,BICHIWARA,thana,Kanba,37476,0.26666666666666666,loose,dungarpur_bichiwara_thana
-DUNGARPUR,BICHIWARA,vikas nagar,Kanba,37476,0.27878787878787886,loose,dungarpur_bichiwara_vikas nagar
-DUNGARPUR,BICHIWARA,vainja,Kanba,37476,0.3,loose,dungarpur_bichiwara_vainja
-DUNGARPUR,BICHIWARA,malmatha,Malmatha,37483,0,exact,dungarpur_bichiwara_malmatha
-DUNGARPUR,BICHIWARA,mada,Malmatha,37483,0.2916666666666667,loose,dungarpur_bichiwara_mada
-DUNGARPUR,BICHIWARA,palpadar,Palpadar,37489,0,exact,dungarpur_bichiwara_palpadar
-DUNGARPUR,BICHIWARA,balwada,Palpadar,37489,0.22023809523809523,loose,dungarpur_bichiwara_balwada
-DUNGARPUR,BICHIWARA,palvda,Palpadar,37489,0.24722222222222212,loose,dungarpur_bichiwara_palvda
-DUNGARPUR,BICHIWARA,galander,Palpadar,37489,0.25000000000000006,loose,dungarpur_bichiwara_galander
-DUNGARPUR,SAGWARA,bunchiya bada,Buchiya Bada,37547,0.025641025641025605,strict,dungarpur_sagwara_bunchiya bada
-DUNGARPUR,SAGWARA,divda bada,Buchiya Bada,37547,0.23888888888888898,loose,dungarpur_sagwara_divda bada
+DHAULPUR,RAJAKHERA,samona,Samor,37402,0.17777777777777778,fuzzy,dhaulpur_rajakhera_samona
 DUNGARPUR,SAGWARA,kariyana,Kariyana,37562,0,exact,dungarpur_sagwara_kariyana
-DUNGARPUR,SAGWARA,daiyana,Kariyana,37562,0.130952380952381,strict,dungarpur_sagwara_daiyana
-DUNGARPUR,SAGWARA,kokapura,Kokapur,37564,0.04166666666666672,strict,dungarpur_sagwara_kokapura
-DUNGARPUR,SAGWARA,jogpur,Kokapur,37564,0.253968253968254,loose,dungarpur_sagwara_jogpur
-DUNGARPUR,SAGWARA,padra,Padra,37571,0,exact,dungarpur_sagwara_padra
-DUNGARPUR,SAGWARA,parda mehta,Padra,37571,0.24848484848484842,loose,dungarpur_sagwara_parda mehta
-DUNGARPUR,SIMALWARA,dhambola,Dhambola,37602,0,exact,dungarpur_simalwara_dhambola
-DUNGARPUR,SIMALWARA,ambada,Dhambola,37602,0.27777777777777785,loose,dungarpur_simalwara_ambada
+DUNGARPUR,SAGWARA,daiyana,Kariyana,37562,0.130952380952381,fuzzy,dungarpur_sagwara_daiyana
 DUNGARPUR,SIMALWARA,dunka,Dunka,37607,0,exact,dungarpur_simalwara_dunka
-DUNGARPUR,SIMALWARA,dungar,Dunka,37607,0.17777777777777778,strict,dungarpur_simalwara_dungar
-DUNGARPUR,SIMALWARA,dungarsaran,Dunka,37607,0.27878787878787886,loose,dungarpur_simalwara_dungarsaran
-DUNGARPUR,SIMALWARA,jharni,Jharni,37617,0,exact,dungarpur_simalwara_jharni
-DUNGARPUR,SIMALWARA,chitari,Jharni,37617,0.253968253968254,loose,dungarpur_simalwara_chitari
-DUNGARPUR,SIMALWARA,kochari,Jharni,37617,0.253968253968254,loose,dungarpur_simalwara_kochari
-DUNGARPUR,SIMALWARA,rasta pal,Rasta,37633,0.14814814814814825,strict,dungarpur_simalwara_rasta pal
-DUNGARPUR,SIMALWARA,ratadiya,Rasta,37633,0.23333333333333345,loose,dungarpur_simalwara_ratadiya
+DUNGARPUR,SIMALWARA,dungar,Dunka,37607,0.17777777777777778,fuzzy,dungarpur_simalwara_dungar
 DUNGARPUR,SIMALWARA,sadriya,Sadriya,37635,0,exact,dungarpur_simalwara_sadriya
-DUNGARPUR,SIMALWARA,nadiya,Sadriya,37635,0.1507936507936509,strict,dungarpur_simalwara_nadiya
-DUNGARPUR,SIMALWARA,dariyati,Sadriya,37635,0.18650793650793648,strict,dungarpur_simalwara_dariyati
-DUNGARPUR,SIMALWARA,sakodra,Sadriya,37635,0.19047619047619044,strict,dungarpur_simalwara_sakodra
-DUNGARPUR,SIMALWARA,garitiya,Sadriya,37635,0.22023809523809523,loose,dungarpur_simalwara_garitiya
+DUNGARPUR,SIMALWARA,nadiya,Sadriya,37635,0.1507936507936509,fuzzy,dungarpur_simalwara_nadiya
+DUNGARPUR,SIMALWARA,dariyati,Sadriya,37635,0.18650793650793648,fuzzy,dungarpur_simalwara_dariyati
+DUNGARPUR,SIMALWARA,sakodra,Sadriya,37635,0.19047619047619044,fuzzy,dungarpur_simalwara_sakodra
 DUNGARPUR,SIMALWARA,sakarsi,Sakarsi,37636,0,exact,dungarpur_simalwara_sakarsi
-DUNGARPUR,SIMALWARA,kasariya,Sakarsi,37636,0.18650793650793648,strict,dungarpur_simalwara_kasariya
-GANGANAGAR,ANUPGARH,3 nd,3 Nd,37687,0,exact,ganganagar_anupgarh_3 nd
-GANGANAGAR,ANUPGARH,3 ksd,3 Nd,37687,0.21666666666666667,loose,ganganagar_anupgarh_3 ksd
-GANGANAGAR,SADULSHAHAR,bhagsar,Bhagsar,37899,0,exact,ganganagar_sadulshahar_bhagsar
-GANGANAGAR,SADULSHAHAR,ganeshgarh,Bhagsar,37899,0.2642857142857143,loose,ganganagar_sadulshahar_ganeshgarh
-HANUMANGARH,BHADRA,bhanai,Bhanai,37970,0,exact,hanumangarh_bhadra_bhanai
-HANUMANGARH,BHADRA,mehrana,Bhanai,37970,0.253968253968254,loose,hanumangarh_bhadra_mehrana
-HANUMANGARH,BHADRA,kalana,Kalana,37991,0,exact,hanumangarh_bhadra_kalana
-HANUMANGARH,BHADRA,khachwana,Kalana,37991,0.20370370370370378,loose,hanumangarh_bhadra_khachwana
+DUNGARPUR,SIMALWARA,kasariya,Sakarsi,37636,0.18650793650793648,fuzzy,dungarpur_simalwara_kasariya
 HANUMANGARH,NOHAR,birkali,Birkali,38152,0,exact,hanumangarh_nohar_birkali
-HANUMANGARH,NOHAR,barwali,Birkali,38152,0.19047619047619044,strict,hanumangarh_nohar_barwali
-JAIPUR,AMBER,khannipura,Akhepura,38217,0.21309523809523812,loose,jaipur_amber_khannipura
-JAIPUR,AMBER,anoppura,Akhepura,38217,0.25000000000000006,loose,jaipur_amber_anoppura
-JAIPUR,AMBER,bilochi,Bilochi,38225,0,exact,jaipur_amber_bilochi
-JAIPUR,AMBER,bichpadi,Bilochi,38225,0.22023809523809523,loose,jaipur_amber_bichpadi
-JAIPUR,AMBER,chitanu kalan,Chitanu Kalan,38229,0,exact,jaipur_amber_chitanu kalan
-JAIPUR,AMBER,raithal,Chitanu Kalan,38229,0.2826617826617827,loose,jaipur_amber_raithal
-JAIPUR,AMBER,kanwarpura,Kanwarpura,38240,0,exact,jaipur_amber_kanwarpura
-JAIPUR,AMBER,chatarpura,Kanwarpura,38240,0.20000000000000007,loose,jaipur_amber_chatarpura
-JAIPUR,AMBER,jairampura,Kanwarpura,38240,0.24761904761904768,loose,jaipur_amber_jairampura
+HANUMANGARH,NOHAR,barwali,Birkali,38152,0.19047619047619044,fuzzy,hanumangarh_nohar_barwali
 JAIPUR,AMBER,khora meena,Khora Meena,38242,0,exact,jaipur_amber_khora meena
-JAIPUR,AMBER,khoria beesal,Khora Meena,38242,0.16317016317016325,strict,jaipur_amber_khoria beesal
-JAIPUR,AMBER,khora shyamdas,Khora Meena,38242,0.2754329004329005,loose,jaipur_amber_khora shyamdas
-JAIPUR,AMBER,nangal susawatan,Nangal Susavtan,38252,0.08769841269841273,strict,jaipur_amber_nangal susawatan
-JAIPUR,AMBER,nangal siras,Nangal Susavtan,38252,0.20000000000000007,loose,jaipur_amber_nangal siras
-JAIPUR,AMBER,nangal purohitan,Nangal Susavtan,38252,0.22335858585858587,loose,jaipur_amber_nangal purohitan
-JAIPUR,AMBER,rundal,Rundal,38259,0,exact,jaipur_amber_rundal
-JAIPUR,AMBER,mundota,Rundal,38259,0.253968253968254,loose,jaipur_amber_mundota
-JAIPUR,AMBER,barna,Rundal,38259,0.3,loose,jaipur_amber_barna
+JAIPUR,AMBER,khoria beesal,Khora Meena,38242,0.16317016317016325,fuzzy,jaipur_amber_khoria beesal
 JAIPUR,AMBER,shyampura,Shyampura,38261,0,exact,jaipur_amber_shyampura
-JAIPUR,AMBER,sewapura,Shyampura,38261,0.19444444444444453,strict,jaipur_amber_sewapura
-JAIPUR,AMBER,rampura dabli,Shyampura,38261,0.2905982905982906,loose,jaipur_amber_rampura dabli
-JAIPUR,AMBER,sirohi,Sirohi,38262,0,exact,jaipur_amber_sirohi
-JAIPUR,AMBER,sirsali,Sirohi,38262,0.253968253968254,loose,jaipur_amber_sirsali
-JAIPUR,BASSI,badwa,Badwa,38265,0,exact,jaipur_bassi_badwa
-JAIPUR,BASSI,bhudla,Badwa,38265,0.3,loose,jaipur_bassi_bhudla
-JAIPUR,BASSI,mohanpura,Mohanpura,38291,0,exact,jaipur_bassi_mohanpura
-JAIPUR,BASSI,anantpura,Mohanpura,38291,0.22222222222222238,loose,jaipur_bassi_anantpura
-JAIPUR,BASSI,kashipura,Mohanpura,38291,0.27777777777777785,loose,jaipur_bassi_kashipura
+JAIPUR,AMBER,sewapura,Shyampura,38261,0.19444444444444453,fuzzy,jaipur_amber_sewapura
 JAIPUR,CHAKSU,badli,Badli,38304,0,exact,jaipur_chaksu_badli
-JAIPUR,CHAKSU,radoli,Badli,38304,0.17777777777777778,strict,jaipur_chaksu_radoli
-JAIPUR,CHAKSU,badodiya,Badli,38304,0.23333333333333345,loose,jaipur_chaksu_badodiya
-JAIPUR,CHAKSU,shivdaspura,Shivdaspura,38330,0,exact,jaipur_chaksu_shivdaspura
-JAIPUR,CHAKSU,mahadevpura,Shivdaspura,38330,0.24431818181818185,loose,jaipur_chaksu_mahadevpura
-JAIPUR,SAMBHAR,harsoli,Bardoti,38341,0.28571428571428575,loose,jaipur_sambhar_harsoli
-JAIPUR,SAMBHAR,mundoti,Bardoti,38341,0.28571428571428575,loose,jaipur_sambhar_mundoti
-JAIPUR,DUDU,rasili,Harsoli,38362,0.21746031746031746,loose,jaipur_dudu_rasili
-JAIPUR,DUDU,bardoti,Harsoli,38362,0.28571428571428575,loose,jaipur_dudu_bardoti
-JAIPUR,DUDU,dhamana,Mamana,38371,0.1507936507936509,strict,jaipur_dudu_dhamana
-JAIPUR,DUDU,mangalwada,Mamana,38371,0.2888888888888888,loose,jaipur_dudu_mangalwada
-JAIPUR,DUDU,narayana,Rahalana,38379,0.2222222222222222,loose,jaipur_dudu_narayana
-JAIPUR,DUDU,rehlana,Rahalana,38379,0.24206349206349215,loose,jaipur_dudu_rehlana
-JAIPUR,DUDU,urseya,Ursewa,38393,0.11111111111111106,strict,jaipur_dudu_urseya
-JAIPUR,DUDU,sewa,Ursewa,38393,0.11111111111111122,strict,jaipur_dudu_sewa
-JAIPUR,GOVINDGARH,takrda,Tankarda,38432,0.1666666666666667,strict,jaipur_govindgarh_takrda
-JAIPUR,GOVINDGARH,kaladera,Tankarda,38432,0.27777777777777785,loose,jaipur_govindgarh_kaladera
+JAIPUR,CHAKSU,radoli,Badli,38304,0.17777777777777778,fuzzy,jaipur_chaksu_radoli
+JAIPUR,DUDU,urseya,Ursewa,38393,0.11111111111111106,fuzzy,jaipur_dudu_urseya
+JAIPUR,DUDU,sewa,Ursewa,38393,0.11111111111111122,fuzzy,jaipur_dudu_sewa
 JAIPUR,JAMWA RAMGARH,basna,Basna,38437,0,exact,jaipur_jamwa ramgarh_basna
-JAIPUR,JAMWA RAMGARH,beerasna,Basna,38437,0.12500000000000006,strict,jaipur_jamwa ramgarh_beerasna
-JAIPUR,JAMWA RAMGARH,bhawnai,Basna,38437,0.20952380952380956,loose,jaipur_jamwa ramgarh_bhawnai
+JAIPUR,JAMWA RAMGARH,beerasna,Basna,38437,0.12500000000000006,fuzzy,jaipur_jamwa ramgarh_beerasna
 JAIPUR,JAMWA RAMGARH,bilod,Bilod,38441,0,exact,jaipur_jamwa ramgarh_bilod
-JAIPUR,JAMWA RAMGARH,behlod,Bilod,38441,0.17777777777777778,strict,jaipur_jamwa ramgarh_behlod
-JAIPUR,JAMWA RAMGARH,dhularavji,Dhaula,38448,0.21666666666666667,loose,jaipur_jamwa ramgarh_dhularavji
-JAIPUR,JAMWA RAMGARH,phutolav,Dhaula,38448,0.27777777777777785,loose,jaipur_jamwa ramgarh_phutolav
-JAIPUR,JAMWA RAMGARH,langadiyawas,Langadiyawas,38457,0,exact,jaipur_jamwa ramgarh_langadiyawas
-JAIPUR,JAMWA RAMGARH,chanvandiya,Langadiyawas,38457,0.2601010101010101,loose,jaipur_jamwa ramgarh_chanvandiya
-JAIPUR,JAMWA RAMGARH,manota,Manota,38459,0,exact,jaipur_jamwa ramgarh_manota
-JAIPUR,JAMWA RAMGARH,santokda,Manota,38459,0.24722222222222212,loose,jaipur_jamwa ramgarh_santokda
-JAIPUR,JAMWA RAMGARH,raipur,Saipura,38472,0.1507936507936509,strict,jaipur_jamwa ramgarh_raipur
-JAIPUR,JAMWA RAMGARH,sayapura,Saipura,38472,0.24206349206349215,loose,jaipur_jamwa ramgarh_sayapura
-JAIPUR,JAMWA RAMGARH,tala,Tala,38475,0,exact,jaipur_jamwa ramgarh_tala
-JAIPUR,JAMWA RAMGARH,thali,Tala,38475,0.21666666666666667,loose,jaipur_jamwa ramgarh_thali
-JAIPUR,JAMWA RAMGARH,tholai,Tala,38475,0.25000000000000006,loose,jaipur_jamwa ramgarh_tholai
-JAIPUR,JHOTWARA,bhambhori,Bhambhori,38480,0,exact,jaipur_jhotwara_bhambhori
-JAIPUR,JHOTWARA,hathoj,Bhambhori,38480,0.29629629629629634,loose,jaipur_jhotwara_hathoj
-JAIPUR,KOTPUTLI,banethi,Banethi,38496,0,exact,jaipur_kotputli_banethi
-JAIPUR,KOTPUTLI,dantil,Banethi,38496,0.253968253968254,loose,jaipur_kotputli_dantil
-JAIPUR,KOTPUTLI,chimanpura,Chimanpura,38503,0,exact,jaipur_kotputli_chimanpura
-JAIPUR,KOTPUTLI,buchara,Chimanpura,38503,0.2619047619047619,loose,jaipur_kotputli_buchara
-JAIPUR,KOTPUTLI,gopalpura,Gopalpura,38509,0,exact,jaipur_kotputli_gopalpura
-JAIPUR,KOTPUTLI,panditpura,Gopalpura,38509,0.24444444444444452,loose,jaipur_kotputli_panditpura
+JAIPUR,JAMWA RAMGARH,behlod,Bilod,38441,0.17777777777777778,fuzzy,jaipur_jamwa ramgarh_behlod
 JAIPUR,KOTPUTLI,gordhanpura,Gordhanpura,38510,0,exact,jaipur_kotputli_gordhanpura
-JAIPUR,KOTPUTLI,mohanpura,Gordhanpura,38510,0.12794612794612809,strict,jaipur_kotputli_mohanpura
-JAIPUR,KOTPUTLI,sundarpura,Gordhanpura,38510,0.19924242424242428,strict,jaipur_kotputli_sundarpura
-JAIPUR,KOTPUTLI,torda gurjar,Gordhanpura,38510,0.2601010101010101,loose,jaipur_kotputli_torda gurjar
+JAIPUR,KOTPUTLI,mohanpura,Gordhanpura,38510,0.12794612794612809,fuzzy,jaipur_kotputli_mohanpura
+JAIPUR,KOTPUTLI,sundarpura,Gordhanpura,38510,0.19924242424242428,fuzzy,jaipur_kotputli_sundarpura
 JAIPUR,KOTPUTLI,kalyanpura kalan,Kalyanpura Kalan,38512,0,exact,jaipur_kotputli_kalyanpura kalan
-JAIPUR,KOTPUTLI,kalyanpura khurd,Kalyanpura Kalan,38512,0.1666666666666667,strict,jaipur_kotputli_kalyanpura khurd
-JAIPUR,KOTPUTLI,dwarkapura,Kanwarpura,38515,0.14074074074074072,strict,jaipur_kotputli_dwarkapura
-JAIPUR,KOTPUTLI,sundarpuradhada,Kanwarpura,38515,0.2847222222222222,loose,jaipur_kotputli_sundarpuradhada
-JAIPUR,KOTPUTLI,nareda,Nareda,38522,0,exact,jaipur_kotputli_nareda
-JAIPUR,KOTPUTLI,goneda,Nareda,38522,0.22222222222222238,loose,jaipur_kotputli_goneda
-JAIPUR,KOTPUTLI,sarud,Nareda,38522,0.3,loose,jaipur_kotputli_sarud
-JAIPUR,KOTPUTLI,sukhlawas,Shuklawas,38532,0.05555555555555556,strict,jaipur_kotputli_sukhlawas
-JAIPUR,KOTPUTLI,bhonawas,Shuklawas,38532,0.27314814814814825,loose,jaipur_kotputli_bhonawas
+JAIPUR,KOTPUTLI,kalyanpura khurd,Kalyanpura Kalan,38512,0.1666666666666667,fuzzy,jaipur_kotputli_kalyanpura khurd
 JAIPUR,PHAGI,lasadiya,Lasadiya,38551,0,exact,jaipur_phagi_lasadiya
-JAIPUR,PHAGI,pahadiya,Lasadiya,38551,0.1666666666666667,strict,jaipur_phagi_pahadiya
-JAIPUR,PHAGI,harsoliya,Lasadiya,38551,0.27314814814814825,loose,jaipur_phagi_harsoliya
-JAIPUR,PHAGI,mandoor,Mandor,38553,0.04761904761904765,strict,jaipur_phagi_mandoor
-JAIPUR,PHAGI,madhorajpura,Mandor,38553,0.25000000000000006,loose,jaipur_phagi_madhorajpura
+JAIPUR,PHAGI,pahadiya,Lasadiya,38551,0.1666666666666667,fuzzy,jaipur_phagi_pahadiya
 JAIPUR,PHAGI,mandawari,Mandawari,38554,0,exact,jaipur_phagi_mandawari
-JAIPUR,PHAGI,mehandawas,Mandawari,38554,0.1740740740740741,strict,jaipur_phagi_mehandawas
-JAIPUR,PHAGI,mandi,Mandi,38555,0,exact,jaipur_phagi_mandi
-JAIPUR,PHAGI,gohandi,Mandi,38555,0.20952380952380956,loose,jaipur_phagi_gohandi
-JAIPUR,SAMBHAR,kajipura,Kajipura,38589,0,exact,jaipur_sambhar_kajipura
-JAIPUR,SAMBHAR,malikpur,Kajipura,38589,0.25000000000000006,loose,jaipur_sambhar_malikpur
-JAIPUR,SAMBHAR,khandel,Khandel,38592,0,exact,jaipur_sambhar_khandel
-JAIPUR,SAMBHAR,bandhal,Khandel,38592,0.28571428571428575,loose,jaipur_sambhar_bandhal
-JAIPUR,SAMBHAR,norangpura,Norangpura,38605,0,exact,jaipur_sambhar_norangpura
-JAIPUR,SAMBHAR,anantpura,Norangpura,38605,0.2216931216931217,loose,jaipur_sambhar_anantpura
-JAIPUR,SAMBHAR,tyod,Tyod,38611,0,exact,jaipur_sambhar_tyod
-JAIPUR,SAMBHAR,dyodi,Tyod,38611,0.21666666666666667,loose,jaipur_sambhar_dyodi
-JAIPUR,SANGANER,devliya,Devaliya,38620,0.13690476190476192,strict,jaipur_sanganer_devliya
-JAIPUR,SANGANER,vatika,Devaliya,38620,0.27777777777777785,loose,jaipur_sanganer_vatika
-JAIPUR,SANGANER,mohanpura,Mohanpura,38627,0,exact,jaipur_sanganer_mohanpura
-JAIPUR,SANGANER,muhana,Mohanpura,38627,0.20370370370370378,loose,jaipur_sanganer_muhana
-JAIPUR,SANGANER,aawaniya,Panwaliya,38631,0.16335978835978843,strict,jaipur_sanganer_aawaniya
-JAIPUR,SANGANER,dantali,Panwaliya,38631,0.24338624338624346,loose,jaipur_sanganer_dantali
-JAIPUR,VIRATNAGAR,bajarangpura,Bajrang Pura,38672,0.08585858585858598,strict,jaipur_viratnagar_bajarangpura
-JAIPUR,VIRATNAGAR,badangar,Bajrang Pura,38672,0.2996031746031746,loose,jaipur_viratnagar_badangar
-JAIPUR,VIRATNAGAR,bhawru,Bhabroo,38675,0.253968253968254,loose,jaipur_viratnagar_bhawru
-JAIPUR,VIRATNAGAR,bhakari,Bhabroo,38675,0.28571428571428575,loose,jaipur_viratnagar_bhakari
+JAIPUR,PHAGI,mehandawas,Mandawari,38554,0.1740740740740741,fuzzy,jaipur_phagi_mehandawas
 JAIPUR,VIRATNAGAR,jodhula,Jodhula,38686,0,exact,jaipur_viratnagar_jodhula
-JAIPUR,VIRATNAGAR,jodhpura,Jodhula,38686,0.130952380952381,strict,jaipur_viratnagar_jodhpura
-JAIPUR,VIRATNAGAR,kuhada,Kuhada,38689,0,exact,jaipur_viratnagar_kuhada
-JAIPUR,VIRATNAGAR,pachudala,Kuhada,38689,0.2703703703703703,loose,jaipur_viratnagar_pachudala
-JAIPUR,VIRATNAGAR,kuned,Kuhada,38689,0.3,loose,jaipur_viratnagar_kuned
-JAISALMER,JAISALMER,bhu,Bhoo,38713,0.27777777777777785,loose,jaisalmer_jaisalmer_bhu
-JAISALMER,JAISALMER,boha,Bhoo,38713,0.27777777777777785,loose,jaisalmer_jaisalmer_boha
-JAISALMER,JAISALMER,chandan,Chandhan,38716,0.04166666666666672,strict,jaisalmer_jaisalmer_chandan
-JAISALMER,JAISALMER,nachna,Chandhan,38716,0.25000000000000006,loose,jaisalmer_jaisalmer_nachna
-JAISALMER,JAISALMER,chinnu,Chandhan,38716,0.27777777777777785,loose,jaisalmer_jaisalmer_chinnu
-JAISALMER,JAISALMER,chatrial,Chhatrel,38717,0.1666666666666667,strict,jaisalmer_jaisalmer_chatrial
-JAISALMER,JAISALMER,bharevala,Chhatrel,38717,0.27314814814814825,loose,jaisalmer_jaisalmer_bharevala
-JAISALMER,JAISALMER,dhaysar,Dhaysar,38721,0,exact,jaisalmer_jaisalmer_dhaysar
-JAISALMER,JAISALMER,ajasar,Dhaysar,38721,0.253968253968254,loose,jaisalmer_jaisalmer_ajasar
-JAISALMER,SAM,bandha,Bandha,38746,0,exact,jaisalmer_sam_bandha
-JAISALMER,SAM,kunda,Bandha,38746,0.3,loose,jaisalmer_sam_kunda
-JAISALMER,SAM,bida,Bida,38748,0,exact,jaisalmer_sam_bida
-JAISALMER,SAM,baiya,Bida,38748,0.21666666666666667,loose,jaisalmer_sam_baiya
-JAISALMER,SAM,sitodai,Bida,38748,0.2738095238095238,loose,jaisalmer_sam_sitodai
-JAISALMER,JAISALMER,deva,Dedha,38754,0.21666666666666667,loose,jaisalmer_jaisalmer_deva
-JAISALMER,JAISALMER,nehdai,Dedha,38754,0.2611111111111111,loose,jaisalmer_jaisalmer_nehdai
-JAISALMER,SAM,harnau,Harnau,38760,0,exact,jaisalmer_sam_harnau
-JAISALMER,SAM,habur,Harnau,38760,0.2611111111111111,loose,jaisalmer_sam_habur
-JAISALMER,SAM,pochhnida,Pocheena,38775,0.19444444444444453,strict,jaisalmer_sam_pochhnida
-JAISALMER,SAM,chelak,Pocheena,38775,0.27777777777777785,loose,jaisalmer_sam_chelak
-JAISALMER,SAM,shahgarh,Shahgarh,38785,0,exact,jaisalmer_sam_shahgarh
-JAISALMER,SAM,fatehgarh,Shahgarh,38785,0.25000000000000006,loose,jaisalmer_sam_fatehgarh
-JAISALMER,SAM,sangad,Shahgarh,38785,0.27777777777777785,loose,jaisalmer_sam_sangad
+JAIPUR,VIRATNAGAR,jodhpura,Jodhula,38686,0.130952380952381,fuzzy,jaipur_viratnagar_jodhpura
 JAISALMER,SAM,tejpala,Tejpala,38791,0,exact,jaisalmer_sam_tejpala
-JAISALMER,SAM,tejmalta,Tejpala,38791,0.130952380952381,strict,jaisalmer_sam_tejmalta
-JAISALMER,SAM,tejrava,Tejpala,38791,0.19047619047619044,strict,jaisalmer_sam_tejrava
-JAISALMER,SANKRA,jaimla,Jaimalan,38805,0.1388888888888889,strict,jaisalmer_sankra_jaimla
-JAISALMER,SANKRA,kailava,Jaimalan,38805,0.28690476190476194,loose,jaisalmer_sankra_kailava
-JAISALMER,SANKRA,jhalariya,Jhalariya,38808,0,exact,jaisalmer_sankra_jhalariya
-JAISALMER,SANKRA,jhabra,Jhalariya,38808,0.2703703703703703,loose,jaisalmer_sankra_jhabra
-JAISALMER,SANKRA,jaloda pokran,Jhalariya,38808,0.2905982905982906,loose,jaisalmer_sankra_jaloda pokran
-JAISALMER,SANKRA,sada,Sada,38827,0,exact,jaisalmer_sankra_sada
-JAISALMER,SANKRA,sardarsingh ki dhani,Sada,38827,0.26666666666666666,loose,jaisalmer_sankra_sardarsingh ki dhani
+JAISALMER,SAM,tejmalta,Tejpala,38791,0.130952380952381,fuzzy,jaisalmer_sam_tejmalta
+JAISALMER,SAM,tejrava,Tejpala,38791,0.19047619047619044,fuzzy,jaisalmer_sam_tejrava
 JALOR,AHORE,aipura,Aipura,38834,0,exact,jalor_ahore_aipura
-JALOR,AHORE,ajitpura,Aipura,38834,0.08333333333333338,strict,jalor_ahore_ajitpura
-JALOR,AHORE,bavdi,Bavadi,38838,0.05555555555555556,strict,jalor_ahore_bavdi
-JALOR,AHORE,bhavrani,Bavadi,38838,0.18055555555555555,strict,jalor_ahore_bhavrani
-JALOR,AHORE,bhaisvada,Bavadi,38838,0.22222222222222238,loose,jalor_ahore_bhaisvada
-JALOR,AHORE,bhorda,Bhorda,38843,0,exact,jalor_ahore_bhorda
-JALOR,AHORE,ahore,Bhorda,38843,0.3,loose,jalor_ahore_ahore
-JALOR,BHINMAL,kora,Kora,38892,0,exact,jalor_bhinmal_kora
-JALOR,BHINMAL,khokha,Kora,38892,0.25000000000000006,loose,jalor_bhinmal_khokha
-JALOR,BHINMAL,narta,Narta,38899,0,exact,jalor_bhinmal_narta
-JALOR,BHINMAL,narsana,Narta,38899,0.20952380952380956,loose,jalor_bhinmal_narsana
-JALOR,BHINMAL,jairan,Narta,38899,0.3,loose,jalor_bhinmal_jairan
-JALOR,BHINMAL,punasa,Punasa,38901,0,exact,jalor_bhinmal_punasa
-JALOR,BHINMAL,lunavas,Punasa,38901,0.21746031746031746,loose,jalor_bhinmal_lunavas
+JALOR,AHORE,ajitpura,Aipura,38834,0.08333333333333338,fuzzy,jalor_ahore_ajitpura
+JALOR,AHORE,bavdi,Bavadi,38838,0.05555555555555556,fuzzy,jalor_ahore_bavdi
+JALOR,AHORE,bhavrani,Bavadi,38838,0.18055555555555555,fuzzy,jalor_ahore_bhavrani
 JALOR,JALORE,siyana,Siyana,38934,0,exact,jalor_jalore_siyana
-JALOR,JALORE,sivana,Siyana,38934,0.11111111111111106,strict,jalor_jalore_sivana
-JALOR,JASWANTPURA,bansdadhanji,Basra Dhanji,38936,0.14444444444444443,strict,jalor_jaswantpura_bansdadhanji
-JALOR,JASWANTPURA,bharudi,Basra Dhanji,38936,0.2896825396825397,loose,jalor_jaswantpura_bharudi
-JALOR,JASWANTPURA,dantlawas,Dantlawas,38940,0,exact,jalor_jaswantpura_dantlawas
-JALOR,JASWANTPURA,dhansa,Dantlawas,38940,0.29629629629629634,loose,jalor_jaswantpura_dhansa
-JALOR,JASWANTPURA,dorda,Dorda,38942,0,exact,jalor_jaswantpura_dorda
-JALOR,JASWANTPURA,modra,Dorda,38942,0.21666666666666667,loose,jalor_jaswantpura_modra
-JALOR,JASWANTPURA,kalapura,Kalapura,38947,0,exact,jalor_jaswantpura_kalapura
-JALOR,JASWANTPURA,khanpur,Kalapura,38947,0.22023809523809523,loose,jalor_jaswantpura_khanpur
-JALOR,RANIWARA,aakhrad,Akhrad,38965,0.04761904761904765,strict,jalor_raniwara_aakhrad
-JALOR,RANIWARA,kervada,Akhrad,38965,0.253968253968254,loose,jalor_raniwara_kervada
+JALOR,JALORE,sivana,Siyana,38934,0.11111111111111106,fuzzy,jalor_jalore_sivana
 JALOR,SANCHORE,dhanta,Dhanta,39007,0,exact,jalor_sanchore_dhanta
-JALOR,SANCHORE,danta,Dhanta,39007,0.05555555555555556,strict,jalor_sanchore_danta
-JALOR,SAYLA,bairath,Bairath,39032,0,exact,jalor_sayla_bairath
-JALOR,SAYLA,babtra,Bairath,39032,0.25079365079365085,loose,jalor_sayla_babtra
+JALOR,SANCHORE,danta,Dhanta,39007,0.05555555555555556,fuzzy,jalor_sanchore_danta
 JHALAWAR,BAKANI,bakani,Bakani,39070,0,exact,jhalawar_bakani_bakani
-JHALAWAR,BAKANI,badai,Bakani,39070,0.17777777777777778,strict,jhalawar_bakani_badai
-JHALAWAR,BAKANI,badbad,Barbar,39073,0.22222222222222238,loose,jhalawar_bakani_badbad
-JHALAWAR,BAKANI,borband,Barbar,39073,0.253968253968254,loose,jhalawar_bakani_borband
-JHALAWAR,BAKANI,kushalpura,Kushalpura,39094,0,exact,jhalawar_bakani_kushalpura
-JHALAWAR,BAKANI,asalpur,Kushalpura,39094,0.2920634920634921,loose,jhalawar_bakani_asalpur
-JHALAWAR,BAKANI,ratlai,Ratlai,39100,0,exact,jhalawar_bakani_ratlai
-JHALAWAR,BAKANI,ghatoli,Ratlai,39100,0.253968253968254,loose,jhalawar_bakani_ghatoli
-JHALAWAR,DAG,kchnara,Chara,39110,0.09523809523809525,strict,jhalawar_dag_kchnara
-JHALAWAR,DAG,chada,Chara,39110,0.13333333333333336,strict,jhalawar_dag_chada
+JHALAWAR,BAKANI,badai,Bakani,39070,0.17777777777777778,fuzzy,jhalawar_bakani_badai
+JHALAWAR,DAG,kchnara,Chara,39110,0.09523809523809525,fuzzy,jhalawar_dag_kchnara
+JHALAWAR,DAG,chada,Chara,39110,0.13333333333333336,fuzzy,jhalawar_dag_chada
 JHALAWAR,DAG,guradiya jhala,Guradiya Jhala,39118,0,exact,jhalawar_dag_guradiya jhala
-JHALAWAR,DAG,guradiya kalan,Guradiya Jhala,39118,0.09523809523809525,strict,jhalawar_dag_guradiya kalan
-JHALAWAR,JHALRAPATAN,badodiya,Barodiya,39152,0.130952380952381,strict,jhalawar_jhalrapatan_badodiya
-JHALAWAR,JHALRAPATAN,sarodh,Barodiya,39152,0.27777777777777785,loose,jhalawar_jhalrapatan_sarodh
-JHALAWAR,JHALRAPATAN,borda,Borda,39155,0,exact,jhalawar_jhalrapatan_borda
-JHALAWAR,JHALRAPATAN,mogra,Borda,39155,0.26666666666666666,loose,jhalawar_jhalrapatan_mogra
+JHALAWAR,DAG,guradiya kalan,Guradiya Jhala,39118,0.09523809523809525,fuzzy,jhalawar_dag_guradiya kalan
 JHALAWAR,JHALRAPATAN,gordhanpura,Gordhanpura,39163,0,exact,jhalawar_jhalrapatan_gordhanpura
-JHALAWAR,JHALRAPATAN,girdhanpura,Gordhanpura,39163,0.06060606060606061,strict,jhalawar_jhalrapatan_girdhanpura
-JHALAWAR,JHALRAPATAN,ganeshpura,Gordhanpura,39163,0.2200757575757576,loose,jhalawar_jhalrapatan_ganeshpura
-JHALAWAR,JHALRAPATAN,aktasa,Iktasa,39168,0.11111111111111106,strict,jhalawar_jhalrapatan_aktasa
-JHALAWAR,JHALRAPATAN,titervasa,Iktasa,39168,0.2703703703703703,loose,jhalawar_jhalrapatan_titervasa
-JHALAWAR,JHALRAPATAN,lavasal,Lawasal,39177,0.09523809523809525,strict,jhalawar_jhalrapatan_lavasal
-JHALAWAR,JHALRAPATAN,alava,Lawasal,39177,0.29285714285714287,loose,jhalawar_jhalrapatan_alava
-JHALAWAR,JHALRAPATAN,piplod,Piplod,39185,0,exact,jhalawar_jhalrapatan_piplod
-JHALAWAR,JHALRAPATAN,pipliya,Piplod,39185,0.253968253968254,loose,jhalawar_jhalrapatan_pipliya
+JHALAWAR,JHALRAPATAN,girdhanpura,Gordhanpura,39163,0.06060606060606061,fuzzy,jhalawar_jhalrapatan_girdhanpura
 JHALAWAR,JHALRAPATAN,salriya,Salriya,39189,0,exact,jhalawar_jhalrapatan_salriya
-JHALAWAR,JHALRAPATAN,suliya,Salriya,39189,0.1507936507936509,strict,jhalawar_jhalrapatan_suliya
-JHALAWAR,KHANPUR,bhagwanpura,Bhagwan Pura,39201,0.02777777777777788,strict,jhalawar_khanpur_bhagwanpura
-JHALAWAR,KHANPUR,khanpur,Bhagwan Pura,39201,0.2142857142857143,loose,jhalawar_khanpur_khanpur
-JHALAWAR,KHANPUR,dobda,Dobra,39206,0.13333333333333336,strict,jhalawar_khanpur_dobda
-JHALAWAR,KHANPUR,borda mau,Dobra,39206,0.2481481481481482,loose,jhalawar_khanpur_borda mau
-JHALAWAR,MANOHARTHANA,baneth,Baneth,39236,0,exact,jhalawar_manoharthana_baneth
-JHALAWAR,MANOHARTHANA,ametha,Baneth,39236,0.22222222222222238,loose,jhalawar_manoharthana_ametha
-JHALAWAR,MANOHARTHANA,dangipura,Dangipura,39243,0,exact,jhalawar_manoharthana_dangipura
-JHALAWAR,MANOHARTHANA,nayapura,Dangipura,39243,0.25000000000000006,loose,jhalawar_manoharthana_nayapura
-JHALAWAR,MANOHARTHANA,gerboliya,Garboliya,39246,0.07407407407407415,strict,jhalawar_manoharthana_gerboliya
-JHALAWAR,MANOHARTHANA,churaliya,Garboliya,39246,0.27777777777777785,loose,jhalawar_manoharthana_churaliya
-JHALAWAR,MANOHARTHANA,kamkheda,Kamkhera,39248,0.08333333333333338,strict,jhalawar_manoharthana_kamkheda
-JHALAWAR,MANOHARTHANA,kharpa,Kamkhera,39248,0.24722222222222212,loose,jhalawar_manoharthana_kharpa
-JHALAWAR,MANOHARTHANA,kolukhedikala,Kolookheri Kalan,39252,0.15544871794871795,strict,jhalawar_manoharthana_kolukhedikala
-JHALAWAR,MANOHARTHANA,devlikalan,Kolookheri Kalan,39252,0.29583333333333345,loose,jhalawar_manoharthana_devlikalan
-JHALAWAR,MANOHARTHANA,thikdiya,Theekriya,39270,0.19444444444444453,strict,jhalawar_manoharthana_thikdiya
-JHALAWAR,MANOHARTHANA,turkadiya,Theekriya,39270,0.27777777777777785,loose,jhalawar_manoharthana_turkadiya
-JHALAWAR,PIRAWA (SUNEL),dola,Dola,39282,0,exact,jhalawar_pirawa (sunel)_dola
-JHALAWAR,PIRAWA (SUNEL),nolai,Dola,39282,0.21666666666666667,loose,jhalawar_pirawa (sunel)_nolai
-JHALAWAR,PIRAWA (SUNEL),hemda,Hemra,39289,0.13333333333333336,strict,jhalawar_pirawa (sunel)_hemda
-JHALAWAR,PIRAWA (SUNEL),kherana,Hemra,39289,0.20952380952380956,loose,jhalawar_pirawa (sunel)_kherana
-JHALAWAR,PIRAWA (SUNEL),odiyakhedi,Odiya Kheri,39300,0.09393939393939396,strict,jhalawar_pirawa (sunel)_odiyakhedi
-JHALAWAR,PIRAWA (SUNEL),divalkheda,Odiya Kheri,39300,0.28484848484848485,loose,jhalawar_pirawa (sunel)_divalkheda
+JHALAWAR,JHALRAPATAN,suliya,Salriya,39189,0.1507936507936509,fuzzy,jhalawar_jhalrapatan_suliya
 JHUNJHUNUN,ALSISAR,alsisar,Alsisar,39318,0,exact,jhunjhunun_alsisar_alsisar
-JHUNJHUNUN,ALSISAR,malsisar,Alsisar,39318,0.04166666666666672,strict,jhunjhunun_alsisar_malsisar
-JHUNJHUNUN,ALSISAR,hansasar,Hansasar,39332,0,exact,jhunjhunun_alsisar_hansasar
-JHUNJHUNUN,ALSISAR,mahansar,Hansasar,39332,0.20238095238095244,loose,jhunjhunun_alsisar_mahansar
-JHUNJHUNUN,ALSISAR,jabasar,Jabasar,39334,0,exact,jhunjhunun_alsisar_jabasar
-JHUNJHUNUN,ALSISAR,bheekhansar,Jabasar,39334,0.27705627705627717,loose,jhunjhunun_alsisar_bheekhansar
-JHUNJHUNUN,ALSISAR,jhatawa khurd,Jhatawa Khurd,39335,0,exact,jhunjhunun_alsisar_jhatawa khurd
-JHUNJHUNUN,ALSISAR,pilani khurd,Jhatawa Khurd,39335,0.29273504273504275,loose,jhunjhunun_alsisar_pilani khurd
-JHUNJHUNUN,BUHANA,ghasera,Ghasera,39365,0,exact,jhunjhunun_buhana_ghasera
-JHUNJHUNUN,BUHANA,heerwa,Ghasera,39365,0.253968253968254,loose,jhunjhunun_buhana_heerwa
-JHUNJHUNUN,BUHANA,kalakhari,Kalakhari,39372,0,exact,jhunjhunun_buhana_kalakhari
-JHUNJHUNUN,BUHANA,gada khera,Kalakhari,39372,0.3,loose,jhunjhunun_buhana_gada khera
-JHUNJHUNUN,BUHANA,khandwa,Khandwa,39373,0,exact,jhunjhunun_buhana_khandwa
-JHUNJHUNUN,BUHANA,khanpur,Khandwa,39373,0.28571428571428575,loose,jhunjhunun_buhana_khanpur
+JHUNJHUNUN,ALSISAR,malsisar,Alsisar,39318,0.04166666666666672,fuzzy,jhunjhunun_alsisar_malsisar
 JHUNJHUNUN,BUHANA,kuharwas,Kuharwas,39375,0,exact,jhunjhunun_buhana_kuharwas
-JHUNJHUNUN,BUHANA,gujarwas,Kuharwas,39375,0.1666666666666667,strict,jhunjhunun_buhana_gujarwas
-JHUNJHUNUN,BUHANA,pacheri kalan,Pacheri Kalan,39381,0,exact,jhunjhunun_buhana_pacheri kalan
-JHUNJHUNUN,BUHANA,pacheri khurd,Pacheri Kalan,39381,0.20512820512820518,loose,jhunjhunun_buhana_pacheri khurd
-JHUNJHUNUN,BUHANA,dhadhot kalan,Pacheri Kalan,39381,0.2980769230769231,loose,jhunjhunun_buhana_dhadhot kalan
-JHUNJHUNUN,BUHANA,santor,Santor,39386,0,exact,jhunjhunun_buhana_santor
-JHUNJHUNUN,BUHANA,sanwlod,Santor,39386,0.253968253968254,loose,jhunjhunun_buhana_sanwlod
-JHUNJHUNUN,BUHANA,sohli,Sohli,39390,0,exact,jhunjhunun_buhana_sohli
-JHUNJHUNUN,BUHANA,thali,Sohli,39390,0.26666666666666666,loose,jhunjhunun_buhana_thali
-JHUNJHUNUN,CHIRAWA,bhamarwasi,Bhamarwasi,39399,0,exact,jhunjhunun_chirawa_bhamarwasi
-JHUNJHUNUN,CHIRAWA,bajawa,Bhamarwasi,39399,0.2222222222222222,loose,jhunjhunun_chirawa_bajawa
-JHUNJHUNUN,CHIRAWA,gidaniya,Gadaniya,39405,0.130952380952381,strict,jhunjhunun_chirawa_gidaniya
-JHUNJHUNUN,CHIRAWA,badangarh,Gadaniya,39405,0.27314814814814825,loose,jhunjhunun_chirawa_badangarh
-JHUNJHUNUN,CHIRAWA,keharpura kalan,Keharpura Kalan,39407,0,exact,jhunjhunun_chirawa_keharpura kalan
-JHUNJHUNUN,CHIRAWA,bhadunda kalan,Keharpura Kalan,39407,0.2063492063492064,loose,jhunjhunun_chirawa_bhadunda kalan
-JHUNJHUNUN,CHIRAWA,solana,Shyolana,39420,0.08333333333333338,strict,jhunjhunun_chirawa_solana
-JHUNJHUNUN,CHIRAWA,sultana,Shyolana,39420,0.22023809523809523,loose,jhunjhunun_chirawa_sultana
-JHUNJHUNUN,JHUNJHUNU,ajari kalan,Ajari Kalan,39424,0,exact,jhunjhunun_jhunjhunu_ajari kalan
-JHUNJHUNUN,JHUNJHUNU,siriyasar kalan,Ajari Kalan,39424,0.20808080808080806,loose,jhunjhunun_jhunjhunu_siriyasar kalan
-JHUNJHUNUN,JHUNJHUNU,bishanpura,Bishanpura,39433,0,exact,jhunjhunun_jhunjhunu_bishanpura
-JHUNJHUNUN,JHUNJHUNU,wahidpura,Bishanpura,39433,0.2216931216931217,loose,jhunjhunun_jhunjhunu_wahidpura
-JHUNJHUNUN,JHUNJHUNU,makhar,Makhar,39447,0,exact,jhunjhunun_jhunjhunu_makhar
-JHUNJHUNUN,JHUNJHUNU,mahradasi,Makhar,39447,0.2703703703703703,loose,jhunjhunun_jhunjhunu_mahradasi
-JHUNJHUNUN,JHUNJHUNU,purohiton ki dhani,Dhani Purohiton Ki,39453,0.2199074074074075,loose,jhunjhunun_jhunjhunu_purohiton ki dhani
-JHUNJHUNUN,JHUNJHUNU,bharoo,Dhani Purohiton Ki,39453,0.29629629629629634,loose,jhunjhunun_jhunjhunu_bharoo
-JHUNJHUNUN,SURAJGARH,adooka,Adooka,39532,0,exact,jhunjhunun_surajgarh_adooka
-JHUNJHUNUN,SURAJGARH,deoroad,Adooka,39532,0.253968253968254,loose,jhunjhunun_surajgarh_deoroad
-JHUNJHUNUN,SURAJGARH,berla,Berla,39538,0,exact,jhunjhunun_surajgarh_berla
-JHUNJHUNUN,SURAJGARH,beri,Berla,39538,0.21666666666666667,loose,jhunjhunun_surajgarh_beri
-JHUNJHUNUN,SURAJGARH,dheegariya,Dheegariya,39542,0,exact,jhunjhunun_surajgarh_dheegariya
-JHUNJHUNUN,SURAJGARH,dulaniya,Dheegariya,39542,0.2916666666666667,loose,jhunjhunun_surajgarh_dulaniya
-JHUNJHUNUN,SURAJGARH,kakora,Kakora,39553,0,exact,jhunjhunun_surajgarh_kakora
-JHUNJHUNUN,SURAJGARH,morwa,Kakora,39553,0.3,loose,jhunjhunun_surajgarh_morwa
-JHUNJHUNUN,SURAJGARH,kuloth kalan,Kuloth Kalan,39556,0,exact,jhunjhunun_surajgarh_kuloth kalan
-JHUNJHUNUN,SURAJGARH,bangothri kalan,Kuloth Kalan,39556,0.21666666666666667,loose,jhunjhunun_surajgarh_bangothri kalan
-JHUNJHUNUN,SURAJGARH,kirwana,Kirhwana,39565,0.04166666666666672,strict,jhunjhunun_surajgarh_kirwana
-JHUNJHUNUN,SURAJGARH,khudaniya,Kirhwana,39565,0.27314814814814825,loose,jhunjhunun_surajgarh_khudaniya
-JHUNJHUNUN,SURAJGARH,ureeka,Ureeka,39568,0,exact,jhunjhunun_surajgarh_ureeka
-JHUNJHUNUN,SURAJGARH,leekhwa,Ureeka,39568,0.253968253968254,loose,jhunjhunun_surajgarh_leekhwa
+JHUNJHUNUN,BUHANA,gujarwas,Kuharwas,39375,0.1666666666666667,fuzzy,jhunjhunun_buhana_gujarwas
 JODHPUR,BALESAR,agolai,Agolai,39605,0,exact,jodhpur_balesar_agolai
-JODHPUR,BALESAR,godelai,Agolai,39605,0.1507936507936509,strict,jodhpur_balesar_godelai
-JODHPUR,BALESAR,balesar durgavata,Balesar Durgawata,39606,0.039215686274509866,strict,jodhpur_balesar_balesar durgavata
-JODHPUR,BALESAR,balesar satta,Balesar Durgawata,39606,0.199232140408611,strict,jodhpur_balesar_balesar satta
+JODHPUR,BALESAR,godelai,Agolai,39605,0.1507936507936509,fuzzy,jodhpur_balesar_godelai
+JODHPUR,BALESAR,balesar durgavata,Balesar Durgawata,39606,0.039215686274509866,fuzzy,jodhpur_balesar_balesar durgavata
+JODHPUR,BALESAR,balesar satta,Balesar Durgawata,39606,0.199232140408611,fuzzy,jodhpur_balesar_balesar satta
 JODHPUR,BALESAR,belwa ranaji,Belwa Ranaji,39612,0,exact,jodhpur_balesar_belwa ranaji
-JODHPUR,BALESAR,belwa,Belwa Ranaji,39612,0.1944444444444444,strict,jodhpur_balesar_belwa
-JODHPUR,BALESAR,bhalu rajwan,Belwa Ranaji,39612,0.2407407407407408,loose,jodhpur_balesar_bhalu rajwan
-JODHPUR,BALESAR,bhatelai purohitan,Bhatelai Purohitan,39615,0,exact,jodhpur_balesar_bhatelai purohitan
-JODHPUR,BALESAR,kanodiya purohitan,Bhatelai Purohitan,39615,0.21082621082621086,loose,jodhpur_balesar_kanodiya purohitan
-JODHPUR,BALESAR,bhalu anopgarh,Bhatelai Purohitan,39615,0.255952380952381,loose,jodhpur_balesar_bhalu anopgarh
-JODHPUR,BALESAR,khudiyala,Khudiyala,39631,0,exact,jodhpur_balesar_khudiyala
-JODHPUR,BALESAR,sekhala,Khudiyala,39631,0.24338624338624346,loose,jodhpur_balesar_sekhala
-JODHPUR,BALESAR,ketukalla,Khudiyala,39631,0.29629629629629634,loose,jodhpur_balesar_ketukalla
+JODHPUR,BALESAR,belwa,Belwa Ranaji,39612,0.1944444444444444,fuzzy,jodhpur_balesar_belwa
 JODHPUR,BAP,charnai,Charnai,39645,0,exact,jodhpur_bap_charnai
-JODHPUR,BAP,chimana,Charnai,39645,0.19047619047619044,strict,jodhpur_bap_chimana
-JODHPUR,BAP,kalyansingh ki sidd,Kalyansingh Ki Sid,39653,0.017543859649122917,strict,jodhpur_bap_kalyansingh ki sidd
-JODHPUR,BAP,kansingh ki sidd,Kalyansingh Ki Sid,39653,0.0763888888888889,strict,jodhpur_bap_kansingh ki sidd
+JODHPUR,BAP,chimana,Charnai,39645,0.19047619047619044,fuzzy,jodhpur_bap_chimana
+JODHPUR,BAP,kalyansingh ki sidd,Kalyansingh Ki Sid,39653,0.017543859649122917,fuzzy,jodhpur_bap_kalyansingh ki sidd
+JODHPUR,BAP,kansingh ki sidd,Kalyansingh Ki Sid,39653,0.0763888888888889,fuzzy,jodhpur_bap_kansingh ki sidd
 JODHPUR,BAP,kanasar,Kanasar,39655,0,exact,jodhpur_bap_kanasar
-JODHPUR,BAP,chanpasar,Kanasar,39655,0.1587301587301588,strict,jodhpur_bap_chanpasar
-JODHPUR,BAP,kelansar,Kanasar,39655,0.18650793650793648,strict,jodhpur_bap_kelansar
-JODHPUR,BAP,shekhasar,Kanasar,39655,0.24338624338624346,loose,jodhpur_bap_shekhasar
-JODHPUR,PHALODI,bhojasar,Shekhasar,39666,0.27314814814814825,loose,jodhpur_phalodi_bhojasar
-JODHPUR,PHALODI,bhinyasar,Shekhasar,39666,0.29629629629629634,loose,jodhpur_phalodi_bhinyasar
-JODHPUR,PHALODI,fatehsagar,Shekhasar,39666,0.3,loose,jodhpur_phalodi_fatehsagar
-JODHPUR,BHOPALGARH,khariya khangar,Artiya Kalan,39670,0.20000000000000007,loose,jodhpur_bhopalgarh_khariya khangar
-JODHPUR,BHOPALGARH,sathian,Artiya Kalan,39670,0.2896825396825397,loose,jodhpur_bhopalgarh_sathian
-JODHPUR,BHOPALGARH,budkiya,Burkiya,39679,0.09523809523809525,strict,jodhpur_bhopalgarh_budkiya
-JODHPUR,BHOPALGARH,ratkudiya,Burkiya,39679,0.24206349206349215,loose,jodhpur_bhopalgarh_ratkudiya
-JODHPUR,BHOPALGARH,kudi,Kuri,39692,0.1666666666666667,strict,jodhpur_bhopalgarh_kudi
-JODHPUR,BHOPALGARH,kud,Kuri,39692,0.27777777777777785,loose,jodhpur_bhopalgarh_kud
-JODHPUR,BHOPALGARH,rampura,Rampura,39702,0,exact,jodhpur_bhopalgarh_rampura
-JODHPUR,BHOPALGARH,khvaspura,Rampura,39702,0.24338624338624346,loose,jodhpur_bhopalgarh_khvaspura
-JODHPUR,BILARA,borunda,Barna,39710,0.20952380952380956,loose,jodhpur_bilara_borunda
-JODHPUR,BILARA,nanan,Barna,39710,0.26666666666666666,loose,jodhpur_bilara_nanan
-JODHPUR,BILARA,chandelav,Chandelao,39717,0.07407407407407415,strict,jodhpur_bilara_chandelav
-JODHPUR,BILARA,buchkala,Chandelao,39717,0.27314814814814825,loose,jodhpur_bilara_buchkala
-JODHPUR,BILARA,ransigaon,Ransigaon,39740,0,exact,jodhpur_bilara_ransigaon
-JODHPUR,BILARA,ravniyana,Ransigaon,39740,0.22222222222222238,loose,jodhpur_bilara_ravniyana
-JODHPUR,BILARA,sambadiya,Sambariya,39744,0.07407407407407415,strict,jodhpur_bilara_sambadiya
-JODHPUR,BILARA,silari,Sambariya,39744,0.29629629629629634,loose,jodhpur_bilara_silari
-JODHPUR,BILARA,udliyavas,Udaliyawas,39748,0.187037037037037,strict,jodhpur_bilara_udliyavas
-JODHPUR,BILARA,madliya,Udaliyawas,39748,0.2365079365079366,loose,jodhpur_bilara_madliya
-JODHPUR,BILARA,malavas,Udaliyawas,39748,0.2619047619047619,loose,jodhpur_bilara_malavas
-JODHPUR,LUNI,bhatinda,Bhatinda,39752,0,exact,jodhpur_luni_bhatinda
-JODHPUR,LUNI,bhandu kalan,Bhatinda,39752,0.25000000000000006,loose,jodhpur_luni_bhandu kalan
-JODHPUR,LUNI,birami,Birami,39753,0,exact,jodhpur_luni_birami
-JODHPUR,LUNI,piprali,Birami,39753,0.253968253968254,loose,jodhpur_luni_piprali
-JODHPUR,LUNI,modga kalan,Mograkalan,39777,0.09393939393939396,strict,jodhpur_luni_modga kalan
-JODHPUR,LUNI,rohicha kalan,Mograkalan,39777,0.23653846153846148,loose,jodhpur_luni_rohicha kalan
-JODHPUR,LUNI,nandwan,Nandwan,39778,0,exact,jodhpur_luni_nandwan
-JODHPUR,LUNI,narnadi,Nandwan,39778,0.2571428571428572,loose,jodhpur_luni_narnadi
-JODHPUR,LUNI,palasani,Palasani,39781,0,exact,jodhpur_luni_palasani
-JODHPUR,LUNI,jhalamand,Palasani,39781,0.27314814814814825,loose,jodhpur_luni_jhalamand
-JODHPUR,MANDOR,loredi panditji,Lordi Pandit Ji,39809,0.04444444444444449,strict,jodhpur_mandor_loredi panditji
-JODHPUR,MANDOR,lordi dejgra,Lordi Pandit Ji,39809,0.2722222222222222,loose,jodhpur_mandor_lordi dejgra
-JODHPUR,MANDOR,nandda kalan,Nandra Kalan,39811,0.055555555555555705,strict,jodhpur_mandor_nandda kalan
-JODHPUR,MANDOR,salvan kalan,Nandra Kalan,39811,0.20370370370370378,loose,jodhpur_mandor_salvan kalan
-JODHPUR,MANDOR,narva khichyan,Nandra Kalan,39811,0.253968253968254,loose,jodhpur_mandor_narva khichyan
-JODHPUR,MANDOR,rohila kalan,Nandra Kalan,39811,0.2847222222222224,loose,jodhpur_mandor_rohila kalan
-JODHPUR,MANDOR,pithawas,Peethawas,39813,0.11574074074074082,strict,jodhpur_mandor_pithawas
-JODHPUR,MANDOR,popawas,Peethawas,39813,0.24338624338624346,loose,jodhpur_mandor_popawas
-JODHPUR,OSIAN,bairdo ka bas,Berdon Ka Bas,39826,0.10256410256410255,strict,jodhpur_osian_bairdo ka bas
-JODHPUR,OSIAN,bana kabas,Berdon Ka Bas,39826,0.2990384615384615,loose,jodhpur_osian_bana kabas
-JODHPUR,OSIAN,bhed,Bher,39829,0.1666666666666667,strict,jodhpur_osian_bhed
-JODHPUR,OSIAN,cherai,Bher,39829,0.25000000000000006,loose,jodhpur_osian_cherai
-JODHPUR,OSIAN,mandiyai khurd,Khabra Khurd,39853,0.253968253968254,loose,jodhpur_osian_mandiyai khurd
-JODHPUR,OSIAN,panchlakhurd,Khabra Khurd,39853,0.263888888888889,loose,jodhpur_osian_panchlakhurd
-JODHPUR,OSIAN,santodakhurd,Khabra Khurd,39853,0.27777777777777773,loose,jodhpur_osian_santodakhurd
-JODHPUR,OSIAN,tinvri,Kinjari,39858,0.253968253968254,loose,jodhpur_osian_tinvri
-JODHPUR,OSIAN,binjvadiya,Kinjari,39858,0.2619047619047619,loose,jodhpur_osian_binjvadiya
-JODHPUR,PHALODI,hoparadi,Hopardi,39898,0.04166666666666672,strict,jodhpur_phalodi_hoparadi
-JODHPUR,PHALODI,chadi,Hopardi,39898,0.20952380952380956,loose,jodhpur_phalodi_chadi
-JODHPUR,PHALODI,phadiyal,Hopardi,39898,0.28690476190476194,loose,jodhpur_phalodi_phadiyal
-JODHPUR,PHALODI,lodriya,Lordiyan,39910,0.08928571428571432,strict,jodhpur_phalodi_lodriya
-JODHPUR,PHALODI,jaloda,Lordiyan,39910,0.27777777777777785,loose,jodhpur_phalodi_jaloda
-JODHPUR,SHERGARH,chaba,Chaba,39926,0,exact,jodhpur_shergarh_chaba
-JODHPUR,SHERGARH,chandsama,Chaba,39926,0.2518518518518519,loose,jodhpur_shergarh_chandsama
-JODHPUR,SHERGARH,dasniya,Dasaniya,39930,0.13690476190476192,strict,jodhpur_shergarh_dasniya
-JODHPUR,SHERGARH,untavaliya,Dasaniya,39930,0.2722222222222222,loose,jodhpur_shergarh_untavaliya
-JODHPUR,SHERGARH,jethaniya,Dasaniya,39930,0.27314814814814825,loose,jodhpur_shergarh_jethaniya
+JODHPUR,BAP,chanpasar,Kanasar,39655,0.1587301587301588,fuzzy,jodhpur_bap_chanpasar
+JODHPUR,BAP,kelansar,Kanasar,39655,0.18650793650793648,fuzzy,jodhpur_bap_kelansar
 JODHPUR,SHERGARH,gumansinghpura,Gumansinghpura,39934,0,exact,jodhpur_shergarh_gumansinghpura
-JODHPUR,SHERGARH,gumanpura,Gumansinghpura,39934,0.11904761904761912,strict,jodhpur_shergarh_gumanpura
-JODHPUR,SHERGARH,pabusar,Pabusar,39942,0,exact,jodhpur_shergarh_pabusar
-JODHPUR,SHERGARH,jaitsar,Pabusar,39942,0.28571428571428575,loose,jodhpur_shergarh_jaitsar
-JODHPUR,SHERGARH,sointra,Sointara,39950,0.08928571428571432,strict,jodhpur_shergarh_sointra
-JODHPUR,SHERGARH,setrava,Sointara,39950,0.28690476190476194,loose,jodhpur_shergarh_setrava
-JODHPUR,SHERGARH,solankiya tala,Solkiya Tla,39951,0.19264069264069278,strict,jodhpur_shergarh_solankiya tala
-JODHPUR,SHERGARH,siyanda,Solkiya Tla,39951,0.27705627705627717,loose,jodhpur_shergarh_siyanda
-KARAULI,HINDAUN,bhango,Bhango,39961,0,exact,karauli_hindaun_bhango
-KARAULI,HINDAUN,chandangaon,Bhango,39961,0.23737373737373735,loose,karauli_hindaun_chandangaon
-KARAULI,HINDAUN,dhidhora,Dhindora,39967,0.08333333333333338,strict,karauli_hindaun_dhidhora
-KARAULI,HINDAUN,dehra,Dhindora,39967,0.23333333333333345,loose,karauli_hindaun_dehra
-KARAULI,HINDAUN,jatwara,Jatwara,39976,0,exact,karauli_hindaun_jatwara
-KARAULI,HINDAUN,katakad,Jatwara,39976,0.28571428571428575,loose,karauli_hindaun_katakad
-KARAULI,HINDAUN,jherada,Jhareda,39977,0.04761904761904765,strict,karauli_hindaun_jherada
-KARAULI,HINDAUN,bajheda,Jhareda,39977,0.17857142857142858,strict,karauli_hindaun_bajheda
+JODHPUR,SHERGARH,gumanpura,Gumansinghpura,39934,0.11904761904761912,fuzzy,jodhpur_shergarh_gumanpura
+KARAULI,HINDAUN,jherada,Jhareda,39977,0.04761904761904765,fuzzy,karauli_hindaun_jherada
+KARAULI,HINDAUN,bajheda,Jhareda,39977,0.17857142857142858,fuzzy,karauli_hindaun_bajheda
 KARAULI,HINDAUN,karsoli,Karsoli,39979,0,exact,karauli_hindaun_karsoli
-KARAULI,HINDAUN,kachroli,Karsoli,39979,0.130952380952381,strict,karauli_hindaun_kachroli
-KARAULI,HINDAUN,khareta,Khareta,39981,0,exact,karauli_hindaun_khareta
-KARAULI,HINDAUN,kheda,Khareta,39981,0.29285714285714287,loose,karauli_hindaun_kheda
-KARAULI,HINDAUN,pali,Pali,39995,0,exact,karauli_hindaun_pali
-KARAULI,HINDAUN,palanpur,Pali,39995,0.2916666666666667,loose,karauli_hindaun_palanpur
-KARAULI,HINDAUN,sikroda meena,Sikroda Meena,40001,0,exact,karauli_hindaun_sikroda meena
-KARAULI,HINDAUN,gavda meena,Sikroda Meena,40001,0.2607808857808859,loose,karauli_hindaun_gavda meena
-KARAULI,HINDAUN,nangal meena,Sikroda Meena,40001,0.29273504273504275,loose,karauli_hindaun_nangal meena
-KARAULI,KARAULI,gudla,Gurla,40016,0.13333333333333336,strict,karauli_karauli_gudla
-KARAULI,KARAULI,guvreda,Gurla,40016,0.20952380952380956,loose,karauli_karauli_guvreda
-KARAULI,KARAULI,karsai,Karsai,40024,0,exact,karauli_karauli_karsai
-KARAULI,KARAULI,dukawali,Karsai,40024,0.27777777777777785,loose,karauli_karauli_dukawali
-KARAULI,KARAULI,kashipura,Kashipura,40025,0,exact,karauli_karauli_kashipura
-KARAULI,KARAULI,kanchanpur,Kashipura,40025,0.2693121693121693,loose,karauli_karauli_kanchanpur
-KARAULI,KARAULI,fatehpur,Kashipura,40025,0.27314814814814825,loose,karauli_karauli_fatehpur
+KARAULI,HINDAUN,kachroli,Karsoli,39979,0.130952380952381,fuzzy,karauli_hindaun_kachroli
 KARAULI,NADAUTI,kemla,Kemla,40067,0,exact,karauli_nadauti_kemla
-KARAULI,NADAUTI,kema,Kemla,40067,0.06666666666666678,strict,karauli_nadauti_kema
-KARAULI,NADAUTI,kemri,Kemla,40067,0.26666666666666666,loose,karauli_nadauti_kemri
-KARAULI,SAPOTRA,amarwad,Amarwar,40082,0.09523809523809525,strict,karauli_sapotra_amarwad
-KARAULI,SAPOTRA,mahajrapura,Amarwar,40082,0.2546897546897547,loose,karauli_sapotra_mahajrapura
-KARAULI,SAPOTRA,bagida,Bagida,40084,0,exact,karauli_sapotra_bagida
-KARAULI,SAPOTRA,bugdar,Bagida,40084,0.22222222222222238,loose,karauli_sapotra_bugdar
+KARAULI,NADAUTI,kema,Kemla,40067,0.06666666666666678,fuzzy,karauli_nadauti_kema
 KARAULI,SAPOTRA,baloti,Baloti,40087,0,exact,karauli_sapotra_baloti
-KARAULI,SAPOTRA,bapoti,Baloti,40087,0.11111111111111106,strict,karauli_sapotra_bapoti
-KARAULI,SAPOTRA,baroda,Baroda,40089,0,exact,karauli_sapotra_baroda
-KARAULI,SAPOTRA,rodhai,Baroda,40089,0.22222222222222238,loose,karauli_sapotra_rodhai
-KARAULI,SAPOTRA,gothra,Gothra,40103,0,exact,karauli_sapotra_gothra
-KARAULI,SAPOTRA,sapotra,Gothra,40103,0.253968253968254,loose,karauli_sapotra_sapotra
-KARAULI,SAPOTRA,hadoti,Haroti,40106,0.11111111111111106,strict,karauli_sapotra_hadoti
-KARAULI,SAPOTRA,rahir,Haroti,40106,0.2611111111111111,loose,karauli_sapotra_rahir
-KARAULI,SAPOTRA,jeerota,Jeerota,40109,0,exact,karauli_sapotra_jeerota
-KARAULI,SAPOTRA,dhoreta,Jeerota,40109,0.2571428571428572,loose,karauli_sapotra_dhoreta
-KARAULI,SAPOTRA,mahmedpur,Mahmadpur,40121,0.07407407407407415,strict,karauli_sapotra_mahmedpur
-KARAULI,SAPOTRA,bahadarpur,Mahmadpur,40121,0.24550264550264556,loose,karauli_sapotra_bahadarpur
-KARAULI,SAPOTRA,karanpur,Mahmadpur,40121,0.27314814814814825,loose,karauli_sapotra_karanpur
-KARAULI,SAPOTRA,nibhera,Nibhaira,40127,0.18650793650793648,strict,karauli_sapotra_nibhera
-KARAULI,SAPOTRA,bhankari,Nibhaira,40127,0.22619047619047633,loose,karauli_sapotra_bhankari
+KARAULI,SAPOTRA,bapoti,Baloti,40087,0.11111111111111106,fuzzy,karauli_sapotra_bapoti
 KARAULI,TODABHIM,jagdishpura,Jagdishpura,40146,0,exact,karauli_todabhim_jagdishpura
-KARAULI,TODABHIM,jhadisa,Jagdishpura,40146,0.19913419913419916,strict,karauli_todabhim_jhadisa
+KARAULI,TODABHIM,jhadisa,Jagdishpura,40146,0.19913419913419916,fuzzy,karauli_todabhim_jhadisa
 KARAULI,TODABHIM,sankarwara,Sankarwara,40174,0,exact,karauli_todabhim_sankarwara
-KARAULI,TODABHIM,sahrakar,Sankarwara,40174,0.1892857142857144,strict,karauli_todabhim_sahrakar
-KARAULI,TODABHIM,singhaniya,Singhniyan,40177,0.14074074074074072,strict,karauli_todabhim_singhaniya
-KARAULI,TODABHIM,tighriya,Singhniyan,40177,0.21666666666666667,loose,karauli_todabhim_tighriya
-KOTA,ITAWA,talab,Talav,40209,0.13333333333333336,strict,kota_itawa_talab
-KOTA,ITAWA,itawa,Talav,40209,0.26666666666666666,loose,kota_itawa_itawa
-KOTA,KHAIRABAD,salavadkhurd,Salawad Khurd,40239,0.07905982905982913,strict,kota_khairabad_salavadkhurd
-KOTA,KHAIRABAD,saledakhurd,Salawad Khurd,40239,0.14055944055944064,strict,kota_khairabad_saledakhurd
-NAGAUR,DEGANA,butati,Butati,40341,0,exact,nagaur_degana_butati
-NAGAUR,DEGANA,thata,Butati,40341,0.3,loose,nagaur_degana_thata
-NAGAUR,DEGANA,nimbolakalan,Nimbola Kalan,40368,0.025641025641025605,strict,nagaur_degana_nimbolakalan
-NAGAUR,DEGANA,nimbdikalan,Nimbola Kalan,40368,0.2002072002072003,loose,nagaur_degana_nimbdikalan
-NAGAUR,DEGANA,rajod,Rajod,40374,0,exact,nagaur_degana_rajod
-NAGAUR,DEGANA,rajlota,Rajod,40374,0.20952380952380956,loose,nagaur_degana_rajlota
-NAGAUR,DEGANA,langod,Rajod,40374,0.3,loose,nagaur_degana_langod
+KARAULI,TODABHIM,sahrakar,Sankarwara,40174,0.1892857142857144,fuzzy,karauli_todabhim_sahrakar
+KOTA,KHAIRABAD,salavadkhurd,Salawad Khurd,40239,0.07905982905982913,fuzzy,kota_khairabad_salavadkhurd
+KOTA,KHAIRABAD,saledakhurd,Salawad Khurd,40239,0.14055944055944064,fuzzy,kota_khairabad_saledakhurd
 NAGAUR,DIDWANA,baliya,Baliya,40382,0,exact,nagaur_didwana_baliya
-NAGAUR,DIDWANA,bhandliya,Baliya,40382,0.11111111111111122,strict,nagaur_didwana_bhandliya
-NAGAUR,DIDWANA,barangana,Barangana,40385,0,exact,nagaur_didwana_barangana
-NAGAUR,DIDWANA,bardawa,Barangana,40385,0.24338624338624346,loose,nagaur_didwana_bardawa
-NAGAUR,DIDWANA,dadu basni,Dadu Basni,40395,0,exact,nagaur_didwana_dadu basni
-NAGAUR,DIDWANA,dabda,Dadu Basni,40395,0.23333333333333345,loose,nagaur_didwana_dabda
-NAGAUR,DIDWANA,daulatpura,Daulat Pura,40398,0.03030303030303033,strict,nagaur_didwana_daulatpura
-NAGAUR,DIDWANA,daudsar,Daulat Pura,40398,0.27705627705627717,loose,nagaur_didwana_daudsar
-NAGAUR,DIDWANA,dayalpura,Dayal Pura,40399,0.033333333333333416,strict,nagaur_didwana_dayalpura
-NAGAUR,DIDWANA,alakhpura,Dayal Pura,40399,0.2216931216931217,loose,nagaur_didwana_alakhpura
-NAGAUR,DIDWANA,ladariya,Dayal Pura,40399,0.236904761904762,loose,nagaur_didwana_ladariya
-NAGAUR,DIDWANA,dundoli,Dudoli,40402,0.04761904761904765,strict,nagaur_didwana_dundoli
-NAGAUR,DIDWANA,dhankoli,Dudoli,40402,0.27777777777777785,loose,nagaur_didwana_dhankoli
-NAGAUR,DIDWANA,kharesh,Kharesh,40406,0,exact,nagaur_didwana_kharesh
-NAGAUR,DIDWANA,khojas,Kharesh,40406,0.253968253968254,loose,nagaur_didwana_khojas
-NAGAUR,DIDWANA,khunkhuna,Khunkhuna,40410,0,exact,nagaur_didwana_khunkhuna
-NAGAUR,DIDWANA,khatukhurd,Khunkhuna,40410,0.24444444444444452,loose,nagaur_didwana_khatukhurd
-NAGAUR,DIDWANA,khankholi,Khunkhuna,40410,0.29629629629629634,loose,nagaur_didwana_khankholi
-NAGAUR,DIDWANA,mawa,Mawa,40417,0,exact,nagaur_didwana_mawa
-NAGAUR,DIDWANA,molasar,Mawa,40417,0.2738095238095238,loose,nagaur_didwana_molasar
+NAGAUR,DIDWANA,bhandliya,Baliya,40382,0.11111111111111122,fuzzy,nagaur_didwana_bhandliya
 NAGAUR,DIDWANA,pawa,Pawa,40423,0,exact,nagaur_didwana_pawa
-NAGAUR,DIDWANA,pidawa,Pawa,40423,0.11111111111111122,strict,nagaur_didwana_pidawa
-NAGAUR,MUNDWA,berawas,Arawar,40438,0.253968253968254,loose,nagaur_mundwa_berawas
-NAGAUR,MUNDWA,lalawas,Arawar,40438,0.253968253968254,loose,nagaur_mundwa_lalawas
-NAGAUR,JAYAL,jalniyaser,Jalniyasar,40456,0.06666666666666678,strict,nagaur_jayal_jalniyaser
-NAGAUR,JAYAL,jayal,Jalniyasar,40456,0.26666666666666666,loose,nagaur_jayal_jayal
-NAGAUR,KUCHAMAN CITY,adaksar,Adaksar,40481,0,exact,nagaur_kuchaman city_adaksar
-NAGAUR,KUCHAMAN CITY,jabdinagar,Adaksar,40481,0.2619047619047619,loose,nagaur_kuchaman city_jabdinagar
+NAGAUR,DIDWANA,pidawa,Pawa,40423,0.11111111111111122,fuzzy,nagaur_didwana_pidawa
 NAGAUR,KUCHAMAN CITY,anandpura,Anandpura,40482,0,exact,nagaur_kuchaman city_anandpura
-NAGAUR,KUCHAMAN CITY,bhagwanpura,Anandpura,40482,0.19528619528619526,strict,nagaur_kuchaman city_bhagwanpura
-NAGAUR,KUCHAMAN CITY,charnawas,Charnwas,40487,0.07870370370370378,strict,nagaur_kuchaman city_charnawas
-NAGAUR,KUCHAMAN CITY,lichana,Charnwas,40487,0.22023809523809523,loose,nagaur_kuchaman city_lichana
-NAGAUR,KUCHAMAN CITY,rajliya,Jiliya,40502,0.1507936507936509,strict,nagaur_kuchaman city_rajliya
-NAGAUR,KUCHAMAN CITY,jeenliya,Jiliya,40502,0.18055555555555555,strict,nagaur_kuchaman city_jeenliya
-NAGAUR,KUCHAMAN CITY,khardiya,Khariya,40505,0.04166666666666672,strict,nagaur_kuchaman city_khardiya
-NAGAUR,KUCHAMAN CITY,khiriya,Khariya,40505,0.1507936507936509,strict,nagaur_kuchaman city_khiriya
-NAGAUR,KUCHAMAN CITY,khorindi,Khorandi,40506,0.15476190476190485,strict,nagaur_kuchaman city_khorindi
-NAGAUR,KUCHAMAN CITY,khakdkhi,Khorandi,40506,0.25000000000000006,loose,nagaur_kuchaman city_khakdkhi
-NAGAUR,KUCHAMAN CITY,lunava,Lalas,40508,0.3,loose,nagaur_kuchaman city_lunava
-NAGAUR,KUCHAMAN CITY,solaya,Lalas,40508,0.3,loose,nagaur_kuchaman city_solaya
-NAGAUR,KUCHAMAN CITY,mandawara,Mandawara,40512,0,exact,nagaur_kuchaman city_mandawara
-NAGAUR,KUCHAMAN CITY,meenda,Mandawara,40512,0.29629629629629634,loose,nagaur_kuchaman city_meenda
-NAGAUR,KUCHAMAN CITY,narayanpura,Narayanpura,40520,0,exact,nagaur_kuchaman city_narayanpura
-NAGAUR,KUCHAMAN CITY,maharajpura,Narayanpura,40520,0.2234848484848485,loose,nagaur_kuchaman city_maharajpura
-NAGAUR,KUCHAMAN CITY,panchawa,Panchwa,40523,0.08928571428571432,strict,nagaur_kuchaman city_panchawa
-NAGAUR,KUCHAMAN CITY,panchota,Panchwa,40523,0.130952380952381,strict,nagaur_kuchaman city_panchota
-NAGAUR,KUCHAMAN CITY,rasal,Rasal,40527,0,exact,nagaur_kuchaman city_rasal
-NAGAUR,KUCHAMAN CITY,gudha salot,Rasal,40527,0.27878787878787886,loose,nagaur_kuchaman city_gudha salot
-NAGAUR,KUCHAMAN CITY,maroth,Sargoth,40529,0.1507936507936509,strict,nagaur_kuchaman city_maroth
-NAGAUR,KUCHAMAN CITY,sargoth padampura,Sargoth,40529,0.1960784313725491,strict,nagaur_kuchaman city_sargoth padampura
-NAGAUR,MAKRANA,barwali,Barwali,40571,0,exact,nagaur_makrana_barwali
-NAGAUR,MAKRANA,borawad,Barwali,40571,0.2571428571428572,loose,nagaur_makrana_borawad
-NAGAUR,MUNDWA,janana,Janana,40653,0,exact,nagaur_mundwa_janana
-NAGAUR,MUNDWA,aachina,Janana,40653,0.253968253968254,loose,nagaur_mundwa_aachina
-NAGAUR,MUNDWA,khajwana,Khajwana,40657,0,exact,nagaur_mundwa_khajwana
-NAGAUR,MUNDWA,bhavanda,Khajwana,40657,0.25000000000000006,loose,nagaur_mundwa_bhavanda
-NAGAUR,MUNDWA,kharnal,Kharnal,40658,0,exact,nagaur_mundwa_kharnal
-NAGAUR,MUNDWA,aankala,Kharnal,40658,0.28571428571428575,loose,nagaur_mundwa_aankala
-NAGAUR,MUNDWA,kantiya,Kharnal,40658,0.28571428571428575,loose,nagaur_mundwa_kantiya
-NAGAUR,MUNDWA,manakpura,Manakpur,40663,0.037037037037037104,strict,nagaur_mundwa_manakpura
-NAGAUR,MUNDWA,madpura,Manakpur,40663,0.24206349206349215,loose,nagaur_mundwa_madpura
-NAGAUR,NAGAUR,balwa,Balwa,40679,0,exact,nagaur_nagaur_balwa
-NAGAUR,NAGAUR,tankla,Balwa,40679,0.3,loose,nagaur_nagaur_tankla
+NAGAUR,KUCHAMAN CITY,bhagwanpura,Anandpura,40482,0.19528619528619526,fuzzy,nagaur_kuchaman city_bhagwanpura
+NAGAUR,KUCHAMAN CITY,rajliya,Jiliya,40502,0.1507936507936509,fuzzy,nagaur_kuchaman city_rajliya
+NAGAUR,KUCHAMAN CITY,jeenliya,Jiliya,40502,0.18055555555555555,fuzzy,nagaur_kuchaman city_jeenliya
+NAGAUR,KUCHAMAN CITY,khardiya,Khariya,40505,0.04166666666666672,fuzzy,nagaur_kuchaman city_khardiya
+NAGAUR,KUCHAMAN CITY,khiriya,Khariya,40505,0.1507936507936509,fuzzy,nagaur_kuchaman city_khiriya
+NAGAUR,KUCHAMAN CITY,panchawa,Panchwa,40523,0.08928571428571432,fuzzy,nagaur_kuchaman city_panchawa
+NAGAUR,KUCHAMAN CITY,panchota,Panchwa,40523,0.130952380952381,fuzzy,nagaur_kuchaman city_panchota
+NAGAUR,KUCHAMAN CITY,maroth,Sargoth,40529,0.1507936507936509,fuzzy,nagaur_kuchaman city_maroth
+NAGAUR,KUCHAMAN CITY,sargoth padampura,Sargoth,40529,0.1960784313725491,fuzzy,nagaur_kuchaman city_sargoth padampura
 NAGAUR,NAGAUR,barani,Barani,40681,0,exact,nagaur_nagaur_barani
-NAGAUR,NAGAUR,basni,Barani,40681,0.17777777777777778,strict,nagaur_nagaur_basni
-NAGAUR,NAGAUR,bhadana,Bhadana,40683,0,exact,nagaur_nagaur_bhadana
-NAGAUR,NAGAUR,gudha bhawandas,Bhadana,40683,0.273015873015873,loose,nagaur_nagaur_gudha bhawandas
-NAGAUR,NAGAUR,bhed,Bhadana,40683,0.2738095238095238,loose,nagaur_nagaur_bhed
-NAGAUR,NAGAUR,chuntisara,Chuntisara,40693,0,exact,nagaur_nagaur_chuntisara
-NAGAUR,NAGAUR,chenar,Chuntisara,40693,0.2222222222222222,loose,nagaur_nagaur_chenar
-NAGAUR,NAGAUR,jhandisra,Jhadisara,40702,0.11574074074074082,strict,nagaur_nagaur_jhandisra
-NAGAUR,NAGAUR,dhingsara,Jhadisara,40702,0.19576719576719587,strict,nagaur_nagaur_dhingsara
-NAGAUR,NAGAUR,jodhiyasi,Jodhiyasi,40703,0,exact,nagaur_nagaur_jodhiyasi
-NAGAUR,NAGAUR,bhojas,Jodhiyasi,40703,0.2703703703703703,loose,nagaur_nagaur_bhojas
-NAGAUR,NAGAUR,kaladi,Kalri,40704,0.17777777777777778,strict,nagaur_nagaur_kaladi
-NAGAUR,NAGAUR,karnu,Kalri,40704,0.26666666666666666,loose,nagaur_nagaur_karnu
+NAGAUR,NAGAUR,basni,Barani,40681,0.17777777777777778,fuzzy,nagaur_nagaur_basni
+NAGAUR,NAGAUR,jhandisra,Jhadisara,40702,0.11574074074074082,fuzzy,nagaur_nagaur_jhandisra
+NAGAUR,NAGAUR,dhingsara,Jhadisara,40702,0.19576719576719587,fuzzy,nagaur_nagaur_dhingsara
 NAGAUR,NAGAUR,sinod,Sinod,40719,0,exact,nagaur_nagaur_sinod
-NAGAUR,NAGAUR,singad,Sinod,40719,0.17777777777777778,strict,nagaur_nagaur_singad
-NAGAUR,PARBATSAR,bethwalia,Bithwaliya,40733,0.10370370370370369,strict,nagaur_parbatsar_bethwalia
-NAGAUR,PARBATSAR,pilawa,Bithwaliya,40733,0.2888888888888888,loose,nagaur_parbatsar_pilawa
-NAGAUR,RIYAN BADI,arniyala,Arniyala,40760,0,exact,nagaur_riyan badi_arniyala
-NAGAUR,RIYAN BADI,aalniyawas,Arniyala,40760,0.26071428571428573,loose,nagaur_riyan badi_aalniyawas
+NAGAUR,NAGAUR,singad,Sinod,40719,0.17777777777777778,fuzzy,nagaur_nagaur_singad
 NAGAUR,RIYAN BADI,bhawal,Bhawal,40765,0,exact,nagaur_riyan badi_bhawal
-NAGAUR,RIYAN BADI,thawla,Bhawal,40765,0.17777777777777778,strict,nagaur_riyan badi_thawla
-NAGAUR,RIYAN BADI,chundiya,Chundiya,40768,0,exact,nagaur_riyan badi_chundiya
-NAGAUR,RIYAN BADI,bherunda,Chundiya,40768,0.25000000000000006,loose,nagaur_riyan badi_bherunda
+NAGAUR,RIYAN BADI,thawla,Bhawal,40765,0.17777777777777778,fuzzy,nagaur_riyan badi_thawla
 PALI,BALI,bedal,Bedal,40799,0,exact,pali_bali_bedal
-PALI,BALI,beda,Bedal,40799,0.06666666666666678,strict,pali_bali_beda
+PALI,BALI,beda,Bedal,40799,0.06666666666666678,fuzzy,pali_bali_beda
 PALI,BALI,dhani,Dhani,40809,0,exact,pali_bali_dhani
-PALI,BALI,dudani,Dhani,40809,0.17777777777777778,strict,pali_bali_dudani
-PALI,BALI,padarla,Paderla,40829,0.09523809523809525,strict,pali_bali_padarla
-PALI,BALI,pairva,Paderla,40829,0.253968253968254,loose,pali_bali_pairva
-PALI,KHARCHI(MAR.JUN),chawariya,Chawadiya,40902,0.07407407407407415,strict,pali_kharchi(mar.jun)_chawariya
-PALI,KHARCHI(MAR.JUN),chaukdiya,Chawadiya,40902,0.14814814814814825,strict,pali_kharchi(mar.jun)_chaukdiya
-PALI,KHARCHI(MAR.JUN),dhundhla,Dhundhala,40908,0.07870370370370378,strict,pali_kharchi(mar.jun)_dhundhla
-PALI,KHARCHI(MAR.JUN),dudaud,Dhundhala,40908,0.29629629629629634,loose,pali_kharchi(mar.jun)_dudaud
-PALI,KHARCHI(MAR.JUN),gudasoorsingh,Gura Soorsingh,40913,0.12881562881562886,strict,pali_kharchi(mar.jun)_gudasoorsingh
-PALI,KHARCHI(MAR.JUN),guda kesarsingh,Gura Soorsingh,40913,0.1603174603174604,strict,pali_kharchi(mar.jun)_guda kesarsingh
-PALI,KHARCHI(MAR.JUN),hingola khurd,Hingola Khurd,40915,0,exact,pali_kharchi(mar.jun)_hingola khurd
-PALI,KHARCHI(MAR.JUN),hemaliawas khurd,Hingola Khurd,40915,0.23525641025641036,loose,pali_kharchi(mar.jun)_hemaliawas khurd
-PALI,KHARCHI(MAR.JUN),karadi,Karari,40922,0.11111111111111106,strict,pali_kharchi(mar.jun)_karadi
-PALI,KHARCHI(MAR.JUN),kharchi,Karari,40922,0.253968253968254,loose,pali_kharchi(mar.jun)_kharchi
-PALI,RAIPUR,amarpura,Amarpura,40963,0,exact,pali_raipur_amarpura
-PALI,RAIPUR,raipur,Amarpura,40963,0.24722222222222212,loose,pali_raipur_raipur
-PALI,SOJAT,atbara,Atbra,41050,0.12222222222222213,strict,pali_sojat_atbara
-PALI,SOJAT,sojat road,Atbra,41050,0.26666666666666666,loose,pali_sojat_sojat road
-PALI,SOJAT,rajolakalan,Rajola Kalan,41078,0.02777777777777788,strict,pali_sojat_rajolakalan
-PALI,SOJAT,raira kalan,Rajola Kalan,41078,0.23653198653198648,loose,pali_sojat_raira kalan
-RAJSAMAND,BHIM,kheema khera,Kheema Khera,41152,0,exact,rajsamand_bhim_kheema khera
-RAJSAMAND,BHIM,bheem,Kheema Khera,41152,0.2888888888888889,loose,rajsamand_bhim_bheem
-RAJSAMAND,BHIM,lagetkhera,Laget Khera,41156,0.03030303030303033,strict,rajsamand_bhim_lagetkhera
-RAJSAMAND,BHIM,dangerkheda,Laget Khera,41156,0.2651515151515152,loose,rajsamand_bhim_dangerkheda
-RAJSAMAND,KHAMNOR,gunjol,Gunjol,41197,0,exact,rajsamand_khamnor_gunjol
-RAJSAMAND,KHAMNOR,unthnol,Gunjol,41197,0.253968253968254,loose,rajsamand_khamnor_unthnol
-RAJSAMAND,KHAMNOR,koshiwara,Koshiwara,41203,0,exact,rajsamand_khamnor_koshiwara
-RAJSAMAND,KHAMNOR,kothariya,Koshiwara,41203,0.2195767195767196,loose,rajsamand_khamnor_kothariya
-RAJSAMAND,KHAMNOR,machind,Machind,41207,0,exact,rajsamand_khamnor_machind
-RAJSAMAND,KHAMNOR,pakhand,Machind,41207,0.28571428571428575,loose,rajsamand_khamnor_pakhand
+PALI,BALI,dudani,Dhani,40809,0.17777777777777778,fuzzy,pali_bali_dudani
+PALI,KHARCHI(MAR.JUN),chawariya,Chawadiya,40902,0.07407407407407415,fuzzy,pali_kharchi(mar.jun)_chawariya
+PALI,KHARCHI(MAR.JUN),chaukdiya,Chawadiya,40902,0.14814814814814825,fuzzy,pali_kharchi(mar.jun)_chaukdiya
+PALI,KHARCHI(MAR.JUN),gudasoorsingh,Gura Soorsingh,40913,0.12881562881562886,fuzzy,pali_kharchi(mar.jun)_gudasoorsingh
+PALI,KHARCHI(MAR.JUN),guda kesarsingh,Gura Soorsingh,40913,0.1603174603174604,fuzzy,pali_kharchi(mar.jun)_guda kesarsingh
 RAJSAMAND,KHAMNOR,namana,Namana,41210,0,exact,rajsamand_khamnor_namana
-RAJSAMAND,KHAMNOR,mandiyana,Namana,41210,0.1666666666666667,strict,rajsamand_khamnor_mandiyana
+RAJSAMAND,KHAMNOR,mandiyana,Namana,41210,0.1666666666666667,fuzzy,rajsamand_khamnor_mandiyana
 RAJSAMAND,KHAMNOR,saloda,Saloda,41215,0,exact,rajsamand_khamnor_saloda
-RAJSAMAND,KHAMNOR,salor,Saloda,41215,0.17777777777777778,strict,rajsamand_khamnor_salor
-RAJSAMAND,KHAMNOR,upali odan,Saloda,41215,0.2222222222222222,loose,rajsamand_khamnor_upali odan
+RAJSAMAND,KHAMNOR,salor,Saloda,41215,0.17777777777777778,fuzzy,rajsamand_khamnor_salor
 RAJSAMAND,KHAMNOR,sema,Sema,41218,0,exact,rajsamand_khamnor_sema
-RAJSAMAND,KHAMNOR,semal,Sema,41218,0.06666666666666678,strict,rajsamand_khamnor_semal
-RAJSAMAND,KHAMNOR,shishoda,Shishoda,41220,0,exact,rajsamand_khamnor_shishoda
-RAJSAMAND,KHAMNOR,shishvi,Shishoda,41220,0.22023809523809523,loose,rajsamand_khamnor_shishvi
-RAJSAMAND,RAILMAGRA,kundiya,Kundiya,41278,0,exact,rajsamand_railmagra_kundiya
-RAJSAMAND,RAILMAGRA,junada,Kundiya,41278,0.253968253968254,loose,rajsamand_railmagra_junada
-RAJSAMAND,RAJSAMAND,khatamala,Khatamla,41305,0.07870370370370378,strict,rajsamand_rajsamand_khatamala
-RAJSAMAND,RAJSAMAND,atama,Khatamla,41305,0.12500000000000006,strict,rajsamand_rajsamand_atama
-RAJSAMAND,RAJSAMAND,sangtha kalan,Sahgath Kalan,41319,0.1068376068376068,strict,rajsamand_rajsamand_sangtha kalan
-RAJSAMAND,RAJSAMAND,piplatiri kalan,Sahgath Kalan,41319,0.2837606837606838,loose,rajsamand_rajsamand_piplatiri kalan
-SAWAI MADHOPUR,BAMANWAS,amavara,Amawara,41322,0.09523809523809525,strict,sawai madhopur_bamanwas_amavara
-SAWAI MADHOPUR,BAMANWAS,bamanwas patti kala,Amawara,41322,0.27568922305764426,loose,sawai madhopur_bamanwas_bamanwas patti kala
-SAWAI MADHOPUR,BAMANWAS,bamanwas patti khurd,Amawara,41322,0.280952380952381,loose,sawai madhopur_bamanwas_bamanwas patti khurd
-SAWAI MADHOPUR,BONLI,bas torda,Bas Torda,41361,0,exact,sawai madhopur_bonli_bas torda
-SAWAI MADHOPUR,BONLI,bahter,Bas Torda,41361,0.29629629629629634,loose,sawai madhopur_bonli_bahter
-SAWAI MADHOPUR,BONLI,jastana,Jastana,41375,0,exact,sawai madhopur_bonli_jastana
-SAWAI MADHOPUR,BONLI,maksudanpura,Jastana,41375,0.2896825396825397,loose,sawai madhopur_bonli_maksudanpura
-SAWAI MADHOPUR,BONLI,kolada,Kolara,41381,0.11111111111111106,strict,sawai madhopur_bonli_kolada
-SAWAI MADHOPUR,BONLI,jolanda,Kolara,41381,0.253968253968254,loose,sawai madhopur_bonli_jolanda
+RAJSAMAND,KHAMNOR,semal,Sema,41218,0.06666666666666678,fuzzy,rajsamand_khamnor_semal
+RAJSAMAND,RAJSAMAND,khatamala,Khatamla,41305,0.07870370370370378,fuzzy,rajsamand_rajsamand_khatamala
+RAJSAMAND,RAJSAMAND,atama,Khatamla,41305,0.12500000000000006,fuzzy,rajsamand_rajsamand_atama
 SAWAI MADHOPUR,BONLI,thadoli,Thadoli,41397,0,exact,sawai madhopur_bonli_thadoli
-SAWAI MADHOPUR,BONLI,bhadoti,Thadoli,41397,0.19047619047619044,strict,sawai madhopur_bonli_bhadoti
-SAWAI MADHOPUR,GANGAPUR CITY,raipur,Raipur,41425,0,exact,sawai madhopur_gangapur city_raipur
-SAWAI MADHOPUR,GANGAPUR CITY,vajirpur,Raipur,41425,0.2805555555555556,loose,sawai madhopur_gangapur city_vajirpur
-SAWAI MADHOPUR,KHANDAR,bichpuri gujran,Bichpuri Goojran,41445,0.06388888888888886,strict,sawai madhopur_khandar_bichpuri gujran
-SAWAI MADHOPUR,KHANDAR,bhuri phari,Bichpuri Goojran,41445,0.28863636363636364,loose,sawai madhopur_khandar_bhuri phari
-SAWAI MADHOPUR,SAWAI MADHOPUR,jadavata,Jarawata,41489,0.1666666666666667,strict,sawai madhopur_sawai madhopur_jadavata
-SAWAI MADHOPUR,SAWAI MADHOPUR,rajwana,Jarawata,41489,0.24206349206349215,loose,sawai madhopur_sawai madhopur_rajwana
-SAWAI MADHOPUR,SAWAI MADHOPUR,jeenapur,Jeenapur,41491,0,exact,sawai madhopur_sawai madhopur_jeenapur
-SAWAI MADHOPUR,SAWAI MADHOPUR,tapur,Jeenapur,41491,0.23333333333333345,loose,sawai madhopur_sawai madhopur_tapur
-SAWAI MADHOPUR,SAWAI MADHOPUR,karmoda,Karmoda,41494,0,exact,sawai madhopur_sawai madhopur_karmoda
-SAWAI MADHOPUR,SAWAI MADHOPUR,isarda,Karmoda,41494,0.253968253968254,loose,sawai madhopur_sawai madhopur_isarda
-SAWAI MADHOPUR,SAWAI MADHOPUR,sarsoap,Karmoda,41494,0.28571428571428575,loose,sawai madhopur_sawai madhopur_sarsoap
-SAWAI MADHOPUR,SAWAI MADHOPUR,olwara,Olwara,41505,0,exact,sawai madhopur_sawai madhopur_olwara
-SAWAI MADHOPUR,SAWAI MADHOPUR,jola,Olwara,41505,0.25000000000000006,loose,sawai madhopur_sawai madhopur_jola
-SAWAI MADHOPUR,SAWAI MADHOPUR,shyampura,Shyampura,41515,0,exact,sawai madhopur_sawai madhopur_shyampura
-SAWAI MADHOPUR,SAWAI MADHOPUR,shivar,Shyampura,41515,0.29629629629629634,loose,sawai madhopur_sawai madhopur_shivar
-SAWAI MADHOPUR,SAWAI MADHOPUR,sunari,Sunari,41517,0,exact,sawai madhopur_sawai madhopur_sunari
-SAWAI MADHOPUR,SAWAI MADHOPUR,binjari,Sunari,41517,0.253968253968254,loose,sawai madhopur_sawai madhopur_binjari
-SIKAR,DANTA RAMGARH,banuda,Banoora,41522,0.253968253968254,loose,sikar_danta ramgarh_banuda
-SIKAR,DANTA RAMGARH,ganoda,Banoora,41522,0.253968253968254,loose,sikar_danta ramgarh_ganoda
+SAWAI MADHOPUR,BONLI,bhadoti,Thadoli,41397,0.19047619047619044,fuzzy,sawai madhopur_bonli_bhadoti
 SIKAR,DANTA RAMGARH,bharija,Bharija,41524,0,exact,sikar_danta ramgarh_bharija
-SIKAR,DANTA RAMGARH,bhirana,Bharija,41524,0.1507936507936509,strict,sikar_danta ramgarh_bhirana
-SIKAR,DANTA RAMGARH,dholsari,Dholasari,41532,0.07870370370370378,strict,sikar_danta ramgarh_dholsari
-SIKAR,DANTA RAMGARH,khandelsar,Dholasari,41532,0.2693121693121693,loose,sikar_danta ramgarh_khandelsar
-SIKAR,DANTA RAMGARH,kankara,Kankra,41538,0.10317460317460315,strict,sikar_danta ramgarh_kankara
-SIKAR,DANTA RAMGARH,jana,Kankra,41538,0.25000000000000006,loose,sikar_danta ramgarh_jana
-SIKAR,DANTA RAMGARH,danta,Kankra,41538,0.3,loose,sikar_danta ramgarh_danta
-SIKAR,DANTA RAMGARH,khud,Khood,41543,0.21666666666666667,loose,sikar_danta ramgarh_khud
-SIKAR,DANTA RAMGARH,kochhor,Khood,41543,0.29285714285714287,loose,sikar_danta ramgarh_kochhor
-SIKAR,DANTA RAMGARH,mandh surera,Mandha (Surera),41551,0.025641025641025605,strict,sikar_danta ramgarh_mandh surera
-SIKAR,DANTA RAMGARH,manda madni,Mandha (Surera),41551,0.275058275058275,loose,sikar_danta ramgarh_manda madni
-SIKAR,DANTA RAMGARH,mundiyawas,Mundiyawas,41554,0,exact,sikar_danta ramgarh_mundiyawas
-SIKAR,DANTA RAMGARH,dukiya,Mundiyawas,41554,0.2888888888888888,loose,sikar_danta ramgarh_dukiya
-SIKAR,DANTA RAMGARH,surera,Surera,41563,0,exact,sikar_danta ramgarh_surera
-SIKAR,DANTA RAMGARH,reta,Surera,41563,0.25000000000000006,loose,sikar_danta ramgarh_reta
-SIKAR,FATEHPUR,bathod,Bathod,41611,0,exact,sikar_fatehpur_bathod
-SIKAR,FATEHPUR,batdanau,Bathod,41611,0.27777777777777785,loose,sikar_fatehpur_batdanau
-SIKAR,FATEHPUR,hirna,Hirna,41626,0,exact,sikar_fatehpur_hirna
-SIKAR,FATEHPUR,disnau,Hirna,41626,0.3,loose,sikar_fatehpur_disnau
-SIKAR,FATEHPUR,hudera,Hudera,41627,0,exact,sikar_fatehpur_hudera
-SIKAR,FATEHPUR,chudimiya,Hudera,41627,0.29629629629629634,loose,sikar_fatehpur_chudimiya
-SIKAR,FATEHPUR,nabibpura,Nabipura,41631,0.037037037037037104,strict,sikar_fatehpur_nabibpura
-SIKAR,FATEHPUR,rajpura,Nabipura,41631,0.22023809523809523,loose,sikar_fatehpur_rajpura
-SIKAR,FATEHPUR,rowasa,Rosawa,41637,0.05555555555555556,strict,sikar_fatehpur_rowasa
-SIKAR,FATEHPUR,rajas,Rosawa,41637,0.2611111111111111,loose,sikar_fatehpur_rajas
-SIKAR,KHANDELA,bhadwadi,Bhadwari,41645,0.08333333333333338,strict,sikar_khandela_bhadwadi
-SIKAR,KHANDELA,jhadli,Bhadwari,41645,0.27777777777777785,loose,sikar_khandela_jhadli
+SIKAR,DANTA RAMGARH,bhirana,Bharija,41524,0.1507936507936509,fuzzy,sikar_danta ramgarh_bhirana
 SIKAR,KHANDELA,kasarda,Kasarda,41665,0,exact,sikar_khandela_kasarda
-SIKAR,KHANDELA,kardaka,Kasarda,41665,0.17857142857142858,strict,sikar_khandela_kardaka
-SIKAR,LACHHMANGARH,bidodi badi,Birodi Bari,41686,0.15824915824915836,strict,sikar_lachhmangarh_bidodi badi
-SIKAR,LACHHMANGARH,tidoki badi,Birodi Bari,41686,0.2234848484848485,loose,sikar_lachhmangarh_tidoki badi
-SIKAR,LACHHMANGARH,dudwa,Doodwa,41692,0.17777777777777778,strict,sikar_lachhmangarh_dudwa
-SIKAR,LACHHMANGARH,gadoda,Doodwa,41692,0.22222222222222238,loose,sikar_lachhmangarh_gadoda
+SIKAR,KHANDELA,kardaka,Kasarda,41665,0.17857142857142858,fuzzy,sikar_khandela_kardaka
 SIKAR,LACHHMANGARH,kumas jatan,Kumas Jatan,41704,0,exact,sikar_lachhmangarh_kumas jatan
-SIKAR,LACHHMANGARH,kumas jagir,Kumas Jatan,41704,0.18181818181818185,strict,sikar_lachhmangarh_kumas jagir
-SIKAR,LACHHMANGARH,lalasu,Lalasi,41705,0.11111111111111106,strict,sikar_lachhmangarh_lalasu
-SIKAR,LACHHMANGARH,rulayani,Lalasi,41705,0.27777777777777785,loose,sikar_lachhmangarh_rulayani
-SIKAR,LACHHMANGARH,patoda,Patoda,41711,0,exact,sikar_lachhmangarh_patoda
-SIKAR,LACHHMANGARH,sutod,Patoda,41711,0.3,loose,sikar_lachhmangarh_sutod
-SIKAR,LACHHMANGARH,rehnawa,Rahnawa,41712,0.09523809523809525,strict,sikar_lachhmangarh_rehnawa
-SIKAR,LACHHMANGARH,kachhawa,Rahnawa,41712,0.22023809523809523,loose,sikar_lachhmangarh_kachhawa
-SIKAR,LACHHMANGARH,nechhawa,Rahnawa,41712,0.28690476190476194,loose,sikar_lachhmangarh_nechhawa
-SIKAR,NEEM KA THANA,aagwadi,Agawari,41719,0.1507936507936509,strict,sikar_neem ka thana_aagwadi
-SIKAR,NEEM KA THANA,godawas,Agawari,41719,0.28571428571428575,loose,sikar_neem ka thana_godawas
-SIKAR,NEEM KA THANA,chala,Chala,41728,0,exact,sikar_neem ka thana_chala
-SIKAR,NEEM KA THANA,cheeplata,Chala,41728,0.2518518518518519,loose,sikar_neem ka thana_cheeplata
-SIKAR,NEEM KA THANA,dabla,Chala,41728,0.26666666666666666,loose,sikar_neem ka thana_dabla
+SIKAR,LACHHMANGARH,kumas jagir,Kumas Jatan,41704,0.18181818181818185,fuzzy,sikar_lachhmangarh_kumas jagir
 SIKAR,NEEM KA THANA,dayal ki nangal,Dayal Ki Nangal,41734,0,exact,sikar_neem ka thana_dayal ki nangal
-SIKAR,NEEM KA THANA,dunga ki nagal,Dayal Ki Nangal,41734,0.1603174603174604,strict,sikar_neem ka thana_dunga ki nagal
-SIKAR,NEEM KA THANA,ladi ka bas,Dayal Ki Nangal,41734,0.268013468013468,loose,sikar_neem ka thana_ladi ka bas
-SIKAR,NEEM KA THANA,govindpura,Govindpura,41743,0,exact,sikar_neem ka thana_govindpura
-SIKAR,NEEM KA THANA,ghasipura,Govindpura,41743,0.24444444444444452,loose,sikar_neem ka thana_ghasipura
-SIKAR,NEEM KA THANA,khadra,Khadra,41748,0,exact,sikar_neem ka thana_khadra
-SIKAR,NEEM KA THANA,salodra,Khadra,41748,0.253968253968254,loose,sikar_neem ka thana_salodra
-SIKAR,NEEM KA THANA,shyampura,Khadra,41748,0.29629629629629634,loose,sikar_neem ka thana_shyampura
-SIKAR,NEEM KA THANA,bihar,Khadra,41748,0.3,loose,sikar_neem ka thana_bihar
-SIKAR,NEEM KA THANA,mahawa,Mahawa,41753,0,exact,sikar_neem ka thana_mahawa
-SIKAR,NEEM KA THANA,mokalwas jhareenda,Mahawa,41753,0.27777777777777785,loose,sikar_neem ka thana_mokalwas jhareenda
-SIKAR,NEEM KA THANA,narsinghpuri,Narsingh Puri,41761,0.025641025641025605,strict,sikar_neem ka thana_narsinghpuri
-SIKAR,NEEM KA THANA,ramsinghpura,Narsingh Puri,41761,0.19914529914529908,strict,sikar_neem ka thana_ramsinghpura
+SIKAR,NEEM KA THANA,dunga ki nagal,Dayal Ki Nangal,41734,0.1603174603174604,fuzzy,sikar_neem ka thana_dunga ki nagal
+SIKAR,NEEM KA THANA,narsinghpuri,Narsingh Puri,41761,0.025641025641025605,fuzzy,sikar_neem ka thana_narsinghpuri
+SIKAR,NEEM KA THANA,ramsinghpura,Narsingh Puri,41761,0.19914529914529908,fuzzy,sikar_neem ka thana_ramsinghpura
 SIKAR,NEEM KA THANA,natha ki nangal,Natha Ki Nangal,41762,0,exact,sikar_neem ka thana_natha ki nangal
-SIKAR,NEEM KA THANA,chhaja ki nangal,Natha Ki Nangal,41762,0.13258547008547017,strict,sikar_neem ka thana_chhaja ki nangal
-SIKAR,NEEM KA THANA,peethampuri,Pritam Puri,41766,0.18181818181818185,strict,sikar_neem ka thana_peethampuri
-SIKAR,NEEM KA THANA,peethalpur,Pritam Puri,41766,0.28484848484848485,loose,sikar_neem ka thana_peethalpur
+SIKAR,NEEM KA THANA,chhaja ki nangal,Natha Ki Nangal,41762,0.13258547008547017,fuzzy,sikar_neem ka thana_chhaja ki nangal
 SIKAR,PIPRALI,chainpura,Chainpura,41783,0,exact,sikar_piprali_chainpura
-SIKAR,PIPRALI,chandpura,Chainpura,41783,0.07407407407407415,strict,sikar_piprali_chandpura
-SIKAR,PIPRALI,palasra,Palasara,41798,0.08928571428571432,strict,sikar_piprali_palasra
-SIKAR,PIPRALI,palsana,Palasara,41798,0.18650793650793648,strict,sikar_piprali_palsana
-SIKAR,PIPRALI,abhayapura,Palasara,41798,0.2916666666666667,loose,sikar_piprali_abhayapura
-SIKAR,SRI MADHOPUR,anantpura,Anatpura,41816,0.037037037037037104,strict,sikar_sri madhopur_anantpura
-SIKAR,SRI MADHOPUR,aaspura,Anatpura,41816,0.130952380952381,strict,sikar_sri madhopur_aaspura
-SIKAR,SRI MADHOPUR,lanpura,Anatpura,41816,0.130952380952381,strict,sikar_sri madhopur_lanpura
-SIKAR,SRI MADHOPUR,arniya,Arniya,41817,0,exact,sikar_sri madhopur_arniya
-SIKAR,SRI MADHOPUR,tapiplya,Arniya,41817,0.27777777777777785,loose,sikar_sri madhopur_tapiplya
-SIKAR,SRI MADHOPUR,bagariwas,Bagariyawas,41819,0.09764309764309766,strict,sikar_sri madhopur_bagariwas
-SIKAR,SRI MADHOPUR,aabhawas,Bagariyawas,41819,0.21049783549783557,loose,sikar_sri madhopur_aabhawas
-SIKAR,SRI MADHOPUR,nathusar,Nathoosar,41841,0.11574074074074082,strict,sikar_sri madhopur_nathusar
-SIKAR,SRI MADHOPUR,jaitusar,Nathoosar,41841,0.27314814814814825,loose,sikar_sri madhopur_jaitusar
-SIKAR,SRI MADHOPUR,hathora,Nathoosar,41841,0.2976190476190476,loose,sikar_sri madhopur_hathora
+SIKAR,PIPRALI,chandpura,Chainpura,41783,0.07407407407407415,fuzzy,sikar_piprali_chandpura
+SIKAR,PIPRALI,palasra,Palasara,41798,0.08928571428571432,fuzzy,sikar_piprali_palasra
+SIKAR,PIPRALI,palsana,Palasara,41798,0.18650793650793648,fuzzy,sikar_piprali_palsana
+SIKAR,SRI MADHOPUR,anantpura,Anatpura,41816,0.037037037037037104,fuzzy,sikar_sri madhopur_anantpura
+SIKAR,SRI MADHOPUR,aaspura,Anatpura,41816,0.130952380952381,fuzzy,sikar_sri madhopur_aaspura
+SIKAR,SRI MADHOPUR,lanpura,Anatpura,41816,0.130952380952381,fuzzy,sikar_sri madhopur_lanpura
 SIROHI,ABU ROAD,maval,Maval,41862,0,exact,sirohi_abu road_maval
-SIROHI,ABU ROAD,aval,Maval,41862,0.06666666666666678,strict,sirohi_abu road_aval
-TONK,DEOLI,ghad,Ghad,42016,0,exact,tonk_deoli_ghad
-TONK,DEOLI,gavadi,Ghad,42016,0.25000000000000006,loose,tonk_deoli_gavadi
-TONK,DEOLI,juniya,Junia,42019,0.05555555555555556,strict,tonk_deoli_juniya
-TONK,DEOLI,duni,Junia,42019,0.21666666666666667,loose,tonk_deoli_duni
+SIROHI,ABU ROAD,aval,Maval,41862,0.06666666666666678,fuzzy,sirohi_abu road_aval
 TONK,DEOLI,santhali,Santhali,42033,0,exact,tonk_deoli_santhali
-TONK,DEOLI,banthali,Santhali,42033,0.08333333333333338,strict,tonk_deoli_banthali
-TONK,MALPURA,kadila,Kadila,42055,0,exact,tonk_malpura_kadila
-TONK,MALPURA,avda,Kadila,42055,0.25000000000000006,loose,tonk_malpura_avda
-TONK,MALPURA,kiantoli,Kantoli,42057,0.04166666666666672,strict,tonk_malpura_kiantoli
-TONK,MALPURA,antoli,Kantoli,42057,0.04761904761904765,strict,tonk_malpura_antoli
+TONK,DEOLI,banthali,Santhali,42033,0.08333333333333338,fuzzy,tonk_deoli_banthali
+TONK,MALPURA,kiantoli,Kantoli,42057,0.04166666666666672,fuzzy,tonk_malpura_kiantoli
+TONK,MALPURA,antoli,Kantoli,42057,0.04761904761904765,fuzzy,tonk_malpura_antoli
 TONK,MALPURA,nagar,Nagar,42064,0,exact,tonk_malpura_nagar
-TONK,MALPURA,ganvar,Nagar,42064,0.12222222222222213,strict,tonk_malpura_ganvar
-TONK,MALPURA,sindholiya,Sindoliya,42069,0.033333333333333416,strict,tonk_malpura_sindholiya
-TONK,MALPURA,rindliya bujurg,Sindoliya,42069,0.2518518518518519,loose,tonk_malpura_rindliya bujurg
-TONK,NEWAI,khandevat,Khandewat,42097,0.07407407407407415,strict,tonk_newai_khandevat
-TONK,NEWAI,khandwa,Khandewat,42097,0.07407407407407415,strict,tonk_newai_khandwa
+TONK,MALPURA,ganvar,Nagar,42064,0.12222222222222213,fuzzy,tonk_malpura_ganvar
+TONK,NEWAI,khandevat,Khandewat,42097,0.07407407407407415,fuzzy,tonk_newai_khandevat
+TONK,NEWAI,khandwa,Khandewat,42097,0.07407407407407415,fuzzy,tonk_newai_khandwa
 TONK,NEWAI,sindra,Sindra,42109,0,exact,tonk_newai_sindra
-TONK,NEWAI,sidda,Sindra,42109,0.17777777777777778,strict,tonk_newai_sidda
-TONK,TODARAISINGH,bassi,Bassi,42119,0,exact,tonk_todaraisingh_bassi
-TONK,TODARAISINGH,bavdi,Bassi,42119,0.26666666666666666,loose,tonk_todaraisingh_bavdi
-TONK,TONK,ranoli,Baroni,42153,0.24444444444444452,loose,tonk_tonk_ranoli
-TONK,TONK,borkhandikalan,Baroni,42153,0.2460317460317461,loose,tonk_tonk_borkhandikalan
-TONK,TONK,chandlai,Chandlai,42156,0,exact,tonk_tonk_chandlai
-TONK,TONK,nathdi,Chandlai,42156,0.24722222222222212,loose,tonk_tonk_nathdi
-TONK,TONK,dakhiya,Dakhiya,42159,0,exact,tonk_tonk_dakhiya
-TONK,TONK,hadikalan,Dakhiya,42159,0.26984126984126994,loose,tonk_tonk_hadikalan
-TONK,TONK,kabra,Kabara,42174,0.12222222222222213,strict,tonk_tonk_kabra
-TONK,TONK,kashipura,Kabara,42174,0.29629629629629634,loose,tonk_tonk_kashipura
-TONK,TONK,lavadar,Lawadar,42179,0.09523809523809525,strict,tonk_tonk_lavadar
-TONK,TONK,loharwada,Lawadar,42179,0.19312169312169322,strict,tonk_tonk_loharwada
+TONK,NEWAI,sidda,Sindra,42109,0.17777777777777778,fuzzy,tonk_newai_sidda
+TONK,TONK,lavadar,Lawadar,42179,0.09523809523809525,fuzzy,tonk_tonk_lavadar
+TONK,TONK,loharwada,Lawadar,42179,0.19312169312169322,fuzzy,tonk_tonk_loharwada
 TONK,TONK,mandawar,Mandawar,42181,0,exact,tonk_tonk_mandawar
-TONK,TONK,banwada,Mandawar,42181,0.18650793650793648,strict,tonk_tonk_banwada
-TONK,TONK,bagdawa,Mandawar,42181,0.22023809523809523,loose,tonk_tonk_bagdawa
-TONK,TONK,parana,Parana,42187,0,exact,tonk_tonk_parana
-TONK,TONK,jhirana,Parana,42187,0.253968253968254,loose,tonk_tonk_jhirana
-TONK,TONK,dardahind,Parana,42187,0.29629629629629634,loose,tonk_tonk_dardahind
-TONK,TONK,sankhna,Sankhana,42192,0.08928571428571432,strict,tonk_tonk_sankhna
-TONK,TONK,kathmana,Sankhana,42192,0.2222222222222222,loose,tonk_tonk_kathmana
-TONK,TONK,soran,Soran,42195,0,exact,tonk_tonk_soran
-TONK,TONK,sonwa,Soran,42195,0.26666666666666666,loose,tonk_tonk_sonwa
-TONK,TONK,sohela,Soran,42195,0.3,loose,tonk_tonk_sohela
-TONK,UNIARA,khohlya,Kholiya,42214,0.09523809523809525,strict,tonk_uniara_khohlya
-TONK,UNIARA,khelniya,Kholiya,42214,0.130952380952381,strict,tonk_uniara_khelniya
-UDAIPUR,BHINDER,amarpura kha,Amarpura Khalsa,42257,0.06666666666666678,strict,udaipur_bhinder_amarpura kha
-UDAIPUR,BHINDER,batharda kalan,Amarpura Khalsa,42257,0.25238095238095243,loose,udaipur_bhinder_batharda kalan
-UDAIPUR,BHINDER,bansra,Bansda,42262,0.11111111111111106,strict,udaipur_bhinder_bansra
-UDAIPUR,BHINDER,adinda,Bansda,42262,0.22222222222222238,loose,udaipur_bhinder_adinda
-UDAIPUR,BHINDER,chargadhiya,Chargadiya,42268,0.03030303030303033,strict,udaipur_bhinder_chargadhiya
-UDAIPUR,BHINDER,dhawariya,Chargadiya,42268,0.2216931216931217,loose,udaipur_bhinder_dhawariya
-UDAIPUR,BHINDER,dhamaniya,Chargadiya,42268,0.24444444444444452,loose,udaipur_bhinder_dhamaniya
+TONK,TONK,banwada,Mandawar,42181,0.18650793650793648,fuzzy,tonk_tonk_banwada
+TONK,UNIARA,khohlya,Kholiya,42214,0.09523809523809525,fuzzy,tonk_uniara_khohlya
+TONK,UNIARA,khelniya,Kholiya,42214,0.130952380952381,fuzzy,tonk_uniara_khelniya
 UDAIPUR,BHINDER,dharta,Dharta,42271,0,exact,udaipur_bhinder_dharta
-UDAIPUR,BHINDER,dhawa,Dharta,42271,0.17777777777777778,strict,udaipur_bhinder_dhawa
-UDAIPUR,BHINDER,kharsan,Dharta,42271,0.253968253968254,loose,udaipur_bhinder_kharsan
-UDAIPUR,BHINDER,bhatewar,Dharta,42271,0.27777777777777785,loose,udaipur_bhinder_bhatewar
+UDAIPUR,BHINDER,dhawa,Dharta,42271,0.17777777777777778,fuzzy,udaipur_bhinder_dhawa
 UDAIPUR,BHINDER,motida,Motida,42290,0,exact,udaipur_bhinder_motida
-UDAIPUR,BHINDER,modi,Motida,42290,0.19444444444444453,strict,udaipur_bhinder_modi
-UDAIPUR,BHINDER,gotipa,Motida,42290,0.22222222222222238,loose,udaipur_bhinder_gotipa
-UDAIPUR,BHINDER,sarangpura b,Sarangpur Bhi,42297,0.07905982905982913,strict,udaipur_bhinder_sarangpura b
-UDAIPUR,BHINDER,karanpur,Sarangpur Bhi,42297,0.1955128205128206,strict,udaipur_bhinder_karanpur
+UDAIPUR,BHINDER,modi,Motida,42290,0.19444444444444453,fuzzy,udaipur_bhinder_modi
+UDAIPUR,BHINDER,sarangpura b,Sarangpur Bhi,42297,0.07905982905982913,fuzzy,udaipur_bhinder_sarangpura b
+UDAIPUR,BHINDER,karanpur,Sarangpur Bhi,42297,0.1955128205128206,fuzzy,udaipur_bhinder_karanpur
 UDAIPUR,GIRWA,bachhar,Bachhar,42357,0,exact,udaipur_girwa_bachhar
-UDAIPUR,GIRWA,balicha,Bachhar,42357,0.19047619047619044,strict,udaipur_girwa_balicha
-UDAIPUR,GIRWA,bichhadi,Bachhar,42357,0.22023809523809523,loose,udaipur_girwa_bichhadi
-UDAIPUR,GIRWA,barapal,Barapal,42361,0,exact,udaipur_girwa_barapal
-UDAIPUR,GIRWA,bhaisrakalan,Barapal,42361,0.2142857142857143,loose,udaipur_girwa_bhaisrakalan
-UDAIPUR,GIRWA,chansada,Chanavada,42370,0.16335978835978843,strict,udaipur_girwa_chansada
-UDAIPUR,GIRWA,charavda,Chanavada,42370,0.16335978835978843,strict,udaipur_girwa_charavda
-UDAIPUR,GIRWA,kaya,Kaya,42382,0,exact,udaipur_girwa_kaya
-UDAIPUR,GIRWA,kurabad,Kaya,42382,0.2738095238095238,loose,udaipur_girwa_kurabad
-UDAIPUR,GIRWA,lakarwas,Lakadwas,42385,0.08333333333333338,strict,udaipur_girwa_lakarwas
-UDAIPUR,GIRWA,kalarwas,Lakadwas,42385,0.130952380952381,strict,udaipur_girwa_kalarwas
+UDAIPUR,GIRWA,balicha,Bachhar,42357,0.19047619047619044,fuzzy,udaipur_girwa_balicha
+UDAIPUR,GIRWA,chansada,Chanavada,42370,0.16335978835978843,fuzzy,udaipur_girwa_chansada
+UDAIPUR,GIRWA,charavda,Chanavada,42370,0.16335978835978843,fuzzy,udaipur_girwa_charavda
+UDAIPUR,GIRWA,lakarwas,Lakadwas,42385,0.08333333333333338,fuzzy,udaipur_girwa_lakarwas
+UDAIPUR,GIRWA,kalarwas,Lakadwas,42385,0.130952380952381,fuzzy,udaipur_girwa_kalarwas
 UDAIPUR,GOGUNDA,gogunda,Gogunda,42416,0,exact,udaipur_gogunda_gogunda
-UDAIPUR,GOGUNDA,gundali,Gogunda,42416,0.19047619047619044,strict,udaipur_gogunda_gundali
-UDAIPUR,GOGUNDA,jhadoli,Jhadoli,42419,0,exact,udaipur_gogunda_jhadoli
-UDAIPUR,GOGUNDA,dhol,Jhadoli,42419,0.2738095238095238,loose,udaipur_gogunda_dhol
-UDAIPUR,GOGUNDA,kachhaba,Kaachva,42420,0.2142857142857143,loose,udaipur_gogunda_kachhaba
-UDAIPUR,GOGUNDA,ravachh,Kaachva,42420,0.28571428571428575,loose,udaipur_gogunda_ravachh
-UDAIPUR,GOGUNDA,morwal,Morval,42425,0.11111111111111106,strict,udaipur_gogunda_morwal
-UDAIPUR,GOGUNDA,kamol,Morval,42425,0.3,loose,udaipur_gogunda_kamol
-UDAIPUR,JHADOL,badrana,Badrana,42450,0,exact,udaipur_jhadol_badrana
-UDAIPUR,JHADOL,garanwas,Badrana,42450,0.22023809523809523,loose,udaipur_jhadol_garanwas
-UDAIPUR,JHADOL,dharavan,Badrana,42450,0.24206349206349215,loose,udaipur_jhadol_dharavan
-UDAIPUR,JHADOL,dheya,Dewas,42457,0.26666666666666666,loose,udaipur_jhadol_dheya
-UDAIPUR,JHADOL,newaj,Dewas,42457,0.26666666666666666,loose,udaipur_jhadol_newaj
+UDAIPUR,GOGUNDA,gundali,Gogunda,42416,0.19047619047619044,fuzzy,udaipur_gogunda_gundali
 UDAIPUR,JHADOL,kada,Kada,42468,0,exact,udaipur_jhadol_kada
-UDAIPUR,JHADOL,jekada,Kada,42468,0.11111111111111122,strict,udaipur_jhadol_jekada
-UDAIPUR,JHADOL,kanthariya,Kanthariya,42469,0,exact,udaipur_jhadol_kanthariya
-UDAIPUR,JHADOL,panarwa,Kanthariya,42469,0.2619047619047619,loose,udaipur_jhadol_panarwa
+UDAIPUR,JHADOL,jekada,Kada,42468,0.11111111111111122,fuzzy,udaipur_jhadol_jekada
 UDAIPUR,JHADOL,khakhad,Khakhad,42470,0,exact,udaipur_jhadol_khakhad
-UDAIPUR,JHADOL,khati kamdi,Khakhad,42470,0.19913419913419916,strict,udaipur_jhadol_khati kamdi
+UDAIPUR,JHADOL,khati kamdi,Khakhad,42470,0.19913419913419916,fuzzy,udaipur_jhadol_khati kamdi
 UDAIPUR,JHADOL,thobawara,Thobawara,42488,0,exact,udaipur_jhadol_thobawara
-UDAIPUR,JHADOL,jetawara,Thobawara,42488,0.19444444444444453,strict,udaipur_jhadol_jetawara
-UDAIPUR,KHERWARA,badla,Badala,42490,0.12222222222222213,strict,udaipur_kherwara_badla
-UDAIPUR,KHERWARA,gadawat,Badala,42490,0.253968253968254,loose,udaipur_kherwara_gadawat
-UDAIPUR,KHERWARA,dabayacha,Badala,42490,0.2703703703703703,loose,udaipur_kherwara_dabayacha
-UDAIPUR,KHERWARA,mandvafala,Badala,42490,0.2888888888888888,loose,udaipur_kherwara_mandvafala
-UDAIPUR,KHERWARA,banjaria,Banjariya,42492,0.037037037037037104,strict,udaipur_kherwara_banjaria
-UDAIPUR,KHERWARA,jayara,Banjariya,42492,0.2703703703703703,loose,udaipur_kherwara_jayara
-UDAIPUR,KHERWARA,padari,Banjariya,42492,0.29629629629629634,loose,udaipur_kherwara_padari
-UDAIPUR,KHERWARA,barothi brahman,Birothi Brahmanam,42494,0.1405695611577966,strict,udaipur_kherwara_barothi brahman
-UDAIPUR,KHERWARA,bhomtabara,Birothi Brahmanam,42494,0.24575163398692818,loose,udaipur_kherwara_bhomtabara
-UDAIPUR,KHERWARA,bavalvada,Bavalwara,42495,0.14814814814814825,strict,udaipur_kherwara_bavalvada
-UDAIPUR,KHERWARA,pandiyawara,Bavalwara,42495,0.2626262626262627,loose,udaipur_kherwara_pandiyawara
+UDAIPUR,JHADOL,jetawara,Thobawara,42488,0.19444444444444453,fuzzy,udaipur_jhadol_jetawara
 UDAIPUR,KHERWARA,bhanda,Bhanda,42497,0,exact,udaipur_kherwara_bhanda
-UDAIPUR,KHERWARA,thana,Bhanda,42497,0.17777777777777778,strict,udaipur_kherwara_thana
-UDAIPUR,KHERWARA,dhelana,Bhanda,42497,0.253968253968254,loose,udaipur_kherwara_dhelana
+UDAIPUR,KHERWARA,thana,Bhanda,42497,0.17777777777777778,fuzzy,udaipur_kherwara_thana
 UDAIPUR,KHERWARA,kanpur,Kanpur,42518,0,exact,udaipur_kherwara_kanpur
-UDAIPUR,KHERWARA,kalyanpur,Kanpur,42518,0.11111111111111122,strict,udaipur_kherwara_kalyanpur
-UDAIPUR,KHERWARA,kanuwara,Kanpur,42518,0.18055555555555555,strict,udaipur_kherwara_kanuwara
-UDAIPUR,KHERWARA,katarwas,Katarwaas,42522,0.037037037037037104,strict,udaipur_kherwara_katarwas
-UDAIPUR,KHERWARA,asariwada,Katarwaas,42522,0.22222222222222238,loose,udaipur_kherwara_asariwada
-UDAIPUR,KHERWARA,kagdar bhatia,Katarwaas,42522,0.2905982905982906,loose,udaipur_kherwara_kagdar bhatia
-UDAIPUR,KHERWARA,harshawada,Katarwaas,42522,0.3,loose,udaipur_kherwara_harshawada
-UDAIPUR,KHERWARA,navaghara,Navaghara,42532,0,exact,udaipur_kherwara_navaghara
-UDAIPUR,KHERWARA,nayagaon,Navaghara,42532,0.27314814814814825,loose,udaipur_kherwara_nayagaon
-UDAIPUR,KHERWARA,sundra,Sundara,42547,0.10317460317460315,strict,udaipur_kherwara_sundra
-UDAIPUR,KHERWARA,guda,Sundara,42547,0.2738095238095238,loose,udaipur_kherwara_guda
-UDAIPUR,KHERWARA,sagwara,Sundara,42547,0.28571428571428575,loose,udaipur_kherwara_sagwara
-UDAIPUR,KOTRA,gura,Gura,42558,0,exact,udaipur_kotra_gura
-UDAIPUR,KOTRA,gogurudh,Gura,42558,0.2916666666666667,loose,udaipur_kotra_gogurudh
-UDAIPUR,KOTRA,khakharia,Khakharia,42563,0,exact,udaipur_kotra_khakharia
-UDAIPUR,KOTRA,kayari,Khakharia,42563,0.20370370370370378,loose,udaipur_kotra_kayari
-UDAIPUR,KOTRA,mamera,Mamer,42572,0.05555555555555556,strict,udaipur_kotra_mamera
-UDAIPUR,KOTRA,merpur,Mamer,42572,0.3,loose,udaipur_kotra_merpur
-UDAIPUR,MAVLI,mavli,Aamli,42586,0.26666666666666666,loose,udaipur_mavli_mavli
-UDAIPUR,MAVLI,namri,Aamli,42586,0.26666666666666666,loose,udaipur_mavli_namri
+UDAIPUR,KHERWARA,kalyanpur,Kanpur,42518,0.11111111111111122,fuzzy,udaipur_kherwara_kalyanpur
+UDAIPUR,KHERWARA,kanuwara,Kanpur,42518,0.18055555555555555,fuzzy,udaipur_kherwara_kanuwara
 UDAIPUR,MAVLI,gadoli,Gadoli,42600,0,exact,udaipur_mavli_gadoli
-UDAIPUR,MAVLI,gudli,Gadoli,42600,0.17777777777777778,strict,udaipur_mavli_gudli
-UDAIPUR,MAVLI,vijanwas,Jawad,42605,0.23333333333333345,loose,udaipur_mavli_vijanwas
-UDAIPUR,MAVLI,jewana,Jawad,42605,0.2611111111111111,loose,udaipur_mavli_jewana
-UDAIPUR,MAVLI,nauwa,Jawad,42605,0.26666666666666666,loose,udaipur_mavli_nauwa
-UDAIPUR,MAVLI,sangwa,Jawad,42605,0.3,loose,udaipur_mavli_sangwa
-UDAIPUR,MAVLI,ladani,Ladani,42610,0,exact,udaipur_mavli_ladani
-UDAIPUR,MAVLI,warni,Ladani,42610,0.3,loose,udaipur_mavli_warni
-UDAIPUR,MAVLI,lopra,Lopra,42611,0,exact,udaipur_mavli_lopra
-UDAIPUR,MAVLI,noorda,Lopra,42611,0.3,loose,udaipur_mavli_noorda
-UDAIPUR,MAVLI,morath,Morath,42616,0,exact,udaipur_mavli_morath
-UDAIPUR,MAVLI,merta,Morath,42616,0.2611111111111111,loose,udaipur_mavli_merta
-UDAIPUR,MAVLI,mangthala,Morath,42616,0.29629629629629634,loose,udaipur_mavli_mangthala
-UDAIPUR,MAVLI,thamla,Thamla,42629,0,exact,udaipur_mavli_thamla
-UDAIPUR,MAVLI,ghasa,Thamla,42629,0.3,loose,udaipur_mavli_ghasa
+UDAIPUR,MAVLI,gudli,Gadoli,42600,0.17777777777777778,fuzzy,udaipur_mavli_gudli
 UDAIPUR,SALUMBAR,baroda,Baroda,42638,0,exact,udaipur_salumbar_baroda
-UDAIPUR,SALUMBAR,banoda,Baroda,42638,0.11111111111111106,strict,udaipur_salumbar_banoda
-UDAIPUR,SALUMBAR,dagar,Dagar,42645,0,exact,udaipur_salumbar_dagar
-UDAIPUR,SALUMBAR,dholagar khera,Dagar,42645,0.2142857142857143,loose,udaipur_salumbar_dholagar khera
+UDAIPUR,SALUMBAR,banoda,Baroda,42638,0.11111111111111106,fuzzy,udaipur_salumbar_banoda
 UDAIPUR,SALUMBAR,gudel,Gudel,42653,0,exact,udaipur_salumbar_gudel
-UDAIPUR,SALUMBAR,budel,Gudel,42653,0.13333333333333336,strict,udaipur_salumbar_budel
-UDAIPUR,SALUMBAR,idana,Idana,42654,0,exact,udaipur_salumbar_idana
-UDAIPUR,SALUMBAR,jetana,Idana,42654,0.3,loose,udaipur_salumbar_jetana
-UDAIPUR,SALUMBAR,karavali,Karawali,42663,0.08333333333333338,strict,udaipur_salumbar_karavali
-UDAIPUR,SALUMBAR,karakalan,Karawali,42663,0.19444444444444453,strict,udaipur_salumbar_karakalan
+UDAIPUR,SALUMBAR,budel,Gudel,42653,0.13333333333333336,fuzzy,udaipur_salumbar_budel
+UDAIPUR,SALUMBAR,karavali,Karawali,42663,0.08333333333333338,fuzzy,udaipur_salumbar_karavali
+UDAIPUR,SALUMBAR,karakalan,Karawali,42663,0.19444444444444453,fuzzy,udaipur_salumbar_karakalan
 UDAIPUR,SALUMBAR,saradi,Saradi,42675,0,exact,udaipur_salumbar_saradi
-UDAIPUR,SALUMBAR,saria,Saradi,42675,0.12222222222222213,strict,udaipur_salumbar_saria
-UDAIPUR,SARADA,banakala,Bana Kalan,42686,0.06666666666666678,strict,udaipur_sarada_banakala
-UDAIPUR,SARADA,badawali,Bana Kalan,42686,0.2916666666666667,loose,udaipur_sarada_badawali
-UDAIPUR,SARADA,chavand,Chawand,42690,0.09523809523809525,strict,udaipur_sarada_chavand
-UDAIPUR,SARADA,chandora,Chawand,42690,0.2142857142857143,loose,udaipur_sarada_chandora
-UDAIPUR,SARADA,kejar,Kejad,42699,0.13333333333333336,strict,udaipur_sarada_kejar
-UDAIPUR,SARADA,jhadol,Kejad,42699,0.3,loose,udaipur_sarada_jhadol
+UDAIPUR,SALUMBAR,saria,Saradi,42675,0.12222222222222213,fuzzy,udaipur_salumbar_saria
 UDAIPUR,SARADA,nathara,Nathara,42705,0,exact,udaipur_sarada_nathara
-UDAIPUR,SARADA,singhatwara,Nathara,42705,0.19264069264069278,strict,udaipur_sarada_singhatwara
-UDAIPUR,SARADA,nevatalai,Nathara,42705,0.24338624338624346,loose,udaipur_sarada_nevatalai
-UDAIPUR,SARADA,rathora,Nathara,42705,0.2571428571428572,loose,udaipur_sarada_rathora
-UDAIPUR,SARADA,pal sarada,Paal Sarada,42709,0.16363636363636364,strict,udaipur_sarada_pal sarada
-UDAIPUR,SARADA,padala,Paal Sarada,42709,0.23737373737373735,loose,udaipur_sarada_padala
-UDAIPUR,SARADA,sagarda,Sagatra,42715,0.09523809523809525,strict,udaipur_sarada_sagarda
-UDAIPUR,SARADA,sallara,Sagatra,42715,0.19047619047619044,strict,udaipur_sarada_sallara
-UDAIPUR,SARADA,thana,Thana,42724,0,exact,udaipur_sarada_thana
-UDAIPUR,SARADA,dhankawara,Thana,42724,0.26666666666666666,loose,udaipur_sarada_dhankawara
-BIKANER,NOKHA,gajsukhdesar,Gajsukhdesar,236073,0,exact,bikaner_nokha_gajsukhdesar
-BIKANER,NOKHA,jaisinghdesarmagra,Gajsukhdesar,236073,0.2537037037037037,loose,bikaner_nokha_jaisinghdesarmagra
-BHILWARA,ASIND,rooppura,Rooppura,244601,0,exact,bhilwara_asind_rooppura
-BHILWARA,ASIND,rampura,Rooppura,244601,0.22023809523809523,loose,bhilwara_asind_rampura
-BHILWARA,ASIND,bhojpura,Rooppura,244601,0.25000000000000006,loose,bhilwara_asind_bhojpura
-SIKAR,PIPRALI,harsh,Dharamshala,262155,0.18181818181818185,strict,sikar_piprali_harsh
-SIKAR,PIPRALI,radha kishanpura,Dharamshala,262155,0.28051346801346805,loose,sikar_piprali_radha kishanpura
-SIKAR,PIPRALI,kishanpura,Kushalpura,262167,0.13333333333333336,strict,sikar_piprali_kishanpura
-SIKAR,PIPRALI,shyampura,Kushalpura,262167,0.1740740740740741,strict,sikar_piprali_shyampura
-JAIPUR,VIRATNAGAR,rampura,Papra,262242,0.20952380952380956,loose,jaipur_viratnagar_rampura
-JAIPUR,VIRATNAGAR,pragpura,Papra,262242,0.22499999999999998,loose,jaipur_viratnagar_pragpura
-JAIPUR,KOTPUTLI,kansali,Basai,262301,0.20952380952380956,loose,jaipur_kotputli_kansali
-JAIPUR,KOTPUTLI,bhaislana,Basai,262301,0.2481481481481482,loose,jaipur_kotputli_bhaislana
-BARMER,BALOTRA,chilanadi,Bhimarlai,262328,0.27777777777777785,loose,barmer_balotra_chilanadi
-BARMER,BALOTRA,simarkhiya,Bhimarlai,262328,0.3,loose,barmer_balotra_simarkhiya
-BARMER,BALOTRA,baniyawas,Bhandiyawas,262330,0.06060606060606061,strict,barmer_balotra_baniyawas
-BARMER,BALOTRA,bagawas,Bhandiyawas,262330,0.19913419913419916,strict,barmer_balotra_bagawas
-BARMER,BALOTRA,gangawas,Bhandiyawas,262330,0.23484848484848492,loose,barmer_balotra_gangawas
-UDAIPUR,JHADOL,amiwara,Nainbara,262387,0.22023809523809523,loose,udaipur_jhadol_amiwara
-UDAIPUR,JHADOL,pipalbara,Nainbara,262387,0.25000000000000006,loose,udaipur_jhadol_pipalbara
-BARMER,CHOHTAN,bijasar,Jaisar,262418,0.130952380952381,strict,barmer_chohtan_bijasar
-BARMER,CHOHTAN,talsar,Jaisar,262418,0.22222222222222238,loose,barmer_chohtan_talsar
-DHAULPUR,BASERI,baseri,Barai,262428,0.17777777777777778,strict,dhaulpur_baseri_baseri
-DHAULPUR,BASERI,golari,Barai,262428,0.3,loose,dhaulpur_baseri_golari
-DAUSA,BANDIKUI,jhanjhirampura,Dwarapura,262436,0.2407407407407408,loose,dausa_bandikui_jhanjhirampura
-DAUSA,BANDIKUI,nihalpura,Dwarapura,262436,0.29629629629629634,loose,dausa_bandikui_nihalpura
-BARMER,SINDHARI,sindhari chosira,Sindhari Charnan,262491,0.1506410256410256,strict,barmer_sindhari_sindhari chosira
-BARMER,SINDHARI,adarsh chawa,Sindhari Charnan,262491,0.24722222222222212,loose,barmer_sindhari_adarsh chawa
-DUNGARPUR,SIMALWARA,badgama,Bhadar,262514,0.253968253968254,loose,dungarpur_simalwara_badgama
-DUNGARPUR,SIMALWARA,bhaisara chhota,Bhadar,262514,0.27777777777777773,loose,dungarpur_simalwara_bhaisara chhota
-UDAIPUR,KHERWARA,ketav,Katar,262536,0.26666666666666666,loose,udaipur_kherwara_ketav
-UDAIPUR,KHERWARA,pahar,Katar,262536,0.26666666666666666,loose,udaipur_kherwara_pahar
-DHAULPUR,DHAULPUR,nuhera,Khera,262571,0.17777777777777778,strict,dhaulpur_dhaulpur_nuhera
-DHAULPUR,DHAULPUR,piphera,Khera,262571,0.20952380952380956,loose,dhaulpur_dhaulpur_piphera
-DHAULPUR,DHAULPUR,kantheri,Khera,262571,0.25833333333333336,loose,dhaulpur_dhaulpur_kantheri
-DUNGARPUR,DUNGARPUR,hathai,Bhatwada,262585,0.27777777777777785,loose,dungarpur_dungarpur_hathai
-DUNGARPUR,DUNGARPUR,mandawa,Bhatwada,262585,0.28690476190476194,loose,dungarpur_dungarpur_mandawa
-DUNGARPUR,DUNGARPUR,kanhari,Chak Mahuri,262624,0.2546897546897547,loose,dungarpur_dungarpur_kanhari
-DUNGARPUR,DUNGARPUR,pohri khaturat,Chak Mahuri,262624,0.29076479076479084,loose,dungarpur_dungarpur_pohri khaturat
-JAISALMER,SANKRA,manasar,Sanawara,262632,0.22023809523809523,loose,jaisalmer_sankra_manasar
-JAISALMER,SANKRA,pannasar,Sanawara,262632,0.25000000000000006,loose,jaisalmer_sankra_pannasar
-UDAIPUR,SARADA,bhalriya,Sarsiya,262738,0.22023809523809523,loose,udaipur_sarada_bhalriya
-UDAIPUR,SARADA,semari,Sarsiya,262738,0.253968253968254,loose,udaipur_sarada_semari
-UDAIPUR,SARADA,shyampura ja,Kharbar A,262751,0.27777777777777785,loose,udaipur_sarada_shyampura ja
-UDAIPUR,SARADA,shyampura sa,Kharbar A,262751,0.27777777777777785,loose,udaipur_sarada_shyampura sa
-BARMER,CHOHTAN,meetha ka tala,Mate Ka Tala,262763,0.07539682539682548,strict,barmer_chohtan_meetha ka tala
-BARMER,CHOHTAN,sarupe ka tala,Mate Ka Tala,262763,0.1507936507936509,strict,barmer_chohtan_sarupe ka tala
-BARMER,BAYTOO,mudho ki dhani,Hudon Ki Dhani,262771,0.08608058608058612,strict,barmer_baytoo_mudho ki dhani
-BARMER,BAYTOO,heera ki dhani,Hudon Ki Dhani,262771,0.19047619047619044,strict,barmer_baytoo_heera ki dhani
-UDAIPUR,GIRWA,parmda,Umarda,262791,0.21111111111111114,loose,udaipur_girwa_parmda
-UDAIPUR,GIRWA,sakroda,Umarda,262791,0.253968253968254,loose,udaipur_girwa_sakroda
-BIKANER,KOLAYAT,ranjitpura,Gangapura,294041,0.24444444444444452,loose,bikaner_kolayat_ranjitpura
-BIKANER,KOLAYAT,barsalpur,Gangapura,294041,0.29629629629629634,loose,bikaner_kolayat_barsalpur
-BIKANER,KOLAYAT,nagrasar,Ranasar,294044,0.08928571428571432,strict,bikaner_kolayat_nagrasar
-BIKANER,KOLAYAT,manakasar,Ranasar,294044,0.2142857142857143,loose,bikaner_kolayat_manakasar
-BHARATPUR,WEIR,alipur,Raipur,294127,0.11111111111111106,strict,bharatpur_weir_alipur
-BHARATPUR,WEIR,mainapura,Raipur,294127,0.20370370370370378,loose,bharatpur_weir_mainapura
-UDAIPUR,JHADOL,sada,Saldari,294186,0.142857142857143,strict,udaipur_jhadol_sada
-UDAIPUR,JHADOL,madari,Saldari,294186,0.1507936507936509,strict,udaipur_jhadol_madari
-UDAIPUR,KHERWARA,patiya,Palsiya,294207,0.1507936507936509,strict,udaipur_kherwara_patiya
-UDAIPUR,KHERWARA,pipli a,Palsiya,294207,0.28571428571428575,loose,udaipur_kherwara_pipli a
-JAISALMER,SANKRA,bhaisda,Bhadriya,294266,0.18650793650793648,strict,jaisalmer_sankra_bhaisda
-JAISALMER,SANKRA,ratdiya,Bhadriya,294266,0.22023809523809523,loose,jaisalmer_sankra_ratdiya
-JAIPUR,BASSI,patan,Ghata,294290,0.26666666666666666,loose,jaipur_bassi_patan
-JAIPUR,BASSI,kanota,Ghata,294290,0.3,loose,jaipur_bassi_kanota
-CHURU,SUJANGARH,jogalsar,Kolasar,294331,0.18650793650793648,strict,churu_sujangarh_jogalsar
-CHURU,SUJANGARH,lalgarh,Kolasar,294331,0.28571428571428575,loose,churu_sujangarh_lalgarh
-JAIPUR,KOTPUTLI,chaturbhuj,Churi,294355,0.26666666666666666,loose,jaipur_kotputli_chaturbhuj
-JAIPUR,KOTPUTLI,bhuri bhadaj,Churi,294355,0.2888888888888889,loose,jaipur_kotputli_bhuri bhadaj
-NAGAUR,NAGAUR,tausar,Mundasar,294386,0.24722222222222212,loose,nagaur_nagaur_tausar
-NAGAUR,NAGAUR,pabusar,Mundasar,294386,0.28690476190476194,loose,nagaur_nagaur_pabusar
-UDAIPUR,SALUMBAR,payara,Jawarda,294492,0.253968253968254,loose,udaipur_salumbar_payara
-UDAIPUR,SALUMBAR,jhallar,Jawarda,294492,0.28571428571428575,loose,udaipur_salumbar_jhallar
-UDAIPUR,GIRWA,sulawas,Kaliwas,294498,0.2571428571428572,loose,udaipur_girwa_sulawas
-UDAIPUR,GIRWA,vali,Kaliwas,294498,0.2738095238095238,loose,udaipur_girwa_vali
-UDAIPUR,GIRWA,somakhera,Naya Khera,294505,0.24444444444444452,loose,udaipur_girwa_somakhera
-UDAIPUR,GIRWA,savina khera gramin,Naya Khera,294505,0.24580896686159848,loose,udaipur_girwa_savina khera gramin
-DUNGARPUR,SIMALWARA,bhaimai,Bhandari,294844,0.22023809523809523,loose,dungarpur_simalwara_bhaimai
-DUNGARPUR,SIMALWARA,bavdi,Bhandari,294844,0.23333333333333345,loose,dungarpur_simalwara_bavdi
-SIKAR,NEEM KA THANA,hasampur,Harjanpura,294845,0.21666666666666667,loose,sikar_neem ka thana_hasampur
-SIKAR,NEEM KA THANA,rajpura,Harjanpura,294845,0.24285714285714294,loose,sikar_neem ka thana_rajpura
-SIKAR,NEEM KA THANA,biharipur,Harjanpura,294845,0.24444444444444452,loose,sikar_neem ka thana_biharipur
-SIKAR,NEEM KA THANA,kishorpura,Harjanpura,294845,0.26666666666666666,loose,sikar_neem ka thana_kishorpura
-SIKAR,NEEM KA THANA,charanwas puranawas,Harjanpura,294845,0.2828460038986355,loose,sikar_neem ka thana_charanwas puranawas
-UDAIPUR,GOGUNDA,padrada,Madarda,295104,0.1507936507936509,strict,udaipur_gogunda_padrada
-UDAIPUR,GOGUNDA,sayara,Madarda,295104,0.253968253968254,loose,udaipur_gogunda_sayara
-BARMER,CHOHTAN,panoriya,Parariya,295280,0.1666666666666667,strict,barmer_chohtan_panoriya
-BARMER,CHOHTAN,harpaliya,Parariya,295280,0.1871693121693123,strict,barmer_chohtan_harpaliya
-BARMER,CHOHTAN,janpaliya,Parariya,295280,0.25000000000000006,loose,barmer_chohtan_janpaliya
-BARMER,BARMER,gardiya,Ramderiya,295353,0.2142857142857143,loose,barmer_barmer_gardiya
-BARMER,BARMER,ramsar,Ramderiya,295353,0.29629629629629634,loose,barmer_barmer_ramsar
-JAISALMER,SAM,lakha,Salkha,295386,0.12222222222222213,strict,jaisalmer_sam_lakha
-JAISALMER,SAM,salkha damodara,Salkha,295386,0.20000000000000007,loose,jaisalmer_sam_salkha damodara
-BARMER,SHEO,shiv,Shivaji Nagar,295412,0.2307692307692309,loose,barmer_sheo_shiv
-BARMER,SHEO,jaisindhar gaon,Shivaji Nagar,295412,0.24508547008547016,loose,barmer_sheo_jaisindhar gaon
-JAISALMER,SAM,mandai,Mandhla,295427,0.1507936507936509,strict,jaisalmer_sam_mandai
-JAISALMER,SAM,modha,Mandhla,295427,0.20952380952380956,loose,jaisalmer_sam_modha
-JAISALMER,SAM,mulana,Mandhla,295427,0.253968253968254,loose,jaisalmer_sam_mulana
+UDAIPUR,SARADA,singhatwara,Nathara,42705,0.19264069264069278,fuzzy,udaipur_sarada_singhatwara
+UDAIPUR,SARADA,sagarda,Sagatra,42715,0.09523809523809525,fuzzy,udaipur_sarada_sagarda
+UDAIPUR,SARADA,sallara,Sagatra,42715,0.19047619047619044,fuzzy,udaipur_sarada_sallara
+SIKAR,PIPRALI,kishanpura,Kushalpura,262167,0.13333333333333336,fuzzy,sikar_piprali_kishanpura
+SIKAR,PIPRALI,shyampura,Kushalpura,262167,0.1740740740740741,fuzzy,sikar_piprali_shyampura
+BARMER,BALOTRA,baniyawas,Bhandiyawas,262330,0.06060606060606061,fuzzy,barmer_balotra_baniyawas
+BARMER,BALOTRA,bagawas,Bhandiyawas,262330,0.19913419913419916,fuzzy,barmer_balotra_bagawas
+BARMER,CHOHTAN,meetha ka tala,Mate Ka Tala,262763,0.07539682539682548,fuzzy,barmer_chohtan_meetha ka tala
+BARMER,CHOHTAN,sarupe ka tala,Mate Ka Tala,262763,0.1507936507936509,fuzzy,barmer_chohtan_sarupe ka tala
+BARMER,BAYTOO,mudho ki dhani,Hudon Ki Dhani,262771,0.08608058608058612,fuzzy,barmer_baytoo_mudho ki dhani
+BARMER,BAYTOO,heera ki dhani,Hudon Ki Dhani,262771,0.19047619047619044,fuzzy,barmer_baytoo_heera ki dhani
+UDAIPUR,JHADOL,sada,Saldari,294186,0.142857142857143,fuzzy,udaipur_jhadol_sada
+UDAIPUR,JHADOL,madari,Saldari,294186,0.1507936507936509,fuzzy,udaipur_jhadol_madari
+BARMER,CHOHTAN,panoriya,Parariya,295280,0.1666666666666667,fuzzy,barmer_chohtan_panoriya
+BARMER,CHOHTAN,harpaliya,Parariya,295280,0.1871693121693123,fuzzy,barmer_chohtan_harpaliya

@@ -27,10 +27,21 @@ cd ms && latexmk -xelatex main.tex
 
 Because administrative boundaries change frequently and spelling is highly irregular, the pipeline uses the **Local Government Directory (LGD)** as a "universal translator" to link election records to Census covariates at the lowest possible level: the Gram Panchayat (GP).
 
-1. **Election to LGD Block:** Election `samiti` or `block` names are mapped to official LGD Block codes via manual active crosswalks (`data/crosswalks/active/`).
-2. **Election GP to LGD GP:** Within each LGD Block, the Election GP name is fuzzy-matched against the official LGD hierarchy (`data/lgd/processed/lgd_*_block_gp.csv`) to yield an LGD GP Code.
-3. **LGD to SHRUG:** The LGD GP code is then linked to the SHRUG Village ID (`shrid2`) using a pre-built crosswalk (`data/shrug_gp_xwalk/`).
-4. **SHRUG to Census Data:** Finally, covariates are merged directly using the `shrid2` key.
+1. **Election to LGD Block:** Election `samiti` or `block` names are mapped to official LGD Block codes via manual crosswalks (`data/crosswalks/active/`).
+
+2. **Election GP to LGD GP:** Within each matched block, GP names are matched in two passes:
+   - **Exact match:** Normalized GP names are joined directly (handles ~40-50% of GPs)
+   - **Fuzzy match:** Remaining unmatched GPs are matched using Jaro-Winkler distance < 0.20 (optimized for precision over recall)
+
+   Deduplication resolves edge cases:
+   - *One-to-many* (election GP → multiple LGD GPs): Keep lowest distance
+   - *Many-to-one* (multiple election GPs → same LGD GP): Keep lowest distance within district/block
+
+3. **LGD to SHRUG:** The LGD GP code is linked to the SHRUG Village ID (`shrid2`) using a pre-built crosswalk (`data/shrug_gp_xwalk/`).
+
+4. **SHRUG to Census:** Covariates merged via `shrid2` key.
+
+The `match_distance` column is preserved in output files for robustness checks at stricter thresholds.
 
 ### Directory Organization
 
