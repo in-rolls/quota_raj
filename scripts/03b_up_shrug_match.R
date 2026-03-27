@@ -3,9 +3,7 @@
 # Matching strategy:
 # 1. Filter out municipality/urban entries before matching
 # 2. Match election blocks to LGD blocks via comprehensive crosswalk
-# 3. GP name matching within block: exact first, then two-pass fuzzy
-#    - Strict pass: JW distance < 0.20
-#    - Loose pass: JW distance < 0.30 for remaining unmatched
+# 3. GP name matching within block: exact first, then fuzzy (JW distance < 0.20)
 # 4. Detect and handle ties, one-to-many, many-to-one issues
 # 5. Link matched GPs to SHRUG via LGD code
 #
@@ -106,7 +104,7 @@ if (nrow(unmatched_blocks) > 0) {
 }
 
 # ============================================================================
-# STEP 4: Match GP names within block (two-pass fuzzy matching)
+# STEP 4: Match GP names within block (exact + fuzzy)
 # ============================================================================
 
 up_gps <- up_with_block %>%
@@ -137,49 +135,36 @@ unmatched <- up_gps %>%
 
 message("Unmatched GPs for fuzzy: ", nrow(unmatched))
 
-# Two-pass fuzzy matching
-run_fuzzy_pass <- function(unmatched_data, lgd_data, threshold, pass_name) {
-    fuzzy_results <- list()
-    unique_blocks <- unique(unmatched_data$lgd_block_code)
-    message("Processing", length(unique_blocks), "blocks for", pass_name, "fuzzy matching (threshold =", threshold, ")...")
+# Fuzzy matching (JW distance < 0.20)
+FUZZY_THRESHOLD <- 0.20
 
-    pb <- txtProgressBar(min = 0, max = length(unique_blocks), style = 3)
-    for (i in seq_along(unique_blocks)) {
-        blk <- unique_blocks[i]
-        block_elex <- unmatched_data %>% filter(lgd_block_code == blk)
-        block_lgd <- lgd_data %>% filter(block_code == blk)
+fuzzy_results <- list()
+unique_blocks <- unique(unmatched$lgd_block_code)
+message("Processing ", length(unique_blocks), " blocks for fuzzy matching (threshold = ", FUZZY_THRESHOLD, ")...")
 
-        for (j in 1:nrow(block_elex)) {
-            result <- fuzzy_match_within_block(
-                block_elex[j, ], block_lgd,
-                threshold = threshold,
-                id_col = "key_2010",
-                gp_col = "gp_name_eng_2010"
-            )
-            if (!is.null(result)) {
-                result$match_quality <- pass_name
-                fuzzy_results[[length(fuzzy_results) + 1]] <- result
-            }
+pb <- txtProgressBar(min = 0, max = length(unique_blocks), style = 3)
+for (i in seq_along(unique_blocks)) {
+    blk <- unique_blocks[i]
+    block_elex <- unmatched %>% filter(lgd_block_code == blk)
+    block_lgd <- lgd_gps %>% filter(block_code == blk)
+
+    for (j in 1:nrow(block_elex)) {
+        result <- fuzzy_match_within_block(
+            block_elex[j, ], block_lgd,
+            threshold = FUZZY_THRESHOLD,
+            id_col = "key_2010",
+            gp_col = "gp_name_eng_2010"
+        )
+        if (!is.null(result)) {
+            fuzzy_results[[length(fuzzy_results) + 1]] <- result
         }
-        setTxtProgressBar(pb, i)
     }
-    close(pb)
-    bind_rows(fuzzy_results)
+    setTxtProgressBar(pb, i)
 }
+close(pb)
 
-# Pass 1: Strict matching (threshold = 0.20)
-fuzzy_strict <- run_fuzzy_pass(unmatched, lgd_gps, threshold = 0.20, pass_name = "strict")
-message("Strict fuzzy matches: ", nrow(fuzzy_strict))
-
-# Pass 2: Loose matching for remaining unmatched (threshold = 0.30)
-still_unmatched <- unmatched %>%
-    anti_join(fuzzy_strict, by = "key_2010")
-
-fuzzy_loose <- run_fuzzy_pass(still_unmatched, lgd_gps, threshold = 0.30, pass_name = "loose")
-message("Loose fuzzy matches: ", nrow(fuzzy_loose))
-
-fuzzy_df <- bind_rows(fuzzy_strict, fuzzy_loose)
-message("Total fuzzy GP matches: ", nrow(fuzzy_df))
+fuzzy_df <- bind_rows(fuzzy_results)
+message("Fuzzy GP matches: ", nrow(fuzzy_df))
 
 # ============================================================================
 # STEP 5: Export tie-resolved matches for audit
@@ -198,8 +183,7 @@ tie_resolved <- fuzzy_df %>%
         lgd_gp = lgd_gp_name,
         lgd_gp_code,
         match_distance,
-        tie_count,
-        match_quality
+        tie_count
     )
 
 message("\nTie-resolved matches: ", nrow(tie_resolved))
@@ -220,8 +204,7 @@ numeric_mismatch <- fuzzy_df %>%
         elex_gp = gp_name_eng_2010,
         lgd_gp = lgd_gp_name,
         lgd_gp_code,
-        match_distance,
-        match_quality
+        match_distance
     )
 
 message("Numeric mismatch matches: ", nrow(numeric_mismatch))
@@ -244,7 +227,6 @@ all_matches <- bind_rows(
             lgd_block_code = lgd_block_code,
             lgd_block_name = lgd_block_name,
             gp_match_type = "exact",
-            match_quality = "exact",
             match_distance = 0,
             match_confidence = "unique"
         ),
@@ -262,7 +244,6 @@ all_matches <- bind_rows(
             lgd_block_code = lgd_block_code,
             lgd_block_name = lgd_block_name,
             gp_match_type = "fuzzy",
-            match_quality = match_quality,
             match_distance = match_distance,
             match_confidence = match_confidence
         )
@@ -295,7 +276,7 @@ if (nrow(one_to_many) > 0) {
             lgd_gp = lgd_gp_name,
             lgd_gp_code,
             match_distance,
-            match_quality
+            gp_match_type
         ) %>%
         arrange(district, block, elex_gp, match_distance)
 
@@ -331,14 +312,25 @@ if (nrow(many_to_one) > 0) {
             lgd_gp = lgd_gp_name,
             lgd_gp_code,
             match_distance,
-            match_quality,
+            gp_match_type,
             key_2010
         ) %>%
         arrange(lgd_gp_code, match_distance)
 
     write_csv(many_to_one_export, here("data/crosswalks/audit/03b_up_many_to_one_audit.csv"))
     message("Exported: data/crosswalks/audit/03b_up_many_to_one_audit.csv")
-    message("NOTE: Many-to-one may be valid (same GP in multiple election rounds). Review manually.")
+
+    all_matches <- all_matches %>%
+        left_join(
+            up_gps %>% select(key_2010, district_name_eng_2010, block_name_eng_2010) %>% distinct(),
+            by = "key_2010"
+        ) %>%
+        group_by(district_name_eng_2010, block_name_eng_2010, lgd_gp_code) %>%
+        slice_min(match_distance, n = 1, with_ties = FALSE) %>%
+        ungroup() %>%
+        select(-district_name_eng_2010, -block_name_eng_2010)
+
+    message("Resolved many-to-one within district/block by keeping best match. New total: ", nrow(all_matches))
 }
 
 # ============================================================================
@@ -353,7 +345,7 @@ up_matched <- up_05_10 %>%
         by = "key_2010"
     ) %>%
     left_join(
-        all_matches %>% select(key_2010, lgd_gp_code, lgd_gp_name, gp_match_type, match_quality, match_confidence),
+        all_matches %>% select(key_2010, lgd_gp_code, lgd_gp_name, gp_match_type, match_distance, match_confidence),
         by = "key_2010"
     )
 
@@ -364,9 +356,6 @@ message("LGD match rate: ", round(100 * sum(!is.na(up_matched$lgd_gp_code)) / nr
 
 message("\nBy GP match type:")
 print(table(up_matched$gp_match_type, useNA = "ifany"))
-
-message("\nBy match quality:")
-print(table(up_matched$match_quality, useNA = "ifany"))
 
 message("\nBy block match type:")
 print(table(up_matched$block_match_type, useNA = "ifany"))
@@ -490,7 +479,7 @@ up_mapping <- up_shrug %>%
         lgd_block_name,
         block_match_type,
         gp_match_type,
-        match_quality,
+        match_distance,
         match_confidence
     )
 
