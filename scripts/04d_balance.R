@@ -99,6 +99,27 @@ compute_group_means <- function(data, treat_y1, treat_y2, variables) {
 }
 
 # =============================================================================
+# Helper: Compute standardized differences (Cohen's d variant)
+# =============================================================================
+
+compute_std_diff <- function(data, treatment_var, variables) {
+    sapply(variables, function(v) {
+        quota_rows <- data[[treatment_var]] == 1
+        open_rows <- data[[treatment_var]] == 0
+
+        m1 <- mean(data[[v]][quota_rows], na.rm = TRUE)
+        m2 <- mean(data[[v]][open_rows], na.rm = TRUE)
+        s1 <- sd(data[[v]][quota_rows], na.rm = TRUE)
+        s2 <- sd(data[[v]][open_rows], na.rm = TRUE)
+
+        pooled_sd <- sqrt((s1^2 + s2^2) / 2)
+        if (is.na(pooled_sd) || pooled_sd == 0) return(NA_real_)
+
+        abs(m1 - m2) / pooled_sd
+    })
+}
+
+# =============================================================================
 # Helper: Compute balance statistics for a panel
 # =============================================================================
 
@@ -172,6 +193,11 @@ compute_balance_stats <- function(data, treat_y1, treat_y2, panel_name) {
     n_treat <- sum(data_complete[[treat_y1]] == 1)
     n_control <- sum(data_complete[[treat_y1]] == 0)
 
+    # Compute standardized differences
+    std_diffs <- compute_std_diff(data_complete, treat_y1, avail_vars)
+    max_std_diff <- max(std_diffs, na.rm = TRUE)
+    message("Standardized differences (max): ", round(max_std_diff, 3))
+
     list(
         group_means = group_means,
         ttest_results = ttest_results,
@@ -182,7 +208,9 @@ compute_balance_stats <- function(data, treat_y1, treat_y2, panel_name) {
         df = df,
         p_fstat = p_fstat,
         p_ri = p_ri,
-        panel_name = panel_name
+        panel_name = panel_name,
+        std_diffs = std_diffs,
+        max_std_diff = max_std_diff
     )
 }
 
@@ -338,5 +366,148 @@ if (!is.null(up_stats_0510) && !is.null(up_stats_1015) && !is.null(up_stats_1521
     writeLines(combined_up_tex, here("tabs/balance_up.tex"))
     message("Created: tabs/balance_up.tex")
 }
+
+# =============================================================================
+# Log Standardized Differences
+# =============================================================================
+
+message("\n=== STANDARDIZED DIFFERENCES SUMMARY ===")
+
+std_diff_log <- c(
+    "Standardized Differences for Balance Covariates",
+    "================================================",
+    paste0("Generated: ", Sys.time()),
+    "",
+    "Formula: |mean_quota - mean_open| / sqrt((sd_quota^2 + sd_open^2) / 2)",
+    "Threshold for concern: 0.20 (Austin 2009)",
+    "",
+    "=== RAJASTHAN ===",
+    ""
+)
+
+if (!is.null(raj_stats_0510)) {
+    std_diff_log <- c(std_diff_log,
+        "Panel 2005->2010:",
+        paste0("  Max standardized diff: ", round(raj_stats_0510$max_std_diff, 4)),
+        paste0("  By covariate:")
+    )
+    for (nm in names(raj_stats_0510$std_diffs)) {
+        std_diff_log <- c(std_diff_log,
+            paste0("    ", balance_vars[[nm]], ": ", round(raj_stats_0510$std_diffs[nm], 4))
+        )
+    }
+    std_diff_log <- c(std_diff_log, "")
+}
+
+if (!is.null(raj_stats_1015)) {
+    std_diff_log <- c(std_diff_log,
+        "Panel 2010->2015:",
+        paste0("  Max standardized diff: ", round(raj_stats_1015$max_std_diff, 4)),
+        paste0("  By covariate:")
+    )
+    for (nm in names(raj_stats_1015$std_diffs)) {
+        std_diff_log <- c(std_diff_log,
+            paste0("    ", balance_vars[[nm]], ": ", round(raj_stats_1015$std_diffs[nm], 4))
+        )
+    }
+    std_diff_log <- c(std_diff_log, "")
+}
+
+if (!is.null(raj_stats_1520)) {
+    std_diff_log <- c(std_diff_log,
+        "Panel 2015->2020:",
+        paste0("  Max standardized diff: ", round(raj_stats_1520$max_std_diff, 4)),
+        paste0("  By covariate:")
+    )
+    for (nm in names(raj_stats_1520$std_diffs)) {
+        std_diff_log <- c(std_diff_log,
+            paste0("    ", balance_vars[[nm]], ": ", round(raj_stats_1520$std_diffs[nm], 4))
+        )
+    }
+    std_diff_log <- c(std_diff_log, "")
+}
+
+raj_all_std_diffs <- c(
+    if (!is.null(raj_stats_0510)) raj_stats_0510$std_diffs else NULL,
+    if (!is.null(raj_stats_1015)) raj_stats_1015$std_diffs else NULL,
+    if (!is.null(raj_stats_1520)) raj_stats_1520$std_diffs else NULL
+)
+raj_max_all <- max(raj_all_std_diffs, na.rm = TRUE)
+std_diff_log <- c(std_diff_log,
+    paste0("RAJASTHAN MAX (all panels): ", round(raj_max_all, 4)),
+    ""
+)
+
+std_diff_log <- c(std_diff_log,
+    "=== UTTAR PRADESH ===",
+    ""
+)
+
+if (!is.null(up_stats_0510)) {
+    std_diff_log <- c(std_diff_log,
+        "Panel 2005->2010:",
+        paste0("  Max standardized diff: ", round(up_stats_0510$max_std_diff, 4)),
+        paste0("  By covariate:")
+    )
+    for (nm in names(up_stats_0510$std_diffs)) {
+        std_diff_log <- c(std_diff_log,
+            paste0("    ", balance_vars[[nm]], ": ", round(up_stats_0510$std_diffs[nm], 4))
+        )
+    }
+    std_diff_log <- c(std_diff_log, "")
+}
+
+if (!is.null(up_stats_1015)) {
+    std_diff_log <- c(std_diff_log,
+        "Panel 2010->2015:",
+        paste0("  Max standardized diff: ", round(up_stats_1015$max_std_diff, 4)),
+        paste0("  By covariate:")
+    )
+    for (nm in names(up_stats_1015$std_diffs)) {
+        std_diff_log <- c(std_diff_log,
+            paste0("    ", balance_vars[[nm]], ": ", round(up_stats_1015$std_diffs[nm], 4))
+        )
+    }
+    std_diff_log <- c(std_diff_log, "")
+}
+
+if (!is.null(up_stats_1521)) {
+    std_diff_log <- c(std_diff_log,
+        "Panel 2015->2021:",
+        paste0("  Max standardized diff: ", round(up_stats_1521$max_std_diff, 4)),
+        paste0("  By covariate:")
+    )
+    for (nm in names(up_stats_1521$std_diffs)) {
+        std_diff_log <- c(std_diff_log,
+            paste0("    ", balance_vars[[nm]], ": ", round(up_stats_1521$std_diffs[nm], 4))
+        )
+    }
+    std_diff_log <- c(std_diff_log, "")
+}
+
+up_all_std_diffs <- c(
+    if (!is.null(up_stats_0510)) up_stats_0510$std_diffs else NULL,
+    if (!is.null(up_stats_1015)) up_stats_1015$std_diffs else NULL,
+    if (!is.null(up_stats_1521)) up_stats_1521$std_diffs else NULL
+)
+up_max_all <- max(up_all_std_diffs, na.rm = TRUE)
+std_diff_log <- c(std_diff_log,
+    paste0("UP MAX (all panels): ", round(up_max_all, 4)),
+    ""
+)
+
+overall_max <- max(c(raj_all_std_diffs, up_all_std_diffs), na.rm = TRUE)
+std_diff_log <- c(std_diff_log,
+    "=== OVERALL SUMMARY ===",
+    paste0("Maximum standardized difference (all states, all panels): ", round(overall_max, 4)),
+    paste0("Claim in manuscript: 'fall below 0.12'"),
+    paste0("Claim valid: ", ifelse(overall_max < 0.12, "YES", "NO - UPDATE MANUSCRIPT"))
+)
+
+writeLines(std_diff_log, here("tabs/std_diff_log.txt"))
+message("Created: tabs/std_diff_log.txt")
+
+cat("\n")
+cat(std_diff_log, sep = "\n")
 
 message("\n=== Balance Tables Complete ===")
