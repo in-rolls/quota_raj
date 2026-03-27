@@ -169,6 +169,9 @@ unmapped <- setdiff(all_elex_districts, district_mapping$elex_district_raw)
 if (length(unmapped) > 0) {
     message("ERROR: Unmapped election districts:")
     message(unmapped, sep = "")
+    dir.create(here("data/crosswalks/audit"), showWarnings = FALSE, recursive = TRUE)
+    write_csv(tibble(elex_district = unmapped), here("data/crosswalks/audit/01b_raj_missing_districts.csv"))
+    message("Saved: data/crosswalks/audit/01b_raj_missing_districts.csv")
     stop("All election districts must be mapped")
 } else {
     message("All election districts mapped.")

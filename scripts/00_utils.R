@@ -264,6 +264,14 @@ fuzzy_match_within_block <- function(elex_row, lgd_block_gps, threshold = 0.30,
         best_idx <- tied_indices[1]
     }
 
+    # Check for numeric mismatch
+    elex_numbers <- gsub("[^0-9]", "", elex_row$elex_gp_std)
+    lgd_numbers <- gsub("[^0-9]", "", lgd_block_gps$gp_name_std[best_idx])
+
+    if (nchar(elex_numbers) > 0 && nchar(lgd_numbers) > 0 && elex_numbers != lgd_numbers) {
+        match_confidence <- "numeric_mismatch"
+    }
+
     result <- tibble::tibble(
         lgd_gp_code = lgd_block_gps$gp_code[best_idx],
         lgd_gp_name = lgd_block_gps$gp_name[best_idx],

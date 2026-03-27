@@ -1,0 +1,369 @@
+district,block,elex_gp,lgd_gp,lgd_gp_code,match_distance,tie_count,match_quality
+Saharanpur,Sarsawa,Sikri,Saliri,85666,0.17777777777777778,2,strict
+Muzzafarnagar,Morna,Karheda,Kamheda,81416,0.09523809523809525,2,strict
+Muzzafarnagar,Shahpur,Paldi,Palda,81564,0.13333333333333336,2,strict
+Muzzafarnagar,Shamli,Butradi,Butrada,81583,0.09523809523809525,2,strict
+Meerut,Rajpura,Samaipur,Sameypur,79228,0.1666666666666667,2,strict
+Ghaziabad,Hapur,Badnauli,Badnoli,239136,0.130952380952381,2,strict
+Bulandshahr,Sikandrabad,Dhanaura,Dhanora,259795,0.18650793650793648,2,strict
+Bulandshahr,Agauta,Lohgara,Lahagra,57135,0.1507936507936509,2,strict
+Bijnaur,Noorpur,Mirapur,Meerapur,55637,0.130952380952381,2,strict
+Bijnaur,Kotwali,Sharufuddinn agar,Sharfudeennagar,55301,0.1485168426344898,2,strict
+Bijnaur,Afzalgarah,Aanandpur,Anandi Pur,54759,0.14537037037037034,2,strict
+Bijnaur,Mau Pur Devmal,Gajalpur,Gablipur,267196,0.1666666666666667,2,strict
+Bijnaur,Mau Pur Devmal,Baruki,Bahruka,55321,0.1507936507936509,2,strict
+Bijnaur,Syohara,Shahpur,Shahpur Harra,54872,0.15384615384615394,2,strict
+Bijnaur,Syohara,Rahatauli,Rahtolli,54860,0.19444444444444453,2,strict
+Jyotiba Phule Nagar,Hasanpur,Chakori,Chakauri,238863,0.130952380952381,2,strict
+Jyotiba Phule Nagar,Joya,Foudapur,Budanpur,238929,0.1666666666666667,2,strict
+Muradabad,Bilari,Guar Kheda,Gual Khera,80255,0.13333333333333336,2,strict
+Muradabad,Bilari,Haraura,Karsara,80411,0.19047619047619044,2,strict
+Muradabad,Thakurdwara,Bakawala,Banka Bala,80984,0.14166666666666666,2,strict
+Muradabad,Sambhal,Mithauli,Mitholi,80945,0.130952380952381,2,strict
+Muradabad,Mudhaa Pandey,Mudia Malukpur,Mundia Malukpur Mustahkam,80791,0.1466666666666667,2,strict
+Rampur,Chamaraua,Indree,Indra,84497,0.17777777777777778,2,strict
+Rampur,Milk,Kotara,Kamora,84592,0.17777777777777778,2,strict
+Bareilly,Kyara,Chanehti,Chanihta,53333,0.15476190476190485,2,strict
+Bareilly,Shergarh,Sihor,Sahora,53696,0.17777777777777778,2,strict
+Pilibhit,Amariya,Haraypur,Hardaspur,81756,0.11574074074074082,2,strict
+Pilibhit,Lalauri Kheda,Raipur,Aliapur,82035,0.1507936507936509,3,strict
+Pilibhit,Purnanpur,Srinagar,Shiv Nagar,82293,0.14166666666666666,2,strict
+Shahjahnapur,Daderol,Parwezpur,Parvejpur,86996,0.14814814814814825,2,strict
+Shahjahnapur,Bhavlakheda,Barawan,Badavan,86888,0.19047619047619044,2,strict
+Shahjahnapur,Jalalabad,Mālūpur,Maloopur,242405,0.18650793650793648,2,strict
+Budaun,Jagat,Rooppur,Rup Pur,56153,0.19047619047619044,2,strict
+Budaun,Wazirganj,Mirapur,Meerapur,56726,0.130952380952381,2,strict
+Budaun,Junawai,Chirwari,Chirvari,56174,0.08333333333333338,2,strict
+Budaun,Salarpur,Barkheda,Barkhera,56492,0.08333333333333338,2,strict
+Hathras,Sasni,Alipur,Ajitpur,76107,0.1507936507936509,2,strict
+Agra,Khandoli,Senwra,Semra,43180,0.17777777777777778,2,strict
+Agra,Achnera,Sahta,Sahai,42771,0.13333333333333336,2,strict
+Agra,Pinahat,Gajaura,Gajoura,43228,0.09523809523809525,2,strict
+Firozabad,Madanpur,Guraan,Gurai,63018,0.17777777777777778,2,strict
+Firozabad,Firozabad,Matsaina,Matamai,62869,0.18650793650793648,2,strict
+Kannauj,Talam,Ladpur,Lalpur,71381,0.11111111111111106,2,strict
+Itawah,Takha,Amtheri,Amthari,60803,0.09523809523809525,2,strict
+Itawah,Takha,Samthar,Samther,60830,0.09523809523809525,2,strict
+Auraiya,Auraiya,Bhadaripur,Bakar Pur,266322,0.1740740740740741,2,strict
+Auraiya,Bhagyanagar,Baroua,Badua,46627,0.17777777777777778,2,strict
+Kanpur Nagar,Ghatampur,Kater,Katar,72299,0.13333333333333336,2,strict
+Kanpur Nagar,Kakwan,Salempur,Salempur Bilhaur,72358,0.1666666666666667,2,strict
+Jalaun,Madhogarh,Surauli,Atrauli,68909,0.19047619047619044,2,strict
+Lalitpur,Talbehat,Raj Pur,Raajpur,75339,0.09523809523809525,2,strict
+Lalitpur,Mahrauni,Amaura,Bhadaura,75255,0.18055555555555555,2,strict
+Lalitpur,Baar,Marauli,Marroli,75050,0.19047619047619044,2,strict
+Lalitpur,Virddha,Mainwar,Menwar,75110,0.1507936507936509,2,strict
+Lalitpur,Virddha,Barod,Baraud,75078,0.17777777777777778,2,strict
+Jhanshi,Badagaon,Rangwan,Rankuwan,70728,0.130952380952381,2,strict
+Mahoba,Kabrai,Dahra,Gahra,77183,0.13333333333333336,2,strict
+Mahoba,Jaitpur,Magria,Magariya,77132,0.1666666666666667,2,strict
+Mahoba,Jaitpur,Budhvara,Budhaura,77114,0.08333333333333338,2,strict
+Hamirpur,Raath,Atgaon,Atgawan,67332,0.1507936507936509,2,strict
+Banda,Mahua,Bachhei,Bachai,51380,0.1507936507936509,2,strict
+Banda,Mahua,Mawai,Mahuwa,51413,0.17777777777777778,2,strict
+Banda,Kamasin,Lakhipur,Lakhanpur,51353,0.11574074074074082,2,strict
+Banda,Baberu,Nilahu,Nelathu,51172,0.1507936507936509,2,strict
+Fatehpur,Haswa,Manawn,Manawa,62384,0.11111111111111106,2,strict
+Fatehpur,Haswa,Mala wan,Manawa,62384,0.18055555555555555,2,strict
+Fatehpur,Malwan,Hasanapur,Hasnapur,62579,0.07870370370370378,2,strict
+Allahabad,Meja,Badhwa,Baddiha,45149,0.1507936507936509,2,strict
+Allahabad,Uruwa,Kanjauli,Kanjauli Uparhar,45585,0.1666666666666667,2,strict
+Allahabad,Baharia,DALIPUR,Badalpur,44286,0.18650793650793648,2,strict
+Allahabad,Saidabad,Rasulpur,Raghupur,45427,0.1666666666666667,2,strict
+Allahabad,Karachna,Nariya,Naiwa,44753,0.17777777777777778,2,strict
+Allahabad,Mau Aima,Gadinani,Gadhina,45107,0.130952380952381,2,strict
+Allahabad,Dhanupur,Hasanpur,Hasanpur Utrawan,44455,0.1666666666666667,2,strict
+Allahabad,Dhanupur,Parwan,Parawa,44489,0.17777777777777778,2,strict
+Pratapgarh,Magraura,Sarauli,Saraulee,82942,0.130952380952381,2,strict
+Pratapgarh,Patti,Dhui,Dhuie,83063,0.06666666666666678,2,strict
+Pratapgarh,Kunda,Barai,Baraee,82716,0.17777777777777778,2,strict
+Rae bareli,Khiro,Sebanpur,Satanpur,83833,0.1666666666666667,2,strict
+Unnao,Auras,Kabaroi,Kabroee,92087,0.19047619047619044,2,strict
+Unnao,Hilauli,Ahera,Ahesha,92467,0.17777777777777778,2,strict
+Hardoi,Shahabaad,Butamau,Boota Mau,68333,0.1587301587301588,2,strict
+Hardoi,Bharawan,Gorwa,Gherwa,272358,0.17777777777777778,2,strict
+Lucknow,Gosaiganj,Bajupur,Bajoopur,75477,0.18650793650793648,2,strict
+Lucknow,Mohanlalganj,Nandauli,Nandoli,75766,0.130952380952381,2,strict
+Lucknow,Mohanlalganj,Natoli,Nandoli,75766,0.1507936507936509,2,strict
+Sitapur,Biswan,Mahmudpur,Mahamdapur,89112,0.1662037037037037,2,strict
+Sitapur,Machhrehta,Pahadpur,Paidapur,89535,0.130952380952381,2,strict
+Sitapur,Mahmudabad,Banigwan,Bangawan,89559,0.130952380952381,2,strict
+Sitapur,Maholi,Wadhaiyya,Barhaiya,89624,0.19444444444444453,2,strict
+Lakhimpur Khiri,Behjam Devi,Hareya,Harriya,73134,0.1507936507936509,2,strict
+Lakhimpur Khiri,Pasgawan,Ukarmuha,Ukermohan,73956,0.19444444444444453,2,strict
+Lakhimpur Khiri,Nighasan,Khairhana,Kharahana,73778,0.1574074074074075,2,strict
+Lakhimpur Khiri,Ramiyabehar,Kaphara,Kafara,74035,0.1507936507936509,2,strict
+Bahraich,Jarwal,Gour,Gaur,48954,0.1666666666666667,2,strict
+Bahraich,Kaiserganj,Godhiya No.,Godahiya No. 1,49024,0.14358974358974372,4,strict
+Bahraich,Fakhrpur,Bedaura,Baturha,49266,0.19047619047619044,2,strict
+Bahraich,Shivpur,Matra Kala,Matera Klan,49490,0.13097643097643102,2,strict
+Balrampur,Tulsipur,Rajwapur,Ramwapur,51059,0.08333333333333338,2,strict
+Balrampur,Tulsipur,Bhagwanpur,Bhagwaanpur,267363,0.03030303030303033,2,strict
+Balrampur,Hariya Satgharwa,Shivpura,Sheopura,50773,0.1666666666666667,2,strict
+Gonda,Haladharamuu,Mainzapur,Maijapur,65169,0.11574074074074082,2,strict
+Gonda,Manakapur,Gadrahi,Gadhhi,65431,0.1507936507936509,2,strict
+Gonda,Belasar,Badalpur,Badlepur,64938,0.08333333333333338,2,strict
+Gonda,Chhapia,Birpur,Beerapur,64995,0.18055555555555555,2,strict
+Gonda,Karnailganj,Baseriya,Basariya,65069,0.08333333333333338,2,strict
+Gonda,Bhabha njot,Pipra Adhai,Pipra Adaee,64922,0.12121212121212116,2,strict
+Barabanki,Haidarganj,Alapur,Aalapur,51916,0.10317460317460315,2,strict
+Barabanki,Siddhaur,Mirapur,Mira Pur,52475,0.04166666666666672,2,strict
+Barabanki,Sirauli Gauspur,Madhavpur,Madhnapur,52535,0.07407407407407415,2,strict
+Sultanpur,Baldirai,Baliyapur,Dariyapur,90867,0.14814814814814825,2,strict
+Sultanpur,Bhaiyya,Shripur,Sansaripur,90963,0.18095238095238095,2,strict
+Sultanpur,Kudebhar,Kodri,Korari,91585,0.17777777777777778,2,strict
+Sultanpur,Pratappur Kemaicha,Munee Pur,Munipur,91871,0.1587301587301588,2,strict
+Ambedkar Nagar,Akbarpur,Bansgavan,Bangaon,45634,0.1587301587301588,2,strict
+Ambedkar Nagar,Jahangirganj,Udharanpur,Bharatpur,45981,0.1740740740740741,2,strict
+Faizabad,Masaudha,Saraiwan,Saraiya,61081,0.130952380952381,2,strict
+Faizabad,Masaudha,Hansapur,Hunsepur,61048,0.1666666666666667,2,strict
+Faizabad,Puraabaajaar,Nariyaon,Nara,61265,0.1666666666666667,2,strict
+Faizabad,Taroon,Kakauli,Kakooli,61379,0.19047619047619044,3,strict
+Faizabad,Amaniganj,Garauli,Gadauli,60864,0.09523809523809525,3,strict
+Basti,Bikramjot,Devkhar,Deokhal,54699,0.19047619047619044,2,strict
+Basti,Raudhauli,Dhansa,Dhansi,271232,0.11111111111111106,2,strict
+Basti,Basti,Basnawa,Bankata,53868,0.19047619047619044,2,strict
+Siddharth Nagar,Mithwal,Chhitouna,Chhitauna,88667,0.13657407407407415,2,strict
+Siddharth Nagar,Mithwal,Karmhiya,Karhi,88694,0.12500000000000006,2,strict
+Siddharth Nagar,Bhanwaapur,Khamhariya,Khakharav,274018,0.1740740740740741,2,strict
+Siddharth Nagar,Itwa,Semra,Semara,88350,0.12222222222222213,2,strict
+Sant Kabeer Nagar,Baghauli,Vadhara,Badahra,85684,0.1507936507936509,2,strict
+Sant Kabeer Nagar,Khalilabad,Dhaicha,Dhamaicha,85920,0.16931216931216936,2,strict
+Gorakhpur,Uruvaon,Varipur,Harpur,67102,0.1507936507936509,2,strict
+Gorakhpur,Brahmpur,Jungle Rasoolpur No-,Jungle Rasoolpur No.1,272339,0.016666666666666663,2,strict
+Gorakhpur,Pali,Tharuapar,Akuwapar,66777,0.19444444444444453,2,strict
+Gorakhpur,Campier,LakshmiPur -,Laxmipur 1,66292,0.1575757575757576,2,strict
+Gorakhpur,Belghat,Wasai,Asauji,66052,0.17777777777777778,2,strict
+Gorakhpur,Belghat,Raipur,Raepur,66113,0.11111111111111106,2,strict
+Maharajganj,Ghughli,Bhaisi Parsiya,Baspar,76353,0.19047619047619044,2,strict
+Maharajganj,Maharajganj Sadar,Badhara,Badahra Raja,268445,0.18650793650793648,2,strict
+Maharajganj,Nichlaul,Jharwalia,Jharvaliya,76738,0.10370370370370369,2,strict
+Kushinagar,Padrauna,Vohorapur,Bahorapur,74570,0.19576719576719587,2,strict
+Kushinagar,Hata,Pipratiwari,Pipra,74254,0.18181818181818185,2,strict
+Kushinagar,Sukaroli,Lehni,Sehni,74857,0.13333333333333336,2,strict
+Kushinagar,Sukaroli,Benduwar,Binduar,74815,0.130952380952381,2,strict
+Kushinagar,Fazilnagar,Badhara,Badurawa,74123,0.18650793650793648,2,strict
+Mau,Baragaon,Vijpura,Bizpura,78296,0.19047619047619044,2,strict
+Baliya,Gadwar,Kotwan,Kopwa,49930,0.17777777777777778,2,strict
+Baliya,Sohaon,Sarvanapur,Shrawanpur,50466,0.17500000000000002,2,strict
+Baliya,Sohaon,Mahrev,Mahrei,272585,0.11111111111111106,2,strict
+Baliya,Chilakhar,Gaura,Goura,49796,0.13333333333333336,2,strict
+Ghazipur,Muhammadabad,Paranpur,Arjanepur,64416,0.11574074074074082,2,strict
+Ghazipur,Manihari,Para,Parava,270443,0.11111111111111122,2,strict
+Ghazipur,Manihari,Adila,Arilla,64279,0.17777777777777778,2,strict
+Ghazipur,Jamaniya,Chakmedni No .,Chak Medni No.1,270589,0.1391941391941392,2,strict
+Ghazipur,Saidpur,Jabranpur,Gadanpur,64638,0.19444444444444453,2,strict
+Ghazipur,Sadaat,Ibrapur,Mirzapur,64589,0.130952380952381,2,strict
+Ghazipur,Barachwar,Karakpur,Hardaspur,64719,0.19444444444444453,2,strict
+Chandauli,Niyamatabad,Gauri,Gaury,58019,0.13333333333333336,2,strict
+Varanasi,Sewapuri,Isarwar,Esarvar,93581,0.19047619047619044,2,strict
+Varanasi,Chiraigaon,Parnapur,Paranapur,93187,0.07870370370370378,2,strict
+Varanasi,Chiraigaon,Chhitouna,Chhitauna,93150,0.13657407407407415,2,strict
+Varanasi,Araji Lines,Gajaapur,Gazapur,92990,0.130952380952381,2,strict
+Varanasi,Badagaon,Barji,Barai,93068,0.13333333333333336,2,strict
+Jaunpur,Rampur,Nonra,Nonara,70246,0.12222222222222213,2,strict
+Jaunpur,Dobhi,Ailiyan,Ailia,69422,0.09523809523809525,2,strict
+Jaunpur,Sikarara,Firojpur Dwitiya,Firojpur 1.,70388,0.17916666666666675,2,strict
+Jaunpur,Madiyahu,Rajapur No.,Rajapur No. 1,69978,0.05555555555555556,2,strict
+Jaunpur,Sujangang,Vara,Bara,70571,0.1666666666666667,2,strict
+Jaunpur,Kerakat,Bansbari,Bantari,69628,0.130952380952381,2,strict
+Jaunpur,Srikoni,Sadipur,Sadeepur,70482,0.130952380952381,2,strict
+Jaunpur,Khutahan,Mirapur,Meerapur,69733,0.130952380952381,2,strict
+Jaunpur,Karanja Kala,Darbanipur,Dalhanpur,69555,0.1740740740740741,2,strict
+Sant Ravidas Nagar,Aurain,Bhaktapur,Bharatpur,86344,0.11574074074074082,2,strict
+Sant Ravidas Nagar,Aurain,Tulapur,Ugapur,86432,0.1507936507936509,2,strict
+Sant Ravidas Nagar,Deegh,Bhawapur,Baraipur,86552,0.1666666666666667,2,strict
+Mirzapur,Seeti,Chandaipur,Hasipur,80072,0.18095238095238095,2,strict
+Mirzapur,Chhaanbe,Bauri,Babura,79340,0.17777777777777778,2,strict
+Mirzapur,Rajgarh,Rampur,Rampur 33,80048,0.11111111111111122,2,strict
+Mirzapur,Rajgarh,Bargawan,Badgawa,79984,0.130952380952381,2,strict
+Sonbhadra,Nagwan,Nagaon,Nagaw,90615,0.17777777777777778,2,strict
+Sonbhadra,Vabhni,Ghaghra,Ghaghara,90253,0.08928571428571432,2,strict
+Sonbhadra,Robertsganj,Kamhari,Kabari,90676,0.1507936507936509,2,strict
+Sonbhadra,Robertsganj,Arauli,Amauli,269381,0.11111111111111106,2,strict
+Sonbhadra,Robertsganj,Baghori,Baghnari,270144,0.130952380952381,2,strict
+Sonbhadra,Robertsganj,Parhi,Pakari,90709,0.17777777777777778,2,strict
+Sonbhadra,Ghorawal,Bhataulia,Bharauli,90428,0.11574074074074082,2,strict
+Sonbhadra,Ghorawal,Karma,Kariaa,270928,0.17777777777777778,2,strict
+Sonbhadra,Myorpur,Parasi,Parani,90571,0.11111111111111106,2,strict
+Muzzafarnagar,Sadar,Vahlana,Mimlana,81468,0.28571428571428575,2,loose
+Muzzafarnagar,Charthaawal,Chaukda,Chhmau,81153,0.253968253968254,2,loose
+Meerut,Daurala,Azhauta,Bahrala,78880,0.28571428571428575,2,loose
+Meerut,Machhra,Shahjahnapur,Sadullapur,79072,0.3,2,loose
+Ghaziabad,Hapur,Asauda,Asodha,63605,0.22222222222222238,2,loose
+Ghaziabad,Simbhavli,Mau.pur Azamput,Madhapur Mozampur,63800,0.24288048552754443,2,loose
+Gautam Buddha Nagar,Visarkh,Haibatpur,Badalpur,63255,0.25000000000000006,2,loose
+Gautam Buddha Nagar,Dadri,Sadopur,Anandpur,63294,0.22023809523809523,2,loose
+Gautam Buddha Nagar,Jewar,Bankapur,Bajarpur,63348,0.25000000000000006,2,loose
+Bulandshahr,Pahasu,Ahmadavas,Ahmad Baj,57320,0.22222222222222238,2,loose
+Bulandshahr,Pahasu,Waan,Kamauna,57352,0.2738095238095238,2,loose
+Bulandshahr,Anupshahr,Rora,Raura,56798,0.21666666666666667,2,loose
+Bulandshahr,Siyana,Buklana,Barhana,57525,0.28571428571428575,2,loose
+Bulandshahr,Khujra,Dhakar,Dharari,57225,0.21746031746031746,2,loose
+Bulandshahr,Jahangirabad,KarkaRi,Karonji,57178,0.28571428571428575,2,loose
+Bulandshahr,Bulandshahr,Julepura,Jalkhera,56940,0.25000000000000006,2,loose
+Bijnaur,Noorpur,Gunia Kheri,Guniyabodi,55613,0.28484848484848485,2,loose
+Jyotiba Phule Nagar,Gangeshwari,Bhoora,Bhubra,238794,0.22222222222222238,2,loose
+Muradabad,Thakurdwara,Maisuwala,Madhowala,81012,0.22222222222222238,2,loose
+Muradabad,Sambhal,Chaukani,Chamrua,80909,0.22023809523809523,2,loose
+Muradabad,Asamoli,Bhatpura,Hirapur,80120,0.22023809523809523,3,loose
+Muradabad,Asamoli,Dvoei,Dawoi,80106,0.26666666666666666,2,loose
+Rampur,Bilaaspur,Haria Kala,Harraiya Kalan,84404,0.21190476190476193,2,loose
+Rampur,Chamaraua,Bisara,Bahpura,84480,0.253968253968254,2,loose
+Bareilly,Mirganj,divana,Dhaneta,53447,0.253968253968254,2,loose
+Pilibhit,Marauri,Har Krishnanpur,Dioni Kesharpur,267924,0.26868686868686875,2,loose
+Pilibhit,Amariya,Rohaniya,Birhani,81733,0.22023809523809523,2,loose
+Pilibhit,Lalauri Kheda,Mirpur,Aliapur,82035,0.253968253968254,4,loose
+Pilibhit,Purnanpur,Patna,Pandria,82261,0.20952380952380956,2,loose
+Shahjahnapur,Daderol,Dhanyora,Dhaniaura,86966,0.25000000000000006,2,loose
+Shahjahnapur,Kant,Amora,Amaura,87160,0.2611111111111111,2,loose
+Shahjahnapur,Khutar,Sofia,Saufri,242749,0.3,2,loose
+Budaun,Ujhani,Basauma,Barsua,56606,0.21746031746031746,2,loose
+Hathras,Hasayan,Naujarpur,Banbaripur,75853,0.2216931216931217,3,loose
+Agra,Khandoli,Saurai,Chaukra,43156,0.253968253968254,3,loose
+Agra,Khandoli,Saimara,Naharra,43170,0.28571428571428575,2,loose
+Firozabad,Eka,Eka,Ekhu,62789,0.27777777777777785,2,loose
+Firozabad,Aaraon,Sainawali,Sarsauli,62773,0.27314814814814825,2,loose
+Firozabad,Narkhi,Gauchh,Bachhgaon,63068,0.29629629629629634,2,loose
+Firozabad,Hathwant,Kudi,Kodri,62926,0.21666666666666667,2,loose
+Firozabad,Firozabad,Kaulamai,Baramai,264799,0.22023809523809523,3,loose
+Firozabad,Tundla,Rasulpur,Rasulabad,63223,0.27314814814814825,2,loose
+Mainpuri,Mainpuri,Audeya,Badery,77693,0.22222222222222238,2,loose
+Mainpuri,Karhal,Karra,Harer,77536,0.26666666666666666,2,loose
+Mainpuri,Sultanganj,Lallopur,Lalupura,77770,0.2222222222222222,2,loose
+Kannauj,Saurkh,Daddoni,Darauni,71316,0.28571428571428575,2,loose
+Itawah,Takha,Gujrati,Kudrail,60818,0.28571428571428575,2,loose
+Auraiya,Achhaldaa,Aanto,Aouton,46420,0.3,2,loose
+Auraiya,Auraiya,Ikaurapur,Ikorapur,46573,0.21097883597883602,2,loose
+Kanpur Nagar,Shivrajpur,Kapoorpur Bhavan,Kakoopur Nihal,72535,0.28165584415584427,2,loose
+Jalaun,Dakor,Vinorapur,Minora Orai,68627,0.2626262626262627,2,loose
+Jalaun,Mahewa,Khardugui,Khairai,68982,0.24338624338624346,2,loose
+Jalaun,Kuthound,Vavli,Bawali,68843,0.3,2,loose
+Lalitpur,Mahrauni,Kumhaidi,Kumehri,75277,0.22023809523809523,2,loose
+Lalitpur,Mahrauni,Bhaudi,Bhaira,75256,0.22222222222222238,3,loose
+Hamirpur,Raath,Varel,Barail,67337,0.3,2,loose
+Hamirpur,Sumerpur,Pauthia,Atraia,67416,0.253968253968254,3,loose
+Hamirpur,Maudha,Gada,Garha,67255,0.21666666666666667,2,loose
+Hamirpur,Maudha,Riwan,Reevan,67288,0.3,2,loose
+Banda,Mahua,Harha,Khurhand,51410,0.23333333333333345,2,loose
+Banda,Bissanda,Koni,Konee,51270,0.21666666666666667,2,loose
+Kaushambi,Muratganj,Darveshpur,Asrafpur,72819,0.2722222222222222,2,loose
+Kaushambi,Sirathu,Korase,Khoranv,73021,0.253968253968254,2,loose
+Allahabad,Baharia,Devapur,Buapur,44299,0.253968253968254,2,loose
+Allahabad,Bahadurpur,Dudahi,Medua,44249,0.3,2,loose
+Allahabad,Bahadurpur,Bariyari,Baraepur,44197,0.25000000000000006,2,loose
+Allahabad,Kaudihar,Bhagwatipur,Adampur,44816,0.27705627705627717,2,loose
+Allahabad,Kaudihar,Bhagwatpur,Adampur,44816,0.2619047619047619,2,loose
+Allahabad,Pratapur,Basna,Barendra,45292,0.23333333333333345,2,loose
+Pratapgarh,Sadar,Purekeshawaray,Pure Bhaiya,83141,0.2754329004329005,2,loose
+Pratapgarh,Sadar,Sonawa,Gonda,83117,0.3,2,loose
+Pratapgarh,Baabaganj,Gogahar,Dhangarh,82476,0.28690476190476194,2,loose
+Pratapgarh,Baabaganj,Aingha,Mangarh,82498,0.21746031746031746,2,loose
+Pratapgarh,Shivgarh,Rastipur,Rajapur,83405,0.22023809523809523,3,loose
+Rae bareli,Khiro,Ghurai,Dhurayee,83802,0.27777777777777785,2,loose
+Unnao,Auras,Rampur Rai,Raipur,92105,0.2222222222222222,3,loose
+Unnao,Nawabganj,Azizpur,Ajij Pur,92579,0.22023809523809523,3,loose
+Hardoi,Benhadar,Siroli,Sirauly,67657,0.253968253968254,2,loose
+Lucknow,Sarojninagar,Pyaar,Paharpur,75829,0.23333333333333345,2,loose
+Lucknow,Sarojninagar,Auravan,Harauni,75804,0.28571428571428575,2,loose
+Sitapur,Mishrikh,Atwa,Atava,89678,0.21666666666666667,2,loose
+Sitapur,Ailiya,Gora,Gaura,88927,0.21666666666666667,2,loose
+Sitapur,Biswan,Nyoraipur,Neurajpur,89122,0.22222222222222238,2,loose
+Sitapur,Maholi,ADhora,Bahera,271116,0.22222222222222238,2,loose
+Lakhimpur Khiri,Behjam Devi,Atwa,Atava,73115,0.21666666666666667,2,loose
+Lakhimpur Khiri,Nakha,Velva,Belawa,73696,0.3,2,loose
+Lakhimpur Khiri,Mohammadi,Khantrahara,Khetahara,73673,0.2112794612794614,2,loose
+Lakhimpur Khiri,Palia,Patna,Patihan,73850,0.20952380952380956,3,loose
+Lakhimpur Khiri,Isanagar,Basdhiya,Basaria,73292,0.22023809523809523,2,loose
+Bahraich,Kaiserganj,Naugoiyan,Godahiya No. 1,49024,0.2993487993487994,4,loose
+Bahraich,Prayagpur,Birpur,Arka Pur,49331,0.27777777777777785,2,loose
+Bahraich,Prayagpur,Pair,Padri,49362,0.21666666666666667,3,loose
+Shravasti,Gilola,Gilola,Gilaula,87666,0.21746031746031746,2,loose
+Balrampur,Gainsadi,Lathawar,Majhauwa,50666,0.25000000000000006,2,loose
+Balrampur,Shridattganj,Muzehana,Mujainna,50972,0.25000000000000006,2,loose
+Gonda,Mujehana,Mujehana,Meghwa,65515,0.27777777777777785,2,loose
+Gonda,Tarabganj,Raamaapur,Bhairampur,65811,0.2216931216931217,2,loose
+Gonda,Tarabganj,Gopasarai,Gop Saray,65825,0.24338624338624346,2,loose
+Barabanki,Banikoder,Malinpur,Bhanpur,51573,0.22023809523809523,3,loose
+Barabanki,Puredlai,Khaboli,Khamauli,52246,0.22023809523809523,2,loose
+Sultanpur,Doobepur,Fattehpur,Lakhipur,91205,0.27314814814814825,2,loose
+Sultanpur,Kudwar,Narottampur,Bahmarpur,91628,0.242905242905243,2,loose
+Faizabad,Masaudha,Mirjapurmafi,Firojpur,61039,0.25000000000000006,2,loose
+Basti,Hareya,Mahughat,Mahuwapar,54141,0.27314814814814825,2,loose
+Basti,Saugahat,Amauli,Amooli,54610,0.22222222222222238,2,loose
+Basti,Raudhauli,Muriyar,Mahuar,54496,0.253968253968254,2,loose
+Basti,Kaptaiganj,Madanpura,Basantpur,54181,0.22222222222222238,3,loose
+Basti,Bankati,Sindhuria,Bhaura,53796,0.29629629629629634,3,loose
+Basti,Saltoya Gopalpur,PaDRiyA Chetasinh,Parsa Khal,54586,0.296078431372549,2,loose
+Basti,Saltoya Gopalpur,Ahar,Bahadurpur,267865,0.20000000000000007,2,loose
+Siddharth Nagar,Bansi,Tiwaripur Purvi,Tiwaripur East,273860,0.2063492063492064,2,loose
+Siddharth Nagar,Dumriaganj,Shyampur,Habibpur,273959,0.25000000000000006,2,loose
+Siddharth Nagar,Bhanwaapur,Deghar,Dengarajot Kasturi,273965,0.29629629629629634,2,loose
+Siddharth Nagar,Itwa,Pedari,Sehari,270261,0.22222222222222238,2,loose
+Siddharth Nagar,Khuniyav,Bargadiha Purvi,Bargadwa (E),88510,0.2222222222222222,2,loose
+Sant Kabeer Nagar,Nathnagar,Sadhra,Satehara,86120,0.24722222222222212,3,loose
+Gorakhpur,Uruvaon,Viri Bu,Pipari Bujurg,67130,0.22710622710622724,2,loose
+Gorakhpur,Uruvaon,Marwatia,Marcha,67115,0.27777777777777785,3,loose
+Gorakhpur,Pali,Visri,Sisai,66829,0.26666666666666666,2,loose
+Gorakhpur,Pali,Bijowa,Birar,271729,0.3,2,loose
+Gorakhpur,Campier,Kalyanpur,Alagatpur,66250,0.22222222222222238,2,loose
+Gorakhpur,Campier,Sahabganj,Machhali Gaon,66295,0.2905982905982906,2,loose
+Gorakhpur,Gola,Ataraura,Dhaurahra,66472,0.25000000000000006,3,loose
+Gorakhpur,Sardarnagar,Bhowapar,Bhau Pur,67032,0.25000000000000006,2,loose
+Gorakhpur,Sahjanwao,Bhagoora,Bharsar,66970,0.22023809523809523,2,loose
+Gorakhpur,Khajni,Dauro,Dorho,66684,0.26666666666666666,3,loose
+Maharajganj,Paniyara,Badwaar,Baida,76789,0.20952380952380956,2,loose
+Maharajganj,Paniyara,Badharalala,Baida,76789,0.27878787878787886,2,loose
+Maharajganj,Maharajganj Sadar,Amrutiya,Imliya,76505,0.27777777777777785,2,loose
+Maharajganj,Nautanwa,Vrilokpur,Harpur,76648,0.29629629629629634,3,loose
+Kushinagar,Hata,Pagra,Parsahwa,74248,0.23333333333333345,2,loose
+Kushinagar,Moti Chak,Farhada,Ashana,74448,0.253968253968254,2,loose
+Kushinagar,Moti Chak,Lohepar,Bedupar,271152,0.28571428571428575,2,loose
+Kushinagar,Sukaroli,Lehni Dvitiya,Sehni,74857,0.29743589743589743,2,loose
+Mau,Ranipur,Mandusara,Jashara,78763,0.24338624338624346,2,loose
+Mau,Pardha,Sanegpur,Harpur,78694,0.27777777777777785,3,loose
+Baliya,Sier,Vidua,Bithua,50368,0.3,2,loose
+Baliya,Sier,Patanri,Padri,50401,0.20952380952380956,2,loose
+Baliya,Bairiya,Bairiya,Balihar,49642,0.28571428571428575,2,loose
+Ghazipur,Saidpur,Laulehra,Amehta,64611,0.27777777777777785,2,loose
+Ghazipur,Saidpur,Gajadharpur,Sigarpur,64682,0.23484848484848492,2,loose
+Ghazipur,Sadaat,Wudhanpur,Burnpur,64552,0.24338624338624346,3,loose
+Ghazipur,Jakhniya,Odrai,Orarae,64124,0.3,3,loose
+Ghazipur,Sadar,Weekapur,Bikapur,64021,0.22023809523809523,2,loose
+Ghazipur,Barachwar,Bareji,Barezy,64698,0.22222222222222238,2,loose
+Ghazipur,Karanda,Sisauda,Sabuan,64178,0.253968253968254,4,loose
+Ghazipur,Virano,Afzalpur,Bahalolpur,64767,0.21666666666666667,2,loose
+Chandauli,Niyamatabad,Leduwa,Lauda,58042,0.2611111111111111,2,loose
+Chandauli,Chakia,Biaasad,Basaniya,57753,0.28690476190476194,2,loose
+Chandauli,Shahababganj,Waraw,Arari,274223,0.26666666666666666,2,loose
+Varanasi,Chiraigaon,Rasulgarh,Ramgadhwa,265885,0.29629629629629634,2,loose
+Varanasi,Chiraigaon,Tilmapur,Tatepur,93214,0.22023809523809523,2,loose
+Varanasi,Kashividyapeeth,Karaudi,Naraur,93440,0.253968253968254,2,loose
+Varanasi,Badagaon,Icipur,Raipur,93120,0.22222222222222238,2,loose
+Varanasi,Harhua,Hatia,Bhaithauli,93315,0.23333333333333345,2,loose
+Varanasi,Harhua,Lamhi,Ahiran,93302,0.3,2,loose
+Varanasi,Harhua,Venipur,Vajidpur,93377,0.22023809523809523,2,loose
+Jaunpur,Rampur,Sahijini,Sapahi,70270,0.27777777777777785,2,loose
+Jaunpur,Dobhi,Lebrwa,Lebarua,69462,0.21746031746031746,2,loose
+Jaunpur,Sikarara,Firozpur Pratham,Firojpur 1.,70388,0.23333333333333345,2,loose
+Jaunpur,Sujangang,Sakra -,Sakara No. 1,70631,0.20707070707070707,2,loose
+Jaunpur,Srikoni,Rajepur Pratham,Rajepur No. 1,70479,0.26666666666666666,2,loose
+Jaunpur,Ramnagar,Ramanagar,Ramnagar No. 1,70183,0.24857549857549863,2,loose
+Jaunpur,Buxa,Devaria,Deoria,69244,0.25079365079365085,2,loose
+Jaunpur,Machhalishahr,Saraibeeka,Sarai Dewa,69832,0.20000000000000007,2,loose
+Jaunpur,Mugrabadshahapur,Loh,Lauh,70083,0.27777777777777785,2,loose
+Sant Ravidas Nagar,Bhadohi,Aneppur,Anangpur,86441,0.22023809523809523,3,loose
+Mirzapur,Seeti,Nauha,Bagha,80061,0.26666666666666666,2,loose
+Mirzapur,Seeti,Rajapur,Adalpura,80060,0.22023809523809523,2,loose
+Mirzapur,Seeti,Bharuhna,Bataua,80063,0.27777777777777785,2,loose
+Sonbhadra,Nagwan,Chanani,Chakaya,267421,0.28571428571428575,2,loose
+Sonbhadra,Duddhi,Beedar,Jabar,90386,0.3,2,loose
+Sonbhadra,Chopan,Badgavan,Barganwa,90320,0.2222222222222222,2,loose
+Sonbhadra,Chopan,Naktawar,Chatarwar,90325,0.27777777777777785,2,loose
+Sonbhadra,Chopan,Nigai,Newari,90355,0.3,2,loose
+Sonbhadra,Robertsganj,Bhawanipur,Barwan,90649,0.2222222222222222,2,loose
+Sonbhadra,Ghorawal,Tikuria,Murtiya,90486,0.28571428571428575,2,loose
+Sonbhadra,Ghorawal,Silhata,Siwadar,90515,0.28571428571428575,2,loose
+Sonbhadra,Ghorawal,Phulwari,Bharauli,90428,0.27777777777777785,5,loose
+Sonbhadra,Ghorawal,Purkhas,Purana,90498,0.253968253968254,2,loose
+Sonbhadra,Myorpur,Anapara,Banmahari,271209,0.24338624338624346,2,loose

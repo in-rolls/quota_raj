@@ -208,6 +208,28 @@ if (nrow(tie_resolved) > 0) {
     message("Exported: data/crosswalks/audit/03b_up_tie_resolved.csv")
 }
 
+numeric_mismatch <- fuzzy_df %>%
+    filter(match_confidence == "numeric_mismatch") %>%
+    left_join(
+        up_gps %>% select(key_2010, district_name_eng_2010, block_name_eng_2010),
+        by = "key_2010"
+    ) %>%
+    select(
+        district = district_name_eng_2010,
+        block = block_name_eng_2010,
+        elex_gp = gp_name_eng_2010,
+        lgd_gp = lgd_gp_name,
+        lgd_gp_code,
+        match_distance,
+        match_quality
+    )
+
+message("Numeric mismatch matches: ", nrow(numeric_mismatch))
+if (nrow(numeric_mismatch) > 0) {
+    write_csv(numeric_mismatch, here("data/crosswalks/audit/03b_up_numeric_mismatch.csv"))
+    message("Exported: data/crosswalks/audit/03b_up_numeric_mismatch.csv")
+}
+
 # ============================================================================
 # STEP 6: Combine matches
 # ============================================================================
@@ -227,6 +249,7 @@ all_matches <- bind_rows(
             match_confidence = "unique"
         ),
     fuzzy_df %>%
+        filter(!match_confidence %in% c("tie_resolved", "numeric_mismatch")) %>%
         left_join(
             up_gps %>% select(key_2010, lgd_block_code, lgd_block_name) %>% distinct(),
             by = "key_2010"
@@ -416,19 +439,121 @@ write_csv(no_lgd_match, here("data/crosswalks/audit/03b_up_gp_unmatched.csv"))
 message("Exported unmatched GPs for review.")
 
 # ============================================================================
-# STEP 11: Save output
+# STEP 11: Load SHRUG covariates and aggregate to LGD GP level
 # ============================================================================
 
-write_parquet(up_shrug, here("data/up/shrug_lgd_up_elex_05_10_block.parquet"))
-message("\nSaved: data/up/shrug_lgd_up_elex_05_10_block.parquet")
+message("\n=== LOADING SHRUG COVARIATES ===")
+
+shrug_pca <- read_csv(here("data/shrug/shrug-pca01-csv/pc01_pca_clean_shrid.csv.zip"), show_col_types = FALSE)
+shrug_vd <- read_csv(here("data/shrug/shrug-vd01-csv/pc01_vd_clean_shrid.csv.zip"), show_col_types = FALSE)
+
+message("SHRUG PCA rows: ", nrow(shrug_pca))
+message("SHRUG VD rows: ", nrow(shrug_vd))
+
+shrug_lgd_full <- read_csv(here("data/shrug_gp_xwalk/data/shrug_LGD_matched.csv"), show_col_types = FALSE) %>%
+    filter(tolower(state_name) == "uttar pradesh")
+
+sum_or_na <- function(x) {
+    if (all(is.na(x))) return(NA_real_)
+    sum(x, na.rm = TRUE)
+}
+
+shrug_covars <- shrug_lgd_full %>%
+    left_join(shrug_pca, by = "shrid2") %>%
+    left_join(shrug_vd, by = "shrid2") %>%
+    filter(!is.na(LGD_code)) %>%
+    group_by(LGD_code) %>%
+    summarize(
+        shrid2 = first(shrid2),
+        n_villages = n(),
+        across(starts_with("pc01_pca_"), sum_or_na),
+        across(starts_with("pc01_vd_"), sum_or_na),
+        .groups = "drop"
+    )
+
+message("SHRUG covariates aggregated to ", n_distinct(shrug_covars$LGD_code), " LGD GPs")
 
 # ============================================================================
-# STEP 12: Report by district
+# STEP 12: Build LGD mapping from 05-10 panel for propagation to other panels
 # ============================================================================
 
-message("\n=== MATCH RATE BY DISTRICT ===")
+message("\n=== BUILDING LGD MAPPING FOR PANEL PROPAGATION ===")
 
-by_dist <- up_shrug %>%
+up_mapping <- up_shrug %>%
+    filter(!is.na(lgd_gp_code)) %>%
+    distinct(match_key, .keep_all = TRUE) %>%
+    select(
+        match_key,
+        lgd_gp_code,
+        lgd_gp_name,
+        lgd_block_code,
+        lgd_block_name,
+        block_match_type,
+        gp_match_type,
+        match_quality,
+        match_confidence
+    )
+
+message("Unique GPs with LGD match: ", nrow(up_mapping))
+
+# ============================================================================
+# STEP 13: Process ALL panels and add SHRUG covariates
+# ============================================================================
+
+message("\n=== PROCESSING ALL PANELS ===")
+
+process_panel <- function(panel_path, output_path) {
+    panel_name <- basename(panel_path)
+    message("\nProcessing: ", panel_name)
+
+    panel <- read_parquet(panel_path)
+    message("  Input rows: ", nrow(panel))
+
+    panel_with_lgd <- panel %>%
+        left_join(up_mapping, by = "match_key")
+
+    panel_final <- panel_with_lgd %>%
+        left_join(
+            shrug_covars,
+            by = c("lgd_gp_code" = "LGD_code")
+        )
+
+    write_parquet(panel_final, output_path)
+
+    message("  Rows with LGD match: ", sum(!is.na(panel_final$lgd_gp_code)))
+    message("  Rows with SHRUG data: ", sum(!is.na(panel_final$shrid2)))
+    message("  Saved: ", output_path)
+
+    return(panel_final)
+}
+
+up_05_10_final <- process_panel(
+    here("data/up/up_05_10.parquet"),
+    here("data/up/shrug_gp_up_05_10_block.parquet")
+)
+
+up_10_15_final <- process_panel(
+    here("data/up/up_10_15.parquet"),
+    here("data/up/shrug_gp_up_10_15_block.parquet")
+)
+
+up_15_21_final <- process_panel(
+    here("data/up/up_15_21.parquet"),
+    here("data/up/shrug_gp_up_15_21_block.parquet")
+)
+
+up_05_21_final <- process_panel(
+    here("data/up/up_05_21.parquet"),
+    here("data/up/shrug_gp_up_05_21_block.parquet")
+)
+
+# ============================================================================
+# STEP 14: Report by district (using 05-10 panel)
+# ============================================================================
+
+message("\n=== MATCH RATE BY DISTRICT (05-10 panel) ===")
+
+by_dist <- up_05_10_final %>%
     group_by(district_name_eng_2010) %>%
     summarize(
         total = n(),
@@ -447,7 +572,7 @@ message("\nHighest SHRUG match rates:")
 print(tail(by_dist, 10))
 
 # ============================================================================
-# STEP 13: Summary verification
+# STEP 15: Verification summary
 # ============================================================================
 
 message("\n=== VERIFICATION SUMMARY ===")
@@ -455,14 +580,31 @@ message("Block crosswalk entries: ", nrow(block_xwalk))
 message("Block match types:")
 print(table(block_xwalk$match_type))
 message("\nUrban entries excluded: ", nrow(urban_excluded))
-message("Election GPs with block match: ", sum(!is.na(up_with_block$lgd_block_code)),
-    "/", nrow(up_05_10), "\n")
-message("Election GPs with LGD GP match: ", sum(!is.na(up_matched$lgd_gp_code)),
-    "/", nrow(up_05_10), "\n")
-message("Election GPs with SHRUG match: ", sum(!is.na(up_shrug$shrid2)),
-    "/", nrow(up_05_10), "\n")
+
+message("\n05-10 Panel:")
+message("  Total GPs: ", nrow(up_05_10_final))
+message("  Matched to LGD: ", sum(!is.na(up_05_10_final$lgd_gp_code)))
+message("  Match rate: ", round(100 * sum(!is.na(up_05_10_final$lgd_gp_code)) / nrow(up_05_10_final), 1), "%")
+message("  Matched to SHRUG: ", sum(!is.na(up_05_10_final$shrid2)))
+message("  SHRUG match rate: ", round(100 * sum(!is.na(up_05_10_final$shrid2)) / nrow(up_05_10_final), 1), "%")
+
+message("\n10-15 Panel:")
+message("  Total GPs: ", nrow(up_10_15_final))
+message("  Matched to LGD: ", sum(!is.na(up_10_15_final$lgd_gp_code)))
+message("  SHRUG match rate: ", round(100 * sum(!is.na(up_10_15_final$shrid2)) / nrow(up_10_15_final), 1), "%")
+
+message("\n15-21 Panel:")
+message("  Total GPs: ", nrow(up_15_21_final))
+message("  Matched to LGD: ", sum(!is.na(up_15_21_final$lgd_gp_code)))
+message("  SHRUG match rate: ", round(100 * sum(!is.na(up_15_21_final$shrid2)) / nrow(up_15_21_final), 1), "%")
+
+message("\n05-21 Panel:")
+message("  Total GPs: ", nrow(up_05_21_final))
+message("  Matched to LGD: ", sum(!is.na(up_05_21_final$lgd_gp_code)))
+message("  SHRUG match rate: ", round(100 * sum(!is.na(up_05_21_final$shrid2)) / nrow(up_05_21_final), 1), "%")
+
+message("\nSHRUG covariates included: ", sum(grepl("^pc01_", names(up_05_10_final))), " variables")
 
 message("\nNote: SHRUG match rate is limited by SHRUG-LGD crosswalk coverage.")
-message("See data/crosswalks/audit/03d_up_shrug_coverage_audit.md for full analysis.")
 
 message("\n=== Done ===")
