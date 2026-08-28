@@ -174,3 +174,36 @@ sibling_path <- function(file, source = "local_elections_up") {
 ## Convenience wrappers so call sites read as what they are.
 up_path  <- function(f) sibling_path(file.path("data/fin", f))
 ref_path <- function(f) sibling_path(file.path("data/external/weaver", f))
+
+## Reference datasets: public downloads shared by several repos, held once in the
+## cache rather than copied into each. Unlike sibling_path() there is nothing to
+## fetch from -- SHRUG is a manual download from devdatalab.org -- so an absent
+## file is reported with the instructions to get it rather than failing obscurely.
+
+reference_path <- function(rel, key = "shrug") {
+     man <- .manifest()
+     spec <- man$reference[[key]]
+     if (is.null(spec))
+          stop("no reference entry for '", key, "' in data/manifest.yaml", call. = FALSE)
+
+     dest <- file.path(.cache_root(man), spec$cache, rel)
+     if (!file.exists(dest))
+          stop(key, " file not in the cache: ", rel, "\n",
+               "  expected at: ", dest, "\n",
+               "  ", key, " ", spec$version, " is a manual download from ", spec$source,
+               "\n  Set INDIA_DATA_HOME to point elsewhere if the cache lives on another disk.",
+               call. = FALSE)
+
+     want <- spec$files[[rel]]
+     if (!is.null(want)) {
+          got <- digest::digest(dest, algo = "sha256", file = TRUE)
+          if (!identical(got, want))
+               stop(rel, " does not match the sha256 pinned in data/manifest.yaml.\n",
+                    "  expected ", want, "\n  got      ", got, "\n",
+                    "  The cached copy differs from the one the results were built on.",
+                    call. = FALSE)
+     }
+     dest
+}
+
+shrug_path <- function(rel) reference_path(rel, "shrug")

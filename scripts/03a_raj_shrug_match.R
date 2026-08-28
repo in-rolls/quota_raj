@@ -457,8 +457,8 @@ message("Exported unmatched GPs for review.")
 
 message("\n=== LOADING SHRUG COVARIATES ===")
 
-shrug_pca <- read_csv(here("data/shrug/shrug-pca01-csv/pc01_pca_clean_shrid.csv.zip"), show_col_types = FALSE)
-shrug_vd <- read_csv(here("data/shrug/shrug-vd01-csv/pc01_vd_clean_shrid.csv.zip"), show_col_types = FALSE)
+shrug_pca <- read_csv(shrug_path("shrug-pca01-csv/pc01_pca_clean_shrid.csv.zip"), show_col_types = FALSE)
+shrug_vd <- read_csv(shrug_path("shrug-vd01-csv/pc01_vd_clean_shrid.csv.zip"), show_col_types = FALSE)
 
 message("SHRUG PCA rows: ", nrow(shrug_pca))
 message("SHRUG VD rows: ", nrow(shrug_vd))

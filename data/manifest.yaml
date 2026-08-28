@@ -23,3 +23,20 @@ upstream:
       data/fin/up_gp_sarpanch_2021_fixed_with_transliteration.parquet: 4b02015d5e4e827ff272d7f8201a87b28c7a8a7e184c086d89f3371834125d16
       data/external/weaver/weaver_data.dta.gz: 1e561493bfda584b29f312080a91b0ff2a1580fea0081248e45614f7599dee11
       data/external/weaver/weaver_data_2.dta.gz: 2a79036d7de6c1bfcfd17fdad7652caad58d70458a298eb1ad534fd383515aec
+
+reference:
+  shrug:
+    version: "2.0"
+    source: https://devdatalab.org/shrug
+    licence: CC BY-NC-SA 4.0
+    # Asher, Lunt, Matsuura & Novosad (2021), World Bank Economic Review 35(4).
+    # Each subdirectory keeps its own README.md and .bib -- the licence requires
+    # the attribution to travel with the data.
+    cache: shrug/2.0
+    files:
+      shrug-antyodaya-csv/antyodaya_shrid.csv.zip: b22801c282c7b56dbda825fc1683d3a485868f1087100ea4209aa3dfbad0e677
+      shrug-pc-keys-csv/pc11r_shrid_key.csv: 7a7aebcf3a3ac1503c601ccabb6052c4aff34ffbc257f0d7295ef6e922303dac
+      shrug-pca01-csv/pc01_pca_clean_shrid.csv.zip: a48fe8bc92718dcba62c285a2003c8f2e9f3def0102b3540b761d6a502344e6a
+      shrug-pca11-csv/pc11_pca_clean_shrid.csv: 2f0e57667641dfbf731cbc9bfad8d8bd3690873a556ed01cb38bc467280c8ff2
+      shrug-secc-mord-rural-csv/secc_rural_shrid.csv.zip: a9437371528c31efe5fd0dc14bc9848b43b4c537ecd1cc777590fbc4d0c03606
+      shrug-vd01-csv/pc01_vd_clean_shrid.csv.zip: 9fad32229b93db35639732c6e1c64489038735e01758e548ce73ba8f3a3f7c95
