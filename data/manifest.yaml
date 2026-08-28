@@ -40,3 +40,14 @@ reference:
       shrug-pca11-csv/pc11_pca_clean_shrid.csv: 2f0e57667641dfbf731cbc9bfad8d8bd3690873a556ed01cb38bc467280c8ff2
       shrug-secc-mord-rural-csv/secc_rural_shrid.csv.zip: a9437371528c31efe5fd0dc14bc9848b43b4c537ecd1cc777590fbc4d0c03606
       shrug-vd01-csv/pc01_vd_clean_shrid.csv.zip: 9fad32229b93db35639732c6e1c64489038735e01758e548ce73ba8f3a3f7c95
+# Some byte-identical files here are APFS clones (`cp -c`): they share their
+# blocks on disk, so each path works normally but the duplicate costs no real
+# space. `du` still reports the full size for each -- only `df` shows the saving.
+#
+# Cloned 2026-08-28: the SHRUG GP crosswalk files that appear both here and in
+# quota_raj/data/shrug_gp_xwalk/ (a citable third-party package -- Mahajan 2025,
+# CC BY-NC-SA -- kept byte-for-byte as distributed, including its own internal
+# repetition across code/, data/ and documentation/).
+#
+# If a backup restores these as ordinary copies the data is still correct, just
+# larger. Re-clone with:  rm dup && cp -c canonical dup
