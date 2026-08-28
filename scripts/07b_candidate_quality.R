@@ -96,7 +96,7 @@ message("Saved: tabs/mean_values_respondents.tex")
 
 message("\n--- Uttar Pradesh ---")
 
-jw <- read_dta(here("data/up/weaver_data_2.dta"))
+jw <- read_dta(ref_path("weaver_data_2.dta.gz"))
 
 jw <- jw %>%
     mutate(year = case_when(

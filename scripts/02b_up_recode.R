@@ -168,8 +168,8 @@ write_parquet(up_10_15, here("data/up/up_10_15.parquet"))
 # ============================================================================
 message("\n--- Creating 2015-2021 panel ---")
 
-up_2015 <- read_parquet(here("data/up/up_gp_sarpanch_2015_fixed_with_transliteration.parquet"))
-up_2021 <- read_parquet(here("data/up/up_gp_sarpanch_2021_fixed_with_transliteration.parquet"))
+up_2015 <- read_parquet(up_path("up_gp_sarpanch_2015_fixed_with_transliteration.parquet"))
+up_2021 <- read_parquet(up_path("up_gp_sarpanch_2021_fixed_with_transliteration.parquet"))
 message("  Input: 2015 raw =", nrow(up_2015), ", 2021 raw =", nrow(up_2021))
 
 # Audit: records with missing GP name

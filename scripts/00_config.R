@@ -1,7 +1,9 @@
 # 00_config.R
 # Central configuration for quota_raj project
 # Variable dictionaries, helper functions, and shared settings
-# Note: File paths use here() directly in scripts rather than centralized PATHS
+# Note: File paths use here() directly in scripts, except data this repo does
+# not own -- those are pinned in data/manifest.yaml and resolved by
+# up_path()/ref_path() below.
 
 library(here)
 library(dplyr)
@@ -109,3 +111,66 @@ COLORS_PUB <- c(
 FIG_WIDTH_FULL <- 6.5
 FIG_WIDTH_HALF <- 3.25
 FIG_HEIGHT <- 4.5
+
+## ---------------------------------------------------------------------------
+## Data this repo uses but does not own
+## ---------------------------------------------------------------------------
+## data/manifest.yaml pins a version and a sha256 for every file that another
+## repository produces. sibling_path() resolves one: cache, then a sibling clone,
+## then a download -- and verifies the checksum before returning, every time,
+## including on the cache hit. A mismatch stops the run; it never silently hands
+## back different data.
+##
+## The point is not disk space. quota, quota_raj, local_elections and others all
+## read the same UP sarpanch files, and until now each kept its own copy with
+## nothing to notice when they drifted apart.
+
+.manifest <- function() {
+     yaml::read_yaml(here::here("data", "manifest.yaml"))
+}
+
+.cache_root <- function(man) {
+     root <- Sys.getenv("INDIA_DATA_HOME", unset = man$cache_dir)
+     path.expand(root)
+}
+
+sibling_path <- function(file, source = "local_elections_up") {
+     man <- .manifest()
+     spec <- man$upstream[[source]]
+     if (is.null(spec))
+          stop("no manifest entry for source '", source, "'", call. = FALSE)
+
+     want <- spec$files[[file]]
+     if (is.null(want))
+          stop(file, " is not pinned in data/manifest.yaml for ", source, ".\n",
+               "  Add it with its sha256 rather than reading an unpinned copy.",
+               call. = FALSE)
+
+     dest <- file.path(.cache_root(man), source, spec$ref, file)
+
+     if (!file.exists(dest)) {
+          dir.create(dirname(dest), recursive = TRUE, showWarnings = FALSE)
+          local <- file.path(spec$sibling, file)
+          if (file.exists(local)) {
+               file.copy(local, dest)
+          } else {
+               url <- paste(spec$raw, spec$ref, file, sep = "/")
+               message("Fetching ", file, " from ", source, "@", spec$ref)
+               utils::download.file(url, dest, mode = "wb", quiet = TRUE)
+          }
+     }
+
+     got <- digest::digest(dest, algo = "sha256", file = TRUE)
+     if (!identical(got, want)) {
+          unlink(dest)
+          stop(file, " does not match the sha256 pinned in data/manifest.yaml.\n",
+               "  expected ", want, "\n  got      ", got, "\n",
+               "  Either ", source, "@", spec$ref, " changed, or the copy is corrupt.",
+               call. = FALSE)
+     }
+     dest
+}
+
+## Convenience wrappers so call sites read as what they are.
+up_path  <- function(f) sibling_path(file.path("data/fin", f))
+ref_path <- function(f) sibling_path(file.path("data/external/weaver", f))
