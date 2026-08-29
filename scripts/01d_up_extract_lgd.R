@@ -10,7 +10,7 @@ source(here("scripts/00_config.R"))
 message("=== Extracting UP LGD Block-GP Hierarchy ===")
 
 # Parse the XML Excel file
-xml_file <- here("data/lgd/up_lgd/up_block_panchayat.xls")
+xml_file <- here("data/lgd/up_lgd/up_block_panchayat.xls.gz")
 message("Reading: ", xml_file)
 
 doc <- read_xml(xml_file)
