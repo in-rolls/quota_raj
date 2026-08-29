@@ -13,7 +13,7 @@ cache_dir: ~/data
 upstream:
   local_elections_up:
     repo: in-rolls/local_elections_up
-    ref: v1.0
+    ref: v1.1
     raw: https://raw.githubusercontent.com/in-rolls/local_elections_up
     sibling: ../local_elections_up
     files:
@@ -23,6 +23,9 @@ upstream:
       data/fin/up_gp_sarpanch_2021_fixed_with_transliteration.parquet: 4b02015d5e4e827ff272d7f8201a87b28c7a8a7e184c086d89f3371834125d16
       data/external/weaver/weaver_data.dta.gz: 1e561493bfda584b29f312080a91b0ff2a1580fea0081248e45614f7599dee11
       data/external/weaver/weaver_data_2.dta.gz: 2a79036d7de6c1bfcfd17fdad7652caad58d70458a298eb1ad534fd383515aec
+      data/external/weaver/nw_election10.dta.gz: dca9d0c13040d40893f6557e7b8ace969c9780ac9867e9aea02949eda9b30d21
+      data/external/weaver/nw_elections_analysis.dta.gz: be188ed096e8771836991534bafceb7429dcb5a13a9bb0a28de2790df5b4232c
+      data/external/weaver/nw_up_nregs.dta.gz: 02401e2a879bbe5c887f4c6dc14c899e6aa684dc3f958695ffcc56ea76332fdf
 
 reference:
   shrug:
