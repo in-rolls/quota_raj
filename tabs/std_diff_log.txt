@@ -1,6 +1,6 @@
 Standardized Differences for Balance Covariates
 ================================================
-Generated: 2026-03-26 19:29:09.347199
+Generated: 2026-09-13 06:02:31.439083
 
 Formula: |mean_quota - mean_open| / sqrt((sd_quota^2 + sd_open^2) / 2)
 Threshold for concern: 0.20 (Austin 2009)
@@ -8,126 +8,124 @@ Threshold for concern: 0.20 (Austin 2009)
 === RAJASTHAN ===
 
 Panel 2005->2010:
-  Max standardized diff: 0.0568
+  Max standardized diff: 0.062
   By covariate:
-    Population: 0.0146
-    Female Share: 0.0398
-    SC Share: 0.0138
-    ST Share: 0.0088
-    Medical fac./1k: 0.002
-    Mat. homes/1k: 0.0269
-    FW Centres/1k: 0.0568
-    Prim. sch./1k: 0.0144
-    Mid. sch./1k: 0.0566
-    Handpumps/1k: 0.0362
-    Tap water/1k: 0.0144
-    Wells/1k: 0.031
-    Banking/1k: 0.0089
-    Power/1k: 0.0075
-    Mud road/1k: 0.012
+    Population: 0.0213
+    Female Share: 0.0378
+    SC Share: 0.0226
+    ST Share: 0.0165
+    Medical fac./1k: 0.0119
+    Mat. homes/1k: 0.0167
+    FW Centres/1k: 0.0531
+    Prim. sch./1k: 0.0119
+    Mid. sch./1k: 0.062
+    Handpumps/1k: 0.0154
+    Tap water/1k: 0.0013
+    Wells/1k: 0.0214
+    Banking/1k: 0.0052
+    Power/1k: 0.0206
+    Mud road/1k: 0.0072
 
 Panel 2010->2015:
-  Max standardized diff: 0.0786
+  Max standardized diff: 0.0732
   By covariate:
-    Population: 0.0418
-    Female Share: 0.0134
-    SC Share: 0.0786
-    ST Share: 0.0189
-    Medical fac./1k: 0.0337
-    Mat. homes/1k: 0.0125
-    FW Centres/1k: 0.0234
-    Prim. sch./1k: 0.0502
-    Mid. sch./1k: 0.0097
-    Handpumps/1k: 0.0331
-    Tap water/1k: 0.0539
-    Wells/1k: 0.0279
-    Banking/1k: 0.0241
-    Power/1k: 0.0094
-    Mud road/1k: 0.0082
+    Population: 0.0409
+    Female Share: 0.0174
+    SC Share: 0.0732
+    ST Share: 0.0211
+    Medical fac./1k: 0.046
+    Mat. homes/1k: 0.0101
+    FW Centres/1k: 0.0157
+    Prim. sch./1k: 0.0549
+    Mid. sch./1k: 0.0137
+    Handpumps/1k: 0.0224
+    Tap water/1k: 0.0581
+    Wells/1k: 0.0203
+    Banking/1k: 0.0284
+    Power/1k: 0.0352
+    Mud road/1k: 0.002
 
 Panel 2015->2020:
-  Max standardized diff: 0.0606
+  Max standardized diff: 0.053
   By covariate:
-    Population: 0.0068
-    Female Share: 0.0376
-    SC Share: 0.0186
-    ST Share: 0.0048
-    Medical fac./1k: 0.0387
-    Mat. homes/1k: 0.0026
-    FW Centres/1k: 0.0277
-    Prim. sch./1k: 0.051
-    Mid. sch./1k: 0.0053
-    Handpumps/1k: 0.0606
-    Tap water/1k: 0.0352
-    Wells/1k: 0.0366
-    Banking/1k: 0.0339
-    Power/1k: 0.0271
-    Mud road/1k: 0.0023
+    Population: 0.0082
+    Female Share: 0.0337
+    SC Share: 0.0032
+    ST Share: 9e-04
+    Medical fac./1k: 0.0378
+    Mat. homes/1k: 0.0071
+    FW Centres/1k: 0.0191
+    Prim. sch./1k: 0.053
+    Mid. sch./1k: 0.0117
+    Handpumps/1k: 0.0513
+    Tap water/1k: 0.0235
+    Wells/1k: 0.0305
+    Banking/1k: 0.0314
+    Power/1k: 0.016
+    Mud road/1k: 0.0116
 
-RAJASTHAN MAX (all panels): 0.0786
+RAJASTHAN MAX (all panels): 0.0732
 
 === UTTAR PRADESH ===
 
 Panel 2005->2010:
   Max standardized diff: 0.1299
   By covariate:
-    Population: 0.0869
-    Female Share: 0.0819
+    Population: 0.0893
+    Female Share: 0.0813
     SC Share: 0.1299
-    ST Share: 0.0103
-    Medical fac./1k: 0.0279
-    Mat. homes/1k: 0.005
-    FW Centres/1k: 0.0295
-    Prim. sch./1k: 0.0131
-    Mid. sch./1k: 0.0043
-    Handpumps/1k: 0.0323
-    Tap water/1k: 7e-04
-    Wells/1k: 0.0051
-    Banking/1k: 0.0264
-    Power/1k: 0.0273
-    Mud road/1k: 0.0345
+    ST Share: 0.0152
+    Medical fac./1k: 0.0238
+    Mat. homes/1k: 0.0057
+    FW Centres/1k: 0.0377
+    Prim. sch./1k: 0.0159
+    Mid. sch./1k: 0.0017
+    Handpumps/1k: 0.0313
+    Tap water/1k: 0.0114
+    Wells/1k: 0.0111
+    Banking/1k: 0.0313
+    Power/1k: 0.0281
+    Mud road/1k: 0.0281
 
 Panel 2010->2015:
-  Max standardized diff: 0.131
+  Max standardized diff: 0.1254
   By covariate:
-    Population: 0.0166
-    Female Share: 0.0239
-    SC Share: 0.131
-    ST Share: 0.0334
-    Medical fac./1k: 0.0046
-    Mat. homes/1k: 0.0135
-    FW Centres/1k: 0.0087
-    Prim. sch./1k: 0.0019
-    Mid. sch./1k: 0.0127
-    Handpumps/1k: 0.0098
-    Tap water/1k: 0.0265
-    Wells/1k: 0.0091
-    Banking/1k: 0.0422
-    Power/1k: 0.0101
-    Mud road/1k: 0.0093
+    Population: 0.0045
+    Female Share: 0.0387
+    SC Share: 0.1254
+    ST Share: 0.035
+    Medical fac./1k: 0
+    Mat. homes/1k: 0.028
+    FW Centres/1k: 0.0134
+    Prim. sch./1k: 0.0113
+    Mid. sch./1k: 0.0246
+    Handpumps/1k: 0.0035
+    Tap water/1k: 0.011
+    Wells/1k: 0.0191
+    Banking/1k: 0.037
+    Power/1k: 0.0305
+    Mud road/1k: 0.0064
 
 Panel 2015->2021:
-  Max standardized diff: 0.4143
+  Max standardized diff: 0.4022
   By covariate:
-    Population: 0.4143
-    Female Share: 0.0211
-    SC Share: 0.0589
-    ST Share: 0.0019
-    Medical fac./1k: 0.0624
-    Mat. homes/1k: 0.0482
-    FW Centres/1k: 0.0149
-    Prim. sch./1k: 0.1517
-    Mid. sch./1k: 0.0243
-    Handpumps/1k: 0.2182
-    Tap water/1k: 0.0586
-    Wells/1k: 0.1449
-    Banking/1k: 0.0604
-    Power/1k: 0.1561
-    Mud road/1k: 0.1858
+    Population: 0.4022
+    Female Share: 0.0191
+    SC Share: 0.0622
+    ST Share: 0.0126
+    Medical fac./1k: 0.0454
+    Mat. homes/1k: 0.0456
+    FW Centres/1k: 0.0209
+    Prim. sch./1k: 0.1452
+    Mid. sch./1k: 0.0236
+    Handpumps/1k: 0.2236
+    Tap water/1k: 0.0711
+    Wells/1k: 0.1409
+    Banking/1k: 0.0602
+    Power/1k: 0.1402
+    Mud road/1k: 0.1805
 
-UP MAX (all panels): 0.4143
+UP MAX (all panels): 0.4022
 
 === OVERALL SUMMARY ===
-Maximum standardized difference (all states, all panels): 0.4143
-Claim in manuscript: 'fall below 0.12'
-Claim valid: NO - UPDATE MANUSCRIPT
+Maximum standardized difference (all states, all panels): 0.4022

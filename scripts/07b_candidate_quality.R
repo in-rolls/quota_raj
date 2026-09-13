@@ -1,129 +1,142 @@
-# 07b_candidate_quality.R
-# Candidate quality: t-tests comparing quota vs open candidates
-# Consolidated script for both Rajasthan and UP
-
 library(tidyverse)
-library(broom)
-library(psych)
+library(arrow)
 library(haven)
 library(here)
-
+library(kableExtra)
 source(here("scripts/00_config.R"))
-source(here("scripts/00_utils.R"))
 
-message("=== Candidate Quality Analysis ===")
+candidates <- read_parquet(here("data/raj/candidates_2020_events.parquet")) |>
+  filter(candidate_key_unique, gp_event_unique) |>
+  mutate(
+    treat = primary_female_reserved,
+    grad_status = if_else(is.na(education_status), NA_integer_, as.integer(
+      str_to_lower(education_status) %in% c(
+        "postgraduate", "graduate",
+        "professional graduate", "professional post graduate"
+      )
+    )),
+    total_children = as.numeric(children_before27111995) + as.numeric(children_on_or_after28111995),
+    age = as.numeric(age),
+    unemployed = as.integer(str_to_lower(contesting_candidate_occupation) == "unemployed"),
+    assets = as.numeric(total_value_of_capital_assets),
+    log_assets = log1p(psych::winsor(assets, trim = 0.1, na.rm = TRUE))
+  )
+winner_keys <- read_parquet(here("data/raj/winners_2020_events.parquet")) |>
+  filter(winner_key_unique, gp_event_unique) |>
+  select(event_key, name_of_contesting_candidate = winner_candidate_name)
+winners <- candidates |>
+  filter(candidate_name_unique) |>
+  semi_join(winner_keys,
+    by = c("event_key", "name_of_contesting_candidate"), na_matches = "never"
+  )
+variables <- c("age", "total_children", "grad_status", "unemployed", "log_assets")
+labels <- c("Age", "Children", "Graduate", "Unemployed", "Log assets")
 
-# =============================================================================
-# RAJASTHAN
-# =============================================================================
-
-message("\n--- Rajasthan 2020 ---")
-
-contestants <- read_csv(here("data/raj/source/sarpanch_election_data/background/ContestingSarpanch_2020.csv"),
-                         show_col_types = FALSE)
-names(contestants) <- tolower(names(contestants))
-contestants <- contestants %>%
-    mutate(across(where(is.character), tolower)) %>%
-    filter(electiontype != "by election") %>%
-    mutate(
-        treat = ifelse(categoryofgrampanchayat %in%
-            c("general (woman)", "obc (woman)", "sc (woman)", "st (woman)"), 1, 0),
-        win_assets = winsor(as.integer(totalvalueofcapitalassets), trim = 0.1, na.rm = TRUE),
-        grad_status = ifelse(educationstatus %in%
-            c("postgraduate", "graduate", "professional graduate", "professional post graduate"), 1, 0),
-        total_children = as.integer(childrenbefore27111995) + as.integer(childrenonorafter28111995),
-        age = as.integer(age),
-        unemployed = ifelse(contestingcandidateoccupation == "unemployed", 1, 0),
-        log_assets = log(win_assets + 1)
+samples <- list(
+  Winners = winners, Candidates = candidates,
+  `Women winners` = filter(winners, candidate_female == 1),
+  `Women candidates` = filter(candidates, candidate_female == 1)
+)
+comparisons <- imap_dfr(samples, function(sample, sample_name) {
+  map2_dfr(variables, labels, function(outcome, label) {
+    observed <- sample |> filter(!is.na(.data[[outcome]]), !is.na(treat))
+    test <- t.test(reformulate("treat", outcome), data = observed)
+    tibble(
+      sample = sample_name, variable = label,
+      open = mean(observed[[outcome]][observed$treat == 0]),
+      quota = mean(observed[[outcome]][observed$treat == 1]),
+      difference = open - quota, p = test$p.value,
+      open_n = sum(observed$treat == 0), quota_n = sum(observed$treat == 1)
     )
+  })
+})
+write_csv(comparisons, here("tabs/candidate_characteristics.csv"))
+for (women_only in c(FALSE, TRUE)) {
+  displayed <- comparisons |>
+    filter(str_starts(sample, "Women") == women_only) |>
+    select(sample, variable, open, quota, difference) |>
+    pivot_wider(
+      names_from = sample, values_from = c(open, quota, difference),
+      names_vary = "slowest"
+    )
+  displayed |>
+    kbl(
+      format = "latex", booktabs = TRUE, digits = 2,
+      caption = if (women_only) "Candidate Characteristics Among Women: Quota vs. Open Seats" else "Candidate Characteristics: Quota vs. Open Seats (Rajasthan 2020)",
+      label = if (women_only) "candidate_women" else "main_cand_char",
+      col.names = c("Characteristic", rep(c("Open", "Quota", "Difference"), 2))
+    ) |>
+    add_header_above(setNames(
+      c(1, 3, 3),
+      c(" ", if (women_only) c("Women winners", "Women candidates") else c("Winners", "Candidates"))
+    )) |>
+    kable_styling(font_size = 8) |>
+    footnote(
+      general = paste(
+        "Descriptive open-minus-quota comparisons, conditional on candidacy or winning.",
+        "Assets winsorized at the 10th and 90th percentiles of the candidate sample before taking logs.",
+        "These comparisons do not identify a causal effect on candidate quality."
+      ),
+      threeparttable = TRUE
+    ) |>
+    save_kable(here("tabs", if (women_only) "cand_characteristics_women.tex" else "cand_characteristics_combined.tex"))
+}
 
-winners_ref <- read_csv(here("data/raj/source/sarpanch_election_data/background/WinnerSarpanch_2020.csv"),
-                         show_col_types = FALSE)
-names(winners_ref) <- tolower(names(winners_ref))
-winners_ref <- winners_ref %>%
-    mutate(across(where(is.character), tolower)) %>%
-    filter(electiontype != "by election")
-
-contestants <- contestants %>%
-    mutate(is_winner = ifelse(
-        paste(key, nameofcontestingcandidate, sep = "|||") %in%
-            paste(winners_ref$key_2020, winners_ref$winnercandidatename, sep = "|||"), 1, 0
-    ))
-
-raj_vars <- c("age", "total_children", "grad_status", "unemployed", "log_assets")
-raj_labels <- c("Age", "Total Children", "Graduation Status", "Unemployed", "Assets (log)")
-
-winners <- contestants %>% filter(is_winner == 1)
-winner_results <- run_t_tests(winners, raj_vars, raj_labels)
-cand_results <- run_t_tests(contestants, raj_vars, raj_labels)
-
-make_balance_table(
-    dfs = list(winner_results, cand_results),
-    group_names = c("Winners", "All Candidates"),
-    notes = paste0(
-        "$^{***}$p$<$0.01; $^{**}$p$<$0.05; $^{*}$p$<$0.1. ",
-        "T-tests comparing characteristics in open vs quota seats. ",
-        "Data from Rajasthan 2020 panchayat elections. Assets winsorized at 10\\%."
+respondent_links <- read_parquet(here("data/raj/phone_candidate_links.parquet"))
+respondents <- winners |>
+  inner_join(respondent_links,
+    by = c(
+      "event_key", "contesting_candidate_serial_no", "name_of_contesting_candidate",
+      "father_husband_of_contesting_candidate"
     ),
-    out = here("tabs", "cand_characteristics_combined.tex")
-)
-message("Saved: tabs/cand_characteristics_combined.tex")
+    relationship = "one-to-one", na_matches = "never"
+  )
+respondent_means <- respondents |>
+  summarise(across(all_of(variables), ~ mean(.x, na.rm = TRUE))) |>
+  pivot_longer(everything(), names_to = "variable", values_to = "mean") |>
+  mutate(variable = labels[match(variable, variables)])
+respondent_means |>
+  kbl(
+    format = "latex", booktabs = TRUE, digits = 2, col.names = c("Characteristic", "Mean"),
+    caption = "Characteristics of Representatives Recorded as Answering Phone Calls",
+    label = "phone_reply_char"
+  ) |>
+  kable_styling(font_size = 8) |>
+  footnote(
+    general = paste("Quota-seat respondents. N =", nrow(respondents)),
+    threeparttable = TRUE
+  ) |>
+  save_kable(here("tabs/mean_values_respondents.tex"))
+write_csv(respondent_means |> mutate(n = nrow(respondents)), here("tabs/phone_respondent_characteristics.csv"))
 
-raj_member_reply <- read_csv(here("data/raj/source/phone_survey_response/member_answered_phone.csv"),
-                              show_col_types = FALSE)
-names(raj_member_reply) <- tolower(names(raj_member_reply))
-raj_member_reply <- raj_member_reply %>% mutate(across(where(is.character), tolower))
-
-winners$key_clean <- trimws(winners$key)
-raj_member_reply$key_clean <- trimws(raj_member_reply$key)
-
-respondents <- winners %>% filter(key_clean %in% raj_member_reply$key_clean)
-mean_values_df <- make_mean_table(respondents, raj_vars, raj_labels)
-
-custom_stargazer(mean_values_df,
-    summary = FALSE, rownames = FALSE,
-    colnames = c("Variable", "Mean"),
-    title = "Characteristics of Representatives Who Answered Phone Calls",
-    label = "tab:phone_reply_char",
-    notes = paste0("Characteristics of representatives in quota seats who answered our phone calls. N = ", nrow(respondents), "."),
-    out = here("tabs", "mean_values_respondents.tex")
-)
-message("Saved: tabs/mean_values_respondents.tex")
-
-# =============================================================================
-# UTTAR PRADESH
-# =============================================================================
-
-message("\n--- Uttar Pradesh ---")
-
-jw <- read_dta(ref_path("weaver_data_2.dta.gz"))
-
-jw <- jw %>%
-    mutate(year = case_when(
-        election == -1 ~ 2010,
-        election == 0 ~ 2015,
-        election == 1 ~ 2020
-    ))
-
+weaver <- read_dta(ref_path("weaver_data_2.dta.gz")) |>
+  mutate(year = case_when(election == -1 ~ 2010L, election == 0 ~ 2015L, election == 1 ~ 2021L))
 up_vars <- c("winner_age", "winner_education", "winner_total_assets_asinh")
-up_labels <- c("Age", "Education", "Assets (asinh)")
-
-results_2010 <- run_t_tests(filter(jw, year == 2010), up_vars, up_labels, treat_var = "reservation_female")
-results_2015 <- run_t_tests(filter(jw, year == 2015), up_vars, up_labels, treat_var = "reservation_female")
-results_2020 <- run_t_tests(filter(jw, year == 2020), up_vars, up_labels, treat_var = "reservation_female")
-
-make_balance_table(
-    dfs = list(results_2010, results_2015, results_2020),
-    group_names = c("2010", "2015", "2020"),
-    notes = paste0(
-        "$^{***}$p$<$0.01; $^{**}$p$<$0.05; $^{*}$p$<$0.1. ",
-        "Data from \\citet{weaver_data}. ",
-        "T-tests comparing winner characteristics in open vs quota seats. ",
-        "Education is ordinal (1=Primary to 9=Doctorate). ",
-        "Assets (asinh transformation) available only for 2020."
-    ),
-    out = here("tabs", "up_cand_characteristics.tex")
-)
-message("Saved: tabs/up_cand_characteristics.tex")
-
-message("\n=== Done ===")
+up_comparisons <- map_dfr(c(2010, 2015, 2021), function(wave) {
+  map2_dfr(up_vars, c("Age", "Education", "Assets (asinh)"), function(outcome, label) {
+    observed <- weaver |> filter(year == wave, !is.na(.data[[outcome]]), !is.na(reservation_female))
+    tibble(
+      year = wave, variable = label,
+      open = if (nrow(observed)) mean(observed[[outcome]][observed$reservation_female == 0]) else NA_real_,
+      quota = if (nrow(observed)) mean(observed[[outcome]][observed$reservation_female == 1]) else NA_real_,
+      difference = open - quota,
+      open_n = sum(observed$reservation_female == 0), quota_n = sum(observed$reservation_female == 1)
+    )
+  })
+})
+write_csv(up_comparisons, here("tabs/up_candidate_characteristics.csv"))
+up_comparisons |>
+  select(year, variable, open, quota, difference) |>
+  pivot_wider(names_from = year, values_from = c(open, quota, difference), names_vary = "slowest") |>
+  kbl(
+    format = "latex", booktabs = TRUE, digits = 2,
+    caption = "Candidate Characteristics: Quota vs. Open Seats (Uttar Pradesh)", label = "up_cand_char",
+    col.names = c("Characteristic", rep(c("Open", "Quota", "Difference"), 3))
+  ) |>
+  add_header_above(c(" " = 1, "2010" = 3, "2015" = 3, "2021" = 3)) |>
+  kable_styling(font_size = 8) |>
+  footnote(general = paste(
+    "Descriptive comparisons using the Weaver data. The last wave is coded 2020 in the source labels",
+    "and corresponds to the 2021 election. Assets are available only in that wave."
+  ), threeparttable = TRUE) |>
+  save_kable(here("tabs/up_cand_characteristics.tex"))

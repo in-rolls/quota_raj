@@ -1,3 +1,4 @@
 #!/bin/bash
+set -eu
 cd "$(dirname "$0")"
-latexmk -xelatex -interaction=nonstopmode main.tex 2>&1 | grep -v "^$"
+exec latexmk -xelatex -interaction=nonstopmode -halt-on-error main.tex
