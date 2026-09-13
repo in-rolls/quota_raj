@@ -84,6 +84,19 @@ test_that("phone categories exhaust their stated denominators", {
     survey == "phone_survey", section == "Among male non-members",
     category %in% c("Spouse", "Child", "Other recorded relative")
   ) |> summarise(n = sum(n)) |> pull(n), 262)
+  expected_contact <- tribble(
+    ~survey, ~denominator, ~n,
+    "phone_survey", 500, 377,
+    "phone_survey_openseats", 507, 400,
+    "jaipur_urban_phone_survey_quota", 78, 63,
+    "jaipur_urban_phone_survey_open", 170, 146
+  )
+  expect_equal(counts |> filter(category == "Answered") |>
+    select(survey, denominator, n), expected_contact)
+  expect_equal(counts |>
+    filter(category == "Recorded as elected representative") |>
+    pull(n), c(35, 305, 20, 129))
+  expect_true(all(counts$denominator > 0))
   quality <- read_csv(here("tabs/candidate_characteristics.csv"), show_col_types = FALSE)
   expect_false(anyNA(quality[c("open", "quota", "difference")]))
   expect_equal(quality$difference, quality$open - quality$quota)

@@ -17,8 +17,13 @@ rural_open <- read_excel(file.path(survey_dir, "sampled_mobile_nos_open_seats.xl
 urban <- read_excel(file.path(survey_dir, "jaipur_audit.xlsx"), sheet = "Sheet1", col_types = "text") |>
   clean_names() |>
   filter(!is.na(attempt_to_reach)) |>
-  mutate(phone_answered = if_else(phone_responded == 1, "yes", "no")) |>
+  mutate(
+    treat_status = parse_double(treat_status),
+    phone_responded = parse_double(phone_responded),
+    phone_answered = if_else(phone_responded == 1, "yes", "no")
+  ) |>
   rename(phone_answered_by = respondent)
+stopifnot(all(urban$treat_status %in% 0:1))
 
 surveys <- list(
   phone_survey = rural_quota,
@@ -34,6 +39,7 @@ contact_counts <- list()
 for (survey_name in names(surveys)) {
   survey <- surveys[[survey_name]] |>
     mutate(phone_answered_by = str_replace_all(phone_answered_by, "-", "_"))
+  stopifnot(nrow(survey) > 0)
   answered <- survey |>
     filter(phone_answered == "yes") |>
     mutate(category = case_when(
