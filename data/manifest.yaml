@@ -90,7 +90,7 @@ reference:
 # space. `du` still reports the full size for each -- only `df` shows the saving.
 #
 # Cloned 2026-08-28: the SHRUG GP crosswalk files that appear both here and in
-# quota_raj/data/shrug_gp_xwalk/ (a citable third-party package -- Mahajan 2025,
+# quota_representation/data/shrug_gp_xwalk/ (a citable third-party package -- Mahajan 2025,
 # CC BY-NC-SA -- kept byte-for-byte as distributed, including its own internal
 # repetition across code/, data/ and documentation/).
 #
