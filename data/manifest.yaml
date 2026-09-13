@@ -1,7 +1,7 @@
 # Data this repository uses but does not own.
 #
 # Each entry pins a version and a sha256. `up_path()` and `ref_path()` in
-# scripts/00_utils.R resolve these: they look in the local cache, fall back to a
+# scripts/00_config.R resolve these: they look in the local cache, fall back to a
 # sibling clone, otherwise download -- and always verify the checksum before
 # handing back a path. A mismatch is an error, never a silent substitution.
 #
@@ -11,6 +11,22 @@
 cache_dir: ~/data
 
 upstream:
+  local_elections_rajasthan:
+    repo: in-rolls/local_elections_rajasthan
+    ref: 0455cf6c3c32ec3db1a0e50be2df18e50609cfab
+    raw: https://raw.githubusercontent.com/in-rolls/local_elections_rajasthan
+    sibling: ../local_elections_rajasthan
+    files:
+      data/fin/source_2005_std.parquet: 488ecf8e08225417e8f293f8edd596a57c2860439cd421a4ec82095e3b716d8d
+      data/fin/source_2010_std.parquet: 8e4e4780fc6379a8367031c223d3321843e6c3ee8d9cc40aa5b153e58128d1be
+      data/fin/source_2015_std.parquet: 077acbf06cc1c66cabd4a584414afa95e414b2c3de08e8d3f8f24b8a34518397
+      data/fin/source_2020_std.parquet: ea0c2fca01cad3b599db29d11f637be7a0f1314d2a9c014638eefab5aefe81f6
+      data/fin/scrape_2020_2022/ContestingSarpanch.parquet: 385cf12352831697da2b2e274fa21029126d75b48bc198227f82b45a62e76167
+      data/fin/scrape_2020_2022/WinnerSarpanch.parquet: 0d87b3fcba53c9f5f6a0bf7df1d438e9d5d67675f7525e936bd503101af0efab
+      data/source/sarpanch/sarpanch_2005.csv: 642c992acc6aa6f81dcfdfbe630a71b017aff551736c435e3ac839bbd85e2c92
+      data/source/sarpanch/sarpanch_2010.csv: 84c9ed22680e75ac5e06f05fcc93e57bc38cc6d835e5cb22887e9d5f982089db
+      data/source/sarpanch/sarpanch_2015_manual_sex.csv: 4b787ccd8115cbdf4edcf22ae38aa2b7b02e8e9be48dd3e6c696e69965901cc0
+      data/source/sarpanch/sarpanch_2020_clean.csv: 0f13bc76ea6d5203a55bb42d858fc832852136f18afd0cc7baf6fd66422f0449
   local_elections_up:
     repo: in-rolls/local_elections_up
     ref: v1.1

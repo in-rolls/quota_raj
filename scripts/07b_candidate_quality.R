@@ -82,15 +82,15 @@ for (women_only in c(FALSE, TRUE)) {
     save_kable(here("tabs", if (women_only) "cand_characteristics_women.tex" else "cand_characteristics_combined.tex"))
 }
 
-respondent_keys <- read_csv(here("data/raj/source/phone_survey_response/member_answered_phone.csv"),
-  show_col_types = FALSE
-) |>
-  janitor::clean_names() |>
-  transmute(key = str_to_lower(str_trim(key))) |>
-  distinct()
+respondent_links <- read_parquet(here("data/raj/phone_candidate_links.parquet"))
 respondents <- winners |>
-  mutate(key = str_to_lower(str_trim(key))) |>
-  semi_join(respondent_keys, by = "key")
+  inner_join(respondent_links,
+    by = c(
+      "event_key", "contesting_candidate_serial_no", "name_of_contesting_candidate",
+      "father_husband_of_contesting_candidate"
+    ),
+    relationship = "one-to-one", na_matches = "never"
+  )
 respondent_means <- respondents |>
   summarise(across(all_of(variables), ~ mean(.x, na.rm = TRUE))) |>
   pivot_longer(everything(), names_to = "variable", values_to = "mean") |>

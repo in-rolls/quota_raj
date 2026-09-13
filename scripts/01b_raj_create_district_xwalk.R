@@ -6,6 +6,7 @@ library(here)
 library(dplyr)
 library(readr)
 library(tidyr)
+source(here("scripts/00_config.R"))
 
 # =============================================================================
 # LOAD SHRUG DISTRICTS
@@ -31,28 +32,28 @@ message("")
 # =============================================================================
 
 elex_2005 <- read_csv(
-  here("data/raj/source/sarpanch_election_data/sarpanch_2005.csv"),
+  raj_path("data/source/sarpanch/sarpanch_2005.csv"),
   show_col_types = FALSE
 )
 districts_2005 <- unique(elex_2005$dist_name)
 
 elex_2010 <- read_csv(
-  here("data/raj/source/sarpanch_election_data/sarpanch_2010.csv"),
+  raj_path("data/source/sarpanch/sarpanch_2010.csv"),
   show_col_types = FALSE
 )
 districts_2010 <- unique(elex_2010$dist_name)
 
 elex_2015 <- read_csv(
-  here("data/raj/source/sarpanch_election_data/sarpanch_2015_manual_sex.csv"),
+  raj_path("data/source/sarpanch/sarpanch_2015_manual_sex.csv"),
   show_col_types = FALSE
 )
 districts_2015 <- unique(elex_2015$dist_name)
 
 elex_2020 <- read_csv(
-  here("data/raj/source/sarpanch_election_data/sarpanch_2020.csv"),
+  raj_path("data/source/sarpanch/sarpanch_2020_clean.csv"),
   show_col_types = FALSE
 )
-districts_2020 <- unique(elex_2020$district_2020)
+districts_2020 <- unique(elex_2020$District)
 
 message("Election districts by year:")
 message("  2005: ", length(districts_2005), "unique districts")

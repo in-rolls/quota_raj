@@ -3,6 +3,7 @@ library(dplyr)
 library(readr)
 library(here)
 source(here("scripts/00_utils.R"))
+source(here("scripts/00_config.R"))
 
 phases <- c("JAN-MAR 2020", "SEP-OCT 2020")
 districts <- read_csv(here("data/crosswalks/active/raj_district_xwalk.csv"), show_col_types = FALSE) %>%
@@ -29,16 +30,18 @@ add_event_keys <- function(data, gp_column) {
       )
     )
 }
-read_events <- function(filename, row_column) {
-  read_csv(here("data/raj/source/sarpanch_election_data/background", filename),
-    show_col_types = FALSE
-  ) %>%
+read_events <- function(filename, row_column, numeric_columns) {
+  read_parquet(raj_path(file.path("data/fin/scrape_2020_2022", filename))) %>%
     janitor::clean_names() %>%
+    select(-any_of(c("mobile_no", "email_address"))) %>%
+    mutate(across(everything(), ~ na_if(trimws(.x), ""))) %>%
+    mutate(across(everything(), ~ na_if(.x, "NA"))) %>%
+    mutate(across(all_of(numeric_columns), as.numeric)) %>%
     mutate(!!row_column := row_number()) %>%
     filter(election_type == "General Election", election_duration %in% phases) %>%
     distinct(across(-any_of(c(row_column, "sr_no"))), .keep_all = TRUE)
 }
-primary_reservation <- read_parquet(here("data/raj/source_2020_std.parquet")) %>%
+primary_reservation <- read_parquet(raj_path("data/fin/source_2020_std.parquet")) %>%
   left_join(districts, by = "district_raw", relationship = "many-to-one") %>%
   mutate(district_std = coalesce(district_std, district_raw)) %>%
   left_join(samitis, by = c("district_std", "samiti_raw"), relationship = "many-to-one") %>%
@@ -61,7 +64,10 @@ add_primary_reservation <- function(data) {
     ) %>%
     mutate(primary_reservation_available = !is.na(primary_female_reserved))
 }
-candidates <- read_events("ContestingSarpanch_2020.csv", "candidate_source_row") %>%
+candidates <- read_events("ContestingSarpanch.parquet", "candidate_source_row", c(
+  "sr_no", "contesting_candidate_serial_no", "age", "total_value_of_capital_assets",
+  "children_before27111995", "children_on_or_after28111995"
+)) %>%
   add_event_keys("name_of_gram_panchayat") %>%
   add_primary_reservation() %>%
   group_by(match_key) %>%
@@ -103,7 +109,12 @@ reservation_lookup <- candidates %>%
     n_ambiguous_candidate_records = sum(!candidate_key_unique),
     .groups = "drop"
   )
-winners <- read_events("WinnerSarpanch_2020.csv", "winner_source_row") %>%
+winners <- read_events("WinnerSarpanch.parquet", "winner_source_row", c(
+  "sr_no", "total_no_of_contesting_candidate", "total_electorate_votes",
+  "total_polled_votes", "rejected_votes", "total_valid_votes", "poll_percent",
+  "vote_secure_by_winner", "vote_secure_by_runnerup", "total_no_of_nota_count",
+  "tendered_votes"
+)) %>%
   add_event_keys("name_of_gram_panchyat") %>%
   add_primary_reservation() %>%
   group_by(event_key) %>%

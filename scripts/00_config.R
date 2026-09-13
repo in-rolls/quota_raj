@@ -222,3 +222,5 @@ reference_path <- function(rel, key = "shrug") {
 }
 
 shrug_path <- function(rel) reference_path(rel, "shrug")
+
+raj_path <- function(file) sibling_path(file, source = "local_elections_rajasthan")

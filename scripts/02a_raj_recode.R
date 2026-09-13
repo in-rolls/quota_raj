@@ -78,10 +78,10 @@ message("Samiti crosswalk: ", nrow(crosswalk_samiti), "mappings")
 # =============================================================================
 message("\n--- Loading Standardized Sources ---")
 
-src_2005 <- read_parquet(here("data/raj/source_2005_std.parquet"))
-src_2010 <- read_parquet(here("data/raj/source_2010_std.parquet"))
-src_2015 <- read_parquet(here("data/raj/source_2015_std.parquet"))
-src_2020 <- read_parquet(here("data/raj/source_2020_std.parquet"))
+src_2005 <- read_parquet(raj_path("data/fin/source_2005_std.parquet"))
+src_2010 <- read_parquet(raj_path("data/fin/source_2010_std.parquet"))
+src_2015 <- read_parquet(raj_path("data/fin/source_2015_std.parquet"))
+src_2020 <- read_parquet(raj_path("data/fin/source_2020_std.parquet"))
 
 message("2005: ", nrow(src_2005), "rows")
 message("2010: ", nrow(src_2010), "rows")

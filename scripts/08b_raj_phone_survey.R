@@ -33,7 +33,7 @@ sample_stratified <- function(data, group_vars, target_n, seed1, seed2) {
 }
 
 # Load and prepare data
-file_path <- here("data/raj/source/sarpanch_election_data/background/WinnerSarpanch_2020.csv")
+file_path <- here("data/raj/source/phone_survey_response/sampling_frame_2020.csv")
 
 raj_sarpanch <- read_csv(file_path) %>%
   filter(ElectionType == "General Election") %>%

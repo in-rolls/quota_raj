@@ -158,3 +158,22 @@ test_that("bootstrap outputs use the declared draws and reproduce one seeded tes
   expect_equal(as.numeric(boot$conf_int), c(expected$bootstrap_low, expected$bootstrap_high))
 })
 message("Validated joins, missingness, category totals, independent OLS contrasts, and bootstrap reproducibility.")
+
+test_that("survey links attach by candidate identity and survive row reordering", {
+  links <- read_parquet(here("data/raj/phone_candidate_links.parquet"))
+  identity <- c(
+    "event_key", "contesting_candidate_serial_no", "name_of_contesting_candidate",
+    "father_husband_of_contesting_candidate"
+  )
+  expect_false(anyNA(links[identity]))
+  expect_equal(anyDuplicated(links[identity]), 0L)
+  expect_equal(nrow(anti_join(links, candidates, by = identity, na_matches = "never")), 0L)
+  forward <- inner_join(candidates, links, by = identity, relationship = "one-to-one", na_matches = "never") |>
+    arrange(key)
+  reversed <- inner_join(candidates |> slice(n():1), links,
+    by = identity,
+    relationship = "one-to-one", na_matches = "never"
+  ) |> arrange(key)
+  expect_equal(forward, reversed)
+  expect_equal(nrow(forward), 35L)
+})
