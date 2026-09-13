@@ -1,8 +1,6 @@
 # 01g_audit_crosswalk_provenance.R
 # Audit crosswalk provenance, key integrity, and LGD validity.
-# Output:
-#   - data/crosswalks/audit/01g_crosswalk_provenance_audit.csv
-#   - data/crosswalks/audit/01g_crosswalk_provenance_audit.md
+# Output: data/crosswalks/audit/01g_crosswalk_provenance_audit.csv
 
 library(readr)
 library(dplyr)
