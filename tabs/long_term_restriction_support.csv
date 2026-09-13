@@ -1,5 +1,5 @@
 "state","outcome_year","transitions","districts","retained","sample_n","status"
 "raj","2020",2,32,9,601,"Estimable"
 "raj","2020",3,32,3,228,"Estimable"
-"up","2021",2,44,11,2057,"Estimable"
-"up","2021",3,44,0,0,"No eligible observations"
+"up","2021",2,60,14,2952,"Estimable"
+"up","2021",3,60,0,0,"No eligible observations"

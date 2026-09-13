@@ -8,23 +8,23 @@
          \toprule
           & \multicolumn{6}{c}{Rajasthan} & \multicolumn{6}{c}{Uttar Pradesh} \\ 
           & \multicolumn{2}{c}{05$\rightarrow$10} & \multicolumn{2}{c}{10$\rightarrow$15} & \multicolumn{2}{c}{15$\rightarrow$20} & \multicolumn{2}{c}{05$\rightarrow$10} & \multicolumn{2}{c}{10$\rightarrow$15} & \multicolumn{2}{c}{15$\rightarrow$21} \\ 
-                               & No FE        & FE            & No FE         & FE            & No FE         & FE            & No FE        & FE            & No FE         & FE            & No FE         & FE \\   
-                               & [i]          & [ii]          & [iii]         & [iv]          & [v]           & [vi]          & [vii]        & [viii]        & [ix]          & [x]           & [xi]          & [xii]\\  
+                               & No FE        & FE            & No FE         & FE            & No FE         & FE            & No FE         & FE            & No FE         & FE            & No FE         & FE \\   
+                               & [i]          & [ii]          & [iii]         & [iv]          & [v]           & [vi]          & [vii]         & [viii]        & [ix]          & [x]           & [xi]          & [xii]\\  
          \midrule 
-         Intercept             & 0.46$^{***}$ &               & 0.68$^{***}$  &               & 0.64$^{***}$  &               & 0.34$^{***}$ &               & 0.38$^{***}$  &               & 0.44$^{***}$  &   \\   
-                               & (0.007)      &               & (0.01)        &               & (0.01)        &               & (0.004)      &               & (0.003)       &               & (0.003)       &   \\   
-         $\text{Quota}_{t-1}$  & 0.02         & 0.02          & -0.42$^{***}$ & -0.43$^{***}$ & -0.32$^{***}$ & -0.32$^{***}$ & -0.02$^{**}$ & -0.02$^{**}$  & -0.11$^{***}$ & -0.11$^{***}$ & -0.29$^{***}$ & -0.29$^{***}$\\   
-                               & (0.01)       & (0.01)        & (0.03)        & (0.03)        & (0.03)        & (0.03)        & (0.008)      & (0.008)       & (0.008)       & (0.008)       & (0.006)       & (0.006)\\   
+         Intercept             & 0.46$^{***}$ &               & 0.68$^{***}$  &               & 0.64$^{***}$  &               & 0.34$^{***}$  &               & 0.38$^{***}$  &               & 0.44$^{***}$  &   \\   
+                               & (0.007)      &               & (0.01)        &               & (0.01)        &               & (0.004)       &               & (0.003)       &               & (0.002)       &   \\   
+         $\text{Quota}_{t-1}$  & 0.02         & 0.02          & -0.42$^{***}$ & -0.43$^{***}$ & -0.32$^{***}$ & -0.32$^{***}$ & -0.02$^{***}$ & -0.02$^{***}$ & -0.11$^{***}$ & -0.11$^{***}$ & -0.28$^{***}$ & -0.28$^{***}$\\   
+                               & (0.01)       & (0.01)        & (0.03)        & (0.03)        & (0.03)        & (0.03)        & (0.006)       & (0.007)       & (0.006)       & (0.006)       & (0.005)       & (0.005)\\   
           \\
-         R$^2$                 & 0.0003       & 0.03          & 0.18          & 0.19          & 0.10          & 0.12          & 0.0004       & 0.02          & 0.01          & 0.02          & 0.08          & 0.09\\  
-         Observations          & 5,334        & 5,334         & 5,334         & 5,334         & 5,334         & 5,334         & 21,499       & 21,499        & 21,499        & 21,499        & 21,499        & 21,499\\  
+         R$^2$                 & 0.0003       & 0.03          & 0.18          & 0.19          & 0.10          & 0.12          & 0.0005        & 0.01          & 0.01          & 0.02          & 0.08          & 0.09\\  
+         Observations          & 5,334        & 5,334         & 5,334         & 5,334         & 5,334         & 5,334         & 29,253        & 29,253        & 29,253        & 29,253        & 29,253        & 29,253\\  
           \\
-         (District, Samiti) FE &              & $\checkmark$  &               &               &               &               &              &               &               &               &               & \\  
-         (District, Samiti) FE &              &               &               & $\checkmark$  &               &               &              &               &               &               &               & \\  
-         (District, Samiti) FE &              &               &               &               &               & $\checkmark$  &              &               &               &               &               & \\  
-         (District, Block) FE  &              &               &               &               &               &               &              & $\checkmark$  &               &               &               & \\  
-         (District, Block) FE  &              &               &               &               &               &               &              &               &               & $\checkmark$  &               & \\  
-         (District, Block) FE  &              &               &               &               &               &               &              &               &               &               &               & $\checkmark$\\   
+         (District, Samiti) FE &              & $\checkmark$  &               &               &               &               &               &               &               &               &               & \\  
+         (District, Samiti) FE &              &               &               & $\checkmark$  &               &               &               &               &               &               &               & \\  
+         (District, Samiti) FE &              &               &               &               &               & $\checkmark$  &               &               &               &               &               & \\  
+         (District, Block) FE  &              &               &               &               &               &               &               & $\checkmark$  &               &               &               & \\  
+         (District, Block) FE  &              &               &               &               &               &               &               &               &               & $\checkmark$  &               & \\  
+         (District, Block) FE  &              &               &               &               &               &               &               &               &               &               &               & $\checkmark$\\   
          \bottomrule
       \end{tabular}
       
