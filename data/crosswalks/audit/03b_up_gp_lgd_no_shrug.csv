@@ -817,7 +817,6 @@ Muzzafarnagar,Morna,Khedi Firozabad,2014,Morna,81423,Kheri Firozabad,fuzzy
 Muzzafarnagar,Morna,Jauli,2014,Morna,81413,Jauli,exact
 Muzzafarnagar,Morna,Kamheda,2014,Morna,81416,Kamheda,exact
 Muzzafarnagar,Morna,Kishanpur,2014,Morna,81424,Kishanpur,exact
-Muzzafarnagar,Morna,Kakarala,2014,Morna,81414,Kakarauli,fuzzy
 Muzzafarnagar,Morna,Morna,2014,Morna,81427,Morna,exact
 Muzzafarnagar,Morna,Bhuwapur,2014,Morna,81404,Bhuwapur,exact
 Muzzafarnagar,Morna,Ilahabad,2014,Morna,81412,Ilahabas,fuzzy
@@ -2477,7 +2476,6 @@ Pilibhit,Bilsanda,Dhakia Jalalpur,2023,Bilsanda,81906,Dhakia Jalalpur,exact
 Pilibhit,Bilsanda,Tilchi,2023,Bilsanda,81966,Tilchhi,fuzzy
 Pilibhit,Bilsanda,Vilaspur,2023,Bilsanda,81901,Bilaspur,fuzzy
 Pilibhit,Bilsanda,Mirpur Harrai,2023,Bilsanda,81938,Mirpur Harraipur,fuzzy
-Pilibhit,Bilsanda,Chaparwa Kuyan,2023,Bilsanda,81903,Chaprua Kuiya,fuzzy
 Pilibhit,Bilsanda,Hemppur,2023,Bilsanda,81916,Hempur,fuzzy
 Pilibhit,Bilsanda,Sindhora Kharagpur,2023,Bilsanda,81963,Sindhaura Kharagpur,fuzzy
 Pilibhit,Bilsanda,Kareli,2023,Bilsanda,81924,Kareli,exact
@@ -4566,7 +4564,6 @@ Mahoba,Charkhari,Natars,1938,Charkhari,77086,Natarra,fuzzy
 Mahoba,Charkhari,Aichana,1938,Charkhari,77053,Aichana,exact
 Mahoba,Charkhari,Puvwara,1938,Charkhari,77091,Pupwara,fuzzy
 Mahoba,Charkhari,Kuan,1938,Charkhari,77084,Kuwan,fuzzy
-Mahoba,Charkhari,Barai,1938,Charkhari,77066,Bari,fuzzy
 Mahoba,Charkhari,Pahretha,1938,Charkhari,77088,Pahretha,exact
 Mahoba,Charkhari,Bamhaurikalan,1938,Charkhari,77061,Bambhauri Kalan,fuzzy
 Mahoba,Charkhari,Saluwa,1938,Charkhari,77095,Saluwa,exact
@@ -5124,7 +5121,6 @@ Allahabad,Bahadurpur,Mandor,1413,Bahadurpur,44248,Mandaur,fuzzy
 Allahabad,Bahadurpur,Faizullapur,1413,Bahadurpur,44220,Faijjula Pur,fuzzy
 Allahabad,Bahadurpur,Birgapur,1413,Bahadurpur,44203,Birgapur,exact
 Allahabad,Bahadurpur,Pahadpur,1413,Bahadurpur,44254,Paharpur,fuzzy
-Allahabad,Bahadurpur,Baraippur,1413,Bahadurpur,44197,Baraepur,fuzzy
 Allahabad,Bahadurpur,Ramaipur,1413,Bahadurpur,44259,Ramaepur,fuzzy
 Allahabad,Bahadurpur,Kotowaa,1413,Bahadurpur,44239,Kotwa,fuzzy
 Allahabad,Bahadurpur,Karanpur,1413,Bahadurpur,44231,Karanpur,exact
@@ -7992,7 +7988,6 @@ Lucknow,Mohanlalganj,Mastipur,1917,Mohanlalganj,75754,Mastipur,exact
 Lucknow,Mohanlalganj,Madapur,1917,Mohanlalganj,265344,Ramdas Pur,fuzzy
 Lucknow,Mohanlalganj,Garhi (Mahdauli),1917,Mohanlalganj,75731,Garhi Mehdoli,fuzzy
 Lucknow,Mohanlalganj,Bhaundri,1917,Mohanlalganj,75717,Bhaundari,fuzzy
-Lucknow,Mohanlalganj,Dehwa,1917,Mohanlalganj,75729,Dewati,fuzzy
 Lucknow,Mohanlalganj,Bhasanda,1917,Mohanlalganj,75715,Bhasanda,exact
 Lucknow,Mohanlalganj,Uttargaon,1917,Mohanlalganj,75778,Uttaar Gaon,fuzzy
 Lucknow,Mohanlalganj,Bhadesua,1917,Mohanlalganj,75714,Bhadesuwa,fuzzy
@@ -9771,7 +9766,6 @@ Lakhimpur Khiri,Pasgawan,Pandewari,1888,Pasgawan,73935,Pandewari,exact
 Lakhimpur Khiri,Pasgawan,Pipra Aziz,1888,Pasgawan,73939,Pipri Aziz,fuzzy
 Lakhimpur Khiri,Pasgawan,Piparaula Kunwarpur,1888,Pasgawan,73938,Pipraula Kunwarpur,fuzzy
 Lakhimpur Khiri,Pasgawan,Bachgawan,1888,Pasgawan,73869,Bachgawan,exact
-Lakhimpur Khiri,Pasgawan,Badhaiya,1888,Pasgawan,73873,Barhaiya,fuzzy
 Lakhimpur Khiri,Pasgawan,Banikagaon,1888,Pasgawan,73872,Banikagaon,exact
 Lakhimpur Khiri,Pasgawan,Barkhera,1888,Pasgawan,73875,Berkhera,fuzzy
 Lakhimpur Khiri,Pasgawan,Barkheria Jat,1888,Pasgawan,73874,Barkheriya Jat,fuzzy
@@ -10495,7 +10489,6 @@ Sultanpur,Dhanpat Ganj,Mahmandipura,2165,Dhanpatganj,91085,Mahmandi Pur,fuzzy
 Sultanpur,Dhanpat Ganj,Atarsuma Kala,2165,Dhanpatganj,91058,Atar Suma Kalan,fuzzy
 Sultanpur,Dhanpat Ganj,Saraiya Mazhona,2165,Dhanpatganj,91104,Saraiya Mafi,fuzzy
 Sultanpur,Dhanpat Ganj,Sarai Gokul,2165,Dhanpatganj,91102,Sarai Gokul,exact
-Sultanpur,Dhanpat Ganj,Pratapur,2165,Dhanpatganj,91100,Ratapur,fuzzy
 Sultanpur,Dhanpat Ganj,Bahadurpur,2165,Dhanpatganj,91060,Bahadur Pur,fuzzy
 Sultanpur,Dhanpat Ganj,Dhobibhar,2165,Dhanpatganj,91072,Dhobibhar,exact
 Sultanpur,Dhanpat Ganj,Dharmadspur,2165,Dhanpatganj,91071,Dharamdas Pur,fuzzy
@@ -11259,7 +11252,6 @@ Siddharth Nagar,Bhanwaapur,Tenui,2120,Bhanwapur,88119,Tanui,fuzzy
 Siddharth Nagar,Bhanwaapur,Bharwatia Mu 0,2120,Bhanwapur,88051,Bharwatiya Mustakum,fuzzy
 Siddharth Nagar,Bhanwaapur,Khurpahva,2120,Bhanwapur,273986,Khurpahava,fuzzy
 Siddharth Nagar,Bhanwaapur,Dumariya,2120,Bhanwapur,273987,Dumariya,exact
-Siddharth Nagar,Bhanwaapur,pikaura,2120,Bhanwapur,274034,Bijaura,fuzzy
 Siddharth Nagar,Bhanwaapur,Virpur Ahtmaali,2120,Bhanwapur,243883,Virpur Ahatmali,fuzzy
 Siddharth Nagar,Bhanwaapur,Ramwapur Urf Nebuwa,2120,Bhanwapur,88105,Ramwapur Urf Nabua,fuzzy
 Siddharth Nagar,Bhanwaapur,Dhano Hari,2120,Bhanwapur,88061,Dhanohari,fuzzy
@@ -13725,7 +13717,6 @@ Mau,Kopaganj,Bhavar Kol,1965,Kopaganj,78552,Bhawrkol,fuzzy
 Mau,Kopaganj,Jahaniapur,1965,Kopaganj,78574,Jahaniyapur,fuzzy
 Mau,Kopaganj,Sodsara,1965,Kopaganj,78609,Sondsar,fuzzy
 Mau,Kopaganj,Dhwariyasaath,1965,Kopaganj,78564,Dhwriysath,fuzzy
-Mau,Kopaganj,Para,1965,Kopaganj,78549,Bara,fuzzy
 Mau,Kopaganj,basarathpur,1965,Kopaganj,78555,Bsartpur,fuzzy
 Mau,Kopaganj,Gauharpur,1965,Kopaganj,78567,Gauharpur,exact
 Mau,Kopaganj,Kotwa Kopda,1965,Kopaganj,78585,Kotwa Kopra,fuzzy
@@ -13805,7 +13796,6 @@ Mau,Pardha,Magesar,1967,Pardaha,78704,Mugesar,fuzzy
 Mau,Pardha,Raukoli,1967,Pardaha,78715,Rakauli,fuzzy
 Mau,Pardha,Adedih,1967,Pardaha,78683,Audedih,fuzzy
 Mau,Pardha,Ranbirpur,1967,Pardaha,78716,Ranbirpur,exact
-Mau,Pardha,Umapar,1967,Pardaha,78728,Umapur,fuzzy
 Mau,Pardha,Kasimpur,1967,Pardaha,78698,Kasimpur,exact
 Mau,Pardha,Baizapur,1967,Pardaha,78687,Baijapur,fuzzy
 Mau,Pardha,Dumraon,1967,Pardaha,78692,Dumaranw,fuzzy
@@ -13909,7 +13899,6 @@ Varanasi,Chiraigaon,Khanpur,2200,Chiraigaon,93170,Khanpur,exact
 Varanasi,Chiraigaon,Sivo,2200,Chiraigaon,93210,Sivo,exact
 Varanasi,Chiraigaon,Variyasanpur,2200,Chiraigaon,93144,Bariyasanpur,fuzzy
 Varanasi,Chiraigaon,Umraha,2200,Chiraigaon,93217,Umaraha,fuzzy
-Varanasi,Chiraigaon,Ashapur,2200,Chiraigaon,93219,Byashpur,fuzzy
 Varanasi,Chiraigaon,Bartharakala,2200,Chiraigaon,93145,Bartharakala,exact
 Varanasi,Chiraigaon,Siristti,2200,Chiraigaon,93209,Siristi,fuzzy
 Varanasi,Chiraigaon,Ukathi,2200,Chiraigaon,93184,Ukathi,exact
@@ -14404,7 +14393,6 @@ Mirzapur,Seeti,Dhanipatti,1993,Shikhar,80067,Dhanaita,fuzzy
 Mirzapur,Seeti,Aghwar,1993,Shikhar,80061,Bagha,fuzzy
 Mirzapur,Seeti,Birpur,1993,Shikhar,80064,Bidapur,fuzzy
 Mirzapur,Seeti,Chheetpur,1993,Shikhar,80066,Chhitakpur,fuzzy
-Mirzapur,Seeti,Katran,1993,Shikhar,80073,Katherwa,fuzzy
 Mirzapur,Seeti,Kushahan,1993,Shikhar,80077,Kushha,fuzzy
 Mirzapur,Seeti,Kharhara,1993,Shikhar,80075,Khaira,fuzzy
 Mirzapur,Seeti,Birshahpur,1993,Shikhar,80065,Biththalpur,fuzzy
@@ -15143,7 +15131,6 @@ Sonbhadra,Ghorawal,Pedh,2155,Ghorawal,90495,Pedh,exact
 Sonbhadra,Ghorawal,Purna,2155,Ghorawal,90498,Purana,fuzzy
 Sonbhadra,Ghorawal,Madhka,2155,Ghorawal,90474,Madhaka,fuzzy
 Sonbhadra,Ghorawal,Sirsai,2155,Ghorawal,90510,Sirsain,fuzzy
-Sonbhadra,Ghorawal,Kadiya,2155,Ghorawal,90422,Bardiya,fuzzy
 Sonbhadra,Ghorawal,Tenduwa,2155,Ghorawal,90518,Tendua,fuzzy
 Sonbhadra,Ghorawal,Dhuwas,2155,Ghorawal,90444,Ghuwas,fuzzy
 Sonbhadra,Ghorawal,Murtiyaan,2155,Ghorawal,90486,Murtiya,fuzzy

@@ -22,39 +22,41 @@ ambiguous_exports <- list()
 # Helper: detect and filter key collisions where normalized triplets map to multiple keys
 # =============================================================================
 filter_key_collisions <- function(df, year_label, district_col, samiti_col, gp_col) {
-    df <- df %>%
-        mutate(
-            .triplet_norm = paste(
-                normalize_string(!!sym(district_col)),
-                normalize_string(!!sym(samiti_col)),
-                normalize_string(!!sym(gp_col)),
-                sep = "_"
-            )
-        )
+  df <- df %>%
+    mutate(
+      .triplet_norm = paste(
+        normalize_string(!!sym(district_col)),
+        normalize_string(!!sym(samiti_col)),
+        normalize_string(!!sym(gp_col)),
+        sep = "_"
+      )
+    )
 
-    collision_triplets <- df %>%
-        filter(!is.na(match_key)) %>%
-        distinct(.triplet_norm, match_key) %>%
-        group_by(.triplet_norm) %>%
-        filter(n() > 1) %>%
-        summarize(
-            n_targets = n(),
-            keys = paste(unique(match_key), collapse = "; "),
-            .groups = "drop"
-        )
+  collision_triplets <- df %>%
+    filter(!is.na(match_key)) %>%
+    distinct(.triplet_norm, match_key) %>%
+    group_by(.triplet_norm) %>%
+    filter(n() > 1) %>%
+    summarize(
+      n_targets = n(),
+      keys = paste(unique(match_key), collapse = "; "),
+      .groups = "drop"
+    )
 
-    n_collisions <- 0
-    if (nrow(collision_triplets) > 0) {
-        outfile <- here("data/crosswalks/audit", paste0("02a_raj_", year_label, "_triplet_key_collisions.csv"))
-        write_csv(collision_triplets, outfile)
+  n_collisions <- 0
+  if (nrow(collision_triplets) > 0) {
+    outfile <- here("data/crosswalks/audit", paste0("02a_raj_", year_label, "_triplet_key_collisions.csv"))
+    write_csv(collision_triplets, outfile)
 
-        n_collisions <- df %>% filter(.triplet_norm %in% collision_triplets$.triplet_norm) %>% nrow()
-        message("  Key collisions: ", nrow(collision_triplets), " triplets, dropping ", n_collisions, " records")
+    n_collisions <- df %>%
+      filter(.triplet_norm %in% collision_triplets$.triplet_norm) %>%
+      nrow()
+    message("  Key collisions: ", nrow(collision_triplets), " triplets, dropping ", n_collisions, " records")
 
-        df <- df %>% filter(!.triplet_norm %in% collision_triplets$.triplet_norm)
-    }
+    df <- df %>% filter(!.triplet_norm %in% collision_triplets$.triplet_norm)
+  }
 
-    df %>% select(-.triplet_norm)
+  df %>% select(-.triplet_norm)
 }
 
 # =============================================================================
@@ -63,9 +65,9 @@ filter_key_collisions <- function(df, year_label, district_col, samiti_col, gp_c
 message("\n--- Loading Crosswalks ---")
 
 crosswalk_district <- read_csv(here("data/crosswalks/active/raj_district_xwalk.csv"), show_col_types = FALSE) %>%
-    select(elex_district_raw, shrug_district) %>%
-    rename(district_raw = elex_district_raw, district_std = shrug_district) %>%
-    mutate(district_std = toupper(district_std))
+  select(elex_district_raw, shrug_district) %>%
+  rename(district_raw = elex_district_raw, district_std = shrug_district) %>%
+  mutate(district_std = toupper(district_std))
 crosswalk_samiti <- read_csv(here("data/crosswalks/active/raj_samiti_std.csv"), show_col_types = FALSE)
 
 message("District crosswalk: ", nrow(crosswalk_district), "mappings")
@@ -88,22 +90,24 @@ message("2020: ", nrow(src_2020), "rows")
 
 # Audit: records with missing GP name
 missing_gp_all <- bind_rows(
-    src_2005 %>% filter(is.na(gp_std) | gp_std == "") %>% mutate(year = 2005) %>% select(year, district_raw, samiti_raw, gp_std),
-    src_2010 %>% filter(is.na(gp_std) | gp_std == "") %>% mutate(year = 2010) %>% select(year, district_raw, samiti_raw, gp_std),
-    src_2015 %>% filter(is.na(gp_std) | gp_std == "") %>% mutate(year = 2015) %>% select(year, district_raw, samiti_raw, gp_std),
-    src_2020 %>% filter(is.na(gp_std) | gp_std == "") %>% mutate(year = 2020) %>% select(year, district_raw, samiti_raw, gp_std)
+  src_2005 %>% filter(is.na(gp_std) | gp_std == "") %>% mutate(year = 2005) %>% select(year, district_raw, samiti_raw, gp_std),
+  src_2010 %>% filter(is.na(gp_std) | gp_std == "") %>% mutate(year = 2010) %>% select(year, district_raw, samiti_raw, gp_std),
+  src_2015 %>% filter(is.na(gp_std) | gp_std == "") %>% mutate(year = 2015) %>% select(year, district_raw, samiti_raw, gp_std),
+  src_2020 %>% filter(is.na(gp_std) | gp_std == "") %>% mutate(year = 2020) %>% select(year, district_raw, samiti_raw, gp_std)
 )
 if (nrow(missing_gp_all) > 0) {
-    write_csv(missing_gp_all, here("data/crosswalks/audit/02a_raj_missing_gp_name.csv"))
-    message("Missing GP name: ", nrow(missing_gp_all), " records. See data/crosswalks/audit/02a_raj_missing_gp_name.csv")
+  write_csv(missing_gp_all, here("data/crosswalks/audit/02a_raj_missing_gp_name.csv"))
+  message("Missing GP name: ", nrow(missing_gp_all), " records. See data/crosswalks/audit/02a_raj_missing_gp_name.csv")
 }
 
 src_2005 <- src_2005 %>% filter(!is.na(gp_std) & gp_std != "")
 src_2010 <- src_2010 %>% filter(!is.na(gp_std) & gp_std != "")
 src_2015 <- src_2015 %>% filter(!is.na(gp_std) & gp_std != "")
 src_2020 <- src_2020 %>% filter(!is.na(gp_std) & gp_std != "")
-message("After filtering missing GP: 2005=", nrow(src_2005), ", 2010=", nrow(src_2010),
-        ", 2015=", nrow(src_2015), ", 2020=", nrow(src_2020))
+message(
+  "After filtering missing GP: 2005=", nrow(src_2005), ", 2010=", nrow(src_2010),
+  ", 2015=", nrow(src_2015), ", 2020=", nrow(src_2020)
+)
 
 # =============================================================================
 # Apply Crosswalks
@@ -111,26 +115,26 @@ message("After filtering missing GP: 2005=", nrow(src_2005), ", 2010=", nrow(src
 message("\n--- Applying Crosswalks ---")
 
 apply_crosswalks <- function(df, year_label) {
-    df <- df %>%
-        left_join(crosswalk_district, by = "district_raw") %>%
-        mutate(district_std = ifelse(is.na(district_std), district_raw, district_std))
+  df <- df %>%
+    left_join(crosswalk_district, by = "district_raw") %>%
+    mutate(district_std = ifelse(is.na(district_std), district_raw, district_std))
 
-    df <- df %>%
-        left_join(
-            crosswalk_samiti %>% select(district_std, samiti_raw, samiti_std),
-            by = c("district_std", "samiti_raw")
-        ) %>%
-        mutate(samiti_std = ifelse(is.na(samiti_std), samiti_raw, samiti_std))
+  df <- df %>%
+    left_join(
+      crosswalk_samiti %>% select(district_std, samiti_raw, samiti_std),
+      by = c("district_std", "samiti_raw")
+    ) %>%
+    mutate(samiti_std = ifelse(is.na(samiti_std), samiti_raw, samiti_std))
 
-    df <- df %>%
-        mutate(match_key = make_match_key(district_std, samiti_std, gp_std))
+  df <- df %>%
+    mutate(match_key = make_match_key(district_std, samiti_std, gp_std))
 
-    n_missing_district <- sum(is.na(df$district_std))
-    n_missing_samiti <- sum(is.na(df$samiti_std))
-    if (n_missing_district > 0) message("  WARNING: ", year_label, "missing district_std:", n_missing_district)
-    if (n_missing_samiti > 0) message("  WARNING: ", year_label, "missing samiti_std:", n_missing_samiti)
+  n_missing_district <- sum(is.na(df$district_std))
+  n_missing_samiti <- sum(is.na(df$samiti_std))
+  if (n_missing_district > 0) message("  WARNING: ", year_label, "missing district_std:", n_missing_district)
+  if (n_missing_samiti > 0) message("  WARNING: ", year_label, "missing samiti_std:", n_missing_samiti)
 
-    df
+  df
 }
 
 src_2005 <- apply_crosswalks(src_2005, "2005")
@@ -143,58 +147,54 @@ src_2020 <- apply_crosswalks(src_2020, "2020")
 # =============================================================================
 message("\n--- Loading 2020 Winner Sex Data ---")
 
-cand_2020 <- read_csv(
-    here("data/raj/source/sarpanch_election_data/background/ContestingSarpanch_2020.csv"),
-    show_col_types = FALSE
+winner_events <- read_parquet(here("data/raj/winners_2020_events.parquet"))
+winner_sex_2020 <- winner_events %>%
+  filter(winner_key_unique, gp_event_unique) %>%
+  transmute(match_key,
+    winner_sex_from_cand = female_winner_2020,
+    candidate_reservation_raw, candidate_reservation_unique,
+    candidate_reserved = case_when(
+      is.na(candidate_reservation_raw) ~ NA_integer_,
+      grepl("WOMAN|W$", toupper(candidate_reservation_raw)) ~ 1L,
+      TRUE ~ 0L
+    ),
+    candidate_caste = case_when(
+      grepl("^GEN", toupper(candidate_reservation_raw)) ~ "GEN",
+      grepl("^OBC", toupper(candidate_reservation_raw)) ~ "OBC",
+      grepl("^SC", toupper(candidate_reservation_raw)) ~ "SC",
+      grepl("^ST", toupper(candidate_reservation_raw)) ~ "ST"
+    )
+  ) %>%
+  left_join(
+    src_2020 %>% group_by(match_key) %>% filter(n() == 1) %>% ungroup() %>%
+      select(match_key, female_reserved, caste_category),
+    by = "match_key", relationship = "one-to-one"
+  ) %>%
+  mutate(
+    reservation_gender_conflict = candidate_reserved != female_reserved,
+    reservation_caste_conflict = candidate_caste != caste_category
+  ) %>%
+  select(-female_reserved, -caste_category)
+stopifnot(!anyDuplicated(winner_sex_2020$match_key))
+write_csv(
+  winner_sex_2020 %>%
+    filter(reservation_gender_conflict | reservation_caste_conflict),
+  here("data/crosswalks/audit/02a_raj_reservation_source_conflicts.csv")
 )
-winner_2020 <- read_csv(
-    here("data/raj/source/sarpanch_election_data/background/WinnerSarpanch_2020.csv"),
-    show_col_types = FALSE
-)
-
-winner_sex_2020 <- winner_2020 %>%
-    left_join(
-        cand_2020 %>% select(District, PanchayatSamiti, NameOfGramPanchayat, NameOfContestingCandidate, Gender),
-        by = c("District", "PanchayatSamiti",
-               "NameOfGramPanchyat" = "NameOfGramPanchayat",
-               "WinnerCandidateName" = "NameOfContestingCandidate"),
-        relationship = "many-to-many"
-    ) %>%
-    mutate(
-        winner_sex_from_cand = ifelse(Gender == "F", 1L, 0L),
-        ps_clean = gsub(" PANCHAYAT SAMITI$", "", PanchayatSamiti, ignore.case = TRUE)
-    ) %>%
-    filter(!is.na(winner_sex_from_cand)) %>%
-    left_join(crosswalk_district, by = c("District" = "district_raw")) %>%
-    mutate(district_std = ifelse(is.na(district_std), District, district_std)) %>%
-    left_join(
-        crosswalk_samiti %>% select(district_std, samiti_raw, samiti_std),
-        by = c("district_std", "ps_clean" = "samiti_raw")
-    ) %>%
-    mutate(
-        samiti_std = ifelse(is.na(samiti_std), ps_clean, samiti_std),
-        gp_std = normalize_string(NameOfGramPanchyat),
-        match_key = make_match_key(district_std, samiti_std, gp_std)
-    ) %>%
-    select(match_key, winner_sex_from_cand) %>%
-    group_by(match_key) %>%
-    filter(n() == 1) %>%
-    ungroup()
-
 message("Winner sex data for 2020: ", nrow(winner_sex_2020), " GPs")
 
 # =============================================================================
 # Helper: Prepare Source for Panel Join
 # =============================================================================
 prepare_source <- function(df, year) {
-    suffix <- paste0("_", year)
-    df %>%
-        select(
-            match_key,
-            district_std, samiti_std, gp_std,
-            female_reserved, caste_category, winner_female, winner_name
-        ) %>%
-        rename_with(~ paste0(., suffix), -match_key)
+  suffix <- paste0("_", year)
+  df %>%
+    select(
+      match_key,
+      district_std, samiti_std, gp_std,
+      female_reserved, caste_category, winner_female, winner_name
+    ) %>%
+    rename_with(~ paste0(., suffix), -match_key)
 }
 
 # Prepare sources
@@ -216,28 +216,28 @@ n_after_join <- nrow(raj_05_10_raw)
 message("  After inner_join: ", n_after_join)
 
 ambiguous_05_10 <- raj_05_10_raw %>%
-    count(match_key, name = "n_pairs") %>%
-    filter(n_pairs > 1) %>%
-    arrange(desc(n_pairs))
+  count(match_key, name = "n_pairs") %>%
+  filter(n_pairs > 1) %>%
+  arrange(desc(n_pairs))
 
 raj_05_10 <- raj_05_10_raw %>%
-    group_by(match_key) %>%
-    filter(n() == 1) %>%
-    ungroup() %>%
-    mutate(
-        treat_2005 = female_reserved_2005,
-        treat_2010 = female_reserved_2010,
-        case = paste0(treat_2005, treat_2010),
-        female_winner_2005 = winner_female_2005,
-        female_winner_2010 = winner_female_2010,
-        dist_samiti_2010 = paste0(tolower(district_std_2010), "_", tolower(samiti_std_2010)),
-        obc_2005 = as.integer(caste_category_2005 == "OBC"),
-        sc_2005 = as.integer(caste_category_2005 == "SC"),
-        st_2005 = as.integer(caste_category_2005 == "ST"),
-        obc_2010 = as.integer(caste_category_2010 == "OBC"),
-        sc_2010 = as.integer(caste_category_2010 == "SC"),
-        st_2010 = as.integer(caste_category_2010 == "ST")
-    )
+  group_by(match_key) %>%
+  filter(n() == 1) %>%
+  ungroup() %>%
+  mutate(
+    treat_2005 = female_reserved_2005,
+    treat_2010 = female_reserved_2010,
+    case = paste0(treat_2005, treat_2010),
+    female_winner_2005 = winner_female_2005,
+    female_winner_2010 = winner_female_2010,
+    dist_samiti_2010 = paste0(tolower(district_std_2010), "_", tolower(samiti_std_2010)),
+    obc_2005 = as.integer(caste_category_2005 == "OBC"),
+    sc_2005 = as.integer(caste_category_2005 == "SC"),
+    st_2005 = as.integer(caste_category_2005 == "ST"),
+    obc_2010 = as.integer(caste_category_2010 == "OBC"),
+    sc_2010 = as.integer(caste_category_2010 == "SC"),
+    st_2010 = as.integer(caste_category_2010 == "ST")
+  )
 
 n_duplicates <- n_after_join - nrow(raj_05_10)
 message("  Duplicates dropped: ", n_duplicates)
@@ -248,14 +248,14 @@ message("  Final panel N: ", nrow(raj_05_10))
 write_parquet(raj_05_10, here("data/raj/raj_05_10.parquet"))
 
 join_diag[[length(join_diag) + 1]] <- tibble(
-    panel = "raj_05_10",
-    join_rows = n_after_join,
-    final_rows = nrow(raj_05_10),
-    ambiguous_keys = nrow(ambiguous_05_10),
-    dropped_rows = n_duplicates
+  panel = "raj_05_10",
+  join_rows = n_after_join,
+  final_rows = nrow(raj_05_10),
+  ambiguous_keys = nrow(ambiguous_05_10),
+  dropped_rows = n_duplicates
 )
 ambiguous_exports[[length(ambiguous_exports) + 1]] <- ambiguous_05_10 %>%
-    mutate(panel = "raj_05_10")
+  mutate(panel = "raj_05_10")
 
 # =============================================================================
 # Panel 2: 2010-2015
@@ -268,28 +268,28 @@ n_after_join <- nrow(raj_10_15_raw)
 message("  After inner_join: ", n_after_join)
 
 ambiguous_10_15 <- raj_10_15_raw %>%
-    count(match_key, name = "n_pairs") %>%
-    filter(n_pairs > 1) %>%
-    arrange(desc(n_pairs))
+  count(match_key, name = "n_pairs") %>%
+  filter(n_pairs > 1) %>%
+  arrange(desc(n_pairs))
 
 raj_10_15 <- raj_10_15_raw %>%
-    group_by(match_key) %>%
-    filter(n() == 1) %>%
-    ungroup() %>%
-    mutate(
-        treat_2010 = female_reserved_2010,
-        treat_2015 = female_reserved_2015,
-        case = paste0(treat_2010, treat_2015),
-        female_winner_2010 = winner_female_2010,
-        female_winner_2015 = winner_female_2015,
-        dist_samiti_2015 = paste0(tolower(district_std_2015), "_", tolower(samiti_std_2015)),
-        obc_2010 = as.integer(caste_category_2010 == "OBC"),
-        sc_2010 = as.integer(caste_category_2010 == "SC"),
-        st_2010 = as.integer(caste_category_2010 == "ST"),
-        obc_2015 = as.integer(caste_category_2015 == "OBC"),
-        sc_2015 = as.integer(caste_category_2015 == "SC"),
-        st_2015 = as.integer(caste_category_2015 == "ST")
-    )
+  group_by(match_key) %>%
+  filter(n() == 1) %>%
+  ungroup() %>%
+  mutate(
+    treat_2010 = female_reserved_2010,
+    treat_2015 = female_reserved_2015,
+    case = paste0(treat_2010, treat_2015),
+    female_winner_2010 = winner_female_2010,
+    female_winner_2015 = winner_female_2015,
+    dist_samiti_2015 = paste0(tolower(district_std_2015), "_", tolower(samiti_std_2015)),
+    obc_2010 = as.integer(caste_category_2010 == "OBC"),
+    sc_2010 = as.integer(caste_category_2010 == "SC"),
+    st_2010 = as.integer(caste_category_2010 == "ST"),
+    obc_2015 = as.integer(caste_category_2015 == "OBC"),
+    sc_2015 = as.integer(caste_category_2015 == "SC"),
+    st_2015 = as.integer(caste_category_2015 == "ST")
+  )
 
 n_duplicates <- n_after_join - nrow(raj_10_15)
 message("  Duplicates dropped: ", n_duplicates)
@@ -300,14 +300,14 @@ message("  Final panel N: ", nrow(raj_10_15))
 write_parquet(raj_10_15, here("data/raj/raj_10_15.parquet"))
 
 join_diag[[length(join_diag) + 1]] <- tibble(
-    panel = "raj_10_15",
-    join_rows = n_after_join,
-    final_rows = nrow(raj_10_15),
-    ambiguous_keys = nrow(ambiguous_10_15),
-    dropped_rows = n_duplicates
+  panel = "raj_10_15",
+  join_rows = n_after_join,
+  final_rows = nrow(raj_10_15),
+  ambiguous_keys = nrow(ambiguous_10_15),
+  dropped_rows = n_duplicates
 )
 ambiguous_exports[[length(ambiguous_exports) + 1]] <- ambiguous_10_15 %>%
-    mutate(panel = "raj_10_15")
+  mutate(panel = "raj_10_15")
 
 # =============================================================================
 # Panel 3: 2015-2020
@@ -320,30 +320,30 @@ n_after_join <- nrow(raj_15_20_raw)
 message("  After inner_join: ", n_after_join)
 
 ambiguous_15_20 <- raj_15_20_raw %>%
-    count(match_key, name = "n_pairs") %>%
-    filter(n_pairs > 1) %>%
-    arrange(desc(n_pairs))
+  count(match_key, name = "n_pairs") %>%
+  filter(n_pairs > 1) %>%
+  arrange(desc(n_pairs))
 
 raj_15_20 <- raj_15_20_raw %>%
-    group_by(match_key) %>%
-    filter(n() == 1) %>%
-    ungroup() %>%
-    mutate(match_key_2020 = make_match_key(district_std_2020, samiti_std_2020, gp_std_2020)) %>%
-    left_join(winner_sex_2020, by = c("match_key_2020" = "match_key")) %>%
-    mutate(
-        treat_2015 = female_reserved_2015,
-        treat_2020 = female_reserved_2020,
-        case = paste0(treat_2015, treat_2020),
-        female_winner_2015 = winner_female_2015,
-        female_winner_2020 = coalesce(winner_sex_from_cand, NA_integer_),
-        dist_samiti_2020 = paste0(tolower(district_std_2020), "_", tolower(samiti_std_2020)),
-        obc_2015 = as.integer(caste_category_2015 == "OBC"),
-        sc_2015 = as.integer(caste_category_2015 == "SC"),
-        st_2015 = as.integer(caste_category_2015 == "ST"),
-        obc_2020 = as.integer(caste_category_2020 == "OBC"),
-        sc_2020 = as.integer(caste_category_2020 == "SC"),
-        st_2020 = as.integer(caste_category_2020 == "ST")
-    )
+  group_by(match_key) %>%
+  filter(n() == 1) %>%
+  ungroup() %>%
+  mutate(match_key_2020 = make_match_key(district_std_2020, samiti_std_2020, gp_std_2020)) %>%
+  left_join(winner_sex_2020, by = c("match_key_2020" = "match_key")) %>%
+  mutate(
+    treat_2015 = female_reserved_2015,
+    treat_2020 = female_reserved_2020,
+    case = paste0(treat_2015, treat_2020),
+    female_winner_2015 = winner_female_2015,
+    female_winner_2020 = coalesce(winner_sex_from_cand, NA_integer_),
+    dist_samiti_2020 = paste0(tolower(district_std_2020), "_", tolower(samiti_std_2020)),
+    obc_2015 = as.integer(caste_category_2015 == "OBC"),
+    sc_2015 = as.integer(caste_category_2015 == "SC"),
+    st_2015 = as.integer(caste_category_2015 == "ST"),
+    obc_2020 = as.integer(caste_category_2020 == "OBC"),
+    sc_2020 = as.integer(caste_category_2020 == "SC"),
+    st_2020 = as.integer(caste_category_2020 == "ST")
+  )
 
 n_duplicates <- n_after_join - nrow(raj_15_20)
 message("  Duplicates dropped: ", n_duplicates)
@@ -351,27 +351,31 @@ message("  Duplicates dropped: ", n_duplicates)
 raj_15_20 <- filter_key_collisions(raj_15_20, "15_20", "district_std_2020", "samiti_std_2020", "gp_std_2020")
 message("  Final panel N: ", nrow(raj_15_20))
 n_winner_sex_matched <- sum(!is.na(raj_15_20$female_winner_2020))
-message("  Winner sex 2020 matched: ", n_winner_sex_matched, "/", nrow(raj_15_20),
-    "(", round(100 * n_winner_sex_matched / nrow(raj_15_20), 1), "%)\n")
+message(
+  "  Winner sex 2020 matched: ", n_winner_sex_matched, "/", nrow(raj_15_20),
+  "(", round(100 * n_winner_sex_matched / nrow(raj_15_20), 1), "%)\n"
+)
 
 write_parquet(raj_15_20, here("data/raj/raj_15_20.parquet"))
 
 join_diag[[length(join_diag) + 1]] <- tibble(
-    panel = "raj_15_20",
-    join_rows = n_after_join,
-    final_rows = nrow(raj_15_20),
-    ambiguous_keys = nrow(ambiguous_15_20),
-    dropped_rows = n_duplicates
+  panel = "raj_15_20",
+  join_rows = n_after_join,
+  final_rows = nrow(raj_15_20),
+  ambiguous_keys = nrow(ambiguous_15_20),
+  dropped_rows = n_duplicates
 )
 ambiguous_exports[[length(ambiguous_exports) + 1]] <- ambiguous_15_20 %>%
-    mutate(panel = "raj_15_20")
+  mutate(panel = "raj_15_20")
 
 # =============================================================================
 # Panel 4: Full 4-way Panel (2005-2020)
 # =============================================================================
 message("\n--- Creating 4-way Panel (2005-2020) ---")
-message("  Input: 2005 =", nrow(p_2005), ", 2010 =", nrow(p_2010),
-    ", 2015 =", nrow(p_2015), ", 2020 =", nrow(p_2020), "\n")
+message(
+  "  Input: 2005 =", nrow(p_2005), ", 2010 =", nrow(p_2010),
+  ", 2015 =", nrow(p_2015), ", 2020 =", nrow(p_2020), "\n"
+)
 
 raj_05_20_step1 <- p_2005 %>% inner_join(p_2010, by = "match_key", relationship = "many-to-many")
 message("  After 2005-2010 join: ", nrow(raj_05_20_step1))
@@ -383,62 +387,64 @@ raj_05_20_step3 <- raj_05_20_step2 %>% inner_join(p_2020, by = "match_key", rela
 message("  After adding 2020: ", nrow(raj_05_20_step3))
 
 raj_05_20 <- raj_05_20_step3 %>%
-    group_by(match_key) %>%
-    filter(n() == 1) %>%
-    ungroup() %>%
-    mutate(match_key_2020 = make_match_key(district_std_2020, samiti_std_2020, gp_std_2020)) %>%
-    left_join(winner_sex_2020, by = c("match_key_2020" = "match_key")) %>%
-    mutate(
-        treat_2005 = female_reserved_2005,
-        treat_2010 = female_reserved_2010,
-        treat_2015 = female_reserved_2015,
-        treat_2020 = female_reserved_2020,
-        female_winner_2005 = winner_female_2005,
-        female_winner_2010 = winner_female_2010,
-        female_winner_2015 = winner_female_2015,
-        female_winner_2020 = coalesce(winner_sex_from_cand, NA_integer_),
-        never_treated = as.integer(treat_2005 == 0 & treat_2010 == 0 & treat_2015 == 0),
-        always_treated = as.integer(treat_2005 == 1 & treat_2010 == 1 & treat_2015 == 1),
-        count_treated = treat_2005 + treat_2010 + treat_2015,
-        dist_samiti_2020 = paste0(tolower(district_std_2020), "_", tolower(samiti_std_2020)),
-        dist_samiti_2015 = paste0(tolower(district_std_2015), "_", tolower(samiti_std_2015)),
-        dist_samiti_2010 = paste0(tolower(district_std_2010), "_", tolower(samiti_std_2010)),
-        obc_2005 = as.integer(caste_category_2005 == "OBC"),
-        sc_2005 = as.integer(caste_category_2005 == "SC"),
-        st_2005 = as.integer(caste_category_2005 == "ST"),
-        obc_2010 = as.integer(caste_category_2010 == "OBC"),
-        sc_2010 = as.integer(caste_category_2010 == "SC"),
-        st_2010 = as.integer(caste_category_2010 == "ST"),
-        obc_2015 = as.integer(caste_category_2015 == "OBC"),
-        sc_2015 = as.integer(caste_category_2015 == "SC"),
-        st_2015 = as.integer(caste_category_2015 == "ST"),
-        obc_2020 = as.integer(caste_category_2020 == "OBC"),
-        sc_2020 = as.integer(caste_category_2020 == "SC"),
-        st_2020 = as.integer(caste_category_2020 == "ST")
-    )
+  group_by(match_key) %>%
+  filter(n() == 1) %>%
+  ungroup() %>%
+  mutate(match_key_2020 = make_match_key(district_std_2020, samiti_std_2020, gp_std_2020)) %>%
+  left_join(winner_sex_2020, by = c("match_key_2020" = "match_key")) %>%
+  mutate(
+    treat_2005 = female_reserved_2005,
+    treat_2010 = female_reserved_2010,
+    treat_2015 = female_reserved_2015,
+    treat_2020 = female_reserved_2020,
+    female_winner_2005 = winner_female_2005,
+    female_winner_2010 = winner_female_2010,
+    female_winner_2015 = winner_female_2015,
+    female_winner_2020 = coalesce(winner_sex_from_cand, NA_integer_),
+    never_treated = as.integer(treat_2005 == 0 & treat_2010 == 0 & treat_2015 == 0),
+    always_treated = as.integer(treat_2005 == 1 & treat_2010 == 1 & treat_2015 == 1),
+    count_treated = treat_2005 + treat_2010 + treat_2015,
+    dist_samiti_2020 = paste0(tolower(district_std_2020), "_", tolower(samiti_std_2020)),
+    dist_samiti_2015 = paste0(tolower(district_std_2015), "_", tolower(samiti_std_2015)),
+    dist_samiti_2010 = paste0(tolower(district_std_2010), "_", tolower(samiti_std_2010)),
+    obc_2005 = as.integer(caste_category_2005 == "OBC"),
+    sc_2005 = as.integer(caste_category_2005 == "SC"),
+    st_2005 = as.integer(caste_category_2005 == "ST"),
+    obc_2010 = as.integer(caste_category_2010 == "OBC"),
+    sc_2010 = as.integer(caste_category_2010 == "SC"),
+    st_2010 = as.integer(caste_category_2010 == "ST"),
+    obc_2015 = as.integer(caste_category_2015 == "OBC"),
+    sc_2015 = as.integer(caste_category_2015 == "SC"),
+    st_2015 = as.integer(caste_category_2015 == "ST"),
+    obc_2020 = as.integer(caste_category_2020 == "OBC"),
+    sc_2020 = as.integer(caste_category_2020 == "SC"),
+    st_2020 = as.integer(caste_category_2020 == "ST")
+  )
 
 n_duplicates <- nrow(raj_05_20_step3) - nrow(raj_05_20)
 message("  Duplicates dropped: ", n_duplicates)
 message("  Final panel N: ", nrow(raj_05_20))
 n_winner_sex_matched <- sum(!is.na(raj_05_20$female_winner_2020))
-message("  Winner sex 2020 matched: ", n_winner_sex_matched, "/", nrow(raj_05_20),
-    "(", round(100 * n_winner_sex_matched / nrow(raj_05_20), 1), "%)\n")
+message(
+  "  Winner sex 2020 matched: ", n_winner_sex_matched, "/", nrow(raj_05_20),
+  "(", round(100 * n_winner_sex_matched / nrow(raj_05_20), 1), "%)\n"
+)
 write_parquet(raj_05_20, here("data/raj/raj_05_20.parquet"))
 
 ambiguous_05_20 <- raj_05_20_step3 %>%
-    count(match_key, name = "n_pairs") %>%
-    filter(n_pairs > 1) %>%
-    arrange(desc(n_pairs))
+  count(match_key, name = "n_pairs") %>%
+  filter(n_pairs > 1) %>%
+  arrange(desc(n_pairs))
 
 join_diag[[length(join_diag) + 1]] <- tibble(
-    panel = "raj_05_20",
-    join_rows = nrow(raj_05_20_step3),
-    final_rows = nrow(raj_05_20),
-    ambiguous_keys = nrow(ambiguous_05_20),
-    dropped_rows = n_duplicates
+  panel = "raj_05_20",
+  join_rows = nrow(raj_05_20_step3),
+  final_rows = nrow(raj_05_20),
+  ambiguous_keys = nrow(ambiguous_05_20),
+  dropped_rows = n_duplicates
 )
 ambiguous_exports[[length(ambiguous_exports) + 1]] <- ambiguous_05_20 %>%
-    mutate(panel = "raj_05_20")
+  mutate(panel = "raj_05_20")
 
 join_diag_df <- bind_rows(join_diag)
 ambiguous_df <- bind_rows(ambiguous_exports)

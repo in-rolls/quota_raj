@@ -1,147 +1,39 @@
-# The Effect of Gender Quotas in Local Bodies on Women's Representation in Rural India
+# Electoral gender quotas in rural India
 
-Using a novel dataset of over 67,000 rural local governance bodies (Gram Panchayats) spanning 20 years across Rajasthan and Uttar Pradesh, we find that randomly implemented gender quotas for women do not substantially increase the chances of women winning elections once the seat is unreserved. Even fifteen years of exposure to local women leaders has limited effects.
+Research code and manuscript for *The Limits of Electoral Gender Quotas in Rural Local Bodies*, by Varun Karekurve-Ramachandra and Gaurav Sood. The analysis follows local elections in Rajasthan (2005–2020) and Uttar Pradesh (2005–2021).
 
-**Authors**: Varun, K. R. and Gaurav Sood
+## Reproduce
 
-## Quick Start
+Restore the R packages pinned in `renv.lock`, then run from the repository root:
 
-```bash
-# 1. Clone and setup
-git clone https://github.com/soodoku/quota_raj.git
-cd quota_raj
-
-# 2. Install R dependencies
-R -e "renv::restore()"
-
-# 3. Obtain external data (see Data Dependencies below)
-
-# 4. Run full pipeline
+```sh
+Rscript -e 'renv::restore()'
 Rscript scripts/99_run_all.R
-
-# 5. Compile manuscript
-cd ms && latexmk -xelatex main.tex
+bash ms/compile.sh
 ```
 
-## Pipeline and Crosswalk Architecture
+The runner rebuilds the panels, tables, figures and numerical manuscript inputs, then runs `scripts/98_validate.R`. Validation checks join cardinality, unresolved matches, outcome missingness, phone denominators, independently estimated cumulative contrasts, and seeded bootstrap reproduction. To rerun those checks alone:
 
-Because administrative boundaries change frequently and spelling is highly irregular, the pipeline uses the **Local Government Directory (LGD)** as a "universal translator" to link election records to Census covariates at the lowest possible level: the Gram Panchayat (GP).
-
-1. **Election to LGD Block:** Election `samiti` or `block` names are mapped to official LGD Block codes via manual crosswalks (`data/crosswalks/active/`).
-
-2. **Election GP to LGD GP:** Within each matched block, GP names are matched in two passes:
-   - **Exact match:** Normalized GP names are joined directly (handles ~40-50% of GPs)
-   - **Fuzzy match:** Remaining unmatched GPs are matched using Jaro-Winkler distance < 0.20 (optimized for precision over recall)
-
-   Deduplication resolves edge cases:
-   - *One-to-many* (election GP → multiple LGD GPs): Keep lowest distance
-   - *Many-to-one* (multiple election GPs → same LGD GP): Keep lowest distance within district/block
-
-3. **LGD to SHRUG:** The LGD GP code is linked to the SHRUG Village ID (`shrid2`) using a pre-built crosswalk (`data/shrug_gp_xwalk/`).
-
-4. **SHRUG to Census:** Covariates merged via `shrid2` key.
-
-The `match_distance` column is preserved in output files for robustness checks at stricter thresholds.
-
-### Directory Organization
-
-```text
-data/
-├── crosswalks/
-│   ├── active/             # Active election-to-LGD mappings (Essential)
-│   └── audit/              # Tie-resolution, unmatched, and diagnostic reports
-├── lgd/
-│   ├── raw/                # Original .xls and .csv from LGD portal
-│   ├── processed/          # Cleaned LGD hierarchies
-│   └── manual/             # SHRUG manual matches
-└── shrug/                  # Raw Development Data Lab datasets
+```sh
+Rscript scripts/98_validate.R
 ```
 
-## Data Dependencies
+R 4.6 and XeLaTeX were used for this revision. `fwildclusterboot` uses its R engine; Julia is not required.
 
-### Included Data
-- **Rajasthan**: GP election data 2005-2020 in `data/raj/source/`
+## Data and analysis
 
-### External Data (must be obtained separately)
+Rajasthan source records are in `data/raj/source/`. External UP election files and SHRUG 2.0 inputs are pinned by SHA-256 in `data/manifest.yaml`. UP files resolve from a sibling `local_elections_up` checkout or the versioned cache. Obtain licensed SHRUG inputs from [Development Data Lab](https://www.devdatalab.org/shrug_download/), retaining their attribution files. The default external cache is `~/data`; set `INDIA_DATA_HOME` to use another location. The SHRUG–LGD crosswalk is in `data/shrug_gp_xwalk/` and LGD source files are in `data/lgd/`.
 
-#### 1. SHRUG (Development Data Lab)
-Source: https://www.devdatalab.org/shrug_download/
+Scripts `01–03` construct election-specific links and analysis panels. Candidate identity and candidate-name uniqueness are separate: different candidates may share a name. Ambiguous links remain unavailable. Primary reservation classifications follow the original GP source; exclusions of conflicts with candidate records are sensitivity analyses. Native UP identifiers survive transliteration.
 
-Download and place in `data/shrug/`:
-- `shrug-pca01-csv` - Population Census Abstracts 2001
-- `shrug-pca11-csv` - Population Census Abstracts 2011
-- `shrug-vd01-csv` - Village Directory 2001
-- `shrug-vd11-csv` - Village Directory 2011
-- `shrug-ec05-csv` - Economic Census 2005
-- `shrug-ec13-csv` - Economic Census 2013
-- `shrug-secc-mord-rural-csv` - SECC Rural
-- `shrug-pc-keys-csv` - PC Keys for linking
+Village counts are summed. GP distance is the unweighted mean of observed constituent village-to-town distances, with the minimum recorded distance as a sensitivity analysis. A facility is available if observed in any constituent village; absence requires observed absence in every village. Coverage accompanies these aggregates.
 
-#### 2. SHRUG-LGD Crosswalk
-Source: https://www.devdatalab.org/shrug_download/ (User Contributed Modules section)
+Scripts `04–07` produce descriptive comparisons and regressions. Main inference clusters by district–samiti in Rajasthan and district–block in UP, with explicit small-sample adjustments and retained singleton groups. HC1 results are supplied as a sensitivity analysis. Primary fixed-effects coefficients and cumulative contrasts also receive 9,999 null-imposed Rademacher wild cluster bootstrap draws with inverted confidence intervals. `tabs/model_inference.csv` records the sample, contrast, cluster counts, comparison-cell counts, covariance choice and bootstrap seed. The history-support table reports how many GPs and clusters contribute to each history. Restricted cumulative models use the same final election as the full model; passing an independence test is a sample restriction, not proof of random assignment.
 
-Download "SHRUG GP to shrids" by Pratik Mahajan, extract to `data/shrug_gp_xwalk/`
+Script `08a` uses the completed interview records. The archived sampler `08b` is deliberately outside the runner: rerunning an analysis must not redraw a completed survey. The archived initial selections contain 578 quota-seat and 593 open-seat records; the completed call files contain 500 and 507. The reason for that reduction is not documented in the retained files. Officeholder identity conflicts in seven female-held open-seat calls remain unresolved.
 
-#### 3. LGD (Local Government Directory)
-Source: https://lgdirectory.gov.in/
+The Weaver appendix uses the supplied source panel, with its final wave labeled 2021 in the exhibits (coded 2020 in the source). Its models use complete 2011 Census district–block identifiers; the original election-specific 2015 block fields are blank throughout the matched short-run sample.
 
-Download for Rajasthan and UP, place in `data/lgd/raw/`:
-- Village-GP mapping files
-- Block/Panchayat Samiti files
+## Versions
 
-#### 4. UP Election Data
-Source: [in-rolls/local_elections_up](https://github.com/in-rolls/local_elections_up)
-
-## Code Organization
-
-Scripts are numbered sequentially by processing stage to guarantee the exact execution sequence.
-
-```text
-scripts/
-├── 00_*.R          # Stage 0: Configuration and utilities
-├── 01_*.R          # Stage 1: Data extraction, standardization, crosswalks
-├── 02_*.R          # Stage 2: Panel creation and recoding
-├── 03_*.R          # Stage 3: SHRUG integration and audits
-├── 04_*.R          # Stage 4: Descriptives, Balance & Validation
-├── 05_*.R          # Stage 5: Main Analysis - Short Term
-├── 06_*.R          # Stage 6: Main Analysis - Long Term
-├── 07_*.R          # Stage 7: Extensions (Candidates, Replications)
-├── 08_*.R          # Stage 8: Phone Surveys
-└── 99_run_all.R    # Stage 99: Master pipeline orchestration
-```
-
-## Notes on Analysis
-
-### Random Rotation Subsample (06c)
-
-The random rotation analysis restricts to districts where chi-square tests fail to reject independence of quota assignment across transitions (p > 0.05).
-
-**10-year analysis (2005→2015)**: Requires independence for 05→10 AND 10→15
-- Rajasthan: 9/32 districts (592 open seats)
-- UP: 10/44 districts (1,772 open seats)
-- Results reported in `tabs/long_term_random_rotation.tex`
-
-**15-year analysis (2005→2020/21)**: Requires independence for ALL THREE transitions
-- Rajasthan: 3/32 districts (208 open seats in Churu, Jaisalmer, Sikar)
-- UP: 0/44 districts pass
-
-We do not report 15-year random rotation results because the sample is too small. With only 3 districts and 208 observations, the 7-coefficient interaction model cannot be reliably estimated, and any findings would likely reflect district-specific patterns rather than generalizable effects.
-
-## Outputs
-
-**Tables** (`tabs/`): Balance tests, treatment effects, candidate characteristics (~25 LaTeX tables)
-
-**Figures** (`figs/`): Coefficient plots, treatment persistence, maps
-
-**Manuscript** (`ms/main.pdf`)
-
-## Requirements
-
-- R 4.5+
-- XeLaTeX (for manuscript compilation)
-
-## Related Repositories
-
-- [in-rolls/local_elections_up](https://github.com/in-rolls/local_elections_up) - UP Local Election Data
-- [in-rolls/quota](https://github.com/in-rolls/quota) - Effects of Reservations on Allocation and Development Outcomes
-- [in-rolls/local_elections_kerala](https://github.com/in-rolls/local_elections_kerala) - Kerala Local Government Data
+`pre-corrections-20260912` preserves the manuscript and code before these revisions; it is not a certification that every earlier exhibit reproduces. Current scripts overwrite the current derived outputs. Git and release tags preserve earlier versions. The final release tag awaits review of the cumulative-effect and mechanism interpretations.

@@ -43,13 +43,27 @@ message("\n--- Rajasthan 2005 → 2010 Placebo ---")
 raj_05_10_placebo <- filter(raj_05_10, treat_2005 == 0)
 message("Open seats in 2005: ", nrow(raj_05_10_placebo))
 
-m_raj_0510_nofe <- feols(female_winner_2005 ~ treat_2010, data = raj_05_10_placebo)
-m_raj_0510_fe <- feols(female_winner_2005 ~ treat_2010 | dist_samiti_2010, data = raj_05_10_placebo, fixef.rm = "singleton")
+m_raj_0510_nofe <- feols(female_winner_2005 ~ treat_2010,
+  data = raj_05_10_placebo,
+  vcov = ~dist_samiti_2010,
+  fixef.rm = "none",
+  ssc = MODEL_SSC
+)
+m_raj_0510_fe <- feols(female_winner_2005 ~ treat_2010 | dist_samiti_2010,
+  data = raj_05_10_placebo,
+  vcov = ~dist_samiti_2010,
+  fixef.rm = "none",
+  ssc = MODEL_SSC
+)
 
-message("No FE coef: ", round(coef(m_raj_0510_nofe)["treat_2010"], 4),
-    "p =", round(pvalue(m_raj_0510_nofe)["treat_2010"], 4), "\n")
-message("FE coef: ", round(coef(m_raj_0510_fe)["treat_2010"], 4),
-    "p =", round(pvalue(m_raj_0510_fe)["treat_2010"], 4), "\n")
+message(
+  "No FE coef: ", round(coef(m_raj_0510_nofe)["treat_2010"], 4),
+  "p =", round(pvalue(m_raj_0510_nofe)["treat_2010"], 4), "\n"
+)
+message(
+  "FE coef: ", round(coef(m_raj_0510_fe)["treat_2010"], 4),
+  "p =", round(pvalue(m_raj_0510_fe)["treat_2010"], 4), "\n"
+)
 
 # =============================================================================
 # Rajasthan 2010 → 2015 Placebo: female_winner_2010 ~ treat_2015
@@ -59,11 +73,23 @@ message("\n--- Rajasthan 2010 → 2015 Placebo ---")
 raj_10_15_placebo <- filter(raj_10_15, treat_2010 == 0)
 message("Open seats in 2010: ", nrow(raj_10_15_placebo))
 
-m_raj_1015_nofe <- feols(female_winner_2010 ~ treat_2015, data = raj_10_15_placebo)
-m_raj_1015_fe <- feols(female_winner_2010 ~ treat_2015 | dist_samiti_2015, data = raj_10_15_placebo, fixef.rm = "singleton")
+m_raj_1015_nofe <- feols(female_winner_2010 ~ treat_2015,
+  data = raj_10_15_placebo,
+  vcov = ~dist_samiti_2015,
+  fixef.rm = "none",
+  ssc = MODEL_SSC
+)
+m_raj_1015_fe <- feols(female_winner_2010 ~ treat_2015 | dist_samiti_2015,
+  data = raj_10_15_placebo,
+  vcov = ~dist_samiti_2015,
+  fixef.rm = "none",
+  ssc = MODEL_SSC
+)
 
-message("No FE coef: ", round(coef(m_raj_1015_nofe)["treat_2015"], 4),
-    "p =", round(pvalue(m_raj_1015_nofe)["treat_2015"], 4), "\n")
+message(
+  "No FE coef: ", round(coef(m_raj_1015_nofe)["treat_2015"], 4),
+  "p =", round(pvalue(m_raj_1015_nofe)["treat_2015"], 4), "\n"
+)
 
 # =============================================================================
 # Rajasthan 2015 → 2020 Placebo: female_winner_2015 ~ treat_2020
@@ -73,11 +99,23 @@ message("\n--- Rajasthan 2015 → 2020 Placebo ---")
 raj_15_20_placebo <- filter(raj_15_20, treat_2015 == 0)
 message("Open seats in 2015: ", nrow(raj_15_20_placebo))
 
-m_raj_1520_nofe <- feols(female_winner_2015 ~ treat_2020, data = raj_15_20_placebo)
-m_raj_1520_fe <- feols(female_winner_2015 ~ treat_2020 | dist_samiti_2020, data = raj_15_20_placebo, fixef.rm = "singleton")
+m_raj_1520_nofe <- feols(female_winner_2015 ~ treat_2020,
+  data = raj_15_20_placebo,
+  vcov = ~dist_samiti_2020,
+  fixef.rm = "none",
+  ssc = MODEL_SSC
+)
+m_raj_1520_fe <- feols(female_winner_2015 ~ treat_2020 | dist_samiti_2020,
+  data = raj_15_20_placebo,
+  vcov = ~dist_samiti_2020,
+  fixef.rm = "none",
+  ssc = MODEL_SSC
+)
 
-message("No FE coef: ", round(coef(m_raj_1520_nofe)["treat_2020"], 4),
-    "p =", round(pvalue(m_raj_1520_nofe)["treat_2020"], 4), "\n")
+message(
+  "No FE coef: ", round(coef(m_raj_1520_nofe)["treat_2020"], 4),
+  "p =", round(pvalue(m_raj_1520_nofe)["treat_2020"], 4), "\n"
+)
 
 # =============================================================================
 # UP 2005 → 2010 Placebo: female_winner_2005 ~ treat_2010
@@ -87,11 +125,23 @@ message("\n--- UP 2005 → 2010 Placebo ---")
 up_05_10_placebo <- filter(up_05_10, treat_2005 == 0)
 message("Open seats in 2005: ", nrow(up_05_10_placebo))
 
-m_up_0510_nofe <- feols(female_winner_2005 ~ treat_2010, data = up_05_10_placebo)
-m_up_0510_fe <- feols(female_winner_2005 ~ treat_2010 | dist_block_2010, data = up_05_10_placebo, fixef.rm = "singleton")
+m_up_0510_nofe <- feols(female_winner_2005 ~ treat_2010,
+  data = up_05_10_placebo,
+  vcov = ~dist_block_2010,
+  fixef.rm = "none",
+  ssc = MODEL_SSC
+)
+m_up_0510_fe <- feols(female_winner_2005 ~ treat_2010 | dist_block_2010,
+  data = up_05_10_placebo,
+  vcov = ~dist_block_2010,
+  fixef.rm = "none",
+  ssc = MODEL_SSC
+)
 
-message("No FE coef: ", round(coef(m_up_0510_nofe)["treat_2010"], 4),
-    "p =", round(pvalue(m_up_0510_nofe)["treat_2010"], 4), "\n")
+message(
+  "No FE coef: ", round(coef(m_up_0510_nofe)["treat_2010"], 4),
+  "p =", round(pvalue(m_up_0510_nofe)["treat_2010"], 4), "\n"
+)
 
 # =============================================================================
 # UP 2010 → 2015 Placebo: female_winner_2010 ~ treat_2015
@@ -101,11 +151,23 @@ message("\n--- UP 2010 → 2015 Placebo ---")
 up_10_15_placebo <- filter(up_10_15, treat_2010 == 0)
 message("Open seats in 2010: ", nrow(up_10_15_placebo))
 
-m_up_1015_nofe <- feols(female_winner_2010 ~ treat_2015, data = up_10_15_placebo)
-m_up_1015_fe <- feols(female_winner_2010 ~ treat_2015 | dist_block_2015, data = up_10_15_placebo, fixef.rm = "singleton")
+m_up_1015_nofe <- feols(female_winner_2010 ~ treat_2015,
+  data = up_10_15_placebo,
+  vcov = ~dist_block_2015,
+  fixef.rm = "none",
+  ssc = MODEL_SSC
+)
+m_up_1015_fe <- feols(female_winner_2010 ~ treat_2015 | dist_block_2015,
+  data = up_10_15_placebo,
+  vcov = ~dist_block_2015,
+  fixef.rm = "none",
+  ssc = MODEL_SSC
+)
 
-message("No FE coef: ", round(coef(m_up_1015_nofe)["treat_2015"], 4),
-    "p =", round(pvalue(m_up_1015_nofe)["treat_2015"], 4), "\n")
+message(
+  "No FE coef: ", round(coef(m_up_1015_nofe)["treat_2015"], 4),
+  "p =", round(pvalue(m_up_1015_nofe)["treat_2015"], 4), "\n"
+)
 
 # =============================================================================
 # UP 2015 → 2021 Placebo: female_winner_2015 ~ treat_2021
@@ -115,11 +177,23 @@ message("\n--- UP 2015 → 2021 Placebo ---")
 up_15_21_placebo <- filter(up_15_21, treat_2015 == 0)
 message("Open seats in 2015: ", nrow(up_15_21_placebo))
 
-m_up_1521_nofe <- feols(female_winner_2015 ~ treat_2021, data = up_15_21_placebo)
-m_up_1521_fe <- feols(female_winner_2015 ~ treat_2021 | dist_block_2021, data = up_15_21_placebo, fixef.rm = "singleton")
+m_up_1521_nofe <- feols(female_winner_2015 ~ treat_2021,
+  data = up_15_21_placebo,
+  vcov = ~dist_block_2021,
+  fixef.rm = "none",
+  ssc = MODEL_SSC
+)
+m_up_1521_fe <- feols(female_winner_2015 ~ treat_2021 | dist_block_2021,
+  data = up_15_21_placebo,
+  vcov = ~dist_block_2021,
+  fixef.rm = "none",
+  ssc = MODEL_SSC
+)
 
-message("No FE coef: ", round(coef(m_up_1521_nofe)["treat_2021"], 4),
-    "p =", round(pvalue(m_up_1521_nofe)["treat_2021"], 4), "\n")
+message(
+  "No FE coef: ", round(coef(m_up_1521_nofe)["treat_2021"], 4),
+  "p =", round(pvalue(m_up_1521_nofe)["treat_2021"], 4), "\n"
+)
 
 # =============================================================================
 # Combined Output Table: All panels, NO FE and FE (12 columns)
@@ -127,45 +201,45 @@ message("No FE coef: ", round(coef(m_up_1521_nofe)["treat_2021"], 4),
 message("\n=== Generating output table ===")
 
 all_models <- list(
-    m_raj_0510_nofe, m_raj_0510_fe,
-    m_raj_1015_nofe, m_raj_1015_fe,
-    m_raj_1520_nofe, m_raj_1520_fe,
-    m_up_0510_nofe, m_up_0510_fe,
-    m_up_1015_nofe, m_up_1015_fe,
-    m_up_1521_nofe, m_up_1521_fe
+  m_raj_0510_nofe, m_raj_0510_fe,
+  m_raj_1015_nofe, m_raj_1015_fe,
+  m_raj_1520_nofe, m_raj_1520_fe,
+  m_up_0510_nofe, m_up_0510_fe,
+  m_up_1015_nofe, m_up_1015_fe,
+  m_up_1521_nofe, m_up_1521_fe
 )
 
 dict_placebo <- c(
-    "female_winner_2005" = "Woman Elected$_{t-1}$",
-    "female_winner_2010" = "Woman Elected$_{t-1}$",
-    "female_winner_2015" = "Woman Elected$_{t-1}$",
-    "treat_2010" = "$\\text{Quota}_{t}$",
-    "treat_2015" = "$\\text{Quota}_{t}$",
-    "treat_2020" = "$\\text{Quota}_{t}$",
-    "treat_2021" = "$\\text{Quota}_{t}$",
-    "(Intercept)" = "Intercept",
-    "dist_samiti_2010" = "(District, Samiti)",
-    "dist_samiti_2015" = "(District, Samiti)",
-    "dist_samiti_2020" = "(District, Samiti)",
-    "dist_block_2010" = "(District, Samiti)",
-    "dist_block_2015" = "(District, Samiti)",
-    "dist_block_2021" = "(District, Samiti)"
+  "female_winner_2005" = "Woman Elected$_{t-1}$",
+  "female_winner_2010" = "Woman Elected$_{t-1}$",
+  "female_winner_2015" = "Woman Elected$_{t-1}$",
+  "treat_2010" = "$\\text{Quota}_{t}$",
+  "treat_2015" = "$\\text{Quota}_{t}$",
+  "treat_2020" = "$\\text{Quota}_{t}$",
+  "treat_2021" = "$\\text{Quota}_{t}$",
+  "(Intercept)" = "Intercept",
+  "dist_samiti_2010" = "(District, Samiti)",
+  "dist_samiti_2015" = "(District, Samiti)",
+  "dist_samiti_2020" = "(District, Samiti)",
+  "dist_block_2010" = "(District, Block)",
+  "dist_block_2015" = "(District, Block)",
+  "dist_block_2021" = "(District, Block)"
 )
 
 aer_etable(all_models,
-    file = here("tabs", "placebo_combined.tex"),
-    headers = list(
-        c("Rajasthan" = 6, "Uttar Pradesh" = 6),
-        c("05$\\rightarrow$10" = 2, "10$\\rightarrow$15" = 2, "15$\\rightarrow$20" = 2,
-          "05$\\rightarrow$10" = 2, "10$\\rightarrow$15" = 2, "15$\\rightarrow$21" = 2),
-        c("No FE", "FE", "No FE", "FE", "No FE", "FE",
-          "No FE", "FE", "No FE", "FE", "No FE", "FE")
-    ),
-    cmidrules = list(after = 1, rules = c("2-7", "8-13")),
-    colsep = list(after = 6, space = "1em"),
-    keep = c("(Intercept)", "%treat_"),
-    notes = "$^{***}$p$<$0.01; $^{**}$p$<$0.05; $^{*}$p$<$0.1. Placebo test: FUTURE quota status predicting PAST outcomes. Outcome: woman elected in open seat at $t-1$. Treatment: quota status at $t$. Sample restricted to GPs where seat was open in the outcome election. Null effects support random assignment of quota. Heteroskedasticity-robust standard errors.",
-    dict = dict_placebo)
+  file = here("tabs", "placebo_combined.tex"),
+  headers = list(
+    rep(c("Rajasthan", "Uttar Pradesh"), c(6, 6)),
+    rep(c("05$\\rightarrow$10", "10$\\rightarrow$15", "15$\\rightarrow$20", "05$\\rightarrow$10", "10$\\rightarrow$15", "15$\\rightarrow$21"), c(2, 2, 2, 2, 2, 2)),
+    c(
+      "No FE", "FE", "No FE", "FE", "No FE", "FE",
+      "No FE", "FE", "No FE", "FE", "No FE", "FE"
+    )
+  ),
+  keep = c("(Intercept)", "%treat_"),
+  notes = "$^{***}$p$<$0.01; $^{**}$p$<$0.05; $^{*}$p$<$0.1. Placebo test: FUTURE quota status predicting PAST outcomes. Outcome: woman elected in open seat at $t-1$. Treatment: quota status at $t$. Sample restricted to GPs where seat was open in the outcome election. Non-rejection is a limited temporal diagnostic and does not establish random quota assignment. Standard errors clustered by district-samiti (Rajasthan) or district-block (UP).",
+  dict = dict_placebo
+)
 
 message("Created: tabs/placebo_combined.tex")
 

@@ -114,6 +114,7 @@ Muzzafarnagar,Morna,Kaidi,2014,Morna
 Muzzafarnagar,Morna,Rudkali,2014,Morna
 Muzzafarnagar,Morna,Teuda,2014,Morna
 Muzzafarnagar,Morna,Karheda,2014,Morna
+Muzzafarnagar,Morna,Kakarala,2014,Morna
 Muzzafarnagar,Morna,Bhedahedi,2014,Morna
 Muzzafarnagar,Morna,Kadipur,2014,Morna
 Muzzafarnagar,Morna,Vajibad,2014,Morna
@@ -495,6 +496,7 @@ Gautam Buddha Nagar,Jewar,Thora,1710,Jewar
 Gautam Buddha Nagar,Jewar,Mauhavelipur,1710,Jewar
 Gautam Buddha Nagar,Jewar,Dastampur,1710,Jewar
 Gautam Buddha Nagar,Jewar,Bankapur,1710,Jewar
+Gautam Buddha Nagar,Jewar,Chanchali,1710,Jewar
 Gautam Buddha Nagar,Jewar,Dayora,1710,Jewar
 Gautam Buddha Nagar,Jewar,Neemka,1710,Jewar
 Gautam Buddha Nagar,Jewar,Chaurauli,1710,Jewar
@@ -716,6 +718,7 @@ Bijnaur,Afzalgarah,Harpur,1570,Afzalgarh
 Bijnaur,Afzalgarah,Aanandpur,1570,Afzalgarh
 Bijnaur,Afzalgarah,Dehla wala,1570,Afzalgarh
 Bijnaur,Afzalgarah,hareweli,1570,Afzalgarh
+Bijnaur,Afzalgarah,Harewala,1570,Afzalgarh
 Bijnaur,Kiratpur,Mau  Asgarpur,1575,Kiratpur
 Bijnaur,Kiratpur,Kumhaida,1575,Kiratpur
 Bijnaur,Kiratpur,Shahlipr A,1575,Kiratpur
@@ -824,6 +827,7 @@ Jyotiba Phule Nagar,Gangeshwari,Bhoora,1837,Gangeshwari
 Jyotiba Phule Nagar,Gangeshwari,Damgadda,1837,Gangeshwari
 Jyotiba Phule Nagar,Dhanaura,Daurala,1835,Dhanaura
 Jyotiba Phule Nagar,Dhanaura,Peeltga,1835,Dhanaura
+Jyotiba Phule Nagar,Dhanaura,Kaurara,1835,Dhanaura
 Jyotiba Phule Nagar,Dhanaura,Fanuadi,1835,Dhanaura
 Jyotiba Phule Nagar,Dhanaura,Paaraakhaalasaa,1835,Dhanaura
 Jyotiba Phule Nagar,Dhanaura,Malkpur Bhood Shu 0,1835,Dhanaura
@@ -1130,6 +1134,7 @@ Pilibhit,Bisalpur,Museli,2024,Bisalpur
 Pilibhit,Bilsanda,Marorikhas,2023,Bilsanda
 Pilibhit,Bilsanda,Rautapur,2023,Bilsanda
 Pilibhit,Bilsanda,Pastaur kuiyan,2023,Bilsanda
+Pilibhit,Bilsanda,Chaparwa Kuyan,2023,Bilsanda
 Pilibhit,Bilsanda,Mareena,2023,Bilsanda
 Pilibhit,Bilsanda,Gohania,2023,Bilsanda
 Pilibhit,Bilsanda,Phirsā Churrāh,2023,Bilsanda
@@ -1354,6 +1359,7 @@ Hathras,Sasni,Dayanatpur,1923,Sasni
 Hathras,Sasni,Hadouli,1923,Sasni
 Hathras,Sasni,Jariya Gadakheda,1923,Sasni
 Hathras,Sasni,Loh,1923,Sasni
+Hathras,Sasni,Jarauli,1923,Sasni
 Hathras,Sasni,Wadhanu,1923,Sasni
 Hathras,Sasni,Ooswa,1923,Sasni
 Hathras,Sasni,Kaumari,1923,Sasni
@@ -1525,6 +1531,7 @@ Firozabad,Shikohabad,Kirathra Muhammadpur,1705,Shikohabad
 Firozabad,Shikohabad,No. Bazadar,1705,Shikohabad
 Firozabad,Shikohabad,Rapdi,1705,Shikohabad
 Firozabad,Shikohabad,Garidanshay,1705,Shikohabad
+Firozabad,Shikohabad,Aamri,1705,Shikohabad
 Firozabad,Shikohabad,Gagayee,1705,Shikohabad
 Firozabad,Shikohabad,MU Labhouaa,1705,Shikohabad
 Firozabad,Firozabad,Sophipur,1700,Firozabad
@@ -1612,6 +1619,7 @@ Mainpuri,Barnahal,Meetheepur,1942,Barnahal
 Mainpuri,Barnahal,G Jain,1942,Barnahal
 Mainpuri,Barnahal,Naurmaayi,1942,Barnahal
 Kannauj,Kannauj,Sihapur,1844,Kannauj
+Kannauj,Kannauj,Najrapur,1844,Kannauj
 Kannauj,Kannauj,Madharpur,1844,Kannauj
 Kannauj,Kannauj,Sadiyaapur Baangar,1844,Kannauj
 Kannauj,Kannauj,Saraymira Dehat,1844,Kannauj
@@ -1805,6 +1813,7 @@ Jalaun,Rampura,Jayagha,1804,Rampura
 Jalaun,Nadigaon,Kanasi,1803,Nadigaon
 Jalaun,Nadigaon,Siwni Bujurg,1803,Nadigaon
 Jalaun,Nadigaon,Baduwao,1803,Nadigaon
+Jalaun,Nadigaon,Raba,1803,Nadigaon
 Jalaun,Nadigaon,Goverdhanpura,1803,Nadigaon
 Jalaun,Nadigaon,Teetra Khalilpur,1803,Nadigaon
 Jalaun,Nadigaon,Ganerna,1803,Nadigaon
@@ -1931,6 +1940,7 @@ Mahoba,Panwadi,Baindoo,1941,Panwari
 Mahoba,Panwadi,Syodhi,1941,Panwari
 Mahoba,Charkhari,Behari,1938,Charkhari
 Mahoba,Charkhari,Baari,1938,Charkhari
+Mahoba,Charkhari,Barai,1938,Charkhari
 Mahoba,Charkhari,EmiliaDang,1938,Charkhari
 Mahoba,Charkhari,Akthonha,1938,Charkhari
 Mahoba,Charkhari,Sohajana,1938,Charkhari
@@ -2083,6 +2093,7 @@ Fatehpur,Devmai,Eesepur,1690,Devmai
 Fatehpur,Devmai,Ibrahimur Tanda,1690,Devmai
 Fatehpur,Devmai,Akbarpur Nasirpur,1690,Devmai
 Fatehpur,Devmai,Sarae,1690,Devmai
+Fatehpur,Malwan,Dawatpur,1695,Malwan
 Fatehpur,Malwan,Hasanapur,1695,Malwan
 Fatehpur,Malwan,Basavanakhēḍā,1695,Malwan
 Fatehpur,Malwan,Amaravati Kalyapur,1695,Malwan
@@ -2293,6 +2304,7 @@ Allahabad,Bahadurpur,Sherdih,1413,Bahadurpur
 Allahabad,Bahadurpur,Bahadurpur Kachhar,1413,Bahadurpur
 Allahabad,Bahadurpur,SONAUTI,1413,Bahadurpur
 Allahabad,Bahadurpur,Balrampur,1413,Bahadurpur
+Allahabad,Bahadurpur,Baraippur,1413,Bahadurpur
 Allahabad,Bahadurpur,Malawa Buzurg,1413,Bahadurpur
 Allahabad,Bahadurpur,Sarfuddinpur,1413,Bahadurpur
 Allahabad,Bahadurpur,Kuwandih,1413,Bahadurpur
@@ -2888,6 +2900,7 @@ Hardoi,Shahabaad,Sikandarapur Kallu,1792,Shahabad
 Hardoi,Shahabaad,Nagla Ganesh,1792,Shahabad
 Hardoi,Shahabaad,Shahabad DehAt,1792,Shahabad
 Hardoi,Shahabaad,C h andup ur kherai,1792,Shahabad
+Hardoi,Shahabaad,Dhierai,1792,Shahabad
 Hardoi,Shahabaad,Butamau,1792,Shahabad
 Hardoi,Todarpur,Pidhiya,1795,Todarpur
 Hardoi,Todarpur,Chena,1795,Todarpur
@@ -2978,6 +2991,7 @@ Lucknow,Mohanlalganj,Nandauli,1917,Mohanlalganj
 Lucknow,Mohanlalganj,Natoli,1917,Mohanlalganj
 Lucknow,Mohanlalganj,Hariharpur Patsa,1917,Mohanlalganj
 Lucknow,Mohanlalganj,BhatpuraRatanPur,1917,Mohanlalganj
+Lucknow,Mohanlalganj,Dehwa,1917,Mohanlalganj
 Lucknow,Mohanlalganj,Mau,1917,Mohanlalganj
 Lucknow,Mohanlalganj,Purseni,1917,Mohanlalganj
 Lucknow,Mohanlalganj,Daulona (Harkans Garhi),1917,Mohanlalganj
@@ -3166,6 +3180,7 @@ Lakhimpur Khiri,Pasgawan,Ukarmuha,1888,Pasgawan
 Lakhimpur Khiri,Pasgawan,Kukarmati,1888,Pasgawan
 Lakhimpur Khiri,Pasgawan,Kotara,1888,Pasgawan
 Lakhimpur Khiri,Pasgawan,Cholaбари,1888,Pasgawan
+Lakhimpur Khiri,Pasgawan,Badhaiya,1888,Pasgawan
 Lakhimpur Khiri,Pasgawan,Barnaiya,1888,Pasgawan
 Lakhimpur Khiri,Pasgawan,Bhoora,1888,Pasgawan
 Lakhimpur Khiri,Pasgawan,Rasulpur Tafzzul Huse,1888,Pasgawan
@@ -3520,6 +3535,7 @@ Barabanki,Banki,Badel,1526,Banki
 Barabanki,Banki,Banwa,1526,Banki
 Barabanki,Banki,Baki Dehat,1526,Banki
 Barabanki,Banki,Fazullaganj,1526,Banki
+Barabanki,Dewan,Karaundi,1528,Dewa
 Barabanki,Dewan,KonaaGaav,1528,Dewa
 Barabanki,Dewan,Peer,1528,Dewa
 Barabanki,Dewan,Mustafabad Desi,1528,Dewa
@@ -3528,6 +3544,7 @@ Barabanki,Dariyabad,Itoura,1527,Dariyabad
 Barabanki,Dariyabad,Minna Nagar,1527,Dariyabad
 Barabanki,Dariyabad,Majhaila,1527,Dariyabad
 Barabanki,Banikoder,Gazputipur,1525,Bani Kodar
+Barabanki,Banikoder,Chandauli,1525,Bani Kodar
 Barabanki,Banikoder,Chaura Aladaspur,1525,Bani Kodar
 Barabanki,Banikoder,Chhandwat,1525,Bani Kodar
 Barabanki,Banikoder,Dilona,1525,Bani Kodar
@@ -3543,6 +3560,7 @@ Barabanki,Puredlai,Sarai Barai,1534,Puredalai
 Barabanki,Haidarganj,Alapur,1530,Haidargarh
 Barabanki,Haidarganj,Gautauna,1530,Haidargarh
 Barabanki,Haidarganj,Varawan,1530,Haidargarh
+Barabanki,Haidarganj,Bahramoo,1530,Haidargarh
 Barabanki,Haidarganj,Vara,1530,Haidargarh
 Barabanki,Haidarganj,Muhiuddin Sarai,1530,Haidargarh
 Barabanki,Haidarganj,Mo Pur,1530,Haidargarh
@@ -3584,6 +3602,7 @@ Sultanpur,Bhaiyya,Shripur,2162,Bhadaiya
 Sultanpur,Bhaiyya,Jamuawa Pashchim,2162,Bhadaiya
 Sultanpur,Bhaiyya,Asarvan,2162,Bhadaiya
 Sultanpur,Dhanpat Ganj,Itawavulhanapur,2165,Dhanpatganj
+Sultanpur,Dhanpat Ganj,Pratapur,2165,Dhanpatganj
 Sultanpur,Dhanpat Ganj,Mahmudpur,2165,Dhanpatganj
 Sultanpur,Dhanpat Ganj,Rataipur,2165,Dhanpatganj
 Sultanpur,Dhanpat Ganj,Lakhnepur,2165,Dhanpatganj
@@ -3944,6 +3963,7 @@ Basti,Basti,Bakainiya Dweep,1558,Basti
 Basti,Basti,Muradiha,1558,Basti
 Basti,Basti,Devaria,1558,Basti
 Basti,Saltoya Gopalpur,PaDRiyA Chetasinh,1567,Saltaua Gopal Pur
+Basti,Saltoya Gopalpur,Basdila,1567,Saltaua Gopal Pur
 Basti,Saltoya Gopalpur,Mazhouwa Khajuri,1567,Saltaua Gopal Pur
 Basti,Saltoya Gopalpur,Vasdiliya,1567,Saltaua Gopal Pur
 Basti,Saltoya Gopalpur,Aamanraayanpur,1567,Saltaua Gopal Pur
@@ -4062,6 +4082,7 @@ Siddharth Nagar,Bhanwaapur,Sikautha,2120,Bhanwapur
 Siddharth Nagar,Bhanwaapur,Vijoura,2120,Bhanwapur
 Siddharth Nagar,Bhanwaapur,Safipur,2120,Bhanwapur
 Siddharth Nagar,Bhanwaapur,Khamhariya,2120,Bhanwapur
+Siddharth Nagar,Bhanwaapur,pikaura,2120,Bhanwapur
 Siddharth Nagar,Bhanwaapur,Semra Bankasia,2120,Bhanwapur
 Siddharth Nagar,Bhanwaapur,Mahitnia Bu O,2120,Bhanwapur
 Siddharth Nagar,Bhanwaapur,Beninagar,2120,Bhanwapur
@@ -4876,6 +4897,7 @@ Mau,Kopaganj,Bharathiya Kadipur,1965,Kopaganj
 Mau,Kopaganj,Faizullahpur,1965,Kopaganj
 Mau,Kopaganj,Hikmagaadha,1965,Kopaganj
 Mau,Kopaganj,Kurthijafarpur,1965,Kopaganj
+Mau,Kopaganj,Para,1965,Kopaganj
 Mau,Kopaganj,Dhaadhachabar,1965,Kopaganj
 Mau,Muhammadabad,Itaurachaubepur,1966,Mohammadabad Gohana
 Mau,Muhammadabad,Bardiha,1966,Mohammadabad Gohana
@@ -4891,6 +4913,7 @@ Mau,Pardha,Belchaura,1967,Pardaha
 Mau,Pardha,Parsapura,1967,Pardaha
 Mau,Pardha,Nasopur,1967,Pardaha
 Mau,Pardha,Manpur,1967,Pardaha
+Mau,Pardha,Umapar,1967,Pardaha
 Mau,Pardha,Reni,1967,Pardaha
 Mau,Pardha,Barlai,1967,Pardaha
 Mau,Pardha,Sanegpur,1967,Pardaha
@@ -5039,6 +5062,7 @@ Ghazipur,Manihari,Khadwadih,1726,Manihari
 Ghazipur,Manihari,Jagmaljyo,1726,Manihari
 Ghazipur,Manihari,Chaukdi,1726,Manihari
 Ghazipur,Manihari,Gauraari,1726,Manihari
+Ghazipur,Manihari,Akraw,1726,Manihari
 Ghazipur,Manihari,Adila,1726,Manihari
 Ghazipur,Manihari,Mauidhiya,1726,Manihari
 Ghazipur,Jamaniya,Chakmedni No .,1734,Zamania
@@ -5183,6 +5207,7 @@ Varanasi,Chiraigaon,Rasulgarh,2200,Chiraigaon
 Varanasi,Chiraigaon,Raghunathpur,2200,Chiraigaon
 Varanasi,Chiraigaon,Khalispur,2200,Chiraigaon
 Varanasi,Chiraigaon,Salarpur,2200,Chiraigaon
+Varanasi,Chiraigaon,Ashapur,2200,Chiraigaon
 Varanasi,Chiraigaon,Vyaspur,2200,Chiraigaon
 Varanasi,Chiraigaon,Parnapur,2200,Chiraigaon
 Varanasi,Chiraigaon,Ledupur,2200,Chiraigaon
@@ -5305,6 +5330,7 @@ Jaunpur,Sujangang,Sakra -,1825,Sujan Ganj
 Jaunpur,Sujangang,Shivriha,1825,Sujan Ganj
 Jaunpur,Sujangang,Padua,1825,Sujan Ganj
 Jaunpur,Sujangang,Viloee,1825,Sujan Ganj
+Jaunpur,Sujangang,Aruao,1825,Sujan Ganj
 Jaunpur,Sujangang,Vara,1825,Sujan Ganj
 Jaunpur,Kerakat,Bansbari,1812,Kerakat
 Jaunpur,Kerakat,Nuaunv,1812,Kerakat
@@ -5316,6 +5342,7 @@ Jaunpur,Srikoni,Dalpatpatti,1823,Sirkoni
 Jaunpur,Srikoni,Bhuwalapatti,1823,Sirkoni
 Jaunpur,Srikoni,Chandpur,1823,Sirkoni
 Jaunpur,Srikoni,Husainabad Dehat,1823,Sirkoni
+Jaunpur,Srikoni,Sultanpur,1823,Sirkoni
 Jaunpur,Srikoni,Madhopatti,1823,Sirkoni
 Jaunpur,Srikoni,Saadatmasauda,1823,Sirkoni
 Jaunpur,Srikoni,Rajepur Pratham,1823,Sirkoni
@@ -5477,6 +5504,7 @@ Mirzapur,Seeti,Pahadi,1993,Shikhar
 Mirzapur,Seeti,Bhiskhuri,1993,Shikhar
 Mirzapur,Seeti,Jasowar,1993,Shikhar
 Mirzapur,Seeti,Shahpur Chausa,1993,Shikhar
+Mirzapur,Seeti,Katran,1993,Shikhar
 Mirzapur,Seeti,Masari,1993,Shikhar
 Mirzapur,Seeti,Nuanv,1993,Shikhar
 Mirzapur,Seeti,Sinhara Kala,1993,Shikhar
@@ -5687,6 +5715,7 @@ Sonbhadra,Ghorawal,Vardia,2155,Ghorawal
 Sonbhadra,Ghorawal,Mizhoon,2155,Ghorawal
 Sonbhadra,Ghorawal,ShivDwar,2155,Ghorawal
 Sonbhadra,Ghorawal,Tiloolikala,2155,Ghorawal
+Sonbhadra,Ghorawal,Kadiya,2155,Ghorawal
 Sonbhadra,Chatra,UnchiKhurd ( Majhidha ),2152,Chatra
 Sonbhadra,Chatra,Gullidand,2152,Chatra
 Sonbhadra,Chatra,Karwaniyan,2152,Chatra

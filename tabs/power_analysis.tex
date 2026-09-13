@@ -1,26 +1,30 @@
-\begin{table}[!h]
+\begin{table}
 \centering
-\caption{\label{tab:power_analysis}Power Analysis: Minimum Detectable Effects for Quota Effects}
+\caption{\label{tab:power_analysis}Precision of the fitted short-run models and cumulative contrasts}
 \centering
 \resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{
-\begin{threeparttable}
-\begin{tabular}[t]{lllrrrrcrr}
+\fontsize{8}{10}\selectfont
+\begin{tabular}[t]{lllrrrlr}
 \toprule
-State & Period & Type & N & Control Mean & Coef (pp) & SE & 95\% CI & MDE (pp) & MDE (\% of ctrl)\\
+State & Period & Contrast & N & Estimate (pp) & Cluster SE (pp) & 95\% CI (pp) & Approx. MDE (pp)\\
 \midrule
-Rajasthan & 2005-2010 & Short-term & 4,062 & 9.2\% & 1.44 & (1.00) & {}[-0.52, 3.39] & 2.79 & 30\%\\
-Rajasthan & 2010-2015 & Short-term & 3,867 & 8.8\% & -2.81 & (1.02) & {}[-4.82, -0.81] & 2.86 & 32\%\\
-Rajasthan & 2015-2020 & Short-term & 3,962 & 12.1\% & 0.49 & (1.17) & {}[-1.80, 2.78] & 3.27 & 27\%\\
-Rajasthan & 2005-2020 (LT) & Long-term & 2,630 & 11.2\% & 3.08 & (1.41) & {}[0.31, 5.85] & 3.96 & 35\%\\
-UP & 2005-2010 & Short-term & 14,469 & 14.8\% & 1.08 & (0.61) & {}[-0.12, 2.27] & 1.71 & 12\%\\
+raj & 05\_10 & treat\_2005 & 4061 & 1.44 & 0.93 & {}[-0.39, 3.26] & 2.60\\
+raj & 10\_15 & treat\_2010 & 3867 & -2.81 & 1.14 & {}[-5.06, -0.57] & 3.19\\
+raj & 15\_20 & treat\_2015 & 4014 & 0.41 & 1.14 & {}[-1.83, 2.65] & 3.19\\
+raj & 05\_20 & 111-000 & 2671 & 9.42 & 3.29 & {}[2.94, 15.90] & 9.21\\
+raj & 05\_20 & 111-001 & 2671 & 5.34 & 3.21 & {}[-0.98, 11.66] & 8.99\\
 \addlinespace
-UP & 2010-2015 & Short-term & 14,194 & 16.0\% & 1.67 & (0.66) & {}[0.37, 2.96] & 1.85 & 12\%\\
-UP & 2015-2021 & Short-term & 14,132 & 17.4\% & 4.43 & (0.67) & {}[3.12, 5.75] & 1.88 & 11\%\\
-UP & 2005-2021 (LT) & Long-term & 14,132 & 19.2\% & 0.36 & (0.68) & {}[-0.98, 1.70] & 1.91 & 10\%\\
+raj & 05\_20 & 101-001 & 2671 & 3.38 & 2.03 & {}[-0.62, 7.37] & 5.68\\
+raj & 05\_20 & 011-001 & 2671 & 1.87 & 2.53 & {}[-3.11, 6.85] & 7.08\\
+up & 05\_10 & treat\_2005 & 26444 & 1.85 & 0.46 & {}[0.95, 2.74] & 1.28\\
+up & 10\_15 & treat\_2010 & 22709 & 1.16 & 0.49 & {}[0.19, 2.13] & 1.38\\
+up & 15\_21 & treat\_2015 & 27919 & 3.54 & 0.51 & {}[2.54, 4.53] & 1.42\\
+\addlinespace
+up & 05\_21 & 111-000 & 14117 & 11.48 & 2.01 & {}[7.54, 15.42] & 5.62\\
+up & 05\_21 & 111-001 & 14117 & 6.79 & 1.95 & {}[2.96, 10.62] & 5.46\\
+up & 05\_21 & 101-001 & 14117 & -0.10 & 1.32 & {}[-2.69, 2.50] & 3.70\\
+up & 05\_21 & 011-001 & 14117 & 0.46 & 1.47 & {}[-2.44, 3.35] & 4.13\\
 \bottomrule
-\end{tabular}
-\begin{tablenotes}
-\item MDE calculated for 80\% power at $\alpha = 0.05$. Control Mean is the proportion of women winning in open seats among GPs not previously reserved. Coefficient and CI are in percentage points. Short-term panels test one-election lag effects; long-term (LT) panels test 2005 treatment effect on 2020/2021 outcomes. MDE (\% of ctrl) expresses the minimum detectable effect as a percentage increase relative to the control mean. For comparison, Bhavnani (2009) found a 15 percentage point effect in urban Mumbai.
-\end{tablenotes}
-\end{threeparttable}}
+\end{tabular}}
 \end{table}
+\par\smallskip{\footnotesize Normal-approximation MDEs use 80\% power and two-sided 5\% size, computed from each fitted model or full-covariance linear contrast. They are precision summaries, not evidence of a zero effect or exact bootstrap power.}

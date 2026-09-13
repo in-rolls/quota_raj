@@ -1,0 +1,38 @@
+category,n,denominator,section,survey
+Answered,377,500,Initial contact,phone_survey
+No answer recorded,123,500,Initial contact,phone_survey
+Recorded as elected representative,35,377,Among answered,phone_survey
+Male non-member,319,377,Among answered,phone_survey
+Female non-member,6,377,Among answered,phone_survey
+"Non-member, sex unavailable",6,377,Among answered,phone_survey
+Identity unavailable,11,377,Among answered,phone_survey
+Child,46,319,Among male non-members,phone_survey
+Other recorded relative,44,319,Among male non-members,phone_survey
+Relationship recorded as self,1,319,Among male non-members,phone_survey
+Relationship unavailable,56,319,Among male non-members,phone_survey
+Spouse,172,319,Among male non-members,phone_survey
+Did not transfer,283,331,Among non-members,phone_survey
+Transfer recorded as not applicable,2,331,Among non-members,phone_survey
+Transfer status unavailable,43,331,Among non-members,phone_survey
+Transferred,3,331,Among non-members,phone_survey
+Answered,400,507,Initial contact,phone_survey_openseats
+No answer recorded,107,507,Initial contact,phone_survey_openseats
+Recorded as elected representative,305,400,Among answered,phone_survey_openseats
+Male non-member,66,400,Among answered,phone_survey_openseats
+Female non-member,10,400,Among answered,phone_survey_openseats
+"Non-member, sex unavailable",3,400,Among answered,phone_survey_openseats
+Identity unavailable,16,400,Among answered,phone_survey_openseats
+Answered,0,0,Initial contact,jaipur_urban_phone_survey_quota
+No answer recorded,0,0,Initial contact,jaipur_urban_phone_survey_quota
+Recorded as elected representative,0,0,Among answered,jaipur_urban_phone_survey_quota
+Male non-member,0,0,Among answered,jaipur_urban_phone_survey_quota
+Female non-member,0,0,Among answered,jaipur_urban_phone_survey_quota
+"Non-member, sex unavailable",0,0,Among answered,jaipur_urban_phone_survey_quota
+Identity unavailable,0,0,Among answered,jaipur_urban_phone_survey_quota
+Answered,0,0,Initial contact,jaipur_urban_phone_survey_open
+No answer recorded,0,0,Initial contact,jaipur_urban_phone_survey_open
+Recorded as elected representative,0,0,Among answered,jaipur_urban_phone_survey_open
+Male non-member,0,0,Among answered,jaipur_urban_phone_survey_open
+Female non-member,0,0,Among answered,jaipur_urban_phone_survey_open
+"Non-member, sex unavailable",0,0,Among answered,jaipur_urban_phone_survey_open
+Identity unavailable,0,0,Among answered,jaipur_urban_phone_survey_open

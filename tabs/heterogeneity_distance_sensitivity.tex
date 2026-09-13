@@ -1,0 +1,50 @@
+
+\begingroup
+\centering
+\scriptsize
+\begin{adjustbox}{max width=\linewidth}
+   \begin{threeparttable}[b]
+      \begin{tabular}{lcccccccccccc}
+         \toprule
+          & \multicolumn{2}{c}{\textit{female\_winner\_2010}} & \multicolumn{2}{c}{\textit{female\_winner\_2015}} & \multicolumn{2}{c}{\textit{female\_winner\_2020}} & \multicolumn{2}{c}{\textit{female\_winner\_2010}} & \multicolumn{2}{c}{\textit{female\_winner\_2015}} & \multicolumn{2}{c}{\textit{female\_winner\_2021}}\\
+                                                    & [i]           & [ii]          & [iii]         & [iv]          & [v]           & [vi]          & [vii]         & [viii]        & [ix]          & [x]           & [xi]          & [xii]\\  
+         \midrule 
+         treat\_2005 $\times$ near\_town            & -0.02         & -0.0002       &               &               &               &               & 0.02          & 0.02          &               &               &               &   \\   
+                                                    & (0.03)        & (0.02)        &               &               &               &               & (0.01)        & (0.01)        &               &               &               &   \\   
+         treat\_2005 $\times$ high\_infra           & -0.007        & -0.009        &               &               &               &               & 0.02          & 0.02          &               &               &               &   \\   
+                                                    & (0.03)        & (0.03)        &               &               &               &               & (0.01)        & (0.01)        &               &               &               &   \\   
+         treat\_2005 $\times$ high\_f\_literacy     & 0.04          & 0.03          &               &               &               &               & -0.001        & -0.002        &               &               &               &   \\   
+                                                    & (0.02)        & (0.02)        &               &               &               &               & (0.01)        & (0.01)        &               &               &               &   \\   
+         treat\_2010 $\times$ near\_town            &               &               & -0.005        & -0.0009       &               &               &               &               & 0.02          & 0.02          &               &   \\   
+                                                    &               &               & (0.03)        & (0.02)        &               &               &               &               & (0.02)        & (0.02)        &               &   \\   
+         treat\_2010 $\times$ high\_infra           &               &               & 0.02          & 0.02          &               &               &               &               & 0.01          & 0.01          &               &   \\   
+                                                    &               &               & (0.02)        & (0.02)        &               &               &               &               & (0.02)        & (0.02)        &               &   \\   
+         treat\_2010 $\times$ high\_f\_literacy     &               &               & 0.005         & 0.005         &               &               &               &               & -0.01         & -0.01         &               &   \\   
+                                                    &               &               & (0.03)        & (0.03)        &               &               &               &               & (0.02)        & (0.02)        &               &   \\   
+         treat\_2015 $\times$ near\_town            &               &               &               &               & 0.04          & 0.02          &               &               &               &               & -0.01         & -0.02\\   
+                                                    &               &               &               &               & (0.03)        & (0.03)        &               &               &               &               & (0.02)        & (0.02)\\   
+         treat\_2015 $\times$ high\_infra           &               &               &               &               & -0.05         & -0.05         &               &               &               &               & -0.03         & -0.03\\   
+                                                    &               &               &               &               & (0.03)        & (0.03)        &               &               &               &               & (0.02)        & (0.02)\\   
+         treat\_2015 $\times$ high\_f\_literacy     &               &               &               &               & 0.05$^{*}$    & 0.06$^{*}$    &               &               &               &               & -0.010        & -0.009\\   
+                                                    &               &               &               &               & (0.03)        & (0.03)        &               &               &               &               & (0.02)        & (0.02)\\   
+          \\
+         R$^2$                                      & 0.14          & 0.14          & 0.20          & 0.20          & 0.16          & 0.16          & 0.06          & 0.06          & 0.06          & 0.06          & 0.07          & 0.07\\  
+         Observations                               & 2,684         & 2,684         & 2,343         & 2,343         & 2,279         & 2,279         & 11,971        & 11,971        & 9,358         & 9,358         & 6,301         & 6,301\\  
+          \\
+         dist\_samiti\_2010 FE                      & $\checkmark$  & $\checkmark$  &               &               &               &               &               &               &               &               &               & \\  
+         dist\_samiti\_2015 FE                      &               &               & $\checkmark$  & $\checkmark$  &               &               &               &               &               &               &               & \\  
+         dist\_samiti\_2020 FE                      &               &               &               &               & $\checkmark$  & $\checkmark$  &               &               &               &               &               & \\  
+         dist\_block\_2010 FE                       &               &               &               &               &               &               & $\checkmark$  & $\checkmark$  &               &               &               & \\  
+         dist\_block\_2015 FE                       &               &               &               &               &               &               &               &               & $\checkmark$  & $\checkmark$  &               & \\  
+         dist\_block\_2021 FE                       &               &               &               &               &               &               &               &               &               &               & $\checkmark$  & $\checkmark$\\   
+         \bottomrule
+      \end{tabular}
+      
+      \begin{tablenotes}
+         \item All models include district-samiti/block fixed effects and clustered standard errors. Mean distance is the primary GP definition; minimum observed village distance is the sensitivity definition. Unknown facility availability is excluded from the infrastructure index. Medians use observed values.
+      \end{tablenotes}
+   \end{threeparttable}
+\end{adjustbox}
+\par\endgroup
+
+

@@ -30,7 +30,7 @@ block_xwalk <- read_csv(here("data/crosswalks/active/up_block_xwalk.csv"), show_
 message("Block crosswalk entries: ", nrow(block_xwalk))
 
 lgd_gp <- read_csv(here("data/lgd/processed/lgd_up_block_gp.csv"), show_col_types = FALSE) %>%
-    mutate(gp_name_std = normalize_string(gp_name))
+  mutate(gp_name_std = normalize_string(gp_name))
 message("LGD GPs: ", nrow(lgd_gp))
 
 up_05_10 <- read_parquet(here("data/up/up_05_10.parquet"))
@@ -43,38 +43,38 @@ message("Election GPs (raw): ", nrow(up_05_10))
 message("\n=== FILTERING MUNICIPALITY/URBAN ENTRIES ===")
 
 urban_patterns <- c(
-    "NAGAR PALIKA",
-    "NAGAR PANCHAYAT",
-    "MUNICIPAL",
-    "NAGARPALIKA",
-    "NAGARPANCHAYAT",
-    "\\bWARD\\s*NO\\b",
-    "\\bWARD\\s*[0-9]+\\b"
+  "NAGAR PALIKA",
+  "NAGAR PANCHAYAT",
+  "MUNICIPAL",
+  "NAGARPALIKA",
+  "NAGARPANCHAYAT",
+  "\\bWARD\\s*NO\\b",
+  "\\bWARD\\s*[0-9]+\\b"
 )
 
 up_05_10 <- up_05_10 %>%
-    mutate(
-        gp_upper = toupper(gp_name_eng_2010),
-        is_urban = grepl(paste(urban_patterns, collapse = "|"), gp_upper, ignore.case = TRUE)
-    )
+  mutate(
+    gp_upper = toupper(gp_name_eng_2010),
+    is_urban = grepl(paste(urban_patterns, collapse = "|"), gp_upper, ignore.case = TRUE)
+  )
 
 urban_excluded <- up_05_10 %>%
-    filter(is_urban) %>%
-    select(
-        district_name_eng_2010,
-        block_name_eng_2010,
-        gp_name_eng_2010,
-        key_2010
-    ) %>%
-    distinct()
+  filter(is_urban) %>%
+  select(
+    district_name_eng_2010,
+    block_name_eng_2010,
+    gp_name_eng_2010,
+    key_2010
+  ) %>%
+  distinct()
 
 message("Urban/municipality entries excluded: ", nrow(urban_excluded))
 write_csv(urban_excluded, here("data/crosswalks/audit/03b_up_urban_excluded.csv"))
 message("Exported: data/crosswalks/audit/03b_up_urban_excluded.csv")
 
 up_05_10 <- up_05_10 %>%
-    filter(!is_urban) %>%
-    select(-gp_upper, -is_urban)
+  filter(!is_urban) %>%
+  select(-gp_upper, -is_urban)
 
 message("Election GPs after filtering: ", nrow(up_05_10))
 
@@ -83,24 +83,28 @@ message("Election GPs after filtering: ", nrow(up_05_10))
 # ============================================================================
 
 up_with_block <- up_05_10 %>%
-    left_join(
-        block_xwalk %>% select(elex_district, elex_block, lgd_block_code, lgd_block_name, match_type),
-        by = c("district_name_eng_2010" = "elex_district",
-               "block_name_eng_2010" = "elex_block")
-    ) %>%
-    rename(block_match_type = match_type)
+  left_join(
+    block_xwalk %>% select(elex_district, elex_block, lgd_block_code, lgd_block_name, match_type),
+    by = c(
+      "district_name_eng_2010" = "elex_district",
+      "block_name_eng_2010" = "elex_block"
+    )
+  ) %>%
+  rename(block_match_type = match_type)
 
-message("Election rows with block code: ", sum(!is.na(up_with_block$lgd_block_code)),
-    "of", nrow(up_with_block), "\n")
+message(
+  "Election rows with block code: ", sum(!is.na(up_with_block$lgd_block_code)),
+  "of", nrow(up_with_block), "\n"
+)
 
 unmatched_blocks <- up_with_block %>%
-    filter(is.na(lgd_block_code)) %>%
-    select(district_name_eng_2010, block_name_eng_2010) %>%
-    distinct()
+  filter(is.na(lgd_block_code)) %>%
+  select(district_name_eng_2010, block_name_eng_2010) %>%
+  distinct()
 
 if (nrow(unmatched_blocks) > 0) {
-    message("\nWARNING: Unmatched blocks (may be urban wards):")
-    print(unmatched_blocks)
+  message("\nWARNING: Unmatched blocks (may be urban wards):")
+  print(unmatched_blocks)
 }
 
 # ============================================================================
@@ -108,30 +112,30 @@ if (nrow(unmatched_blocks) > 0) {
 # ============================================================================
 
 up_gps <- up_with_block %>%
-    mutate(
-        elex_gp_std = normalize_string(gp_name_eng_2010),
-        elex_key = paste(lgd_block_code, elex_gp_std)
-    ) %>%
-    filter(!is.na(lgd_block_code), !is.na(gp_name_eng_2010))
+  mutate(
+    elex_gp_std = normalize_string(gp_name_eng_2010),
+    elex_key = paste(lgd_block_code, elex_gp_std)
+  ) %>%
+  filter(!is.na(lgd_block_code), !is.na(gp_name_eng_2010))
 
 lgd_gps <- lgd_gp %>%
-    mutate(lgd_key = paste(block_code, gp_name_std))
+  mutate(lgd_key = paste(block_code, gp_name_std))
 
 message("\nElection GPs to match: ", nrow(up_gps))
 
 # Exact match first
 exact_matches <- up_gps %>%
-    inner_join(
-        lgd_gps %>% select(gp_code, gp_name, block_code, lgd_key),
-        by = c("elex_key" = "lgd_key"),
-        relationship = "many-to-many"
-    )
+  inner_join(
+    lgd_gps %>% select(gp_code, gp_name, block_code, lgd_key),
+    by = c("elex_key" = "lgd_key"),
+    relationship = "many-to-many"
+  )
 
 message("Exact GP matches: ", nrow(exact_matches))
 
 # Unmatched GPs for fuzzy matching
 unmatched <- up_gps %>%
-    anti_join(exact_matches, by = c("key_2010", "gp_name_eng_2010"))
+  anti_join(exact_matches, by = c("key_2010", "gp_name_eng_2010"))
 
 message("Unmatched GPs for fuzzy: ", nrow(unmatched))
 
@@ -144,22 +148,22 @@ message("Processing ", length(unique_blocks), " blocks for fuzzy matching (thres
 
 pb <- txtProgressBar(min = 0, max = length(unique_blocks), style = 3)
 for (i in seq_along(unique_blocks)) {
-    blk <- unique_blocks[i]
-    block_elex <- unmatched %>% filter(lgd_block_code == blk)
-    block_lgd <- lgd_gps %>% filter(block_code == blk)
+  blk <- unique_blocks[i]
+  block_elex <- unmatched %>% filter(lgd_block_code == blk)
+  block_lgd <- lgd_gps %>% filter(block_code == blk)
 
-    for (j in 1:nrow(block_elex)) {
-        result <- fuzzy_match_within_block(
-            block_elex[j, ], block_lgd,
-            threshold = FUZZY_THRESHOLD,
-            id_col = "key_2010",
-            gp_col = "gp_name_eng_2010"
-        )
-        if (!is.null(result)) {
-            fuzzy_results[[length(fuzzy_results) + 1]] <- result
-        }
+  for (j in 1:nrow(block_elex)) {
+    result <- fuzzy_match_within_block(
+      block_elex[j, ], block_lgd,
+      threshold = FUZZY_THRESHOLD,
+      id_col = "key_2010",
+      gp_col = "gp_name_eng_2010"
+    )
+    if (!is.null(result)) {
+      fuzzy_results[[length(fuzzy_results) + 1]] <- result
     }
-    setTxtProgressBar(pb, i)
+  }
+  setTxtProgressBar(pb, i)
 }
 close(pb)
 
@@ -171,46 +175,46 @@ message("Fuzzy GP matches: ", nrow(fuzzy_df))
 # ============================================================================
 
 tie_resolved <- fuzzy_df %>%
-    filter(match_confidence == "tie_resolved") %>%
-    left_join(
-        up_gps %>% select(key_2010, district_name_eng_2010, block_name_eng_2010),
-        by = "key_2010"
-    ) %>%
-    select(
-        district = district_name_eng_2010,
-        block = block_name_eng_2010,
-        elex_gp = gp_name_eng_2010,
-        lgd_gp = lgd_gp_name,
-        lgd_gp_code,
-        match_distance,
-        tie_count
-    )
+  filter(match_confidence == "tie_resolved") %>%
+  left_join(
+    up_gps %>% select(key_2010, district_name_eng_2010, block_name_eng_2010),
+    by = "key_2010"
+  ) %>%
+  select(
+    district = district_name_eng_2010,
+    block = block_name_eng_2010,
+    elex_gp = gp_name_eng_2010,
+    lgd_gp = lgd_gp_name,
+    lgd_gp_code,
+    match_distance,
+    tie_count
+  )
 
 message("\nTie-resolved matches: ", nrow(tie_resolved))
 if (nrow(tie_resolved) > 0) {
-    write_csv(tie_resolved, here("data/crosswalks/audit/03b_up_tie_resolved.csv"))
-    message("Exported: data/crosswalks/audit/03b_up_tie_resolved.csv")
+  write_csv(tie_resolved, here("data/crosswalks/audit/03b_up_tie_resolved.csv"))
+  message("Exported: data/crosswalks/audit/03b_up_tie_resolved.csv")
 }
 
 numeric_mismatch <- fuzzy_df %>%
-    filter(match_confidence == "numeric_mismatch") %>%
-    left_join(
-        up_gps %>% select(key_2010, district_name_eng_2010, block_name_eng_2010),
-        by = "key_2010"
-    ) %>%
-    select(
-        district = district_name_eng_2010,
-        block = block_name_eng_2010,
-        elex_gp = gp_name_eng_2010,
-        lgd_gp = lgd_gp_name,
-        lgd_gp_code,
-        match_distance
-    )
+  filter(match_confidence == "numeric_mismatch") %>%
+  left_join(
+    up_gps %>% select(key_2010, district_name_eng_2010, block_name_eng_2010),
+    by = "key_2010"
+  ) %>%
+  select(
+    district = district_name_eng_2010,
+    block = block_name_eng_2010,
+    elex_gp = gp_name_eng_2010,
+    lgd_gp = lgd_gp_name,
+    lgd_gp_code,
+    match_distance
+  )
 
 message("Numeric mismatch matches: ", nrow(numeric_mismatch))
 if (nrow(numeric_mismatch) > 0) {
-    write_csv(numeric_mismatch, here("data/crosswalks/audit/03b_up_numeric_mismatch.csv"))
-    message("Exported: data/crosswalks/audit/03b_up_numeric_mismatch.csv")
+  write_csv(numeric_mismatch, here("data/crosswalks/audit/03b_up_numeric_mismatch.csv"))
+  message("Exported: data/crosswalks/audit/03b_up_numeric_mismatch.csv")
 }
 
 # ============================================================================
@@ -218,35 +222,35 @@ if (nrow(numeric_mismatch) > 0) {
 # ============================================================================
 
 all_matches <- bind_rows(
-    exact_matches %>%
-        transmute(
-            key_2010 = key_2010,
-            gp_name_eng_2010 = gp_name_eng_2010,
-            lgd_gp_code = gp_code,
-            lgd_gp_name = gp_name,
-            lgd_block_code = lgd_block_code,
-            lgd_block_name = lgd_block_name,
-            gp_match_type = "exact",
-            match_distance = 0,
-            match_confidence = "unique"
-        ),
-    fuzzy_df %>%
-        filter(!match_confidence %in% c("tie_resolved", "numeric_mismatch")) %>%
-        left_join(
-            up_gps %>% select(key_2010, lgd_block_code, lgd_block_name) %>% distinct(),
-            by = "key_2010"
-        ) %>%
-        transmute(
-            key_2010 = key_2010,
-            gp_name_eng_2010 = gp_name_eng_2010,
-            lgd_gp_code = lgd_gp_code,
-            lgd_gp_name = lgd_gp_name,
-            lgd_block_code = lgd_block_code,
-            lgd_block_name = lgd_block_name,
-            gp_match_type = "fuzzy",
-            match_distance = match_distance,
-            match_confidence = match_confidence
-        )
+  exact_matches %>%
+    transmute(
+      key_2010 = key_2010,
+      gp_name_eng_2010 = gp_name_eng_2010,
+      lgd_gp_code = gp_code,
+      lgd_gp_name = gp_name,
+      lgd_block_code = lgd_block_code,
+      lgd_block_name = lgd_block_name,
+      gp_match_type = "exact",
+      match_distance = 0,
+      match_confidence = "unique"
+    ),
+  fuzzy_df %>%
+    filter(!match_confidence %in% c("tie_resolved", "numeric_mismatch")) %>%
+    left_join(
+      up_gps %>% select(key_2010, lgd_block_code, lgd_block_name) %>% distinct(),
+      by = "key_2010"
+    ) %>%
+    transmute(
+      key_2010 = key_2010,
+      gp_name_eng_2010 = gp_name_eng_2010,
+      lgd_gp_code = lgd_gp_code,
+      lgd_gp_name = lgd_gp_name,
+      lgd_block_code = lgd_block_code,
+      lgd_block_name = lgd_block_name,
+      gp_match_type = "fuzzy",
+      match_distance = match_distance,
+      match_confidence = match_confidence
+    )
 )
 
 # ============================================================================
@@ -257,80 +261,82 @@ message("\n=== DEDUPLICATION CHECKS ===")
 
 # One-to-many: election GP matches multiple LGD GPs
 one_to_many <- all_matches %>%
-    group_by(key_2010, gp_name_eng_2010) %>%
-    filter(n() > 1) %>%
-    ungroup() %>%
-    left_join(
-        up_gps %>% select(key_2010, district_name_eng_2010, block_name_eng_2010) %>% distinct(),
-        by = "key_2010"
-    )
+  group_by(key_2010, gp_name_eng_2010) %>%
+  filter(n() > 1) %>%
+  ungroup() %>%
+  left_join(
+    up_gps %>% select(key_2010, district_name_eng_2010, block_name_eng_2010) %>% distinct(),
+    by = "key_2010"
+  )
 
 message("One-to-many matches (election GP -> multiple LGD GPs): ", n_distinct(one_to_many$key_2010))
 
 if (nrow(one_to_many) > 0) {
-    one_to_many_export <- one_to_many %>%
-        select(
-            district = district_name_eng_2010,
-            block = block_name_eng_2010,
-            elex_gp = gp_name_eng_2010,
-            lgd_gp = lgd_gp_name,
-            lgd_gp_code,
-            match_distance,
-            gp_match_type
-        ) %>%
-        arrange(district, block, elex_gp, match_distance)
+  one_to_many_export <- one_to_many %>%
+    select(
+      district = district_name_eng_2010,
+      block = block_name_eng_2010,
+      elex_gp = gp_name_eng_2010,
+      lgd_gp = lgd_gp_name,
+      lgd_gp_code,
+      match_distance,
+      gp_match_type
+    ) %>%
+    arrange(district, block, elex_gp, match_distance)
 
-    write_csv(one_to_many_export, here("data/crosswalks/audit/03b_up_one_to_many_errors.csv"))
-    message("Exported: data/crosswalks/audit/03b_up_one_to_many_errors.csv")
+  write_csv(one_to_many_export, here("data/crosswalks/audit/03b_up_one_to_many_errors.csv"))
+  message("Exported: data/crosswalks/audit/03b_up_one_to_many_errors.csv")
 
-    all_matches <- all_matches %>%
-        group_by(key_2010, gp_name_eng_2010) %>%
-        slice_min(match_distance, n = 1, with_ties = FALSE) %>%
-        ungroup()
+  all_matches <- all_matches %>%
+    group_by(key_2010, gp_name_eng_2010) %>%
+    slice_min(match_distance, n = 1, with_ties = TRUE) %>%
+    filter(n() == 1L) %>%
+    ungroup()
 
-    message("Resolved one-to-many by keeping best match. New total: ", nrow(all_matches))
+  message("Resolved one-to-many by keeping best match. New total: ", nrow(all_matches))
 }
 
 # Many-to-one: multiple election GPs match same LGD GP
 many_to_one <- all_matches %>%
-    group_by(lgd_gp_code) %>%
-    filter(n() > 1) %>%
-    ungroup() %>%
-    left_join(
-        up_gps %>% select(key_2010, district_name_eng_2010, block_name_eng_2010) %>% distinct(),
-        by = "key_2010"
-    )
+  group_by(lgd_gp_code) %>%
+  filter(n() > 1) %>%
+  ungroup() %>%
+  left_join(
+    up_gps %>% select(key_2010, district_name_eng_2010, block_name_eng_2010) %>% distinct(),
+    by = "key_2010"
+  )
 
 message("Many-to-one matches (multiple election GPs -> same LGD GP): ", n_distinct(many_to_one$lgd_gp_code))
 
 if (nrow(many_to_one) > 0) {
-    many_to_one_export <- many_to_one %>%
-        select(
-            district = district_name_eng_2010,
-            block = block_name_eng_2010,
-            elex_gp = gp_name_eng_2010,
-            lgd_gp = lgd_gp_name,
-            lgd_gp_code,
-            match_distance,
-            gp_match_type,
-            key_2010
-        ) %>%
-        arrange(lgd_gp_code, match_distance)
+  many_to_one_export <- many_to_one %>%
+    select(
+      district = district_name_eng_2010,
+      block = block_name_eng_2010,
+      elex_gp = gp_name_eng_2010,
+      lgd_gp = lgd_gp_name,
+      lgd_gp_code,
+      match_distance,
+      gp_match_type,
+      key_2010
+    ) %>%
+    arrange(lgd_gp_code, match_distance)
 
-    write_csv(many_to_one_export, here("data/crosswalks/audit/03b_up_many_to_one_audit.csv"))
-    message("Exported: data/crosswalks/audit/03b_up_many_to_one_audit.csv")
+  write_csv(many_to_one_export, here("data/crosswalks/audit/03b_up_many_to_one_audit.csv"))
+  message("Exported: data/crosswalks/audit/03b_up_many_to_one_audit.csv")
 
-    all_matches <- all_matches %>%
-        left_join(
-            up_gps %>% select(key_2010, district_name_eng_2010, block_name_eng_2010) %>% distinct(),
-            by = "key_2010"
-        ) %>%
-        group_by(district_name_eng_2010, block_name_eng_2010, lgd_gp_code) %>%
-        slice_min(match_distance, n = 1, with_ties = FALSE) %>%
-        ungroup() %>%
-        select(-district_name_eng_2010, -block_name_eng_2010)
+  all_matches <- all_matches %>%
+    left_join(
+      up_gps %>% select(key_2010, district_name_eng_2010, block_name_eng_2010) %>% distinct(),
+      by = "key_2010"
+    ) %>%
+    group_by(district_name_eng_2010, block_name_eng_2010, lgd_gp_code) %>%
+    slice_min(match_distance, n = 1, with_ties = TRUE) %>%
+    filter(n() == 1L) %>%
+    ungroup() %>%
+    select(-district_name_eng_2010, -block_name_eng_2010)
 
-    message("Resolved many-to-one within district/block by keeping best match. New total: ", nrow(all_matches))
+  message("Resolved many-to-one within district/block by keeping best match. New total: ", nrow(all_matches))
 }
 
 # ============================================================================
@@ -338,16 +344,16 @@ if (nrow(many_to_one) > 0) {
 # ============================================================================
 
 up_matched <- up_05_10 %>%
-    left_join(
-        up_with_block %>%
-            select(key_2010, lgd_block_code, lgd_block_name, block_match_type) %>%
-            distinct(),
-        by = "key_2010"
-    ) %>%
-    left_join(
-        all_matches %>% select(key_2010, lgd_gp_code, lgd_gp_name, gp_match_type, match_distance, match_confidence),
-        by = "key_2010"
-    )
+  left_join(
+    up_with_block %>%
+      select(key_2010, lgd_block_code, lgd_block_name, block_match_type) %>%
+      distinct(),
+    by = "key_2010"
+  ) %>%
+  left_join(
+    all_matches %>% select(key_2010, lgd_gp_code, lgd_gp_name, gp_match_type, match_distance, match_confidence),
+    by = "key_2010"
+  )
 
 message("\n=== LGD GP MATCH SUMMARY ===")
 message("Total election GPs: ", nrow(up_05_10))
@@ -364,25 +370,24 @@ print(table(up_matched$block_match_type, useNA = "ifany"))
 # STEP 9: Link to SHRUG via LGD code
 # ============================================================================
 
-# NOTE: Multiple SHRUG villages may map to one LGD GP code. We keep the first match.
-# SHRUG covariates reflect one village per GP, not GP-level aggregates.
-# For robustness, consider: group_by(LGD_code) %>% summarize(across(starts_with("pc01"), mean))
 shrug_lgd <- read_csv(here("data/shrug_gp_xwalk/data/shrug_LGD_matched.csv"),
-                      show_col_types = FALSE) %>%
-    filter(tolower(state_name) == "uttar pradesh") %>%
-    select(shrid2, LGD_code, local_body_name) %>%
-    filter(!is.na(LGD_code)) %>%
-    group_by(LGD_code) %>%
-    slice(1) %>%
-    ungroup()
+  show_col_types = FALSE
+) %>%
+  filter(tolower(state_name) == "uttar pradesh") %>%
+  select(shrid2, LGD_code, local_body_name) %>%
+  filter(!is.na(LGD_code)) %>%
+  group_by(LGD_code) %>%
+  arrange(shrid2, .by_group = TRUE) %>%
+  slice(1) %>%
+  ungroup()
 
 message("\nSHRUG GPs for UP: ", n_distinct(shrug_lgd$LGD_code))
 
 up_shrug <- up_matched %>%
-    left_join(
-        shrug_lgd %>% select(shrid2, LGD_code),
-        by = c("lgd_gp_code" = "LGD_code")
-    )
+  left_join(
+    shrug_lgd %>% select(shrid2, LGD_code),
+    by = c("lgd_gp_code" = "LGD_code")
+  )
 
 message("\n=== SHRUG MATCH SUMMARY ===")
 message("Matched to SHRUG: ", sum(!is.na(up_shrug$shrid2)))
@@ -395,31 +400,31 @@ message("SHRUG match rate: ", round(100 * sum(!is.na(up_shrug$shrid2)) / nrow(up
 message("\n=== EXPORTING UNMATCHED GPs ===")
 
 lgd_but_no_shrug <- up_shrug %>%
-    filter(!is.na(lgd_gp_code), is.na(shrid2)) %>%
-    select(
-        district_name_eng_2010,
-        block_name_eng_2010,
-        gp_name_eng_2010,
-        lgd_block_code,
-        lgd_block_name,
-        lgd_gp_code,
-        lgd_gp_name,
-        gp_match_type
-    ) %>%
-    distinct()
+  filter(!is.na(lgd_gp_code), is.na(shrid2)) %>%
+  select(
+    district_name_eng_2010,
+    block_name_eng_2010,
+    gp_name_eng_2010,
+    lgd_block_code,
+    lgd_block_name,
+    lgd_gp_code,
+    lgd_gp_name,
+    gp_match_type
+  ) %>%
+  distinct()
 
 message("GPs matched to LGD but not SHRUG: ", nrow(lgd_but_no_shrug))
 
 no_lgd_match <- up_shrug %>%
-    filter(is.na(lgd_gp_code), !is.na(gp_name_eng_2010)) %>%
-    select(
-        district_name_eng_2010,
-        block_name_eng_2010,
-        gp_name_eng_2010,
-        lgd_block_code,
-        lgd_block_name
-    ) %>%
-    distinct()
+  filter(is.na(lgd_gp_code), !is.na(gp_name_eng_2010)) %>%
+  select(
+    district_name_eng_2010,
+    block_name_eng_2010,
+    gp_name_eng_2010,
+    lgd_block_code,
+    lgd_block_name
+  ) %>%
+  distinct()
 
 message("GPs not matched to LGD: ", nrow(no_lgd_match))
 
@@ -440,25 +445,49 @@ message("SHRUG PCA rows: ", nrow(shrug_pca))
 message("SHRUG VD rows: ", nrow(shrug_vd))
 
 shrug_lgd_full <- read_csv(here("data/shrug_gp_xwalk/data/shrug_LGD_matched.csv"), show_col_types = FALSE) %>%
-    filter(tolower(state_name) == "uttar pradesh")
+  filter(tolower(state_name) == "uttar pradesh")
 
 sum_or_na <- function(x) {
-    if (all(is.na(x))) return(NA_real_)
-    sum(x, na.rm = TRUE)
+  if (all(is.na(x))) {
+    return(NA_real_)
+  }
+  sum(x, na.rm = TRUE)
 }
-
+availability <- function(x) {
+  if (any(x > 0, na.rm = TRUE)) {
+    return(1L)
+  }
+  if (anyNA(x)) {
+    return(NA_integer_)
+  }
+  0L
+}
+facility_fields <- c(
+  "pc01_vd_edu_fac", "pc01_vd_medi_fac",
+  "pc01_vd_power_supl", "pc01_vd_bank_fac"
+)
+stopifnot(
+  !anyDuplicated(shrug_lgd_full$shrid2),
+  !anyDuplicated(shrug_pca$shrid2), !anyDuplicated(shrug_vd$shrid2)
+)
 shrug_covars <- shrug_lgd_full %>%
-    left_join(shrug_pca, by = "shrid2") %>%
-    left_join(shrug_vd, by = "shrid2") %>%
-    filter(!is.na(LGD_code)) %>%
-    group_by(LGD_code) %>%
-    summarize(
-        shrid2 = first(shrid2),
-        n_villages = n(),
-        across(starts_with("pc01_pca_"), sum_or_na),
-        across(starts_with("pc01_vd_"), sum_or_na),
-        .groups = "drop"
-    )
+  left_join(shrug_pca, by = "shrid2") %>%
+  left_join(shrug_vd, by = "shrid2") %>%
+  filter(!is.na(LGD_code)) %>%
+  group_by(LGD_code) %>%
+  summarize(
+    shrid2 = min(shrid2),
+    n_villages = n(),
+    across(starts_with("pc01_pca_"), sum_or_na),
+    across(starts_with("pc01_vd_") & !all_of(c(facility_fields, "pc01_vd_dist_town")), sum_or_na),
+    across(all_of(facility_fields), ~ sum(!is.na(.x)), .names = "{.col}_n_observed"),
+    across(all_of(facility_fields), availability),
+    n_distance_observed = sum(!is.na(pc01_vd_dist_town)),
+    pc01_vd_dist_town_sum = sum_or_na(pc01_vd_dist_town),
+    pc01_vd_dist_town_min = if (all(is.na(pc01_vd_dist_town))) NA_real_ else min(pc01_vd_dist_town, na.rm = TRUE),
+    pc01_vd_dist_town = if (all(is.na(pc01_vd_dist_town))) NA_real_ else mean(pc01_vd_dist_town, na.rm = TRUE),
+    .groups = "drop"
+  )
 
 message("SHRUG covariates aggregated to ", n_distinct(shrug_covars$LGD_code), " LGD GPs")
 
@@ -469,19 +498,19 @@ message("SHRUG covariates aggregated to ", n_distinct(shrug_covars$LGD_code), " 
 message("\n=== BUILDING LGD MAPPING FOR PANEL PROPAGATION ===")
 
 up_mapping <- up_shrug %>%
-    filter(!is.na(lgd_gp_code)) %>%
-    distinct(match_key, .keep_all = TRUE) %>%
-    select(
-        match_key,
-        lgd_gp_code,
-        lgd_gp_name,
-        lgd_block_code,
-        lgd_block_name,
-        block_match_type,
-        gp_match_type,
-        match_distance,
-        match_confidence
-    )
+  filter(!is.na(lgd_gp_code)) %>%
+  distinct(match_key, .keep_all = TRUE) %>%
+  select(
+    match_key,
+    lgd_gp_code,
+    lgd_gp_name,
+    lgd_block_code,
+    lgd_block_name,
+    block_match_type,
+    gp_match_type,
+    match_distance,
+    match_confidence
+  )
 
 message("Unique GPs with LGD match: ", nrow(up_mapping))
 
@@ -492,48 +521,58 @@ message("Unique GPs with LGD match: ", nrow(up_mapping))
 message("\n=== PROCESSING ALL PANELS ===")
 
 process_panel <- function(panel_path, output_path) {
-    panel_name <- basename(panel_path)
-    message("\nProcessing: ", panel_name)
+  panel_name <- basename(panel_path)
+  message("\nProcessing: ", panel_name)
 
-    panel <- read_parquet(panel_path)
-    message("  Input rows: ", nrow(panel))
+  panel <- read_parquet(panel_path)
+  message("  Input rows: ", nrow(panel))
 
-    panel_with_lgd <- panel %>%
-        left_join(up_mapping, by = "match_key")
+  panel_with_lgd <- panel %>%
+    mutate(.link_key = if ("english_key_ambiguous" %in% names(panel)) {
+      if_else(english_key_ambiguous, NA_character_, match_key)
+    } else {
+      match_key
+    }) %>%
+    left_join(up_mapping,
+      by = c(".link_key" = "match_key"),
+      relationship = "many-to-one", na_matches = "never"
+    ) %>%
+    select(-.link_key)
 
-    panel_final <- panel_with_lgd %>%
-        left_join(
-            shrug_covars,
-            by = c("lgd_gp_code" = "LGD_code")
-        )
+  panel_final <- panel_with_lgd %>%
+    left_join(
+      shrug_covars,
+      by = c("lgd_gp_code" = "LGD_code")
+    )
 
-    write_parquet(panel_final, output_path)
+  stopifnot(nrow(panel_final) == nrow(panel))
+  write_parquet(panel_final, output_path)
 
-    message("  Rows with LGD match: ", sum(!is.na(panel_final$lgd_gp_code)))
-    message("  Rows with SHRUG data: ", sum(!is.na(panel_final$shrid2)))
-    message("  Saved: ", output_path)
+  message("  Rows with LGD match: ", sum(!is.na(panel_final$lgd_gp_code)))
+  message("  Rows with SHRUG data: ", sum(!is.na(panel_final$shrid2)))
+  message("  Saved: ", output_path)
 
-    return(panel_final)
+  return(panel_final)
 }
 
 up_05_10_final <- process_panel(
-    here("data/up/up_05_10.parquet"),
-    here("data/up/shrug_gp_up_05_10_block.parquet")
+  here("data/up/up_05_10.parquet"),
+  here("data/up/shrug_gp_up_05_10_block.parquet")
 )
 
 up_10_15_final <- process_panel(
-    here("data/up/up_10_15.parquet"),
-    here("data/up/shrug_gp_up_10_15_block.parquet")
+  here("data/up/up_10_15.parquet"),
+  here("data/up/shrug_gp_up_10_15_block.parquet")
 )
 
 up_15_21_final <- process_panel(
-    here("data/up/up_15_21.parquet"),
-    here("data/up/shrug_gp_up_15_21_block.parquet")
+  here("data/up/up_15_21.parquet"),
+  here("data/up/shrug_gp_up_15_21_block.parquet")
 )
 
 up_05_21_final <- process_panel(
-    here("data/up/up_05_21.parquet"),
-    here("data/up/shrug_gp_up_05_21_block.parquet")
+  here("data/up/up_05_21.parquet"),
+  here("data/up/shrug_gp_up_05_21_block.parquet")
 )
 
 # ============================================================================
@@ -543,16 +582,16 @@ up_05_21_final <- process_panel(
 message("\n=== MATCH RATE BY DISTRICT (05-10 panel) ===")
 
 by_dist <- up_05_10_final %>%
-    group_by(district_name_eng_2010) %>%
-    summarize(
-        total = n(),
-        lgd_matched = sum(!is.na(lgd_gp_code)),
-        lgd_rate = round(100 * lgd_matched / total, 1),
-        shrug_matched = sum(!is.na(shrid2)),
-        shrug_rate = round(100 * shrug_matched / total, 1),
-        .groups = "drop"
-    ) %>%
-    arrange(shrug_rate)
+  group_by(district_name_eng_2010) %>%
+  summarize(
+    total = n(),
+    lgd_matched = sum(!is.na(lgd_gp_code)),
+    lgd_rate = round(100 * lgd_matched / total, 1),
+    shrug_matched = sum(!is.na(shrid2)),
+    shrug_rate = round(100 * shrug_matched / total, 1),
+    .groups = "drop"
+  ) %>%
+  arrange(shrug_rate)
 
 message("\nLowest SHRUG match rates:")
 print(head(by_dist, 15))

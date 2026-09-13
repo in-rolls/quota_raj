@@ -22,16 +22,19 @@ message("=== UP SHRUG Coverage Audit ===")
 message("Loading data...")
 
 shrug_lgd <- read_csv(here("data/shrug_gp_xwalk/data/shrug_LGD_matched.csv"),
-                      show_col_types = FALSE)
+  show_col_types = FALSE
+)
 
 up_shrug <- shrug_lgd %>%
-    filter(tolower(state_name) == "uttar pradesh")
+  filter(tolower(state_name) == "uttar pradesh")
 
 lgd_up_gp <- read_csv(here("data/lgd/processed/lgd_up_block_gp.csv"),
-                      show_col_types = FALSE)
+  show_col_types = FALSE
+)
 
 lgd_up_blocks <- read_csv(here("data/lgd/processed/lgd_up_blocks.csv"),
-                          show_col_types = FALSE)
+  show_col_types = FALSE
+)
 
 message("SHRUG rows for UP: ", nrow(up_shrug))
 message("SHRUG rows with valid LGD_code: ", sum(!is.na(up_shrug$LGD_code)))
@@ -53,20 +56,20 @@ message("Coverage rate: ", round(coverage_rate, 1), "%")
 
 # GPs without SHRUG match
 lgd_missing <- lgd_up_gp %>%
-    filter(!gp_code %in% up_shrug$LGD_code)
+  filter(!gp_code %in% up_shrug$LGD_code)
 
 message("\n=== District-level coverage breakdown ===")
 
 coverage_by_district <- lgd_up_gp %>%
-    mutate(has_shrug = gp_code %in% up_shrug$LGD_code) %>%
-    group_by(zp_name) %>%
-    summarize(
-        total_gps = n(),
-        in_shrug = sum(has_shrug),
-        coverage_pct = round(100 * in_shrug / total_gps, 1),
-        .groups = "drop"
-    ) %>%
-    arrange(coverage_pct)
+  mutate(has_shrug = gp_code %in% up_shrug$LGD_code) %>%
+  group_by(zp_name) %>%
+  summarize(
+    total_gps = n(),
+    in_shrug = sum(has_shrug),
+    coverage_pct = round(100 * in_shrug / total_gps, 1),
+    .groups = "drop"
+  ) %>%
+  arrange(coverage_pct)
 
 message("\nLowest coverage districts:")
 print(head(coverage_by_district, 15))
@@ -81,15 +84,15 @@ print(tail(coverage_by_district, 10))
 message("\n=== Patterns in Unmatched GPs ===")
 
 unmatched_by_district <- lgd_missing %>%
-    count(zp_name, name = "n_unmatched") %>%
-    arrange(desc(n_unmatched))
+  count(zp_name, name = "n_unmatched") %>%
+  arrange(desc(n_unmatched))
 
 message("\nDistricts with most unmatched GPs:")
 print(head(unmatched_by_district, 15))
 
 unmatched_by_block <- lgd_missing %>%
-    count(zp_name, block_name, name = "n_unmatched") %>%
-    arrange(desc(n_unmatched))
+  count(zp_name, block_name, name = "n_unmatched") %>%
+  arrange(desc(n_unmatched))
 
 message("\nBlocks with most unmatched GPs:")
 print(head(unmatched_by_block, 20))
@@ -141,10 +144,10 @@ message("\n=== Sample of Unmatched GPs ===")
 
 set.seed(42)
 sample_unmatched <- lgd_missing %>%
-    group_by(zp_name) %>%
-    slice_sample(n = 2) %>%
-    ungroup() %>%
-    select(zp_name, block_name, gp_name, gp_code)
+  group_by(zp_name) %>%
+  slice_sample(n = 2) %>%
+  ungroup() %>%
+  select(zp_name, block_name, gp_name, gp_code)
 
 message("\nRandom sample of unmatched GPs (2 per district):")
 print(sample_unmatched, n = 50)
@@ -156,10 +159,11 @@ print(sample_unmatched, n = 50)
 message("\n=== Comparison with Rajasthan ===")
 
 raj_shrug <- shrug_lgd %>%
-    filter(tolower(state_name) == "rajasthan")
+  filter(tolower(state_name) == "rajasthan")
 
 lgd_raj <- read_csv(here("data/lgd/processed/lgd_raj_block_gp.csv"),
-                    show_col_types = FALSE)
+  show_col_types = FALSE
+)
 
 raj_in_shrug <- lgd_raj$gp_code %in% raj_shrug$LGD_code
 raj_coverage <- mean(raj_in_shrug) * 100
@@ -176,54 +180,57 @@ message("Gap: ", round(raj_coverage - coverage_rate, 1), "percentage points")
 # ============================================================================
 
 findings <- c(
-    "# UP SHRUG Coverage Audit Results",
-    "",
-    "## Executive Summary",
-    "",
-    sprintf("- **UP LGD→SHRUG coverage rate: %.1f%%**", coverage_rate),
-    sprintf("- Rajasthan LGD→SHRUG coverage rate: %.1f%%", raj_coverage),
-    sprintf("- Gap: %.1f percentage points", raj_coverage - coverage_rate),
-    "",
-    "## Key Finding",
-    "",
-    "The low SHRUG match rate is **primarily a SHRUG data coverage issue**, not a crosswalk problem.",
-    sprintf("Only %.1f%% of UP LGD GPs have corresponding entries in the SHRUG-LGD matched file.", coverage_rate),
-    "",
-    "## Root Causes",
-    "",
-    "1. **SHRUG coverage is incomplete for UP**: Many LGD GPs simply do not appear in the SHRUG-LGD crosswalk",
-    "2. **No code format mismatch**: LGD codes have same format in both datasets (5-6 digit integers)",
-    "3. **This is a data availability issue, not a matching issue**",
-    "",
-    "## Coverage by District",
-    "",
-    "Lowest coverage districts:",
-    ""
+  "# UP SHRUG Coverage Audit Results",
+  "",
+  "## Executive Summary",
+  "",
+  sprintf("- **UP LGD→SHRUG coverage rate: %.1f%%**", coverage_rate),
+  sprintf("- Rajasthan LGD→SHRUG coverage rate: %.1f%%", raj_coverage),
+  sprintf("- Gap: %.1f percentage points", raj_coverage - coverage_rate),
+  "",
+  "## Key Finding",
+  "",
+  "The low SHRUG match rate is **primarily a SHRUG data coverage issue**, not a crosswalk problem.",
+  sprintf("Only %.1f%% of UP LGD GPs have corresponding entries in the SHRUG-LGD matched file.", coverage_rate),
+  "",
+  "## Root Causes",
+  "",
+  "1. **SHRUG coverage is incomplete for UP**: Many LGD GPs simply do not appear in the SHRUG-LGD crosswalk",
+  "2. **No code format mismatch**: LGD codes have same format in both datasets (5-6 digit integers)",
+  "3. **This is a data availability issue, not a matching issue**",
+  "",
+  "## Coverage by District",
+  "",
+  "Lowest coverage districts:",
+  ""
 )
 
 for (i in 1:min(10, nrow(coverage_by_district))) {
-    findings <- c(findings, sprintf("- %s: %.1f%% (%d/%d GPs)",
-        coverage_by_district$zp_name[i],
-        coverage_by_district$coverage_pct[i],
-        coverage_by_district$in_shrug[i],
-        coverage_by_district$total_gps[i]))
+  findings <- c(findings, sprintf(
+    "- %s: %.1f%% (%d/%d GPs)",
+    coverage_by_district$zp_name[i],
+    coverage_by_district$coverage_pct[i],
+    coverage_by_district$in_shrug[i],
+    coverage_by_district$total_gps[i]
+  ))
 }
 
-findings <- c(findings,
-    "",
-    "## Statistics",
-    "",
-    sprintf("- Total LGD GPs in UP: %d", nrow(lgd_up_gp)),
-    sprintf("- LGD GPs with SHRUG match: %d", sum(lgd_in_shrug)),
-    sprintf("- LGD GPs without SHRUG match: %d", sum(!lgd_in_shrug)),
-    "",
-    "## Recommendations",
-    "",
-    "1. **Accept the coverage limitation**: The 52.9% SHRUG match rate reflects SHRUG data availability, not crosswalk quality",
-    "2. **Focus on improving block crosswalk**: The block-level matching can still be improved from 97.4% to ~100%",
-    "3. **Export unmatched GPs for reference**: Document which GPs cannot be linked to SHRUG",
-    "4. **Consider alternative data sources**: For GPs not in SHRUG, other census/administrative data may be needed",
-    ""
+findings <- c(
+  findings,
+  "",
+  "## Statistics",
+  "",
+  sprintf("- Total LGD GPs in UP: %d", nrow(lgd_up_gp)),
+  sprintf("- LGD GPs with SHRUG match: %d", sum(lgd_in_shrug)),
+  sprintf("- LGD GPs without SHRUG match: %d", sum(!lgd_in_shrug)),
+  "",
+  "## Recommendations",
+  "",
+  "1. **Accept the coverage limitation**: The 52.9% SHRUG match rate reflects SHRUG data availability, not crosswalk quality",
+  "2. **Focus on improving block crosswalk**: The block-level matching can still be improved from 97.4% to ~100%",
+  "3. **Export unmatched GPs for reference**: Document which GPs cannot be linked to SHRUG",
+  "4. **Consider alternative data sources**: For GPs not in SHRUG, other census/administrative data may be needed",
+  ""
 )
 
 writeLines(findings, here("data/crosswalks/audit/03d_up_shrug_coverage_audit.md"))

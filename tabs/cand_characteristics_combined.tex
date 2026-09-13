@@ -1,20 +1,25 @@
-{\centering\scriptsize
-\begingroup
-\begin{tabular}{@{}lccc@{\hspace{1em}}ccc@{}}
-   \toprule
-    & \multicolumn{3}{c}{Winners} & \multicolumn{3}{c}{All Candidates} \\
-   \cmidrule(lr){2-4} \cmidrule(lr){5-7}
-   Variable & Open & Quota & Diff. & Open & Quota & Diff. \\
-   \midrule
-   Age & 42.69 & 41.16 & 1.54$^{***}$ & 41.50 & 39.82 & 1.68$^{***}$\\
-   Total Children & 2.05 & 2.14 & -0.09$^{***}$ & 1.90 & 2.03 & -0.13$^{***}$\\
-   Graduation Status & 0.24 & 0.12 & 0.11$^{***}$ & 0.22 & 0.13 & 0.09$^{***}$\\
-   Unemployed & 0.10 & 0.61 & -0.51$^{***}$ & 0.11 & 0.61 & -0.51$^{***}$\\
-   Assets (log) & 12.92 & 12.55 & 0.37$^{***}$ & 12.33 & 12.08 & 0.26$^{***}$\\
-   \bottomrule
+\begin{table}
+\centering
+\caption{\label{tab:main_cand_char}Candidate Characteristics: Quota vs. Open Seats (Rajasthan 2020)}
+\centering
+\fontsize{8}{10}\selectfont
+\begin{threeparttable}
+\begin{tabular}[t]{lrrrrrr}
+\toprule
+\multicolumn{1}{c}{ } & \multicolumn{3}{c}{Winners} & \multicolumn{3}{c}{Candidates} \\
+\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-7}
+Characteristic & Open & Quota & Difference & Open & Quota & Difference\\
+\midrule
+Age & 42.79 & 41.18 & 1.61 & 41.50 & 39.83 & 1.67\\
+Children & 2.06 & 2.14 & -0.08 & 1.90 & 2.03 & -0.12\\
+Graduate & 0.24 & 0.12 & 0.11 & 0.22 & 0.13 & 0.09\\
+Unemployed & 0.10 & 0.61 & -0.51 & 0.11 & 0.61 & -0.51\\
+Log assets & 12.93 & 12.56 & 0.37 & 12.33 & 12.07 & 0.26\\
+\bottomrule
 \end{tabular}
-\par\endgroup
-\par}
-
-\vspace{0.5ex}
-\parbox{\linewidth}{\scriptsize \emph{Notes: } $^{***}$p$<$0.01; $^{**}$p$<$0.05; $^{*}$p$<$0.1. T-tests comparing characteristics in open vs quota seats. Data from Rajasthan 2020 panchayat elections. Assets winsorized at 10\%.}
+\begin{tablenotes}
+\item \textit{Note: } 
+\item Descriptive open-minus-quota comparisons, conditional on candidacy or winning. Assets winsorized at the 10th and 90th percentiles of the candidate sample before taking logs. These comparisons do not identify a causal effect on candidate quality.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
