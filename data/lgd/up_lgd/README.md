@@ -5,8 +5,9 @@ Downloaded from the LGD portal (<https://lgdirectory.gov.in>) on **2026-03-25**.
 **These are dated snapshots, not reproducible downloads.** The portal's contents
 change as bodies are created, merged and renamed, and its exports carry a
 download timestamp rather than a data version. Re-downloading tomorrow gives a
-different file with a different name. That is why nothing here is deleted, only
-compressed: the snapshot is the only record of what LGD said on that date.
+different file with a different name. These archived snapshots record what LGD said on that date. Current analysis
+uses the hash-pinned directory and geographic bridge from `local_elections_up`;
+the local extraction and matching scripts have been removed.
 
 Compare the sha256 below rather than the filename to tell whether contents match.
 
@@ -14,14 +15,14 @@ Compare the sha256 below rather than the filename to tell whether contents match
 
 | file | size | read by | notes |
 | --- | ---: | --- | --- |
-| `up_block_panchayat.xls` | 44 MB | `scripts/01d_up_extract_lgd.R` | kept uncompressed because it is parsed directly |
+| `up_block_panchayat.xls` | 44 MB | — | historical extraction source |
 | `up_village_gp_mapping.xls.gz` | 3.7 MB | — | 146 MB raw |
 | `priWards2026:03:25:06:50:56:981.xls.gz` | 10.6 MB | — | 737 MB raw; one row per ward of every UP gram panchayat |
 
 `priWards` is ward-level: `Local Body Code, Local Body Name, Local Body Type,
 District, Intermediate Parent, Ward Code, Ward Number, Ward Name (English),
-Ward Name (Local)`. Nothing derives from it — `processed/lgd_up_block_gp.csv`
-and friends come from `up_block_panchayat.xls`, and are GP-level.
+Ward Name (Local)`. The GP directory now supplied by `local_elections_up` was extracted from
+`up_block_panchayat.xls`, not this ward-level file.
 
 The `.gz` files are SpreadsheetML XML, which compresses 40--70x. Every one was
 verified to decompress byte-identically to the original before that original was

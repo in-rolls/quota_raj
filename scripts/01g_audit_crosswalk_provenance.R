@@ -15,18 +15,12 @@ message("=== Crosswalk Provenance Audit ===")
 dir.create(here("tabs"), showWarnings = FALSE)
 dir.create(here("data/crosswalks/audit"), showWarnings = FALSE, recursive = TRUE)
 
-if (!dir.exists(here("data/crosswalks/active"))) {
-  stop("Expected data/crosswalks/active directory to exist; manual crosswalk inputs should be provisioned before audit.")
-}
-
 required_inputs <- c(
   raj_path("data/source/geography/raj_district_xwalk.csv"),
   raj_path("data/source/geography/raj_samiti_std.csv"),
   raj_path("data/source/geography/raj_samiti_xwalk.csv"),
-  here("data/crosswalks/active/up_district_xwalk.csv"),
-  here("data/crosswalks/active/up_block_xwalk.csv"),
-  here("data/lgd/processed/lgd_up_blocks.csv"),
-  here("data/lgd/processed/lgd_up_block_gp.csv"),
+  sibling_path("data/crosswalks/active/up_block_xwalk.csv"),
+  sibling_path("data/external/lgd/lgd_up_block_gp.csv"),
   raj_path("data/source/geography/lgd_raj_block_gp.csv")
 )
 
@@ -40,10 +34,8 @@ if (length(missing_required) > 0) {
 
 crosswalk_catalog <- tibble::tribble(
   ~file, ~producer_script, ~consumer_scripts, ~key_cols,
-  "data/lgd/processed/lgd_up_blocks.csv", "01d_up_extract_lgd.R", "01e_up_create_district_xwalk.R;01f_up_create_block_xwalk.R;03b_up_shrug_match.R", "block_code",
-  "data/lgd/processed/lgd_up_block_gp.csv", "01d_up_extract_lgd.R", "03b_up_shrug_match.R", "gp_code",
-  "data/crosswalks/active/up_district_xwalk.csv", "01e_up_create_district_xwalk.R", "01f_up_create_block_xwalk.R", "elex_district",
-  "data/crosswalks/active/up_block_xwalk.csv", "01f_up_create_block_xwalk.R", "03b_up_shrug_match.R", "elex_district,elex_block",
+  "data/external/lgd/lgd_up_block_gp.csv", "local_elections_up", "01g_audit_crosswalk_provenance.R;03d_audit_shrug_coverage.R", "gp_code",
+  "data/crosswalks/active/up_block_xwalk.csv", "local_elections_up", "01g_audit_crosswalk_provenance.R", "elex_district,elex_block",
   "data/source/geography/raj_district_xwalk.csv", "local_elections_rajasthan", "01g_audit_crosswalk_provenance.R", "elex_district_raw",
   "data/source/geography/raj_samiti_std.csv", "local_elections_rajasthan", "01g_audit_crosswalk_provenance.R", "district_std,samiti_raw",
   "data/source/geography/raj_samiti_xwalk.csv", "local_elections_rajasthan", "01g_audit_crosswalk_provenance.R", "elex_district,elex_samiti",
@@ -51,7 +43,7 @@ crosswalk_catalog <- tibble::tribble(
 )
 
 crosswalk_path <- function(path) {
-  if (startsWith(path, "data/source/geography/")) raj_path(path) else here(path)
+  if (startsWith(path, "data/source/geography/")) raj_path(path) else sibling_path(path)
 }
 
 read_any_csv <- function(path) {
@@ -87,23 +79,14 @@ file_stats <- crosswalk_catalog %>%
   ungroup()
 
 # LGD validity checks for active matching crosswalks
-lgd_up_blocks <- read_any_csv("data/lgd/processed/lgd_up_blocks.csv")
+lgd_up_blocks <- read_any_csv("data/external/lgd/lgd_up_block_gp.csv") %>% distinct(block_code)
 lgd_raj_block_gp <- read_any_csv("data/source/geography/lgd_raj_block_gp.csv")
 
 up_block_xwalk <- read_any_csv("data/crosswalks/active/up_block_xwalk.csv")
-up_district_xwalk <- read_any_csv("data/crosswalks/active/up_district_xwalk.csv")
 raj_samiti_xwalk <- read_any_csv("data/source/geography/raj_samiti_xwalk.csv")
 
 up_block_invalid <- up_block_xwalk %>%
   anti_join(lgd_up_blocks %>% distinct(block_code), by = c("lgd_block_code" = "block_code")) %>%
-  nrow()
-
-up_district_name_invalid <- up_district_xwalk %>%
-  anti_join(lgd_up_blocks %>% distinct(zp_name), by = c("lgd_district" = "zp_name")) %>%
-  nrow()
-
-up_district_code_invalid <- up_district_xwalk %>%
-  anti_join(lgd_up_blocks %>% distinct(zp_code), by = c("lgd_zp_code" = "zp_code")) %>%
   nrow()
 
 raj_block_invalid <- raj_samiti_xwalk %>%
@@ -113,8 +96,6 @@ raj_block_invalid <- raj_samiti_xwalk %>%
 validity <- tibble::tribble(
   ~file, ~validity_check, ~invalid_rows,
   "data/crosswalks/active/up_block_xwalk.csv", "lgd_block_code in lgd_up_blocks$block_code", up_block_invalid,
-  "data/crosswalks/active/up_district_xwalk.csv", "lgd_district in lgd_up_blocks$zp_name", up_district_name_invalid,
-  "data/crosswalks/active/up_district_xwalk.csv", "lgd_zp_code in lgd_up_blocks$zp_code", up_district_code_invalid,
   "data/source/geography/raj_samiti_xwalk.csv", "lgd_block_code in lgd_raj_block_gp$block_code", raj_block_invalid
 )
 

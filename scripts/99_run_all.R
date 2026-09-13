@@ -2,9 +2,7 @@ library(here)
 options(warn = 1)
 
 scripts <- c(
-  "01d_up_extract_lgd.R",
   "02b_up_recode.R",
-  "01e_up_create_district_xwalk.R", "01f_up_create_block_xwalk.R",
   "01g_audit_crosswalk_provenance.R",
   "03a_raj_shrug_match.R", "03b_up_shrug_match.R",
   "08a_phone_survey_tables.R", "04a_descriptive_tables.R", "04c_transition_matrices.R",

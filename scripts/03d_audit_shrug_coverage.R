@@ -28,11 +28,7 @@ shrug_lgd <- read_csv(here("data/shrug_gp_xwalk/data/shrug_LGD_matched.csv"),
 up_shrug <- shrug_lgd %>%
   filter(tolower(state_name) == "uttar pradesh")
 
-lgd_up_gp <- read_csv(here("data/lgd/processed/lgd_up_block_gp.csv"),
-  show_col_types = FALSE
-)
-
-lgd_up_blocks <- read_csv(here("data/lgd/processed/lgd_up_blocks.csv"),
+lgd_up_gp <- read_csv(sibling_path("data/external/lgd/lgd_up_block_gp.csv"),
   show_col_types = FALSE
 )
 

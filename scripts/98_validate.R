@@ -65,14 +65,27 @@ test_that("sex linkage is unique within an election and invariant to source orde
   )
 })
 
-test_that("GP matching abstains on tied or numerically conflicting candidates", {
-  election <- tibble(id = "a", gp_name = "x", elex_gp_std = "x")
-  villages <- tibble(gp_code = c(1L, 2L), gp_name = c("x", "x"), gp_name_std = c("x", "x"))
-  expect_null(fuzzy_match_within_block(election, villages))
-  expect_null(fuzzy_match_within_block(election, villages |> slice(2:1)))
-  election$elex_gp_std <- "village1"
-  villages <- villages[1, ] |> mutate(gp_name_std = "village2")
-  expect_null(fuzzy_match_within_block(election, villages))
+test_that("UP geographic bridge attaches by source identity and survives reordering", {
+  bridge <- read_parquet(up_path("up_gp_lgd_bridge.parquet"))
+  expect_equal(anyDuplicated(bridge[c("panel", "anchor_key")]), 0L)
+  panels <- c("05_10" = "2005_2010", "10_15" = "2010_2015",
+    "15_21" = "2015_2021", "05_21" = "2005_2010_2015_2021")
+  for (period in names(panels)) {
+    anchor <- if (period == "15_21") "key_2015" else "key_2010"
+    panel <- read_parquet(here("data/up", paste0("up_", period, ".parquet")))
+    geography <- bridge |> filter(.data$panel == panels[[period]]) |>
+      select(anchor_key, lgd_gp_code, mapping_review_id)
+    expect_setequal(panel[[anchor]], geography$anchor_key)
+    join <- function(rows) left_join(rows, geography, by = setNames("anchor_key", anchor),
+      relationship = "one-to-one", na_matches = "never") |> arrange(.data[[anchor]])
+    expect_identical(join(panel), join(panel |> slice(n():1)))
+    matched <- read_parquet(here("data/up", paste0("shrug_gp_up_", period, "_block.parquet")))
+    expect_identical(matched[names(panel)], panel)
+    expected <- join(panel)
+    actual <- matched |> arrange(.data[[anchor]])
+    expect_identical(actual$lgd_gp_code, expected$lgd_gp_code)
+    expect_identical(actual$mapping_review_id, expected$mapping_review_id)
+  }
 })
 
 test_that("SHRUG joins preserve panel rows and observable facility definitions", {
