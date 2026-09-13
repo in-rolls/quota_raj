@@ -161,7 +161,7 @@ message("\n=== Comparison with Rajasthan ===")
 raj_shrug <- shrug_lgd %>%
   filter(tolower(state_name) == "rajasthan")
 
-lgd_raj <- read_csv(here("data/lgd/processed/lgd_raj_block_gp.csv"),
+lgd_raj <- read_csv(raj_path("data/source/geography/lgd_raj_block_gp.csv"),
   show_col_types = FALSE
 )
 
