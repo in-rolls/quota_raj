@@ -8,17 +8,33 @@ Restore the R packages pinned in `renv.lock`, then run from the repository root:
 
 ```sh
 Rscript -e 'renv::restore()'
-Rscript scripts/99_run_all.R
+Rscript scripts/99_run_all.R --from-panels
 bash ms/compile.sh
 ```
 
-The runner rebuilds the panels, tables, figures and numerical manuscript inputs, then runs `scripts/98_validate.R`. Validation checks join cardinality, unresolved matches, outcome missingness, phone denominators, independently estimated cumulative contrasts, and seeded bootstrap reproduction. To rerun those checks alone:
+With `--from-panels`, the runner uses the committed analysis panels and survey tables, regenerates the electoral estimates, figures and numerical manuscript inputs, then runs `scripts/98_validate.R`. Licensed SHRUG inputs are still required for the covariate analyses. Validation checks join cardinality, unresolved matches, outcome missingness, phone denominators, independently estimated cumulative contrasts, and seeded bootstrap reproduction. To rerun those checks alone:
 
 ```sh
 Rscript scripts/98_validate.R
 ```
 
 R 4.6 and XeLaTeX were used for this revision. `fwildclusterboot` uses its R engine; Julia is not required.
+
+To rebuild from source, omit `--from-panels`. In addition to the pinned election
+sources and licensed SHRUG inputs below, that route requires these author-held
+files at their original paths:
+
+- `data/lgd/up_lgd/up_block_panchayat.xls.gz`
+- `data/shrug_gp_xwalk/data/shrug_LGD_matched.csv`
+- `data/raj/source/phone_survey_response/sampled_nos_full_analysis.xlsx`
+- `data/raj/source/phone_survey_response/sampled_mobile_nos_open_seats.xlsx`
+- `data/raj/source/phone_survey_response/jaipur_audit.xlsx`
+
+These files are excluded from Git. Obtain the geography files from the authors
+and arrange access to the original interview workbooks before running the full
+source rebuild. A public checkout can reproduce the electoral results from the
+committed panels; it cannot independently rebuild the survey tables or those
+geographic crosswalks.
 
 ## Data and analysis
 

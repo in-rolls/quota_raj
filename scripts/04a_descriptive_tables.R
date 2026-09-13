@@ -3,7 +3,6 @@
 
 library(here)
 library(readr)
-library(readxl)
 library(arrow)
 library(dplyr)
 library(kableExtra)
@@ -73,15 +72,16 @@ up_stats <- list(
   women_res_2021 = round(100 * mean(grepl("Female", up_2021_winners$gp_reservation_status_eng, ignore.case = TRUE), na.rm = TRUE), 1)
 )
 
-# Phone survey: Sheet1 contains the full sampling frame with phone_answered column
-quota_survey <- read_excel(here("data/raj/source/phone_survey_response/sampled_nos_full_analysis.xlsx"), sheet = "Sheet1", col_types = "text")
-open_survey <- read_excel(here("data/raj/source/phone_survey_response/sampled_mobile_nos_open_seats.xlsx"), sheet = "Sheet1", col_types = "text")
-
+phone_counts <- read_csv(here("tabs/phone_contact_counts.csv"), show_col_types = FALSE) |>
+  filter(section == "Initial contact", category == "Answered")
+quota_counts <- filter(phone_counts, survey == "phone_survey")
+open_counts <- filter(phone_counts, survey == "phone_survey_openseats")
+stopifnot(nrow(quota_counts) == 1L, nrow(open_counts) == 1L)
 phone_stats <- list(
-  quota_sampled = nrow(quota_survey),
-  quota_answered = sum(quota_survey$phone_answered == "yes", na.rm = TRUE),
-  open_sampled = nrow(open_survey),
-  open_answered = sum(open_survey$phone_answered == "yes", na.rm = TRUE)
+  quota_sampled = quota_counts$denominator,
+  quota_answered = quota_counts$n,
+  open_sampled = open_counts$denominator,
+  open_answered = open_counts$n
 )
 
 # =============================================================================
