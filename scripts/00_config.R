@@ -159,14 +159,23 @@ sibling_path <- function(file, source = "local_elections_up") {
 
   if (!file.exists(dest)) {
     dir.create(dirname(dest), recursive = TRUE, showWarnings = FALSE)
+    temporary <- tempfile("source-", tmpdir = dirname(dest))
+    on.exit(unlink(temporary), add = TRUE)
     local <- file.path(spec$sibling, file)
-    if (file.exists(local)) {
-      file.copy(local, dest)
+    if (file.exists(local) && identical(digest::digest(local, algo = "sha256", file = TRUE), want)) {
+      if (!file.copy(local, temporary)) stop("Cannot copy source file: ", local, call. = FALSE)
     } else {
       url <- paste(spec$raw, spec$ref, file, sep = "/")
       message("Fetching ", file, " from ", source, "@", spec$ref)
-      utils::download.file(url, dest, mode = "wb", quiet = TRUE)
+      utils::download.file(url, temporary, mode = "wb", quiet = TRUE)
     }
+    received <- digest::digest(temporary, algo = "sha256", file = TRUE)
+    if (!identical(received, want)) {
+      stop("Downloaded source hash mismatch for ", source, "@", spec$ref, "/", file,
+        "\n  expected ", want, "\n  got      ", received, call. = FALSE
+      )
+    }
+    if (!file.rename(temporary, dest)) stop("Cannot install cached source: ", dest, call. = FALSE)
   }
 
   got <- digest::digest(dest, algo = "sha256", file = TRUE)
@@ -224,3 +233,9 @@ reference_path <- function(rel, key = "shrug") {
 shrug_path <- function(rel) reference_path(rel, "shrug")
 
 raj_path <- function(file) sibling_path(file, source = "local_elections_rajasthan")
+
+raj_product_path <- function(file) raj_path(file.path("data/fin/elections", file))
+
+election_panel_path <- function(state, file) {
+  if (state == "raj") raj_product_path(file) else here::here("data", state, file)
+}

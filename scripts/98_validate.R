@@ -6,8 +6,40 @@ library(here)
 source(here("scripts/00_config.R"))
 source(here("scripts/00_utils.R"))
 
-candidates <- read_parquet(here("data/raj/candidates_2020_events.parquet"))
-winners <- read_parquet(here("data/raj/winners_2020_events.parquet"))
+test_that("source acquisition verifies cold-cache downloads and skips mismatched siblings", {
+  root <- tempfile("pinned-source-")
+  dir.create(root)
+  withr::defer(unlink(root, recursive = TRUE))
+  withr::local_envvar(INDIA_DATA_HOME = file.path(root, "cache"))
+  revision <- paste(rep("a", 40), collapse = "")
+  remote <- file.path(root, "remote", revision)
+  dir.create(remote, recursive = TRUE)
+  writeLines("pinned source", file.path(remote, "input.csv"))
+  expected <- digest::digest(file.path(remote, "input.csv"), algo = "sha256", file = TRUE)
+  sibling <- file.path(root, "sibling")
+  dir.create(sibling)
+  fixture <- list(cache_dir = file.path(root, "cache"), upstream = list(example = list(
+    ref = revision, sibling = sibling, raw = paste0("file://", file.path(root, "remote")),
+    files = list(input.csv = expected)
+  )))
+  resolver <- sibling_path
+  environment(resolver) <- environment()
+  .manifest <- function() fixture
+  cold <- resolver("input.csv", "example")
+  expect_identical(readLines(cold), "pinned source")
+  unlink(cold)
+  writeLines("other revision", file.path(sibling, "input.csv"))
+  recovered <- resolver("input.csv", "example")
+  expect_identical(readLines(recovered), "pinned source")
+  expect_identical(readLines(file.path(sibling, "input.csv")), "other revision")
+  unlink(recovered)
+  writeLines("corrupt download", file.path(remote, "input.csv"))
+  expect_error(resolver("input.csv", "example"), "Downloaded source hash mismatch")
+  expect_false(file.exists(recovered))
+})
+
+candidates <- read_parquet(raj_product_path("candidates_2020_events.parquet"))
+winners <- read_parquet(raj_product_path("winners_2020_events.parquet"))
 test_that("sex linkage is unique within an election and invariant to source order", {
   expect_true(all(candidates$election_type == "General Election"))
   expect_setequal(unique(candidates$election_duration), c("JAN-MAR 2020", "SEP-OCT 2020"))
@@ -33,14 +65,27 @@ test_that("sex linkage is unique within an election and invariant to source orde
   )
 })
 
-test_that("GP matching abstains on tied or numerically conflicting candidates", {
-  election <- tibble(id = "a", gp_name = "x", elex_gp_std = "x")
-  villages <- tibble(gp_code = c(1L, 2L), gp_name = c("x", "x"), gp_name_std = c("x", "x"))
-  expect_null(fuzzy_match_within_block(election, villages))
-  expect_null(fuzzy_match_within_block(election, villages |> slice(2:1)))
-  election$elex_gp_std <- "village1"
-  villages <- villages[1, ] |> mutate(gp_name_std = "village2")
-  expect_null(fuzzy_match_within_block(election, villages))
+test_that("UP geographic bridge attaches by source identity and survives reordering", {
+  bridge <- read_parquet(up_path("up_gp_lgd_bridge.parquet"))
+  expect_equal(anyDuplicated(bridge[c("panel", "anchor_key")]), 0L)
+  panels <- c("05_10" = "2005_2010", "10_15" = "2010_2015",
+    "15_21" = "2015_2021", "05_21" = "2005_2010_2015_2021")
+  for (period in names(panels)) {
+    anchor <- if (period == "15_21") "key_2015" else "key_2010"
+    panel <- read_parquet(here("data/up", paste0("up_", period, ".parquet")))
+    geography <- bridge |> filter(.data$panel == panels[[period]]) |>
+      select(anchor_key, lgd_gp_code, mapping_review_id)
+    expect_setequal(panel[[anchor]], geography$anchor_key)
+    join <- function(rows) left_join(rows, geography, by = setNames("anchor_key", anchor),
+      relationship = "one-to-one", na_matches = "never") |> arrange(.data[[anchor]])
+    expect_identical(join(panel), join(panel |> slice(n():1)))
+    matched <- read_parquet(here("data/up", paste0("shrug_gp_up_", period, "_block.parquet")))
+    expect_identical(matched[names(panel)], panel)
+    expected <- join(panel)
+    actual <- matched |> arrange(.data[[anchor]])
+    expect_identical(actual$lgd_gp_code, expected$lgd_gp_code)
+    expect_identical(actual$mapping_review_id, expected$mapping_review_id)
+  }
 })
 
 test_that("SHRUG joins preserve panel rows and observable facility definitions", {
@@ -48,9 +93,11 @@ test_that("SHRUG joins preserve panel rows and observable facility definitions",
   for (state in c("raj", "up")) {
     panels <- if (state == "raj") c("05_10", "10_15", "15_20", "05_20") else c("05_10", "10_15", "15_21", "05_21")
     for (panel in panels) {
-      original <- read_parquet(here("data", state, paste0(state, "_", panel, ".parquet")))
+      original_path <- election_panel_path(state, paste0(state, "_", panel, ".parquet"))
+      original <- read_parquet(original_path)
       matched <- read_parquet(here("data", state, paste0("shrug_gp_", state, "_", panel, "_block.parquet")))
       expect_equal(nrow(original), nrow(matched))
+      if (state == "raj") expect_identical(matched[names(original)], original)
       for (facility in facilities) {
         expect_true(all(is.na(matched[[facility]]) | matched[[facility]] %in% 0:1))
         coverage <- matched[[paste0(facility, "_n_observed")]]
@@ -63,7 +110,7 @@ test_that("SHRUG joins preserve panel rows and observable facility definitions",
 
 test_that("candidacy joins conserve rows and keep unknown outcomes unavailable", {
   analysis <- read_parquet(here("data/raj/candidacy_analysis.parquet"))
-  panel <- read_parquet(here("data/raj/raj_05_20.parquet"))
+  panel <- read_parquet(raj_product_path("raj_05_20.parquet"))
   expect_equal(nrow(analysis), nrow(panel))
   expect_true(all(analysis$fem_vote_share >= 0 & analysis$fem_vote_share <= 1, na.rm = TRUE))
   expect_true(all(analysis$prop_women >= 0 & analysis$prop_women <= 1, na.rm = TRUE))
@@ -109,7 +156,7 @@ test_that("reported cumulative contrasts reproduce after independent within-bloc
     panel <- if (state == "raj") "05_20" else "05_21"
     block <- paste0(if (state == "raj") "dist_samiti_" else "dist_block_", end)
     outcome <- paste0("female_winner_", end)
-    source <- read_parquet(here("data", state, paste0(state, "_", panel, ".parquet"))) |>
+    source <- read_parquet(election_panel_path(state, paste0(state, "_", panel, ".parquet"))) |>
       filter(.data[[paste0("treat_", end)]] == 0) |>
       drop_na(all_of(c(block, outcome, "treat_2005", "treat_2010", "treat_2015")))
     x <- model.matrix(~ treat_2005 * treat_2010 * treat_2015, data = source)[, -1]
@@ -147,7 +194,7 @@ test_that("bootstrap outputs use the declared draws and reproduce one seeded tes
   expect_true(all(is.finite(primary$bootstrap_low) & is.finite(primary$bootstrap_high)))
   bootstraps <- readRDS(here("data/model_bootstrap.rds"))
   expect_length(bootstraps, nrow(primary))
-  d <- read_parquet(here("data/raj/raj_05_10.parquet")) |>
+  d <- read_parquet(raj_product_path("raj_05_10.parquet")) |>
     filter(treat_2010 == 0) |>
     drop_na(female_winner_2010, treat_2005, dist_samiti_2010) |>
     mutate(dist_samiti_2010 = as.integer(factor(dist_samiti_2010)))

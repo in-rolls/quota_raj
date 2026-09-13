@@ -1,4 +1,0 @@
-candidate_key_unique,candidate_name_unique,gp_event_unique,observed_gender,n
-FALSE,FALSE,TRUE,TRUE,2
-TRUE,FALSE,TRUE,TRUE,1348
-TRUE,TRUE,TRUE,TRUE,66339
